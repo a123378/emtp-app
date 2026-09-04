@@ -129,6 +129,10 @@ body {
   color: var(--orange);
 }
 
+.logo-text-short { display: none; }
+.mode-text-short { display: none; }
+.sidebar-mode-switcher { display: none; }
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -1065,20 +1069,64 @@ body {
 
   #app-header .logo {
     font-size: 0.95rem;
-    gap: 8px;
+    gap: 6px;
+    font-weight: 800;
   }
   #app-header .logo svg {
     width: 22px;
     height: 22px;
   }
+  .logo-text-full { display: none; }
+  .logo-text-short { display: inline; }
+  .mode-text-full { display: none; }
+  .mode-text-short { display: inline; }
 
   .header-tabs {
-    display: none; /* Hide mode tabs on mobile to free up space */
+    display: flex !important;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: 4px;
+  }
+
+  .mode-btn {
+    padding: 5px 11px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 14px;
+    white-space: nowrap;
   }
 
   .header-actions {
-    margin-left: auto;
-    gap: 6px;
+    margin-left: 0;
+    gap: 4px;
+  }
+
+  /* Mobile Sidebar Drawer */
+  .sidebar-mode-switcher {
+    display: flex;
+    gap: 8px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .side-mode-btn {
+    flex: 1;
+    padding: 9px 8px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+  }
+  .side-mode-btn.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(232, 119, 34, 0.35);
   }
 
   /* Mobile Sidebar Drawer */
@@ -2148,8 +2196,24 @@ body {
   .ch-checkbox-grid {
     grid-template-columns: 1fr;
   }
+  .m2-runner-opt {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .m2-opt-letter {
+    width: 26px;
+    height: 26px;
+    font-size: 0.82rem;
+  }
+  .m2-opt-text {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
 }
 
 /* ── Utility ── */
 .hidden { display: none !important; }
+@media (min-width: 769px) {
+  .hidden-desktop { display: none !important; }
+}
 .mt-0 { margin-top: 0 !important; }

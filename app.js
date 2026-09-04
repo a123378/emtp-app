@@ -142,6 +142,9 @@ function buildSidebar() {
 
 // ── Select chapter ────────────────────────────────────
 async function selectChapter(chId) {
+  if (state.currentMode === 2) {
+    switchMode(1);
+  }
   if (state.currentChId === chId) {
     closeMobileSidebar();
     return;
@@ -891,8 +894,11 @@ function switchMode(mode) {
   if (mode === 1) {
     $('#mode1-btn')?.classList.add('active');
     $('#mode2-btn')?.classList.remove('active');
+    $('#side-mode1-btn')?.classList.add('active');
+    $('#side-mode2-btn')?.classList.remove('active');
     $('#mode2-container')?.classList.add('hidden');
     $('#sidebar')?.classList.remove('hidden');
+    $('#sidebar')?.classList.remove('hidden-desktop');
     $('#main-content')?.classList.remove('hidden');
     if ($('#sidebar-toggle')) $('#sidebar-toggle').style.display = '';
     if (state.currentChId) {
@@ -905,10 +911,13 @@ function switchMode(mode) {
   } else {
     $('#mode2-btn')?.classList.add('active');
     $('#mode1-btn')?.classList.remove('active');
-    $('#sidebar')?.classList.add('hidden');
+    $('#side-mode2-btn')?.classList.add('active');
+    $('#side-mode1-btn')?.classList.remove('active');
+    $('#sidebar')?.classList.add('hidden-desktop');
+    $('#sidebar')?.classList.remove('hidden');
     $('#main-content')?.classList.add('hidden');
     $('#mode2-container')?.classList.remove('hidden');
-    if ($('#sidebar-toggle')) $('#sidebar-toggle').style.display = 'none';
+    if ($('#sidebar-toggle')) $('#sidebar-toggle').style.display = '';
     closeMobileSidebar();
     showM2Subview('m2-lobby');
     updateM2LobbyStats();
