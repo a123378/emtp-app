@@ -1960,7 +1960,7 @@ function triggerNativeInstall() {
       closePwaInstallModal();
     });
   } else {
-    alert('若未跳出安裝對話框，請點擊瀏覽器右上角選單 (⋮) 選擇「加到主畫面」或「安裝應用程式」。');
+    alert('【安裝至主畫面提示】\n• 三星瀏覽器 (Samsung)：請點右下角「☰」選單 ➔「新增頁面至」➔「主螢幕」，或看網址列最右邊有無「⤓」\n• Chrome：請點右上角「⋮」選單 ➔「加到主畫面」\n• iPhone Safari：請點底部「📤」分享 ➔「加入主畫面」');
   }
 }
 
