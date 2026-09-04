@@ -88,6 +88,7 @@ async function init() {
   buildSidebar();
   bindEvents();
   initMode2();
+  registerServiceWorker();
 }
 
 // ── Load all past exams for Mode 2 ────────────────────
@@ -1893,6 +1894,81 @@ window.deleteWrongQuestion = deleteWrongQuestion;
 window.clearAllWrongQuestions = clearAllWrongQuestions;
 window.startWrongQuiz = startWrongQuiz;
 
+// ── PWA & Service Worker ──────────────────────────────────
+let deferredInstallPrompt = null;
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((reg) => {
+          console.log('[PWA] Service Worker registered:', reg.scope);
+        })
+        .catch((err) => {
+          console.warn('[PWA] Service Worker failed:', err);
+        });
+    });
+  }
+
+  // Detect Android Chrome install prompt
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    const promptContainer = document.getElementById('pwa-android-prompt');
+    if (promptContainer) {
+      promptContainer.classList.remove('hidden');
+    }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('[PWA] App installed successfully');
+    deferredInstallPrompt = null;
+    closePwaInstallModal();
+  });
+}
+
+function openPwaInstallModal() {
+  closeMobileSidebar();
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (isStandalone) {
+    alert('恭喜！您目前已經在使用獨立 App 模式瀏覽。');
+    return;
+  }
+  const modal = document.getElementById('pwa-install-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+  }
+}
+
+function closePwaInstallModal() {
+  const modal = document.getElementById('pwa-install-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+  }
+}
+
+function triggerNativeInstall() {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    deferredInstallPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('[PWA] User accepted installation');
+      } else {
+        console.log('[PWA] User dismissed installation');
+      }
+      deferredInstallPrompt = null;
+      closePwaInstallModal();
+    });
+  } else {
+    alert('若未跳出安裝對話框，請點擊瀏覽器右上角選單 (⋮) 選擇「加到主畫面」或「安裝應用程式」。');
+  }
+}
+
+window.openPwaInstallModal = openPwaInstallModal;
+window.closePwaInstallModal = closePwaInstallModal;
+window.triggerNativeInstall = triggerNativeInstall;
+
 // ── Boot ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', init);
+
 

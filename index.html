@@ -8,6 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#E87722">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EMT-P 題庫">
+<link rel="icon" type="image/png" sizes="64x64" href="icons/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 </head>
 <body>
 
@@ -56,6 +65,13 @@
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
       </svg>
     </button>
+    <button class="icon-btn" id="header-install-btn" title="安裝至手機桌面 (像 App 般使用)" onclick="openPwaInstallModal()" aria-label="install app">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+    </button>
   </div>
 </header>
 
@@ -79,6 +95,12 @@
     <div class="sidebar-mode-switcher">
       <button class="side-mode-btn active" id="side-mode1-btn" onclick="switchMode(1);closeMobileSidebar()">📋 模式一：重點筆記</button>
       <button class="side-mode-btn" id="side-mode2-btn" onclick="switchMode(2);closeMobileSidebar()">📝 模式二：題庫練習</button>
+    </div>
+
+    <!-- PWA Install Banner in Drawer -->
+    <div class="sidebar-install-banner" onclick="openPwaInstallModal()">
+      <span>📲 <b>安裝到手機桌面</b></span>
+      <span class="install-tag">推薦</span>
     </div>
     <div class="sidebar-search">
       <div class="search-wrap">
@@ -495,6 +517,54 @@
     <div class="modal-body" id="progress-modal-content"></div>
     <div class="modal-footer">
       <button class="modal-btn primary" onclick="closeProgressModal()">關閉</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: PWA Installation Guide -->
+<div id="pwa-install-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>📲 安裝至手機桌面 (如 App 般使用)</h3>
+      <button class="modal-close" onclick="closePwaInstallModal()">✕</button>
+    </div>
+    <div class="modal-body" style="line-height:1.6">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)">
+        <img src="icons/icon-192.png" alt="EMT-P App Icon" style="width:64px;height:64px;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.15)">
+        <div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--text)">EMT-P 醫學筆記與題庫</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px">免開網頁 ‧ 全螢幕秒開 ‧ 離線快速練習</div>
+        </div>
+      </div>
+
+      <!-- Android Chrome native install button if available -->
+      <div id="pwa-android-prompt" class="hidden" style="margin-bottom:16px">
+        <button class="modal-btn primary" style="width:100%;padding:12px;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:8px" onclick="triggerNativeInstall()">
+          ⚡ 點此一鍵安裝到桌面
+        </button>
+      </div>
+
+      <!-- iPhone / iOS Guide -->
+      <div class="install-guide-card" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px">
+        <div style="font-weight:800;color:var(--orange);margin-bottom:8px;font-size:0.95rem">🍎 iPhone (Safari 瀏覽器) 安裝步驟：</div>
+        <ol style="padding-left:20px;font-size:0.86rem;color:var(--text);margin:0;line-height:1.7">
+          <li style="margin-bottom:6px">在 Safari 點擊螢幕底部的 <b>「分享」</b> 按鈕（<span style="display:inline-block;padding:1px 6px;border-radius:4px;background:var(--border)">📤 向上箭頭</span>）。</li>
+          <li style="margin-bottom:6px">在選單中向下滑動，點選 <b>「加入主畫面」</b>（<span style="display:inline-block;padding:1px 6px;border-radius:4px;background:var(--border)">➕ 加入主畫面</span>）。</li>
+          <li>確認名稱後點擊右上角 <b>「新增」</b>，桌面即會產生 EMT-P 專屬圖示！</li>
+        </ol>
+      </div>
+
+      <!-- Android Guide (Fallback) -->
+      <div class="install-guide-card" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px">
+        <div style="font-weight:800;color:var(--blue);margin-bottom:8px;font-size:0.95rem">🤖 Android (Chrome 瀏覽器) 安裝步驟：</div>
+        <ol style="padding-left:20px;font-size:0.86rem;color:var(--text);margin:0;line-height:1.7">
+          <li style="margin-bottom:6px">點擊 Chrome 右上角的選單圖示（三個小點 <b>⋮</b>）。</li>
+          <li>在選單中點選 <b>「加到主畫面」</b> 或 <b>「安裝應用程式」</b> 即可！</li>
+        </ol>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn primary" onclick="closePwaInstallModal()">我知道了</button>
     </div>
   </div>
 </div>
