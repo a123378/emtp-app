@@ -1,9 +1,9 @@
-const CACHE_NAME = 'emtp-app-v1.1';
+const CACHE_NAME = 'emtp-app-v2.5';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
-  './style.css',
-  './app.js',
+  './style.css?v=2.5',
+  './app.js?v=2.5',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -14,12 +14,13 @@ const PRECACHE_ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('Pre-cache partial failure, continuing:', err);
+        console.warn('Pre-cache partial failure:', err);
       });
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
@@ -29,6 +30,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
+            console.log('[SW] Deleting old cache:', key);
             return caches.delete(key);
           }
         })
@@ -43,29 +45,38 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        // Fetch fresh copy in background for next time (stale-while-revalidate)
-        fetch(event.request).then((networkResponse) => {
+  // Network First for HTML, JS, CSS to ensure immediate updates
+  const req = event.request;
+  const isCode = req.mode === 'navigate' || req.destination === 'script' || req.destination === 'style' || req.url.includes('.html') || req.url.includes('.js') || req.url.includes('.css');
+
+  if (isCode) {
+    event.respondWith(
+      fetch(req)
+        .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, networkResponse.clone());
-            });
+            const resClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
           }
-        }).catch(() => {});
-        return cachedResponse;
-      }
-      return fetch(event.request).then((response) => {
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
+          return networkResponse;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // Stale-While-Revalidate for images, json data
+  event.respondWith(
+    caches.match(req).then((cachedResponse) => {
+      const fetchPromise = fetch(req).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const resClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
         }
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-        return response;
-      });
+        return networkResponse;
+      }).catch(() => {});
+
+      return cachedResponse || fetchPromise;
     })
   );
 });
+

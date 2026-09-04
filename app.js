@@ -693,13 +693,14 @@ function markAllChaptersRead() {
 
 // ── Progress Modal ────────────────────────────────────
 function openProgressModal() {
-  const modal = els.progressModal || document.getElementById('progress-modal');
+  closeMobileSidebar();
+  const modal = document.getElementById('progress-modal');
   if (!modal) return;
-  const total = state.chapters.length;
-  const read = state.readChapters.size;
-  const unread = total - read;
+  const total = state.chapters ? state.chapters.length : 0;
+  const read = state.readChapters ? state.readChapters.size : 0;
+  const unread = Math.max(0, total - read);
   const pct = total > 0 ? Math.round((read / total) * 100) : 0;
-  const contentEl = modal.querySelector('#progress-modal-content');
+  const contentEl = document.getElementById('progress-modal-content');
   if (contentEl) {
     contentEl.innerHTML = `
       <div style="font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:8px">
@@ -714,14 +715,15 @@ function openProgressModal() {
         <button class="modal-btn" onclick="markAllChaptersRead()">🟢 全部標記為綠色 (已讀)</button>
       </div>`;
   }
-  modal.style.display = '';
   modal.classList.remove('hidden');
+  modal.style.setProperty('display', 'flex', 'important');
 }
 
 function closeProgressModal() {
-  const modal = els.progressModal || document.getElementById('progress-modal');
+  const modal = document.getElementById('progress-modal');
   if (modal) {
     modal.classList.add('hidden');
+    modal.style.setProperty('display', 'none', 'important');
   }
 }
 
@@ -791,13 +793,17 @@ function bindEvents() {
   // Theme toggle
   $('#theme-toggle').addEventListener('click', toggleTheme);
 
-  // Progress button
+  // Progress button & drawer banner
   if (els.progressBtn) els.progressBtn.addEventListener('click', openProgressModal);
+  const progressBanner = $('.sidebar-progress-banner');
+  if (progressBanner) progressBanner.addEventListener('click', openProgressModal);
 
   // Close progress modal on backdrop click
-  els.progressModal.addEventListener('click', (e) => {
-    if (e.target === els.progressModal) closeProgressModal();
-  });
+  if (els.progressModal) {
+    els.progressModal.addEventListener('click', (e) => {
+      if (e.target === els.progressModal) closeProgressModal();
+    });
+  }
 
   // Mode buttons
   $$('.mode-btn').forEach(btn => {
@@ -1913,10 +1919,19 @@ function registerServiceWorker() {
       navigator.serviceWorker.register('./sw.js')
         .then((reg) => {
           console.log('[PWA] Service Worker registered:', reg.scope);
+          reg.update();
         })
         .catch((err) => {
           console.warn('[PWA] Service Worker failed:', err);
         });
+    });
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
     });
   }
 
