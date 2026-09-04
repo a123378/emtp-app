@@ -693,26 +693,36 @@ function markAllChaptersRead() {
 
 // ── Progress Modal ────────────────────────────────────
 function openProgressModal() {
+  const modal = els.progressModal || document.getElementById('progress-modal');
+  if (!modal) return;
   const total = state.chapters.length;
   const read = state.readChapters.size;
   const unread = total - read;
   const pct = total > 0 ? Math.round((read / total) * 100) : 0;
-  els.progressModal.querySelector('#progress-modal-content').innerHTML = `
-    <div style="font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:8px">
-      🟢 <span style="color:var(--success)">${read}</span> 章已研讀 ‧ 🔴 <span style="color:#ef4444">${unread}</span> 章待研讀
-    </div>
-    <div style="height:10px;background:var(--border);border-radius:5px;overflow:hidden;margin-bottom:14px">
-      <div style="width:${pct}%;height:100%;background:var(--success);border-radius:5px;transition:.4s"></div>
-    </div>
-    <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px">總研讀完成度：${pct}%（左側圓點可直接點擊切換紅綠狀態）</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="modal-btn" onclick="resetAllChaptersToUnread()">🔴 全部重設為紅色 (待讀)</button>
-      <button class="modal-btn" onclick="markAllChaptersRead()">🟢 全部標記為綠色 (已讀)</button>
-    </div>`;
-  els.progressModal.style.display = 'flex';
+  const contentEl = modal.querySelector('#progress-modal-content');
+  if (contentEl) {
+    contentEl.innerHTML = `
+      <div style="font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:8px">
+        🟢 <span style="color:var(--success)">${read}</span> 章已研讀 ‧ 🔴 <span style="color:#ef4444">${unread}</span> 章待研讀
+      </div>
+      <div style="height:10px;background:var(--border);border-radius:5px;overflow:hidden;margin-bottom:14px">
+        <div style="width:${pct}%;height:100%;background:var(--success);border-radius:5px;transition:.4s"></div>
+      </div>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px">總研讀完成度：${pct}%（左側圓點可直接點擊切換紅綠狀態）</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="modal-btn" onclick="resetAllChaptersToUnread()">🔴 全部重設為紅色 (待讀)</button>
+        <button class="modal-btn" onclick="markAllChaptersRead()">🟢 全部標記為綠色 (已讀)</button>
+      </div>`;
+  }
+  modal.style.display = '';
+  modal.classList.remove('hidden');
 }
+
 function closeProgressModal() {
-  els.progressModal.style.display = 'none';
+  const modal = els.progressModal || document.getElementById('progress-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+  }
 }
 
 // ── Pagination helpers ─────────────────────────────────
