@@ -693,10 +693,13 @@ function markAllChaptersRead() {
 
 // ── Progress Modal ────────────────────────────────────
 function openProgressModal() {
-  closeMobileSidebar();
+  try { closeMobileSidebar(); } catch (e) {}
   const modal = document.getElementById('progress-modal');
-  if (!modal) return;
-  const total = state.chapters ? state.chapters.length : 0;
+  if (!modal) {
+    console.warn('progress-modal not found');
+    return;
+  }
+  const total = state.chapters ? state.chapters.length : 60;
   const read = state.readChapters ? state.readChapters.size : 0;
   const unread = Math.max(0, total - read);
   const pct = total > 0 ? Math.round((read / total) * 100) : 0;
@@ -716,14 +719,14 @@ function openProgressModal() {
       </div>`;
   }
   modal.classList.remove('hidden');
-  modal.style.setProperty('display', 'flex', 'important');
+  modal.style.cssText = 'display: flex !important; position: fixed !important; z-index: 9999 !important; inset: 0 !important;';
 }
 
 function closeProgressModal() {
   const modal = document.getElementById('progress-modal');
   if (modal) {
     modal.classList.add('hidden');
-    modal.style.setProperty('display', 'none', 'important');
+    modal.style.cssText = 'display: none !important;';
   }
 }
 
