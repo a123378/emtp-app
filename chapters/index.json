@@ -1,0 +1,364 @@
+{
+  "chapters": [
+    {
+      "id": "ch01",
+      "num": "CH01",
+      "title": "緊急醫療救護體系概論",
+      "ready": true
+    },
+    {
+      "id": "ch02",
+      "num": "CH02",
+      "title": "台灣緊急醫療救護體系",
+      "ready": true
+    },
+    {
+      "id": "ch03",
+      "num": "CH03",
+      "title": "救護技術員的角色與責任",
+      "ready": true
+    },
+    {
+      "id": "ch04",
+      "num": "CH04",
+      "title": "緊急醫療救護相關法律規範",
+      "ready": true
+    },
+    {
+      "id": "ch05",
+      "num": "CH05",
+      "title": "救護技術員的職業安全與傳染病防治",
+      "ready": true
+    },
+    {
+      "id": "ch06",
+      "num": "CH06",
+      "title": "救護技術員的心理衛生",
+      "ready": true
+    },
+    {
+      "id": "ch07",
+      "num": "CH07",
+      "title": "緊急醫療救護派遣系統",
+      "ready": true
+    },
+    {
+      "id": "ch08",
+      "num": "CH08",
+      "title": "社區層級的緊急醫療反應",
+      "ready": true
+    },
+    {
+      "id": "ch09",
+      "num": "CH09",
+      "title": "緊急醫療救護的品質管理",
+      "ready": true
+    },
+    {
+      "id": "ch10",
+      "num": "CH10",
+      "title": "緊急救護之新科技應用",
+      "ready": true
+    },
+    {
+      "id": "ch11",
+      "num": "CH11",
+      "title": "救護技術員的科學思考基礎",
+      "ready": true
+    },
+    {
+      "id": "ch12",
+      "num": "CH12",
+      "title": "人體基本解剖與生理",
+      "ready": true
+    },
+    {
+      "id": "ch13",
+      "num": "CH13",
+      "title": "從出生到死亡：一生的成長與發展",
+      "ready": true
+    },
+    {
+      "id": "ch14",
+      "num": "CH14",
+      "title": "呼吸道處置與通氣-原理篇",
+      "ready": true
+    },
+    {
+      "id": "ch15",
+      "num": "CH15",
+      "title": "呼吸道處置與通氣-技術篇",
+      "ready": true
+    },
+    {
+      "id": "ch16",
+      "num": "CH16",
+      "title": "緊急救護藥理學",
+      "ready": true
+    },
+    {
+      "id": "ch17",
+      "num": "CH17",
+      "title": "藥物給予及給藥途徑",
+      "ready": true
+    },
+    {
+      "id": "ch18",
+      "num": "CH18",
+      "title": "醫病關係與溝通技巧",
+      "ready": true
+    },
+    {
+      "id": "ch19",
+      "num": "CH19",
+      "title": "病史詢問",
+      "ready": true
+    },
+    {
+      "id": "ch20",
+      "num": "CH20",
+      "title": "身體診察",
+      "ready": true
+    },
+    {
+      "id": "ch21",
+      "num": "CH21",
+      "title": "到院前超音波應用",
+      "ready": true
+    },
+    {
+      "id": "ch22",
+      "num": "CH22",
+      "title": "病人評估與決策策",
+      "ready": true
+    },
+    {
+      "id": "ch23",
+      "num": "CH23",
+      "title": "基本生命支持與急救",
+      "ready": true
+    },
+    {
+      "id": "ch24",
+      "num": "CH24",
+      "title": "復甦醫學新進展",
+      "ready": true
+    },
+    {
+      "id": "ch25",
+      "num": "CH25",
+      "title": "外傷總論與重大外傷",
+      "ready": true
+    },
+    {
+      "id": "ch26",
+      "num": "CH26",
+      "title": "出血、休克與止血治療",
+      "ready": true
+    },
+    {
+      "id": "ch27",
+      "num": "CH27",
+      "title": "頭頸脊椎與顏面外傷",
+      "ready": true
+    },
+    {
+      "id": "ch28",
+      "num": "CH28",
+      "title": "胸部外傷",
+      "ready": true
+    },
+    {
+      "id": "ch29",
+      "num": "CH29",
+      "title": "腹骨盆部外傷",
+      "ready": true
+    },
+    {
+      "id": "ch30",
+      "num": "CH30",
+      "title": "軟組織肌肉骨骼外傷與壓砸傷",
+      "ready": true
+    },
+    {
+      "id": "ch31",
+      "num": "CH31",
+      "title": "灼傷與電灼害",
+      "ready": true
+    },
+    {
+      "id": "ch32",
+      "num": "CH32",
+      "title": "特殊創傷族群及親密伴侶暴力",
+      "ready": true
+    },
+    {
+      "id": "ch33",
+      "num": "CH33",
+      "title": "心電圖判定",
+      "ready": true
+    },
+    {
+      "id": "ch34",
+      "num": "CH34",
+      "title": "心臟與血管急症",
+      "ready": true
+    },
+    {
+      "id": "ch35",
+      "num": "CH35",
+      "title": "呼吸系統急症",
+      "ready": true
+    },
+    {
+      "id": "ch36",
+      "num": "CH36",
+      "title": "神經系統急症與急性腦中風",
+      "ready": true
+    },
+    {
+      "id": "ch37",
+      "num": "CH37",
+      "title": "內分泌與代謝急症",
+      "ready": true
+    },
+    {
+      "id": "ch38",
+      "num": "CH38",
+      "title": "腸胃急症",
+      "ready": true
+    },
+    {
+      "id": "ch39",
+      "num": "CH39",
+      "title": "血液與腫瘤急症",
+      "ready": true
+    },
+    {
+      "id": "ch40",
+      "num": "CH40",
+      "title": "過敏與免疫急症",
+      "ready": true
+    },
+    {
+      "id": "ch41",
+      "num": "CH41",
+      "title": "泌尿與腎臟急症",
+      "ready": true
+    },
+    {
+      "id": "ch42",
+      "num": "CH42",
+      "title": "感染急症",
+      "ready": true
+    },
+    {
+      "id": "ch43",
+      "num": "CH43",
+      "title": "新興傳染病與疫災防治",
+      "ready": true
+    },
+    {
+      "id": "ch44",
+      "num": "CH44",
+      "title": "環境急症",
+      "ready": true
+    },
+    {
+      "id": "ch45",
+      "num": "CH45",
+      "title": "野外醫學",
+      "ready": true
+    },
+    {
+      "id": "ch46",
+      "num": "CH46",
+      "title": "行為急症與精神急症",
+      "ready": true
+    },
+    {
+      "id": "ch47",
+      "num": "CH47",
+      "title": "高齡緊急救護概論",
+      "ready": true
+    },
+    {
+      "id": "ch48",
+      "num": "CH48",
+      "title": "新生兒急救與小兒急症",
+      "ready": true
+    },
+    {
+      "id": "ch49",
+      "num": "CH49",
+      "title": "婦產急症",
+      "ready": true
+    },
+    {
+      "id": "ch50",
+      "num": "CH50",
+      "title": "毒物學",
+      "ready": true
+    },
+    {
+      "id": "ch51",
+      "num": "CH51",
+      "title": "醫療管路、維生器材與常見的院內檢查",
+      "ready": true
+    },
+    {
+      "id": "ch52",
+      "num": "CH52",
+      "title": "大量病人與災難應變",
+      "ready": true
+    },
+    {
+      "id": "ch53",
+      "num": "CH53",
+      "title": "危害物質與核生化應變",
+      "ready": true
+    },
+    {
+      "id": "ch54",
+      "num": "CH54",
+      "title": "大型活動之緊急醫療救護",
+      "ready": true
+    },
+    {
+      "id": "ch55",
+      "num": "CH55",
+      "title": "運動賽事救護人員的角色與任務",
+      "ready": true
+    },
+    {
+      "id": "ch56",
+      "num": "CH56",
+      "title": "高危情境或侷限空間病人之緊急醫療救護",
+      "ready": true
+    },
+    {
+      "id": "ch57",
+      "num": "CH57",
+      "title": "常見天然災害",
+      "ready": true
+    },
+    {
+      "id": "ch58",
+      "num": "CH58",
+      "title": "空中救護體系",
+      "ready": true
+    },
+    {
+      "id": "ch59",
+      "num": "CH59",
+      "title": "緊急救護中的團隊資源管理",
+      "ready": true
+    },
+    {
+      "id": "ch60",
+      "num": "CH60",
+      "title": "緊急救護技術的教學技巧",
+      "ready": true
+    }
+  ]
+}
