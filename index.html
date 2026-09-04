@@ -60,18 +60,6 @@
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
     </button>
-    <button class="icon-btn" id="progress-btn" title="閱讀進度" aria-label="progress">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-      </svg>
-    </button>
-    <button class="icon-btn" id="header-install-btn" title="安裝至手機桌面 (像 App 般使用)" onclick="openPwaInstallModal()" aria-label="install app">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-    </button>
   </div>
 </header>
 
@@ -101,6 +89,11 @@
     <div class="sidebar-install-banner" onclick="openPwaInstallModal()">
       <span>📲 <b>安裝到手機桌面</b></span>
       <span class="install-tag">推薦</span>
+    </div>
+    <!-- Progress Stats Banner in Drawer -->
+    <div class="sidebar-install-banner sidebar-progress-banner" onclick="openProgressModal();closeMobileSidebar()">
+      <span>📊 <b>研讀進度管理</b></span>
+      <span class="install-tag" style="background:var(--surface);color:var(--text-muted);border:1px solid var(--border)">統計/重設</span>
     </div>
     <div class="sidebar-search">
       <div class="search-wrap">

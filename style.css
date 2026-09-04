@@ -2269,3 +2269,14 @@ body {
   border-color: var(--orange-border) !important;
 }
 
+.sidebar-progress-banner {
+  margin-top: -6px !important;
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+.sidebar-progress-banner:hover {
+  background: var(--surface-2) !important;
+  border-color: var(--border-hover) !important;
+}
+
+

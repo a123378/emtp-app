@@ -782,7 +782,7 @@ function bindEvents() {
   $('#theme-toggle').addEventListener('click', toggleTheme);
 
   // Progress button
-  els.progressBtn.addEventListener('click', openProgressModal);
+  if (els.progressBtn) els.progressBtn.addEventListener('click', openProgressModal);
 
   // Close progress modal on backdrop click
   els.progressModal.addEventListener('click', (e) => {
