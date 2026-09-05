@@ -444,7 +444,7 @@ function renderQuizItem(q, qi, chId) {
                     ${isAnswered ? 'disabled' : ''}
                     onclick="selectOption(${qi}, ${oi}, '${chId}')">
               <span class="opt-label">${String.fromCharCode(65 + oi)}</span>
-              <span class="opt-text">${opt}</span>
+              <span class="opt-text">${cleanOptionText(opt)}</span>
             </button>`;
         }).join('')}
       </div>
@@ -1094,6 +1094,11 @@ function formatTimer(totalSecs) {
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
+function cleanOptionText(text) {
+  if (!text) return '';
+  return text.replace(/^(\s*[\(\（]?[A-Da-d][\)\）\.\s、·]\s*)+/, '').trim();
+}
+
 function renderRunnerNavBar() {
   const bar = $('#m2-qnav-bar');
   if (!bar) return;
@@ -1150,7 +1155,7 @@ function renderRunnerQuestion(idx) {
     optDiv.className = 'm2-runner-opt' + (userChoice === optIdx ? ' selected' : '');
     optDiv.innerHTML = `
       <div class="m2-opt-letter">${letters[optIdx]}</div>
-      <div class="m2-opt-text">${escapeHtml(optText)}</div>
+      <div class="m2-opt-text">${escapeHtml(cleanOptionText(optText))}</div>
     `;
     optDiv.addEventListener('click', () => {
       selectRunnerOption(idx, optIdx);
@@ -1162,7 +1167,14 @@ function renderRunnerQuestion(idx) {
   const prevBtn = $('#m2-prev-btn');
   const nextBtn = $('#m2-next-btn');
   if (prevBtn) prevBtn.disabled = (idx === 0);
-  if (nextBtn) nextBtn.disabled = (idx === total - 1);
+  if (nextBtn) {
+    nextBtn.disabled = false;
+    if (idx === total - 1) {
+      nextBtn.textContent = '完成交卷 🏁';
+    } else {
+      nextBtn.textContent = '下一題 →';
+    }
+  }
 }
 
 function selectRunnerOption(qIdx, optIdx) {
@@ -1186,8 +1198,11 @@ function prevRunnerQ() {
 }
 
 function nextRunnerQ() {
-  if (state.m2Runner.currentIndex < state.m2Runner.questions.length - 1) {
+  const total = state.m2Runner.questions.length;
+  if (state.m2Runner.currentIndex < total - 1) {
     renderRunnerQuestion(state.m2Runner.currentIndex + 1);
+  } else {
+    submitRunnerQuiz();
   }
 }
 
@@ -1310,7 +1325,7 @@ function renderQuizReviewList(questions, userAnswers) {
       optionsHtml += `
         <div class="${optClass}">
           <b>(${letters[optIdx]})</b>
-          <span>${escapeHtml(optText)}</span>
+          <span>${escapeHtml(cleanOptionText(optText))}</span>
           ${badge}
         </div>
       `;
@@ -1649,7 +1664,7 @@ function filterWrongBook() {
       optionsHtml += `
         <div class="m2-rev-opt ${isCorrect ? 'is-correct-answer' : ''}" style="margin-bottom:6px">
           <b>(${letters[optIdx]})</b>
-          <span>${escapeHtml(optText)}</span>
+          <span>${escapeHtml(cleanOptionText(optText))}</span>
           ${isCorrect ? '<b style="color:var(--success);margin-left:auto">(正確答案)</b>' : ''}
         </div>
       `;

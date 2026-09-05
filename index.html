@@ -19,7 +19,7 @@
     });
   }
 </script>
-<link rel="stylesheet" href="style.css?v=20260905_0320">
+<link rel="stylesheet" href="style.css?v=20260905_1820">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -254,6 +254,7 @@
         <div class="m2-runner-title-wrap">
           <span class="m2-quiz-type-badge" id="m2-runner-type">歷屆全真抽測</span>
           <span class="m2-timer" id="m2-runner-timer">⏱️ 00:00</span>
+          <button class="m2-early-submit-btn" id="m2-submit-btn" onclick="submitRunnerQuiz()">📝 提早交卷</button>
         </div>
       </div>
 
@@ -273,7 +274,6 @@
       <!-- Runner Footer Controls -->
       <div class="m2-runner-footer">
         <button class="m2-nav-btn" id="m2-prev-btn" onclick="prevRunnerQ()">← 上一題</button>
-        <button class="m2-submit-btn" id="m2-submit-btn" onclick="submitRunnerQuiz()">📤 交卷結算並看詳解</button>
         <button class="m2-nav-btn" id="m2-next-btn" onclick="nextRunnerQ()">下一題 →</button>
       </div>
     </div>
@@ -589,6 +589,6 @@
   </div>
 </div>
 
-<script src="app.js?v=20260905_0320"></script>
+<script src="app.js?v=20260905_1820"></script>
 </body>
 </html>
