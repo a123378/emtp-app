@@ -21,7 +21,16 @@ const state = {
   geminiApiKey: localStorage.getItem('gemini_api_key') || '',
   geminiModel: localStorage.getItem('gemini_model') || 'gemini-3.8-flash',
   wrongQuestions: JSON.parse(localStorage.getItem('m2_wrong_questions') || '[]'),
-  m2Stats: JSON.parse(localStorage.getItem('m2_stats') || '{"total":0, "correct":0}'),
+  m2Stats: (() => {
+    // 依使用者要求清空模式二作題數 (2026-09-05)
+    if (!localStorage.getItem('m2_stats_cleared_user_req_20260905')) {
+      const fresh = { total: 0, correct: 0 };
+      localStorage.setItem('m2_stats', JSON.stringify(fresh));
+      localStorage.setItem('m2_stats_cleared_user_req_20260905', 'true');
+      return fresh;
+    }
+    return JSON.parse(localStorage.getItem('m2_stats') || '{"total":0, "correct":0}');
+  })(),
   currentMode: 1,
   m2Runner: {
     type: '',
@@ -973,6 +982,15 @@ function updateM2LobbyStats() {
     accEl.textContent = `${acc}%`;
   }
   if (wrongEl) wrongEl.textContent = state.wrongQuestions.length;
+}
+
+function resetM2Stats() {
+  if (confirm('確定要清空模式二的「累計做題數」與「平均正確率」統計嗎？\n（作答題數將歸零，錯題本資料仍會保留）')) {
+    state.m2Stats = { total: 0, correct: 0 };
+    localStorage.setItem('m2_stats', JSON.stringify(state.m2Stats));
+    updateM2LobbyStats();
+    alert('模式二累計做題數已成功清空！');
+  }
 }
 
 function updateApiStatusBtn() {

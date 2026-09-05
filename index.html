@@ -19,7 +19,7 @@
     });
   }
 </script>
-<link rel="stylesheet" href="style.css?v=20260905_1820">
+<link rel="stylesheet" href="style.css?v=20260905_1825">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -188,10 +188,13 @@
             <h2>📝 EMT-P 題庫練習模式</h2>
             <p>每輪 10 題高擬真臨床情境單選題 ‧ 交卷後完整解析 ‧ 支援直達重點筆記</p>
           </div>
-          <button class="m2-api-btn" onclick="openApiModal()" id="m2-api-status-btn">
-            <span class="api-dot" id="api-dot"></span>
-            <span id="api-status-text">Gemini API 設定</span>
-          </button>
+          <div class="m2-hero-actions">
+            <button class="m2-reset-stats-btn" onclick="resetM2Stats()" title="清空累計做題數與平均正確率統計">🔄 清空作題數</button>
+            <button class="m2-api-btn" onclick="openApiModal()" id="m2-api-status-btn">
+              <span class="api-dot" id="api-dot"></span>
+              <span id="api-status-text">Gemini API 設定</span>
+            </button>
+          </div>
         </div>
 
         <!-- Stats Bar -->
@@ -589,6 +592,6 @@
   </div>
 </div>
 
-<script src="app.js?v=20260905_1820"></script>
+<script src="app.js?v=20260905_1825"></script>
 </body>
 </html>
