@@ -1314,6 +1314,187 @@ function submitRunnerQuiz() {
   showM2Subview('m2-quiz-result');
 }
 
+// ── 模式二：考點速記精簡解析萃取函數 ────────────────────────
+function getBriefExplanation(q) {
+  if (!q) return '詳見各章重點筆記。';
+  let expl = (q.explanation || '').trim();
+  const ansIdx = (typeof q.answer === 'number' && q.answer >= 0 && q.answer < 4) ? q.answer : 0;
+  const letters = ['A', 'B', 'C', 'D'];
+  const ansLetter = letters[ansIdx] || 'A';
+
+  const defaultFallback = () => {
+    if (q.options && q.options[ansIdx]) {
+      const cleanOpt = String(q.options[ansIdx]).replace(/^[A-Da-d][\.\s、:]*/, '').trim();
+      return `正確選項為 (${ansLetter}) ${cleanOpt}。`;
+    }
+    return '詳見該章重點筆記與教材指引。';
+  };
+
+  if (!expl) return defaultFallback();
+
+  // 清除跨行括號斷裂，例如 "(\nC)"
+  expl = expl.replace(/[(（]\s*\r?\n\s*/g, '(');
+
+  // 以空行先切分段落
+  const rawParagraphs = expl.split(/\r?\n\s*\r?\n/).map(p => p.trim()).filter(Boolean);
+
+  const optStartPat = /^(?:重點解析[:：]\s*)?[\uf0e8\*\-•\s]*(?:[(（][A-Da-d][)）]|【[A-Da-d]】|[A-Da-d][:：\s、\.])/;
+  const headerPat = /^(?:重點解析[:：]?\s*$|衛生福利部.*|\d+\s*台大\s*田鴻毅.*|台大\s*田鴻毅.*|參考出處[:：].*|【出處】.*|[─_=*]{3,}|第\s*\d+\s*章.*(?:\(p\d+.*?\))?)$/i;
+
+  const validBlocks = [];
+  let reachedStop = false;
+
+  for (const para of rawParagraphs) {
+    if (reachedStop) break;
+    const lines = para.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    let curr = [];
+
+    for (const l of lines) {
+      if (headerPat.test(l)) continue;
+      if (/(?:\(延伸閱讀\)|法規名稱：|救護技術員管理辦法修正總說明|緊急醫療救護法修正條文)/.test(l)) {
+        reachedStop = true;
+        break;
+      }
+      if (optStartPat.test(l)) {
+        if (curr.length > 0) {
+          validBlocks.push(curr.join(' ').replace(/\s+/g, ' ').trim());
+          curr = [];
+        }
+        curr.push(l);
+      } else {
+        if (curr.length > 0) {
+          curr.push(l);
+        } else {
+          validBlocks.push(l);
+        }
+      }
+    }
+    if (curr.length > 0) {
+      validBlocks.push(curr.join(' ').replace(/\s+/g, ' ').trim());
+    }
+  }
+
+  // 過濾無效或分隔線區塊
+  const filteredBlocks = validBlocks
+    .map(b => b.replace(/\s+/g, ' ').trim())
+    .filter(b => b && !/^(?:重點解析[:：]?|[─_=*\.]{3,}|…+|~+)$/.test(b));
+
+  if (filteredBlocks.length === 0) return defaultFallback();
+
+  // 1. 優先比對正確答案選項標記
+  const ansRegexes = [
+    new RegExp(`^(?:重點解析[:：]\\s*)?[\\uf0e8\\*\\-•\\s]*(?:[(（]${ansLetter}[)）]|【${ansLetter}】|${ansLetter}[:：\\s、\\.])\\s*(.*)`, 'i'),
+    new RegExp(`^(?:重點解析[:：]\\s*)?[\\uf0e8\\*\\-•\\s]*(?:正確|錯誤|錯|對)[。、\\s]*[(（]${ansLetter}[)）]\\s*(.*)`, 'i'),
+    new RegExp(`^(?:重點解析[:：]\\s*)?[\\uf0e8\\*\\-•\\s]*正確[:：\\s]*[(（]?${ansLetter}[)）]`, 'i')
+  ];
+
+  let targetBlock = null;
+  let targetIdx = -1;
+  for (let idx = 0; idx < filteredBlocks.length; idx++) {
+    for (let r of ansRegexes) {
+      if (r.test(filteredBlocks[idx])) {
+        targetBlock = filteredBlocks[idx];
+        targetIdx = idx;
+        break;
+      }
+    }
+    if (targetBlock) break;
+  }
+
+  let chosen = '';
+  if (targetBlock) {
+    let cleanB = targetBlock
+      .replace(/^重點解析[:：]\s*/, '')
+      .replace(/^第\s*\d+\s*章\s*[^\s]+[\s/]*/, '')
+      .trim();
+
+    // 若僅有單純結論判定（如「(A) 錯誤。」或過短），向後探尋實質說明
+    const isBare = /^[\uf0e8\*\-•\s]*(?:[(（]?[A-D][)）][:：\s、\.]*|【[A-D]】\s*|[A-D][:：\s]*)(?:正確|錯誤|錯|對|是|否|無誤)[。！!~.]*$/i.test(cleanB);
+    if (isBare || cleanB.length < 16) {
+      for (let ni = targetIdx + 1; ni < filteredBlocks.length; ni++) {
+        const nextB = filteredBlocks[ni];
+        if (optStartPat.test(nextB)) continue;
+        const cleanNext = nextB
+          .replace(/^重點解析[:：]\s*/, '')
+          .replace(/^第\s*\d+\s*章\s*[^\s]+[\s/]*/, '')
+          .trim();
+        if (cleanNext) {
+          cleanB = `${cleanB} ${cleanNext}`;
+          break;
+        }
+      }
+    }
+    chosen = cleanB;
+  }
+
+  // 2. 若無直接對應，找第一個非其他選項的解析段落
+  if (!chosen) {
+    const otherLetters = letters.filter(l => l !== ansLetter);
+    const otherPats = otherLetters.map(l => new RegExp(`^[\\uf0e8\\*\\-•\\s]*(?:[(（]${l}[)）]|【${l}】|${l}[:：\\s、\\.])`, 'i'));
+    for (let idx = 0; idx < filteredBlocks.length; idx++) {
+      const b = filteredBlocks[idx];
+      if (otherPats.some(p => p.test(b))) continue;
+      let cleanB = b
+        .replace(/^重點解析[:：]\s*/, '')
+        .replace(/^第\s*\d+\s*章\s*[^\s]+[\s/]*/, '')
+        .trim();
+      if (/^(?:原始答案|公布答案)[:：\s]*/.test(cleanB) && idx + 1 < filteredBlocks.length) {
+        cleanB += ' ' + filteredBlocks[idx + 1];
+      }
+      if (cleanB) {
+        chosen = cleanB;
+        break;
+      }
+    }
+  }
+
+  // 3. 兜底取首段
+  if (!chosen && filteredBlocks.length > 0) {
+    chosen = filteredBlocks[0]
+      .replace(/^重點解析[:：]\s*/, '')
+      .replace(/^第\s*\d+\s*章\s*[^\s]+[\s/]*/, '')
+      .trim();
+  }
+
+  if (!chosen) return defaultFallback();
+
+  let res = chosen
+    .replace(/\s+/g, ' ')
+    .replace(/^[\uf0e8\*\-•\s]+/, '')
+    .replace(/^更正[\uf0e8\s]*/, '')
+    .trim();
+
+  // 精簡長度控制，約 1~3 句話，若過長於標點截斷
+  if (res.length > 150) {
+    const cutMatch = res.slice(80, 150).match(/[。；！？]/);
+    if (cutMatch && typeof cutMatch.index === 'number') {
+      res = res.slice(0, 80 + cutMatch.index + 1).trim();
+    } else {
+      res = res.slice(0, 145).trim() + '...';
+    }
+  }
+
+  return res || defaultFallback();
+}
+
+// ── 切換展開/收合完整解析 ────────────────────────────
+function toggleFullExpl(btn) {
+  const box = btn.closest('.review-expl-box');
+  if (!box) return;
+  const fullContainer = box.querySelector('.full-expl-container');
+  if (!fullContainer) return;
+  const isHidden = fullContainer.style.display === 'none' || !fullContainer.style.display;
+  if (isHidden) {
+    fullContainer.style.display = 'block';
+    btn.innerHTML = '🔼 收合完整解析';
+    btn.classList.add('expanded');
+  } else {
+    fullContainer.style.display = 'none';
+    btn.innerHTML = '📖 展開完整解析';
+    btn.classList.remove('expanded');
+  }
+}
+
 function renderQuizReviewList(questions, userAnswers) {
   const container = $('#m2-review-list');
   if (!container) return;
@@ -1364,11 +1545,21 @@ function renderQuizReviewList(questions, userAnswers) {
         ${optionsHtml}
       </div>
       <div class="review-expl-box">
-        <div class="review-expl-title">💡 題目詳解與考點關鍵：</div>
-        <div>${escapeHtml(q.explanation || '暫無解析')}</div>
+        <div class="review-expl-header">
+          <span class="review-expl-title">💡 考點速記：</span>
+          <button type="button" class="toggle-full-expl-btn" onclick="toggleFullExpl(this)">
+            📖 展開完整解析
+          </button>
+        </div>
+        <div class="brief-expl-text">${escapeHtml(getBriefExplanation(q))}</div>
+        <div class="full-expl-container" style="display:none">
+          <div class="full-expl-divider"></div>
+          <div class="full-expl-title">📋 完整教材／法規詳解：</div>
+          <div class="full-expl-content">${escapeHtml(q.explanation || '暫無完整解析')}</div>
+        </div>
       </div>
       <button class="jump-ch-btn" onclick="jumpToMode1Chapter('${q.chId || 'ch01'}')">
-        🔗 跳轉至 ${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '該章')} 重點筆記
+        🔗 查看 ${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '該章')} 完整重點筆記與考點
       </button>
     `;
 
@@ -1379,6 +1570,8 @@ function renderQuizReviewList(questions, userAnswers) {
 // ── 跳轉至模式一重點筆記 ─────────────────────────────
 function jumpToMode1Chapter(chId) {
   if (!chId) chId = 'ch01';
+  $('#m2-review-modal')?.classList.add('hidden');
+  $('#m2-ch-modal')?.classList.add('hidden');
   switchMode(1);
   selectChapter(chId);
   switchTab('notes');
@@ -1703,12 +1896,22 @@ function filterWrongBook() {
         ${optionsHtml}
       </div>
       <div class="review-expl-box" style="margin-top:10px">
-        <div class="review-expl-title">💡 重點解析：</div>
-        <div>${escapeHtml(q.explanation || '暫無解析')}</div>
+        <div class="review-expl-header">
+          <span class="review-expl-title">💡 考點速記：</span>
+          <button type="button" class="toggle-full-expl-btn" onclick="toggleFullExpl(this)">
+            📖 展開完整解析
+          </button>
+        </div>
+        <div class="brief-expl-text">${escapeHtml(getBriefExplanation(q))}</div>
+        <div class="full-expl-container" style="display:none">
+          <div class="full-expl-divider"></div>
+          <div class="full-expl-title">📋 完整教材／法規詳解：</div>
+          <div class="full-expl-content">${escapeHtml(q.explanation || '暫無完整解析')}</div>
+        </div>
       </div>
       <div style="margin-top:12px">
         <button class="jump-ch-btn" onclick="jumpToMode1Chapter('${q.chId || 'ch01'}')">
-          🔗 跳轉至 ${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '該章')} 重點筆記
+          🔗 查看 ${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '該章')} 完整重點筆記與考點
         </button>
       </div>
     `;
