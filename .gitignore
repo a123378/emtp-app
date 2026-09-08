@@ -1,5 +1,7 @@
 # Scripts and OCR images / scratch
 scripts/
+quizzes_images/
+scratch/
 *.py
 *.txt
 

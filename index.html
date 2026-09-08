@@ -271,6 +271,7 @@
           <span class="m2-qtag ch" id="m2-qmeta-ch">CH01 緊急醫療救護體系概論</span>
         </div>
         <div class="m2-qtext" id="m2-qtext">載入題目中…</div>
+        <div id="m2-runner-img" class="m2-qimage-wrap hidden"></div>
         <div class="m2-runner-options" id="m2-runner-options"></div>
       </div>
 
@@ -592,6 +593,25 @@
   </div>
 </div>
 
-<script src="app.js?v=20260905_1825"></script>
+<!-- ══════════════════════════════════════════════════════
+     Image Zoom Lightbox Modal (心電圖/附圖點擊全螢幕高清放大檢視)
+     ══════════════════════════════════════════════════════ -->
+<div id="image-modal" class="image-lightbox-modal hidden" onclick="closeImageModal()">
+  <div class="image-lightbox-content" onclick="event.stopPropagation()">
+    <div class="image-lightbox-header">
+      <span class="image-lightbox-title">🔍 附圖與心電圖格線放大檢視</span>
+      <button class="image-lightbox-close" onclick="closeImageModal()" title="關閉放大視窗">✕</button>
+    </div>
+    <div class="image-lightbox-scroll">
+      <img id="image-modal-img" src="" alt="放大心電圖/附圖">
+    </div>
+    <div class="image-lightbox-footer">
+      <span>💡 手機端支援雙指縮放；電腦端可點擊或滾動檢視 0.04s 小格線與 ST 節段變化</span>
+      <button class="image-lightbox-btn" onclick="closeImageModal()">關閉視窗</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js?v=20260908_1020"></script>
 </body>
 </html>

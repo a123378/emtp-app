@@ -441,6 +441,13 @@ function renderQuizItem(q, qi, chId) {
         </span>
       </div>
       <div class="quiz-q">${qi + 1}. ${q.question}</div>
+      ${q.image ? `
+        <div class="quiz-qimage-wrap">
+          <div class="m2-qimage-box" onclick="openImageModal('${escapeHtml(q.image)}')">
+            <img src="${escapeHtml(q.image)}" alt="題目心電圖/附圖" class="m2-qimage">
+            <div class="m2-qimage-hint">🔍 點擊圖片可放大檢視心電圖細節</div>
+          </div>
+        </div>` : ''}
       <div class="quiz-options">
         ${q.options.map((opt, oi) => {
           let extraClass = '';
@@ -1161,6 +1168,22 @@ function renderRunnerQuestion(idx) {
   const qText = $('#m2-qtext');
   if (qText) qText.textContent = q.question;
 
+  // 附圖 (心電圖 / 題幹附圖)
+  const imgWrap = $('#m2-runner-img');
+  if (imgWrap) {
+    if (q.image) {
+      imgWrap.innerHTML = `
+        <div class="m2-qimage-box" onclick="openImageModal('${escapeHtml(q.image)}')">
+          <img src="${escapeHtml(q.image)}" alt="題目心電圖/附圖" class="m2-qimage">
+          <div class="m2-qimage-hint">🔍 點擊圖片可放大檢視心電圖細節</div>
+        </div>`;
+      imgWrap.classList.remove('hidden');
+    } else {
+      imgWrap.innerHTML = '';
+      imgWrap.classList.add('hidden');
+    }
+  }
+
   // 四個選項渲染
   const optWrap = $('#m2-runner-options');
   if (!optWrap) return;
@@ -1541,6 +1564,13 @@ function renderQuizReviewList(questions, userAnswers) {
         </span>
       </div>
       <div class="m2-qtext" style="font-size:1.05rem;margin-bottom:12px">${escapeHtml(q.question)}</div>
+      ${q.image ? `
+        <div class="m2-qimage-wrap">
+          <div class="m2-qimage-box" onclick="openImageModal('${escapeHtml(q.image)}')">
+            <img src="${escapeHtml(q.image)}" alt="題目心電圖/附圖" class="m2-qimage">
+            <div class="m2-qimage-hint">🔍 點擊圖片可放大檢視心電圖細節</div>
+          </div>
+        </div>` : ''}
       <div class="m2-rev-options">
         ${optionsHtml}
       </div>
@@ -1892,6 +1922,13 @@ function filterWrongBook() {
         <button class="wb-del-btn" onclick="deleteWrongQuestion('${q.id}')">🗑️ 移出錯題本</button>
       </div>
       <div class="m2-qtext" style="font-size:1.02rem;margin-bottom:12px">${escapeHtml(q.question)}</div>
+      ${q.image ? `
+        <div class="m2-qimage-wrap">
+          <div class="m2-qimage-box" onclick="openImageModal('${escapeHtml(q.image)}')">
+            <img src="${escapeHtml(q.image)}" alt="題目心電圖/附圖" class="m2-qimage">
+            <div class="m2-qimage-hint">🔍 點擊圖片可放大檢視心電圖細節</div>
+          </div>
+        </div>` : ''}
       <div class="m2-rev-options" style="margin:10px 0">
         ${optionsHtml}
       </div>
@@ -2231,6 +2268,37 @@ function triggerNativeInstall() {
 window.openPwaInstallModal = openPwaInstallModal;
 window.closePwaInstallModal = closePwaInstallModal;
 window.triggerNativeInstall = triggerNativeInstall;
+
+// ── Image Lightbox Modal ──────────────────────────────
+function openImageModal(src) {
+  if (!src) return;
+  const modal = document.getElementById('image-modal');
+  const img = document.getElementById('image-modal-img');
+  if (modal && img) {
+    img.src = src;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('image-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+}
+
+window.openImageModal = openImageModal;
+window.closeImageModal = closeImageModal;
+
+// Keyboard shortcuts (Esc to close modals)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeImageModal();
+    closePwaInstallModal();
+  }
+});
 
 // ── Boot ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', init);
