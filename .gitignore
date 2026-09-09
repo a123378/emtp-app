@@ -14,3 +14,7 @@ Thumbs.db
 # Python cache
 __pycache__/
 *.pyc
+
+# Excluded documents / local utilities
+*.pdf
+*.bat

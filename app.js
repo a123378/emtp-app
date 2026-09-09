@@ -40,7 +40,11 @@ const state = {
     userAnswers: {},
     timerSeconds: 0,
     timerInterval: null
-  }
+  },
+
+  // AI 出題背景生成狀態：可縮小視窗後在模式一複習，完成後再回來作答
+  aiGenInProgress: false,
+  pendingAiQuiz: null   // { title, questions } | null
 };
 
 // ── DOM refs ──────────────────────────────────────────
@@ -97,7 +101,7 @@ async function init() {
   buildSidebar();
   bindEvents();
   initMode2();
-  registerServiceWorker();
+  initPwaInstallPrompt();
 }
 
 // ── Load all past exams for Mode 2 ────────────────────
@@ -1707,15 +1711,58 @@ function openAiQuizModal() {
     openApiModal();
     return;
   }
-  const statusEl = $('#ai-gen-status');
-  if (statusEl) statusEl.style.display = 'none';
-  const btn = $('#ai-start-gen-btn');
-  if (btn) btn.disabled = false;
   $('#m2-ai-modal')?.classList.remove('hidden');
+  // 若上一份 AI 測驗仍在背景生成中，重新打開視窗時應顯示生成中狀態，
+  // 而不是重置成空白表單（避免使用者誤以為可以重新按「開始生成」）。
+  setAiGenModalUI(state.aiGenInProgress);
 }
 
 function closeAiQuizModal() {
+  // 純粹隱藏視窗，不會中斷背景中仍在進行的生成請求，
+  // 讓使用者可以安心切回模式一繼續複習。
   $('#m2-ai-modal')?.classList.add('hidden');
+}
+
+// 切換 AI 出題視窗在「生成中」與「待設定」兩種狀態下的顯示
+function setAiGenModalUI(generating) {
+  const statusEl = $('#ai-gen-status');
+  const btn = $('#ai-start-gen-btn');
+  const cancelBtn = $('#ai-cancel-btn');
+  const topicSelect = $('#ai-topic-select');
+  const diffSelect = $('#ai-diff-select');
+  if (statusEl) statusEl.style.display = generating ? 'block' : 'none';
+  if (btn) btn.disabled = generating;
+  if (topicSelect) topicSelect.disabled = generating;
+  if (diffSelect) diffSelect.disabled = generating;
+  if (cancelBtn) cancelBtn.textContent = generating ? '🔽 縮小視窗（背景生成中）' : '取消';
+}
+
+// AI 測驗生成完成後的提醒：小紅點 + 大廳橫幅
+function showAiReadyNotice() {
+  $('#mode2-ready-dot')?.classList.remove('hidden');
+  $('#side-mode2-ready-dot')?.classList.remove('hidden');
+  $('#ai-pending-banner')?.classList.remove('hidden');
+}
+
+function clearAiReadyNotice() {
+  $('#mode2-ready-dot')?.classList.add('hidden');
+  $('#side-mode2-ready-dot')?.classList.add('hidden');
+  $('#ai-pending-banner')?.classList.add('hidden');
+}
+
+// 點擊大廳橫幅或小紅點提醒 → 正式進入剛才背景生成好的 AI 測驗
+function openPendingAiQuiz() {
+  if (!state.pendingAiQuiz) return;
+  const { title, questions } = state.pendingAiQuiz;
+  state.pendingAiQuiz = null;
+  clearAiReadyNotice();
+  if (state.currentMode !== 2) switchMode(2);
+  startM2Quiz('ai', title, questions);
+}
+
+// 只是先關掉大廳橫幅提示，測驗本身仍保留，頁籤小紅點會繼續提醒
+function dismissPendingAiQuiz() {
+  $('#ai-pending-banner')?.classList.add('hidden');
 }
 
 async function generateAiQuiz() {
@@ -1724,16 +1771,19 @@ async function generateAiQuiz() {
     openApiModal();
     return;
   }
+  if (state.aiGenInProgress) {
+    // 已經有一份在背景生成中，避免重複發送請求；只把視窗切回生成中狀態。
+    setAiGenModalUI(true);
+    return;
+  }
 
   const topicSelect = $('#ai-topic-select');
   const diffSelect = $('#ai-diff-select');
   const topic = topicSelect ? topicSelect.value : 'all';
   const diff = diffSelect ? diffSelect.value : 'high';
 
-  const statusEl = $('#ai-gen-status');
-  const btn = $('#ai-start-gen-btn');
-  if (statusEl) statusEl.style.display = 'block';
-  if (btn) btn.disabled = true;
+  state.aiGenInProgress = true;
+  setAiGenModalUI(true);
 
   const topicMap = {
     all: '高級救護技術員(EMT-P)全科綜合（涵蓋心肺復甦、困難呼吸道、重大創傷、急性冠心症、腦中風、特殊急症、毒物與災難應變）',
@@ -1796,17 +1846,33 @@ JSON 陣列結構：
       chTitle: item.chTitle || '重點章節'
     })).slice(0, 10);
 
-    closeAiQuizModal();
-    if (statusEl) statusEl.style.display = 'none';
-    if (btn) btn.disabled = false;
+    state.aiGenInProgress = false;
+    const title = `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真級'})`;
 
-    startM2Quiz('ai', `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真級'})`, validatedQuestions);
+    // 若使用者仍停留在這個視窗前（沒有縮小/切走），維持原本體驗：直接進入測驗。
+    // 若視窗已被縮小、或已切去模式一複習，改為背景保存 + 顯示完成提醒，不強行把畫面切走。
+    const modalVisible = !$('#m2-ai-modal')?.classList.contains('hidden');
+    if (modalVisible) {
+      closeAiQuizModal();
+      setAiGenModalUI(false);
+      startM2Quiz('ai', title, validatedQuestions);
+    } else {
+      state.pendingAiQuiz = { title, questions: validatedQuestions };
+      showAiReadyNotice();
+    }
 
   } catch (err) {
     console.error('AI Quiz Generation failed:', err);
-    alert(`AI 出題失敗：${err.message}\n請檢查 API Key 或網路連線後重試！`);
-    if (statusEl) statusEl.style.display = 'none';
-    if (btn) btn.disabled = false;
+    state.aiGenInProgress = false;
+    const modalVisible = !$('#m2-ai-modal')?.classList.contains('hidden');
+    setAiGenModalUI(false);
+    if (modalVisible) {
+      alert(`AI 出題失敗：${err.message}\n請檢查 API Key 或網路連線後重試！`);
+    } else {
+      // 使用者已縮小視窗去複習，避免用 alert 打斷閱讀，改用 console 記錄，
+      // 下次打開 AI 出題視窗時可再重新嘗試。
+      console.warn('背景 AI 出題失敗:', err.message);
+    }
   }
 }
 
@@ -2186,31 +2252,10 @@ window.deleteWrongQuestion = deleteWrongQuestion;
 window.clearAllWrongQuestions = clearAllWrongQuestions;
 window.startWrongQuiz = startWrongQuiz;
 
-// ── PWA & Service Worker ──────────────────────────────────
+// ── PWA Install Prompt (no Service Worker — app is plain static, always network-fresh) ──
 let deferredInstallPrompt = null;
 
-function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then((reg) => {
-          console.log('[PWA] Service Worker registered:', reg.scope);
-          reg.update();
-        })
-        .catch((err) => {
-          console.warn('[PWA] Service Worker failed:', err);
-        });
-    });
-
-    let refreshing = false;
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!refreshing) {
-        refreshing = true;
-        window.location.reload();
-      }
-    });
-  }
-
+function initPwaInstallPrompt() {
   // Detect Android Chrome install prompt
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();

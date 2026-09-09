@@ -7,19 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(regs) {
-      for (var r of regs) { r.unregister(); }
-    });
-  }
-  if ('caches' in window) {
-    caches.keys().then(function(keys) {
-      for (var k of keys) { caches.delete(k); }
-    });
-  }
-</script>
-<link rel="stylesheet" href="style.css?v=20260905_1825">
+<link rel="stylesheet" href="style.css?v=20260909_0001">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -59,6 +47,7 @@
     <button class="mode-btn" data-mode="2" id="mode2-btn" onclick="switchMode(2)">
       <span class="mode-text-full">📝 模式二：題庫練習</span>
       <span class="mode-text-short">📝 題庫</span>
+      <span id="mode2-ready-dot" class="nav-ready-dot hidden" title="AI 測驗已生成完成"></span>
     </button>
   </div>
 
@@ -94,7 +83,7 @@
     <!-- Mobile Drawer Mode Switcher -->
     <div class="sidebar-mode-switcher">
       <button class="side-mode-btn active" id="side-mode1-btn" onclick="switchMode(1);closeMobileSidebar()">📋 模式一：重點筆記</button>
-      <button class="side-mode-btn" id="side-mode2-btn" onclick="switchMode(2);closeMobileSidebar()">📝 模式二：題庫練習</button>
+      <button class="side-mode-btn" id="side-mode2-btn" onclick="switchMode(2);closeMobileSidebar()">📝 模式二：題庫練習<span id="side-mode2-ready-dot" class="nav-ready-dot hidden" title="AI 測驗已生成完成"></span></button>
     </div>
 
     <!-- PWA Install Banner in Drawer -->
@@ -182,6 +171,10 @@
     
     <!-- M2 Subview 1: Lobby 大廳 -->
     <div id="m2-lobby" class="m2-subview">
+      <div id="ai-pending-banner" class="ai-pending-banner hidden" onclick="openPendingAiQuiz()">
+        <span>🤖 剛才背景生成的 AI 測驗已完成，點此立即開始作答！</span>
+        <button class="ai-pending-dismiss" onclick="event.stopPropagation();dismissPendingAiQuiz()" title="先關閉提示（測驗仍保留）">✕</button>
+      </div>
       <div class="m2-hero-card">
         <div class="m2-hero-header">
           <div>
@@ -452,11 +445,11 @@
       </div>
       <div id="ai-gen-status" style="font-size:0.88rem;color:var(--blue);display:none;padding:12px;background:var(--blue-light);border-radius:8px;margin-top:10px">
         <div class="spinner" style="width:20px;height:20px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:8px"></div>
-        <span>醫學教授 AI 正在構思高階臨床試卷中（約需 10~15 秒）…</span>
+        <span>醫學教授 AI 正在構思高階臨床試卷中（10 題詳解內容較多，通常需要 30 秒～1 分鐘）。可以直接點擊「縮小視窗」先去模式一複習，生成完成後會在上方頁籤與此處提醒您！</span>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="modal-btn" onclick="closeAiQuizModal()">取消</button>
+      <button class="modal-btn" id="ai-cancel-btn" onclick="closeAiQuizModal()">取消</button>
       <button class="modal-btn primary" id="ai-start-gen-btn" onclick="generateAiQuiz()">開始生成並測驗</button>
     </div>
   </div>
@@ -543,7 +536,7 @@
         <img src="icons/icon-192.png" alt="EMT-P App Icon" style="width:64px;height:64px;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.15)">
         <div>
           <div style="font-size:1.1rem;font-weight:800;color:var(--text)">EMT-P 醫學筆記與題庫</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px">免開網頁 ‧ 全螢幕秒開 ‧ 離線快速練習</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px">免開瀏覽器 ‧ 全螢幕秒開 ‧ 更貼近原生 App 體驗</div>
         </div>
       </div>
 
@@ -612,6 +605,6 @@
   </div>
 </div>
 
-<script src="app.js?v=20260908_1020"></script>
+<script src="app.js?v=20260909_0001"></script>
 </body>
 </html>

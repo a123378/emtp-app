@@ -688,7 +688,7 @@
         "Rivaroxaban 直接抑制凝血因子 IIa，逆轉藥物為維他命 K。"
       ],
       "answer": 0,
-      "explanation": "",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\nHeparin（肝素）主要作用機轉是大幅增強抗凝血酶 III（antithrombin III）的活性，進而抑制凝血酶與凝血因子 Xa，其專一拮抗劑為魚精蛋白（protamine sulfate），故正解為 (A)。Warfarin 是抑制維生素 K「環氧化酶還原酶」而非「環化酶」，且逆轉需給予維生素 K，緊急時常需合併新鮮冷凍血漿或凝血酶原複合濃縮液（PCC），單用魚精蛋白對 Warfarin 完全無效，故 (B) 錯誤；Dabigatran 是直接凝血酶（第 IIa 因子）抑制劑，並非抑制第 Xa 因子，其專一逆轉劑為 idarucizumab，故 (C) 錯誤；Rivaroxaban 是直接第 Xa 因子抑制劑（並非第 IIa 因子），逆轉多使用 andexanet alfa 或 PCC，維生素 K 對其無效，故 (D) 錯誤。",
       "chId": "ch16",
       "chNum": "CH16"
     }
@@ -850,7 +850,7 @@
         "Rivaroxaban 直接抑制凝血因子 IIa，逆轉藥物為維他命 K。"
       ],
       "answer": 0,
-      "explanation": "",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\nHeparin（肝素）主要作用機轉是大幅增強抗凝血酶 III（antithrombin III）的活性，進而抑制凝血酶與凝血因子 Xa，其專一拮抗劑為魚精蛋白（protamine sulfate），故正解為 (A)。Warfarin 是抑制維生素 K「環氧化酶還原酶」而非「環化酶」，且逆轉需給予維生素 K，緊急時常需合併新鮮冷凍血漿或凝血酶原複合濃縮液（PCC），單用魚精蛋白對 Warfarin 完全無效，故 (B) 錯誤；Dabigatran 是直接凝血酶（第 IIa 因子）抑制劑，並非抑制第 Xa 因子，其專一逆轉劑為 idarucizumab，故 (C) 錯誤；Rivaroxaban 是直接第 Xa 因子抑制劑（並非第 IIa 因子），逆轉多使用 andexanet alfa 或 PCC，維生素 K 對其無效，故 (D) 錯誤。",
       "chId": "ch16",
       "chNum": "CH16"
     }

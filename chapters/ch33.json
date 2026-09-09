@@ -967,7 +967,7 @@
         "病患有低血鎂或QTc區間延長。"
       ],
       "answer": 3,
-      "explanation": "【2026 TP 戰術考點 ‧ 扭轉型心室頻脈 (TdP)】\n心電圖呈現 QRS 複合波圍繞等電位線不斷扭轉其極性與軸向，振幅波浪狀起伏，此為扭轉型心室頻脈 (Torsades de Pointes, TdP)。\n依 2026 TP 心律不整戰術教材：\n1. TdP 是多型性心室頻脈的一種特殊型態，最常由『QTc 間隔延長 (> 500ms)』所誘發。\n2. 常見誘因包括低血鎂、低血鉀、抗心律不整藥物 (Class Ia/III) 或特定抗生素/精神科用藥。\n3. 急救首選藥物為：硫酸鎂 (Magnesium Sulfate, MgSO4) 1 ~ 2 g 稀釋後於 1~2 分鐘內靜脈推注！",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n題目所指心律最典型的臨床情境是多形性心室頻脈（Torsades de Pointes），好發於 QTc 延長或低血鎂之病患，故正解為 (D)。急性心包膜炎典型心電圖為瀰漫性導程 ST 段上升合併 PR 段下降，並非致命性心室心律 (A)；左冠狀動脈主幹完全阻塞多表現為廣泛前壁 ST 上升合併嚴重血液動力學不穩定，非以心律型態呈現 (B)；低血鉀確實可能出現明顯 U 波，但與本題描述的「致命心律」關聯性不如低血鎂/QTc 延長明確 (C)。",
       "chId": "ch33",
       "chNum": "CH33",
       "image": "images/quizzes/quiz3-02.png"
@@ -988,7 +988,7 @@
         "兩者的QRS複合波寬度通常皆大於0.12秒。"
       ],
       "answer": 2,
-      "explanation": "",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n心房撲動（Atrial Flutter）心房電活動規則，心電圖呈現鋸齒狀（sawtooth）F 波，房室結傳導比例固定或不固定，但心室率仍有一定規律性；心房顫動（Atrial Fibrillation）則心房電活動完全混亂、無固定 P 波，R-R 間距絕對不規則（irregularly irregular），故正解為 (C)。(A) 兩者皆非清楚規則 P 波；(B) 房室結不規則傳導較符合心房顫動而非撲動；(D) QRS 波寬度是否超過 0.12 秒與此兩種心律的鑑別無直接關係（除非合併差異性傳導或預存傳導路徑）。",
       "chId": "ch33",
       "chNum": "CH33"
     },
@@ -1008,7 +1008,7 @@
         "Atrial Trigeminy。"
       ],
       "answer": 0,
-      "explanation": "【2026 TP 戰術考點 ‧ 心室二聯律 (Ventricular Bigeminy)】\n心電圖呈現一個正常竇性 QRS 波之後緊跟一個寬大畸形之心室早期收縮 (VPC / PVC)，以 1:1 的配對規律反覆循環出現。\n依江文莒教授節律判定手冊：\n1. 正常波與心室早期收縮成對出現，定義為『心室二聯律 (Ventricular Bigeminy)』。\n2. 若為兩個正常波夾一個 VPC 則為三聯律 (Trigeminy)。\n3. 需評估電解質（尤其是鉀與鎂）與心肌缺血狀態。",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n題目為圖形判讀題（原始圖像未附於本題庫），標準答案為 (A) ventricular bigeminy（心室二聯性心律）：其心電圖特徵為每一個正常竇性心搏後即跟隨一個提早出現、寬大變形的心室早期收縮（PVC），規律地一跳竇性、一跳 PVC 交替出現。此律動型態與 PAC（心房早期收縮，QRS 波正常窄小）、idioventricular rhythm（緩慢、規則的心室固有心律，無交替型態）、Atrial Trigeminy（心房三聯性）型態明顯不同。",
       "chId": "ch33",
       "chNum": "CH33",
       "image": "images/quizzes/quiz3-04.png"
@@ -1271,7 +1271,7 @@
         "病患有低血鎂或QTc區間延長。"
       ],
       "answer": 3,
-      "explanation": "",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n題目所指心律最典型的臨床情境是多形性心室頻脈（Torsades de Pointes），好發於 QTc 延長或低血鎂之病患，故正解為 (D)。急性心包膜炎典型心電圖為瀰漫性導程 ST 段上升合併 PR 段下降，並非致命性心室心律 (A)；左冠狀動脈主幹完全阻塞多表現為廣泛前壁 ST 上升合併嚴重血液動力學不穩定，非以心律型態呈現 (B)；低血鉀確實可能出現明顯 U 波，但與本題描述的「致命心律」關聯性不如低血鎂/QTc 延長明確 (C)。",
       "chId": "ch33",
       "chNum": "CH33"
     },
@@ -1291,7 +1291,7 @@
         "兩者的QRS複合波寬度通常皆大於0.12秒。"
       ],
       "answer": 2,
-      "explanation": "",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n心房撲動（Atrial Flutter）心房電活動規則，心電圖呈現鋸齒狀（sawtooth）F 波，房室結傳導比例固定或不固定，但心室率仍有一定規律性；心房顫動（Atrial Fibrillation）則心房電活動完全混亂、無固定 P 波，R-R 間距絕對不規則（irregularly irregular），故正解為 (C)。(A) 兩者皆非清楚規則 P 波；(B) 房室結不規則傳導較符合心房顫動而非撲動；(D) QRS 波寬度是否超過 0.12 秒與此兩種心律的鑑別無直接關係（除非合併差異性傳導或預存傳導路徑）。",
       "chId": "ch33",
       "chNum": "CH33"
     },
@@ -1311,7 +1311,7 @@
         "Atrial Trigeminy。"
       ],
       "answer": 0,
-      "explanation": "",
+      "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n題目為圖形判讀題（原始圖像未附於本題庫），標準答案為 (A) ventricular bigeminy（心室二聯性心律）：其心電圖特徵為每一個正常竇性心搏後即跟隨一個提早出現、寬大變形的心室早期收縮（PVC），規律地一跳竇性、一跳 PVC 交替出現。此律動型態與 PAC（心房早期收縮，QRS 波正常窄小）、idioventricular rhythm（緩慢、規則的心室固有心律，無交替型態）、Atrial Trigeminy（心房三聯性）型態明顯不同。",
       "chId": "ch33",
       "chNum": "CH33"
     }
