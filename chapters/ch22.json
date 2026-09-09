@@ -673,6 +673,10 @@
     {
       "type": "text",
       "text": "常見的檢查項目如下：\n● 心電圖：能夠判讀可能的心律不整或是急性冠心症。\n● 胸部X光：能夠判斷肺部病灶，例如肺炎或腫瘤。\n● 腹部X光：能夠協助判斷是否有不正常的腸氣分布。\n● 其他X光：可以協助判斷是否有骨折等狀況。\n● 腹部超音波：能夠協助判斷腹腔內病灶，例如是否有腹水。\n● 心臟超音波：能夠協助判斷心臟病灶，例如心臟瓣膜疾患。\n● 電腦斷層：能夠判斷所照射部位內的問題，例如頭部外傷腦出血或腫瘤定位與分級。\n● 核磁共振：通常對神經系統與膽胰管的病灶較為敏感。\n\n常用實驗室檢驗：\n● CBC/DC(全血球計數檢查)：分析各種血球的數量與分類比例。\n● 生化檢查：檢驗肝臟酵素、腎臟功能、電解質、心肌酵素等。\n● PT/PTT：主要是檢查凝血功能。\n● 尿液檢驗：主要是檢查是否有血尿或發炎等問題。\n● 血液氣體分析：檢查血中的酸鹼值、氧氣、二氧化碳。\n● 血液細菌培養：培養血液中是否有細菌。\n\n【情境解答】意識不清的病人可利用口訣「AEIOUTIPS」來鑑別檢查可能之原因：\nA: Alcohol, Anemia\nE: Electrolyte imbalance\nI: Insulin (hypoglycemia)\nO: Opiates, Oxygen (hypoxemia)\nU: Uremia\nT: Trauma, temperature, tumor\nI: Infection\nP: Psychogenic\nS: Seizure, Stroke"
+    },
+    {
+      "type": "mnemonic",
+      "text": "【情境解答】意識不清的病人可利用口訣「AEIOUTIPS」來鑑別檢查可能之原因：\nA: Alcohol, Anemia\nE: Electrolyte imbalance\nI: Insulin (hypoglycemia)\nO: Opiates, Oxygen (hypoxemia)\nU: Uremia\nT: Trauma, temperature, tumor\nI: Infection\nP: Psychogenic\nS: Seizure, Stroke"
     }
   ],
   "summary": {
@@ -851,7 +855,7 @@
       "qnum": 19,
       "chapter": "ch22",
       "chapterTitle": "病人評估與決策策",
-      "question": "高級救護技術員在面臨臨床決策時 , 可以有效率的將臨床決策按順序以六個以 R 開頭的步驟付諸行動 , 以下何者為非？ ？",
+      "question": "高級救護技術員在面臨臨床決策時 , 可以有效率的將臨床決策按順序以六個以 R 開頭的步驟付諸行動 , 以下何者為非？",
       "options": [
         "評估傷病 Æ(Read the patient)。",
         "評估環境 (Read the scene)",
@@ -1033,7 +1037,7 @@
       "qnum": 19,
       "chapter": "ch22",
       "chapterTitle": "病人評估與決策策",
-      "question": "高級救護技術員在面臨臨床決策時 , 可以有效率的將臨床決策按順序以六個以 R 開頭的步驟付諸行動 , 以下何者為非？ ？",
+      "question": "高級救護技術員在面臨臨床決策時 , 可以有效率的將臨床決策按順序以六個以 R 開頭的步驟付諸行動 , 以下何者為非？",
       "options": [
         "評估傷病 Æ(Read the patient)。",
         "評估環境 (Read the scene)",

@@ -376,6 +376,13 @@ function renderContentBlocks(blocks) {
             <div class="box-content">${block.html || renderMarkdown(block.text || '')}</div>
           </details>`;
         break;
+      case 'mnemonic':
+        html += `
+          <div class="mnemonic-block">
+            <div class="mnemonic-label">💡 記憶口訣</div>
+            <div class="mnemonic-text">${block.text}</div>
+          </div>`;
+        break;
       case 'clinical':
         html += `
           <div class="clinical-block">

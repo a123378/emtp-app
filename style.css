@@ -37,6 +37,11 @@
   --table-th-bg: #E87722;
   --table-th-text: #ffffff;
   --table-th-border: #c45e0a;
+
+  /* 記憶口訣 callout */
+  --mnemonic: #7c3aed;
+  --mnemonic-border: #ddd0fb;
+  --mnemonic-bg: linear-gradient(135deg, #f4efff 0%, #fbf9ff 100%);
 }
 
 /* Dark mode */
@@ -71,6 +76,10 @@
   --table-th-bg: #27170c;
   --table-th-text: #f97316;
   --table-th-border: #f97316;
+
+  --mnemonic: #c4b5fd;
+  --mnemonic-border: #3b2d63;
+  --mnemonic-bg: linear-gradient(135deg, #1d1731 0%, #151821 100%);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -643,6 +652,28 @@ body {
   margin: 4px 0;
 }
 .clinical-block li { margin: 4px 0; line-height: 1.6; }
+
+/* ── 記憶口訣 ── */
+.mnemonic-block {
+  background: var(--mnemonic-bg);
+  border: 1px solid var(--mnemonic-border);
+  border-left: 4px solid var(--mnemonic);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin: 10px 0 18px;
+  font-size: 0.9rem;
+}
+.mnemonic-block .mnemonic-label {
+  font-weight: 800;
+  color: var(--mnemonic);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 5px;
+}
+.mnemonic-block .mnemonic-text {
+  line-height: 1.75;
+  color: var(--text);
+}
 
 /* ── 重點一覽 (五) ── */
 .summary-card {
