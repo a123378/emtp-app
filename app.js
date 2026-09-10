@@ -374,10 +374,10 @@ function renderContentBlocks(blocks) {
   for (const block of blocks) {
     switch (block.type) {
       case 'orange':
-        html += `<div class="orange-heading">${block.text}</div>`;
+        html += `<div class="orange-heading">${mdInline(block.text)}</div>`;
         break;
       case 'blue':
-        html += `<div class="blue-heading">${block.text}</div>`;
+        html += `<div class="blue-heading">${mdInline(block.text)}</div>`;
         break;
       case 'list':
         html += `<ul class="content-list">${block.items.map(i => `<li>${renderListItem(i)}</li>`).join('')}</ul>`;
@@ -396,7 +396,7 @@ function renderContentBlocks(blocks) {
         html += `
           <div class="mnemonic-block">
             <div class="mnemonic-label">💡 記憶口訣</div>
-            <div class="mnemonic-text">${block.text}</div>
+            <div class="mnemonic-text">${mdInline(block.text)}</div>
           </div>`;
         break;
       case 'clinical':
@@ -406,11 +406,11 @@ function renderContentBlocks(blocks) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               ${block.label || '核心觀念 ‧ 臨床實務'}
             </div>
-            <ul>${(block.points || []).map(p => `<li>${p}</li>`).join('')}</ul>
+            <ul>${(block.points || []).map(p => `<li>${mdInline(p)}</li>`).join('')}</ul>
           </div>`;
         break;
       case 'text':
-        html += `<p style="font-size:0.9rem;line-height:1.7;margin:8px 0 12px;padding-left:4px">${block.text}</p>`;
+        html += `<p style="font-size:0.9rem;line-height:1.7;margin:8px 0 12px;padding-left:4px">${mdInline(block.text)}</p>`;
         break;
     }
   }
@@ -418,11 +418,11 @@ function renderContentBlocks(blocks) {
 }
 
 function renderListItem(item) {
-  if (typeof item === 'string') return item;
+  if (typeof item === 'string') return mdInline(item);
   if (item.text && item.sub) {
-    return `${item.text}<ul class="sub-list">${item.sub.map(s => `<li>${s}</li>`).join('')}</ul>`;
+    return `${mdInline(item.text)}<ul class="sub-list">${item.sub.map(s => `<li>${mdInline(s)}</li>`).join('')}</ul>`;
   }
-  return item.text || String(item);
+  return mdInline(item.text || String(item));
 }
 
 function renderCompTable(block) {
@@ -432,16 +432,21 @@ function renderCompTable(block) {
   return `
     <div class="comp-table-wrap">
       <table class="comp-table">
-        ${headers.length ? `<thead><tr>${headers.map((h, i) => `<th${i===0?' style="min-width:110px"':''}>${h}</th>`).join('')}</tr></thead>` : ''}
+        ${headers.length ? `<thead><tr>${headers.map((h, i) => `<th${i===0?' style="min-width:110px"':''}>${mdInline(h)}</th>`).join('')}</tr></thead>` : ''}
         <tbody>
           ${rows.map(row => `
             <tr>${row.map((cell, i) => i === 0
-              ? `<td class="row-header">${cell}</td>`
-              : `<td>${cell}</td>`).join('')}
+              ? `<td class="row-header">${mdInline(cell)}</td>`
+              : `<td>${mdInline(cell)}</td>`).join('')}
             </tr>`).join('')}
         </tbody>
       </table>
     </div>`;
+}
+
+// 行內粗體：內容區塊使用 **文字** 標記重點
+function mdInline(s) {
+  return String(s == null ? '' : s).replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
 }
 
 function renderMarkdown(text) {
@@ -631,9 +636,9 @@ function renderSummary(cd) {
           <tbody>
             ${s.keyNumbers.map(n => `
               <tr>
-                <td>${n.label}</td>
-                <td class="highlight-num">${n.value}</td>
-                <td>${n.note || ''}</td>
+                <td>${mdInline(n.label)}</td>
+                <td class="highlight-num">${mdInline(n.value)}</td>
+                <td>${mdInline(n.note || '')}</td>
               </tr>`).join('')}
           </tbody>
         </table>
@@ -646,7 +651,7 @@ function renderSummary(cd) {
       <div class="summary-card">
         <h3>⚡ 快速複習要點</h3>
         <ul style="padding-left:18px;font-size:0.9rem;line-height:1.8">
-          ${s.quickReview.map(r => `<li>${r}</li>`).join('')}
+          ${s.quickReview.map(r => `<li>${mdInline(r)}</li>`).join('')}
         </ul>
       </div>`;
   }
