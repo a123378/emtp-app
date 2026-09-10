@@ -5,6 +5,22 @@
 
 'use strict';
 
+// ── 資料檔版本（避免瀏覽器快取住舊的章節 JSON）──────────
+// 沿用 index.html 載入 app.js 時的 ?v= 參數，所以更新章節資料後，
+// 只要改 index.html 裡那一個版本號，所有 JSON 就會被重新抓取。
+const DATA_VERSION = (() => {
+  try {
+    const src = (document.currentScript && document.currentScript.src)
+      || [...document.scripts].map(s => s.src).find(s => s.includes('app.js'))
+      || '';
+    return new URL(src, location.href).searchParams.get('v') || '';
+  } catch (e) {
+    return '';
+  }
+})();
+
+const dataUrl = path => (DATA_VERSION ? `${path}?v=${DATA_VERSION}` : path);
+
 // ── 狀態 ──────────────────────────────────────────────
 const state = {
   chapters: [],
@@ -107,7 +123,7 @@ async function init() {
 // ── Load all past exams for Mode 2 ────────────────────
 async function loadAllQuizzes() {
   try {
-    const r = await fetch('chapters/all_quizzes.json');
+    const r = await fetch(dataUrl('chapters/all_quizzes.json'));
     state.allQuizzes = await r.json();
     console.log(`Loaded ${state.allQuizzes.length} quiz questions.`);
   } catch (e) {
@@ -119,7 +135,7 @@ async function loadAllQuizzes() {
 // ── Load chapter index ────────────────────────────────
 async function loadChapterIndex() {
   try {
-    const r = await fetch('chapters/index.json');
+    const r = await fetch(dataUrl('chapters/index.json'));
     const data = await r.json();
     state.chapters = data.chapters;
     if (els.totalChCount) els.totalChCount.textContent = state.chapters.length;
@@ -213,7 +229,7 @@ async function loadChapterData(chId) {
   els.notesContent.classList.add('hidden');
 
   try {
-    const r = await fetch(`chapters/${chId}.json`);
+    const r = await fetch(dataUrl(`chapters/${chId}.json`));
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     state.currentChData = await r.json();
   } catch (e) {
