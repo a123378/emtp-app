@@ -3692,12 +3692,12 @@
    "qnum": 44,
    "chapter": "ch16",
    "chapterTitle": "緊急救護藥理學",
-   "question": "70 歲男性有末期腎病變病史 , 最近因家裡辦喪事一個禮拜未到診所洗腎 , 兒子今天發現病人呼吸急促和昏迷因而報案。初步評估發現病人只對痛有反應且病人有休克徵象 , 輔助檢查發現心跳 40 次 / 分鐘 , 血壓 70/40mmHg , 血氧濃度 86 % , 關於此病人可能之用藥選擇何者最不適當 ？",
+   "question": "70 歲男性有末期腎病變病史，最近因家裡辦喪事一個禮拜未到診所洗腎，兒子今天發現病人呼吸急促和昏迷因而報案。初步評估發現病人只對痛有反應且病人有休克徵象，輔助檢查發現心跳 40 次/分鐘，血壓 70/40mmHg，血氧濃度 86%，關於此病人可能之用藥選擇何者最不適當？",
    "options": [
-    "MgS04",
+    "MgSO4。",
     "Sodium bicarbonate。",
     "Atropine。",
-    "CaIcium gluconate。"
+    "Calcium gluconate。"
    ],
    "answer": 0,
    "explanation": "參考出處:高級救護技術員教科書(第二版)(P805、p211~212、p222) \n重點解析: 第10 章 緊急救護藥理學 \n \nA:洗腎病患，沒有洗腎，易發生高血鉀 (可以考慮分別靜脈注射calcium \ngluconate 及sodium bicarbonate。) ; 而病患心搏過慢，可施打Atropine 治療 \n \n腎衰竭及透析病人常見急症 \n嚴重高血鉀 \n嚴重高血鉀(hyperkalemia)有可能影響心臟電氣傳導，產生致命性的心室性心律\n不整，甚至心臟停止等猝死情況。腎衰竭病人如果突然發生心肺功能停止時，\n一定要把嚴重高血鉀列入鑑別診斷當中。病史詢問時如發現心肺功能停止病人\n有腎衰竭病史，在醫療指導醫師指示下，可以考慮分別靜脈注射calcium \ngluconate 及sodium bicarbonate。 \n \n阿托平（Atropine） \n急救藥理作用: \nAtropine 屬於抗蕈毒鹼性藥物，是副交感神經抑制劑，在臨床上，其各種製劑有\n很廣泛的用途。在急救時主要用以加速心竇或心房的節律及增加房室傳導。 \n \n適應症 \n1.有症狀之緩脈(Bradycardia) \n– 竇性心搏過慢(Class I)之首選藥物 \n– 房室節阻斷(Class IIa)：第一度、第二度Morbitz type I \n– 房室節以下之阻斷(2ºMorbitz type II or 3ºAVblock)可能無效 \n硫酸鎂溶液 MgSO4 \n急救藥理作用: \n硫酸鎂溶液可提供鎂離子。鎂是鈉、鉀和鈣的轉運出入細胞機制所必須的，同\n時鎂本身也是穩定細胞膜的一個重要離子。鎂離子的平衡與對鈉離子、鈣離\n子，和鉀離子平衡有緊密的關連性。 \n適應症 \n● 只建議於torsades de pointes 或低血鎂症引起之心跳停止 \n● 頑固性心室顫動(尤其已之有低血鎂之情形時) \n● 有脈搏之torsades de pointes \n● 因毛地黃中毒造成之威脅生命的心室心律不整 \n● 不建議作為心肌梗塞時之預防性給藥",
@@ -3760,7 +3760,7 @@
     "Rivaroxaban 直接抑制凝血因子 IIa，逆轉藥物為維他命 K。"
    ],
    "answer": 0,
-   "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\nHeparin（肝素）主要作用機轉是大幅增強抗凝血酶 III（antithrombin III）的活性，進而抑制凝血酶與凝血因子 Xa，其專一拮抗劑為魚精蛋白（protamine sulfate），故正解為 (A)。Warfarin 是抑制維生素 K「環氧化酶還原酶」而非「環化酶」，且逆轉需給予維生素 K，緊急時常需合併新鮮冷凍血漿或凝血酶原複合濃縮液（PCC），單用魚精蛋白對 Warfarin 完全無效，故 (B) 錯誤；Dabigatran 是直接凝血酶（第 IIa 因子）抑制劑，並非抑制第 Xa 因子，其專一逆轉劑為 idarucizumab，故 (C) 錯誤；Rivaroxaban 是直接第 Xa 因子抑制劑（並非第 IIa 因子），逆轉多使用 andexanet alfa 或 PCC，維生素 K 對其無效，故 (D) 錯誤。",
+   "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n大白 CH16〈肝素 Heparin〉原文：Heparin「能夠與抗凝血酶 III（antithrombin III）形成複合體，影響凝血因子 Thrombin(IIa)、Xa、IXa、XIa、XIIa 的作用，其中又以 Thrombin 與 Xa 為主」，並載明「使用 Heparin 後嚴重出血之解毒劑：Protamine（魚精蛋白）」；CH39 表 39-3 亦列 Heparin 機轉為「增強抗凝血酶 III 活性」、逆轉方法為「魚精蛋白（Protamine Sulfate）」。(A) 兩個半句都與教科書一致，故正解為 (A)。\n(B) 錯誤：前半段機轉用語與表 39-3「抑制維他命 K 環化酶，並影響相關凝血因子活性（II、VII、IX、X）」相符，但後半段錯——Warfarin 的逆轉方法是「維他命 K、新鮮冷凍血漿、四因子凝血酶複合濃縮物（4 factor PCC）」；魚精蛋白只對肝素有效。\n(C) 錯誤：表 39-3 列 DOAC(Dabigatran) 抑制的是 IIa（thrombin）而非 Xa；專一逆轉劑為 Idarucizumab。\n(D) 錯誤：表 39-3 列 DOAC(Rivaroxaban、Apixaban、Edoxaban) 抑制的是 Xa 而非 IIa；逆轉用 Andexanet alfa 或 4 factor PCC，維他命 K 對其無效。",
    "chId": "ch16",
    "chNum": "CH16"
   }
@@ -3854,12 +3854,12 @@
    "qnum": 44,
    "chapter": "ch16",
    "chapterTitle": "緊急救護藥理學",
-   "question": "70 歲男性有末期腎病變病史 , 最近因家裡辦喪事一個禮拜未到診所洗腎 , 兒子今天發現病人呼吸急促和昏迷因而報案。初步評估發現病人只對痛有反應且病人有休克徵象 , 輔助檢查發現心跳 40 次 / 分鐘 , 血壓 70/40mmHg , 血氧濃度 86 % , 關於此病人可能之用藥選擇何者最不適當 ？",
+   "question": "70 歲男性有末期腎病變病史，最近因家裡辦喪事一個禮拜未到診所洗腎，兒子今天發現病人呼吸急促和昏迷因而報案。初步評估發現病人只對痛有反應且病人有休克徵象，輔助檢查發現心跳 40 次/分鐘，血壓 70/40mmHg，血氧濃度 86%，關於此病人可能之用藥選擇何者最不適當？",
    "options": [
-    "MgS04",
+    "MgSO4。",
     "Sodium bicarbonate。",
     "Atropine。",
-    "CaIcium gluconate。"
+    "Calcium gluconate。"
    ],
    "answer": 0,
    "explanation": "參考出處:高級救護技術員教科書(第二版)(P805、p211~212、p222) \n重點解析: 第10 章 緊急救護藥理學 \n \nA:洗腎病患，沒有洗腎，易發生高血鉀 (可以考慮分別靜脈注射calcium \ngluconate 及sodium bicarbonate。) ; 而病患心搏過慢，可施打Atropine 治療 \n \n腎衰竭及透析病人常見急症 \n嚴重高血鉀 \n嚴重高血鉀(hyperkalemia)有可能影響心臟電氣傳導，產生致命性的心室性心律\n不整，甚至心臟停止等猝死情況。腎衰竭病人如果突然發生心肺功能停止時，\n一定要把嚴重高血鉀列入鑑別診斷當中。病史詢問時如發現心肺功能停止病人\n有腎衰竭病史，在醫療指導醫師指示下，可以考慮分別靜脈注射calcium \ngluconate 及sodium bicarbonate。 \n \n阿托平（Atropine） \n急救藥理作用: \nAtropine 屬於抗蕈毒鹼性藥物，是副交感神經抑制劑，在臨床上，其各種製劑有\n很廣泛的用途。在急救時主要用以加速心竇或心房的節律及增加房室傳導。 \n \n適應症 \n1.有症狀之緩脈(Bradycardia) \n– 竇性心搏過慢(Class I)之首選藥物 \n– 房室節阻斷(Class IIa)：第一度、第二度Morbitz type I \n– 房室節以下之阻斷(2ºMorbitz type II or 3ºAVblock)可能無效 \n硫酸鎂溶液 MgSO4 \n急救藥理作用: \n硫酸鎂溶液可提供鎂離子。鎂是鈉、鉀和鈣的轉運出入細胞機制所必須的，同\n時鎂本身也是穩定細胞膜的一個重要離子。鎂離子的平衡與對鈉離子、鈣離\n子，和鉀離子平衡有緊密的關連性。 \n適應症 \n● 只建議於torsades de pointes 或低血鎂症引起之心跳停止 \n● 頑固性心室顫動(尤其已之有低血鎂之情形時) \n● 有脈搏之torsades de pointes \n● 因毛地黃中毒造成之威脅生命的心室心律不整 \n● 不建議作為心肌梗塞時之預防性給藥",
@@ -3922,7 +3922,7 @@
     "Rivaroxaban 直接抑制凝血因子 IIa，逆轉藥物為維他命 K。"
    ],
    "answer": 0,
-   "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\nHeparin（肝素）主要作用機轉是大幅增強抗凝血酶 III（antithrombin III）的活性，進而抑制凝血酶與凝血因子 Xa，其專一拮抗劑為魚精蛋白（protamine sulfate），故正解為 (A)。Warfarin 是抑制維生素 K「環氧化酶還原酶」而非「環化酶」，且逆轉需給予維生素 K，緊急時常需合併新鮮冷凍血漿或凝血酶原複合濃縮液（PCC），單用魚精蛋白對 Warfarin 完全無效，故 (B) 錯誤；Dabigatran 是直接凝血酶（第 IIa 因子）抑制劑，並非抑制第 Xa 因子，其專一逆轉劑為 idarucizumab，故 (C) 錯誤；Rivaroxaban 是直接第 Xa 因子抑制劑（並非第 IIa 因子），逆轉多使用 andexanet alfa 或 PCC，維生素 K 對其無效，故 (D) 錯誤。",
+   "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n大白 CH16〈肝素 Heparin〉原文：Heparin「能夠與抗凝血酶 III（antithrombin III）形成複合體，影響凝血因子 Thrombin(IIa)、Xa、IXa、XIa、XIIa 的作用，其中又以 Thrombin 與 Xa 為主」，並載明「使用 Heparin 後嚴重出血之解毒劑：Protamine（魚精蛋白）」；CH39 表 39-3 亦列 Heparin 機轉為「增強抗凝血酶 III 活性」、逆轉方法為「魚精蛋白（Protamine Sulfate）」。(A) 兩個半句都與教科書一致，故正解為 (A)。\n(B) 錯誤：前半段機轉用語與表 39-3「抑制維他命 K 環化酶，並影響相關凝血因子活性（II、VII、IX、X）」相符，但後半段錯——Warfarin 的逆轉方法是「維他命 K、新鮮冷凍血漿、四因子凝血酶複合濃縮物（4 factor PCC）」；魚精蛋白只對肝素有效。\n(C) 錯誤：表 39-3 列 DOAC(Dabigatran) 抑制的是 IIa（thrombin）而非 Xa；專一逆轉劑為 Idarucizumab。\n(D) 錯誤：表 39-3 列 DOAC(Rivaroxaban、Apixaban、Edoxaban) 抑制的是 Xa 而非 IIa；逆轉用 Andexanet alfa 或 4 factor PCC，維他命 K 對其無效。",
    "chId": "ch16",
    "chNum": "CH16"
   }
