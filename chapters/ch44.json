@@ -2858,27 +2858,6 @@
  },
  "quizzes": [
   {
-   "id": "108-74",
-   "year": "108年",
-   "sourceLabel": "108年甄試",
-   "source": "108 年度高級救護技術員甄試 第 74 題",
-   "qnum": 74,
-   "chapter": "ch33",
-   "chapterTitle": "心電圖判定",
-   "question": "下列狀況 , 何者最能解釋這張心電圖的變化 ? aVE？",
-   "options": [
-    "急性心肌梗塞",
-    "毛地黃中毒。",
-    "腦出血 ( 腦壓上升 ) ,",
-    "低體溫。"
-   ],
-   "answer": 3,
-   "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n心電圖顯示竇性心搏過緩，且在 QRS 複合波末端與 ST 節段交接處（J點）出現顯著向上突起的凸形偏轉波，此為典型之奧斯本波 (Osborn wave 或 J-wave)。\n臨床處置重點：\n1. Osborn 波是嚴重低體溫 (Hypothermia) 的特異性標誌，波幅高度與體溫降低程度呈正相關。\n2. 常伴隨基線顫抖假影 (震顫 Shivering)、QT 間隔延長。處置核心為積極回溫 (Rewarming)，在體溫回升前避免盲目使用抗心律不整藥物與 TCP。",
-   "chId": "ch33",
-   "chNum": "CH33",
-   "image": "images/quizzes/108-74.png"
-  },
-  {
    "id": "108-75",
    "year": "108年",
    "sourceLabel": "108年甄試",
@@ -3300,27 +3279,6 @@
   }
  ],
  "quiz": [
-  {
-   "id": "108-74",
-   "year": "108年",
-   "sourceLabel": "108年甄試",
-   "source": "108 年度高級救護技術員甄試 第 74 題",
-   "qnum": 74,
-   "chapter": "ch33",
-   "chapterTitle": "心電圖判定",
-   "question": "下列狀況 , 何者最能解釋這張心電圖的變化 ? aVE？",
-   "options": [
-    "急性心肌梗塞",
-    "毛地黃中毒。",
-    "腦出血 ( 腦壓上升 ) ,",
-    "低體溫。"
-   ],
-   "answer": 3,
-   "explanation": "【AI 補充解析，非官方詳解，僅供參考】\n\n心電圖顯示竇性心搏過緩，且在 QRS 複合波末端與 ST 節段交接處（J點）出現顯著向上突起的凸形偏轉波，此為典型之奧斯本波 (Osborn wave 或 J-wave)。\n臨床處置重點：\n1. Osborn 波是嚴重低體溫 (Hypothermia) 的特異性標誌，波幅高度與體溫降低程度呈正相關。\n2. 常伴隨基線顫抖假影 (震顫 Shivering)、QT 間隔延長。處置核心為積極回溫 (Rewarming)，在體溫回升前避免盲目使用抗心律不整藥物與 TCP。",
-   "chId": "ch33",
-   "chNum": "CH33",
-   "image": "images/quizzes/108-74.png"
-  },
   {
    "id": "108-75",
    "year": "108年",
