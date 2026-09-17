@@ -1300,6 +1300,32 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── 難易度標籤樣式 ── */
+.m2-qdiff-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.m2-qdiff-badge.diff-medium {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+.m2-qdiff-badge.diff-hard {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+.m2-qdiff-badge.diff-expert {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
 /* ── Lobby: 背景生成的 AI 測驗完成提示橫幅 ── */
 .ai-pending-banner {
   display: flex;

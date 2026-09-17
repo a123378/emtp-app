@@ -1193,7 +1193,12 @@ function renderRunnerQuestion(idx) {
   // 標籤
   const tagMeta = $('#m2-qmeta-tag');
   const chTag = $('#m2-qmeta-ch');
-  if (tagMeta) tagMeta.textContent = `第 ${idx + 1} / ${total} 題`;
+  let diffBadgeHtml = '';
+  if (q.difficulty) {
+    const diffClass = q.difficulty === '中等' ? 'diff-medium' : (q.difficulty === '困難' ? 'diff-expert' : 'diff-hard');
+    diffBadgeHtml = `<span class="m2-qdiff-badge ${diffClass}">${escapeHtml(q.difficulty)}</span>`;
+  }
+  if (tagMeta) tagMeta.innerHTML = `第 ${idx + 1} / ${total} 題 ${diffBadgeHtml}`;
   if (chTag) chTag.textContent = `${q.chNum || ''} ${q.chTitle || ''}`;
 
   // 題幹文字
@@ -1590,6 +1595,7 @@ function renderQuizReviewList(questions, userAnswers) {
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <span class="m2-qtag">第 ${i + 1} 題</span>
           <span class="m2-qtag ch">${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '')}</span>
+          ${q.difficulty ? `<span class="m2-qdiff-badge ${q.difficulty === '中等' ? 'diff-medium' : (q.difficulty === '困難' ? 'diff-expert' : 'diff-hard')}">${escapeHtml(q.difficulty)}</span>` : ''}
         </div>
         <span class="m2-rev-status ${isCorrect ? 'correct' : 'incorrect'}">
           ${isCorrect ? '✅ 答對' : '❌ 答錯'}
@@ -1825,8 +1831,10 @@ async function generateAiQuiz() {
 
   const topicDesc = topicMap[topic] || topicMap.all;
   const diffDesc = (diff === 'expert')
-    ? '地獄挑戰級：包含複合臨床情境、雙重陷阱、生命徵象判斷與先後處置邏輯，難度超越歷屆甄試。'
-    : '甄試全真級：比照衛福部高級救護技術員甄試等級，重視標準作業流程、精確劑量、適應症與禁忌症。';
+    ? '教授級地獄挑戰：全卷10題皆為極高難度，包含複合臨床情境、雙重陷阱、生理數值邊緣變動與處置邏輯先後抉擇，難度超越歷屆甄試。'
+    : '甄試全真強度（結構化 4:6 配比）：\n' +
+      '  - 第 1～4 題【中等難度】：評量核心法規、標準作業程序(SOP)、常規藥物劑量與基礎急救評估機轉。\n' +
+      '  - 第 5～10 題【中等偏上甚至困難】：評量進階臨床決策、非典型症狀鑑別、高難度心電圖判讀、矛盾生命徵象的急救優先順序抉擇、特殊族群處置陷阱。';
 
   const prompt = `你是一位具有20年急診醫學臨床專科與高級救護技術員(EMT-P)甄試命題委員經驗的資深醫學教授。
 請依據台灣高級救護技術員教科書（大白）及最新國際與台灣急救指引命題：
@@ -1839,6 +1847,10 @@ async function generateAiQuiz() {
 3. 每題必須提供極為詳細的中文解析（解釋正解原因、各干擾選項錯誤點、關鍵生理機轉）。
 4. 每題附上對應章節資訊（chId 例如 ch21, chNum 例如 CH21, chTitle 例如 心律不整之判讀與處置）。
 5. 回傳必須是純標準 JSON 陣列格式，嚴禁任何 markdown 包裝或多餘前言，直接以 [ 開頭、以 ] 結尾。
+6. 難易度配比嚴格要求：
+   - 若難易度為「甄試全真強度」，第 1～4 題必須為「中等」難度，第 5～10 題必須為「中等偏上」或「困難」難度。
+   - 若難易度為「教授級地獄挑戰」，全部 10 題皆為「困難」難度。
+   - 每題 JSON 必須包含 "difficulty" 欄位，值為 "中等"、"中等偏上" 或 "困難"。
 
 JSON 陣列結構：
 [
@@ -1847,6 +1859,7 @@ JSON 陣列結構：
     "options": ["選項A", "選項B", "選項C", "選項D"],
     "answer": 0,
     "explanation": "詳細解析...",
+    "difficulty": "中等",
     "chId": "ch21",
     "chNum": "CH21",
     "chTitle": "心律不整之判讀與處置"
@@ -1869,13 +1882,14 @@ JSON 陣列結構：
       options: Array.isArray(item.options) && item.options.length >= 4 ? item.options.slice(0, 4) : ['選項A', '選項B', '選項C', '選項D'],
       answer: typeof item.answer === 'number' && item.answer >= 0 && item.answer <= 3 ? item.answer : 0,
       explanation: item.explanation || '依據教科書臨床指引解析。',
+      difficulty: item.difficulty || (diff === 'expert' ? '困難' : (idx < 4 ? '中等' : '中等偏上')),
       chId: item.chId || 'ch01',
       chNum: item.chNum || 'CH01',
       chTitle: item.chTitle || '重點章節'
     })).slice(0, 10);
 
     state.aiGenInProgress = false;
-    const title = `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真級'})`;
+    const title = `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真強度'})`;
 
     // 若使用者仍停留在這個視窗前（沒有縮小/切走），維持原本體驗：直接進入測驗。
     // 若視窗已被縮小、或已切去模式一複習，改為背景保存 + 顯示完成提醒，不強行把畫面切走。
