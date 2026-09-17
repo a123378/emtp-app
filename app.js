@@ -902,7 +902,7 @@ function initMode2() {
   updateApiStatusBtn();
 
   // Close modals on overlay backdrop click
-  ['gemini-api-modal', 'm2-ch-modal', 'm2-ai-modal', 'manual-add-modal'].forEach(id => {
+  ['gemini-api-modal', 'm2-ch-modal', 'm2-ai-modal', 'manual-add-modal', 'ai-complete-modal'].forEach(id => {
     const modal = $(`#${id}`);
     if (modal) {
       modal.addEventListener('click', (e) => {
@@ -1799,6 +1799,60 @@ function dismissPendingAiQuiz() {
   $('#ai-pending-banner')?.classList.add('hidden');
 }
 
+// ── Web Audio 提示音（安全零依賴） ──
+function playSuccessBeep() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    const now = ctx.currentTime;
+    osc.frequency.setValueAtTime(587.33, now); // D5
+    osc.frequency.setValueAtTime(880, now + 0.12); // A5
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    osc.start(now);
+    osc.stop(now + 0.35);
+  } catch (e) {
+    // 瀏覽器若未互動可能阻止音訊，靜默容錯
+  }
+}
+
+// ── AI 出題完成醒目彈出視窗控制 ──
+function showAiCompleteModal(title, questions, topicDesc, diff) {
+  const titleEl = $('#ai-complete-title');
+  const topicEl = $('#ai-complete-topic');
+  const diffEl = $('#ai-complete-diff');
+  if (titleEl) titleEl.textContent = title;
+  if (topicEl) {
+    const cleanTopic = (topicDesc || '全科綜合').split('（')[0].replace('高級救護技術員(EMT-P)', '').trim();
+    topicEl.textContent = cleanTopic.length > 12 ? cleanTopic.slice(0, 12) + '…' : cleanTopic;
+  }
+  if (diffEl) {
+    diffEl.textContent = diff === 'expert' ? '教授級地獄挑戰' : '甄試全真 (4中+6難)';
+  }
+  $('#ai-complete-modal')?.classList.remove('hidden');
+  playSuccessBeep();
+}
+
+function closeAiCompleteModal() {
+  $('#ai-complete-modal')?.classList.add('hidden');
+}
+
+function startCompletedAiQuiz() {
+  closeAiCompleteModal();
+  if (!state.pendingAiQuiz) return;
+  const { title, questions } = state.pendingAiQuiz;
+  state.pendingAiQuiz = null;
+  clearAiReadyNotice();
+  if (state.currentMode !== 2) switchMode(2);
+  startM2Quiz('ai', title, questions);
+}
+
 async function generateAiQuiz() {
   if (!state.geminiApiKey) {
     alert('請先設定 Gemini API Key！');
@@ -1891,17 +1945,16 @@ JSON 陣列結構：
     state.aiGenInProgress = false;
     const title = `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真強度'})`;
 
-    // 若使用者仍停留在這個視窗前（沒有縮小/切走），維持原本體驗：直接進入測驗。
-    // 若視窗已被縮小、或已切去模式一複習，改為背景保存 + 顯示完成提醒，不強行把畫面切走。
-    const modalVisible = !$('#m2-ai-modal')?.classList.contains('hidden');
-    if (modalVisible) {
-      closeAiQuizModal();
-      setAiGenModalUI(false);
-      startM2Quiz('ai', title, validatedQuestions);
-    } else {
-      state.pendingAiQuiz = { title, questions: validatedQuestions };
-      showAiReadyNotice();
-    }
+    // 關閉出題等待視窗並重置表單按鈕
+    closeAiQuizModal();
+    setAiGenModalUI(false);
+
+    // 保存待測資料並點亮紅點/大廳橫幅
+    state.pendingAiQuiz = { title, questions: validatedQuestions };
+    showAiReadyNotice();
+
+    // 直接彈出醒目的「完成彈出視窗」
+    showAiCompleteModal(title, validatedQuestions, topicDesc, diff);
 
   } catch (err) {
     console.error('AI Quiz Generation failed:', err);

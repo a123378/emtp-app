@@ -1326,6 +1326,73 @@ body {
   border: 1px solid #fecaca;
 }
 
+/* ── AI 出題完成彈出視窗專屬樣式 ── */
+.ai-complete-box {
+  max-width: 520px;
+  border: 2px solid var(--primary, #3b82f6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ai-complete-hero {
+  text-align: center;
+  padding: 10px 0 6px;
+}
+.ai-complete-icon {
+  font-size: 3.2rem;
+  margin-bottom: 8px;
+  animation: bounce 1s ease infinite alternate;
+}
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+.ai-complete-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.ai-complete-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.ai-complete-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  background: var(--surface-2, rgba(0,0,0,0.03));
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.ai-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.ai-meta-lbl {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.ai-meta-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.ai-start-btn {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
 /* ── Lobby: 背景生成的 AI 測驗完成提示橫幅 ── */
 .ai-pending-banner {
   display: flex;
