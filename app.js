@@ -29,6 +29,7 @@ const state = {
   readChapters: new Set(JSON.parse(localStorage.getItem('readCh') || '[]')),
   theme: localStorage.getItem('theme') || 'light',
   searchQuery: '',
+  inlineAnswers: {},   // qId -> 選項索引（模式一段落內嵌考題）
 
   // ── Mode 2 (題庫練習) 狀態 ──
   allQuizzes: [],
@@ -300,7 +301,8 @@ function renderNotes(cd, chId) {
   // ③ 內文重點
   if (cd.content && cd.content.length) {
     html += `<div class="section-label"><span class="s-num">${secNum++}</span> 內文重點整理</div>`;
-    html += renderContentBlocks(cd.content);
+    html += renderContentBlocks(cd.content, chId);
+    html += renderSectionQuizBox(chId, null, '其他本章考題');
   }
 
   // ④ 重點一覽入口
@@ -338,9 +340,14 @@ function renderNotes(cd, chId) {
 }
 
 // ── Render: Content Blocks (四) ───────────────────────
-function renderContentBlocks(blocks) {
+function renderContentBlocks(blocks, chId) {
   let html = '';
-  for (const block of blocks) {
+  let curSec = null;
+  blocks.forEach((block, bi) => {
+    if (block.type === 'orange') {
+      if (curSec !== null && chId) html += renderSectionQuizBox(chId, curSec);
+      curSec = bi;
+    }
     switch (block.type) {
       case 'orange':
         html += `<div class="orange-heading">${mdInline(block.text)}</div>`;
@@ -382,8 +389,109 @@ function renderContentBlocks(blocks) {
         html += `<p style="font-size:0.9rem;line-height:1.7;margin:8px 0 12px;padding-left:4px">${mdInline(block.text)}</p>`;
         break;
     }
-  }
+  });
+  if (curSec !== null && chId) html += renderSectionQuizBox(chId, curSec);
   return html;
+}
+
+// ── 模式一：段落內嵌考題 ────────────────────────────────
+function sectionQuizzes(chId, secIdx) {
+  return (state.allQuizzes || []).filter(q => q.chId === chId &&
+    (secIdx === null ? (q.secIdx === undefined || q.secIdx === null) : q.secIdx === secIdx));
+}
+
+function renderSectionQuizBox(chId, secIdx, label) {
+  const qs = sectionQuizzes(chId, secIdx);
+  if (!qs.length) return '';
+  return `
+    <details class="sec-quiz">
+      <summary>📝 ${label || '這一節的考題'}（${qs.length} 題）</summary>
+      <div class="sec-quiz-body">${qs.map(q => renderInlineQuiz(q)).join('')}</div>
+    </details>`;
+}
+
+function renderInlineQuiz(q) {
+  const L = ['A', 'B', 'C', 'D'];
+  const picked = state.inlineAnswers[q.id];
+  const done = picked !== undefined;
+  const ok = done && picked === q.answer;
+  return `
+    <div class="iq ${done ? (ok ? 'iq-ok' : 'iq-bad') : ''}" id="iq-${q.id}">
+      <div class="iq-meta">
+        <span class="iq-tag">${escapeHtml(q.year || '歷屆')}</span>
+        <span class="iq-tag">${escapeHtml(q.sourceLabel || '甄試')}</span>
+        ${done ? `<span class="iq-tag ${ok ? 'ok' : 'bad'}">${ok ? '✅ 答對' : '❌ 答錯'}</span>` : ''}
+      </div>
+      <div class="iq-q">${mdInline(q.question)}</div>
+      ${q.image ? `<div class="m2-qimage-box" onclick="openImageModal('${escapeHtml(q.image)}')">
+          <img src="${escapeHtml(q.image)}" class="m2-qimage" alt="題目附圖"></div>` : ''}
+      <div class="iq-opts">
+        ${(q.options || []).map((o, i) => {
+          const cls = done ? (i === q.answer ? 'right' : (i === picked ? 'wrong' : '')) : '';
+          return `<button class="iq-opt ${cls}" ${done ? 'disabled' : ''} onclick="answerInlineQuiz('${q.id}', ${i})">
+                    <span class="iq-ol">${L[i]}</span><span>${mdInline(o)}</span></button>`;
+        }).join('')}
+      </div>
+      ${done ? `
+        <div class="iq-expl">
+          <div class="iq-expl-head">正確答案：(${L[q.answer]})</div>
+          <div class="iq-expl-text">${escapeHtml(q.explanation || '暫無解析').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>')}</div>
+          <button class="iq-reset" onclick="resetInlineQuiz('${q.id}')">🔄 再做一次</button>
+        </div>` : ''}
+    </div>`;
+}
+
+function repaintInlineQuiz(qid) {
+  const q = (state.allQuizzes || []).find(x => x.id === qid);
+  const el = document.getElementById('iq-' + qid);
+  if (q && el) el.outerHTML = renderInlineQuiz(q);
+}
+function answerInlineQuiz(qid, oi) { state.inlineAnswers[qid] = oi; repaintInlineQuiz(qid); }
+function resetInlineQuiz(qid) { delete state.inlineAnswers[qid]; repaintInlineQuiz(qid); }
+
+// ── 模式二：就地展開教科書內容（取代跳轉到模式一）─────────────
+const _chCache = {};
+async function loadChapterCached(chId) {
+  if (_chCache[chId]) return _chCache[chId];
+  const r = await fetch(dataUrl(`chapters/${chId}.json`));
+  if (!r.ok) throw new Error('chapter fetch failed');
+  _chCache[chId] = await r.json();
+  return _chCache[chId];
+}
+
+function renderTextbookDetails(q) {
+  const hasSec = q.secIdx !== undefined && q.secIdx !== null;
+  const label = hasSec
+    ? `看教科書這一段：${escapeHtml(q.secTitle || '')}`
+    : `看教科書：${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '本章')}重點整理`;
+  return `
+    <details class="tb-details" ontoggle="loadTextbook(this, '${escapeHtml(q.chId || '')}', ${hasSec ? q.secIdx : -1})">
+      <summary>📖 ${label}</summary>
+      <div class="tb-body"><div class="tb-msg">載入中…</div></div>
+    </details>`;
+}
+
+async function loadTextbook(el, chId, secIdx) {
+  if (!el.open || el.dataset.loaded) return;
+  el.dataset.loaded = '1';
+  const body = el.querySelector('.tb-body');
+  try {
+    const cd = await loadChapterCached(chId);
+    const content = cd.content || [];
+    let html = '';
+    if (secIdx >= 0 && content[secIdx]) {
+      const next = content.findIndex((b, i) => i > secIdx && b.type === 'orange');
+      html += renderContentBlocks(content.slice(secIdx, next === -1 ? content.length : next));
+      html += `<details class="tb-full"><summary>📚 展開整章重點整理</summary>
+                 <div>${renderContentBlocks(content)}</div></details>`;
+    } else {
+      html += renderContentBlocks(content);
+    }
+    body.innerHTML = html || '<div class="tb-msg">本章尚無內容。</div>';
+  } catch (e) {
+    el.dataset.loaded = '';
+    body.innerHTML = '<div class="tb-msg">載入失敗，請確認網路後再試一次。</div>';
+  }
 }
 
 function renderListItem(item) {
@@ -1465,9 +1573,7 @@ function renderQuizReviewList(questions, userAnswers) {
           <div class="full-expl-content">${escapeHtml(q.explanation || '暫無完整解析')}</div>
         </div>
       </div>
-      <button class="jump-ch-btn" onclick="jumpToMode1Chapter('${q.chId || 'ch01'}')">
-        🔗 查看 ${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '該章')} 完整重點筆記與考點
-      </button>
+      ${renderTextbookDetails(q)}
     `;
 
     container.appendChild(card);
@@ -2313,9 +2419,7 @@ function filterWrongBook() {
         </div>
       </div>
       <div style="margin-top:12px">
-        <button class="jump-ch-btn" onclick="jumpToMode1Chapter('${q.chId || 'ch01'}')">
-          🔗 查看 ${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '該章')} 完整重點筆記與考點
-        </button>
+      ${renderTextbookDetails(q)}
       </div>
     `;
     listEl.appendChild(card);
@@ -2504,6 +2608,9 @@ function escapeHtml(str) {
 }
 
 // ── Expose globals for inline handlers ────────────────
+window.answerInlineQuiz = answerInlineQuiz;
+window.resetInlineQuiz = resetInlineQuiz;
+window.loadTextbook = loadTextbook;
 window.selectChapter = selectChapter;
 window.prevChapter = prevChapter;
 window.nextChapter = nextChapter;
