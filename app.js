@@ -28,8 +28,6 @@ const state = {
   currentChData: null,
   readChapters: new Set(JSON.parse(localStorage.getItem('readCh') || '[]')),
   theme: localStorage.getItem('theme') || 'light',
-  quizAnswers: {},   // chId -> { qIdx -> selectedOption }
-  quizScores: {},    // chId -> { correct, total }
   searchQuery: '',
 
   // ── Mode 2 (題庫練習) 狀態 ──
@@ -260,7 +258,6 @@ async function loadChapterData(chId) {
   const cd = state.currentChData;
 
   // Init quiz answers for this chapter
-  if (!state.quizAnswers[chId]) state.quizAnswers[chId] = {};
 
   // Render notes (includes inline quizzes)
   els.notesContent.innerHTML = renderNotes(cd, chId);
@@ -298,25 +295,7 @@ function renderNotes(cd, chId) {
       </div>
     </div>`;
 
-  // ② 歷屆試題（直接嵌入在最開頭）
   let secNum = 1;
-  if (cd.quizzes && cd.quizzes.length) {
-    html += `<div class="section-label"><span class="s-num">${secNum++}</span> 歷屆試題（共 ${cd.quizzes.length} 題）</div>`;
-    html += `<div class="quiz-score-bar" id="quiz-score-bar" style="display:none">
-      <div>
-        <div class="score-label">本章得分</div>
-        <div class="score-value" id="quiz-score-text">0 / 0</div>
-      </div>
-      <div class="score-progress">
-        <div class="score-fill" id="quiz-score-fill" style="width:0%"></div>
-      </div>
-    </div>`;
-    html += `<div class="quiz-container">`;
-    cd.quizzes.forEach((q, qi) => {
-      html += renderQuizItem(q, qi, chId);
-    });
-    html += `</div>`;
-  }
 
   // ③ 內文重點
   if (cd.content && cd.content.length) {
@@ -445,154 +424,6 @@ function renderMarkdown(text) {
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\n- (.+)/g, '<li>$1</li>')
     .replace(/\n/g, '<br>');
-}
-
-// ── Render: Single Quiz Item ──────────────────────────
-function renderQuizItem(q, qi, chId) {
-  const isAnswered = state.quizAnswers[chId] && state.quizAnswers[chId][qi] !== undefined;
-  const userAns = isAnswered ? state.quizAnswers[chId][qi] : null;
-  const isCorrect = isAnswered && userAns === q.answer;
-
-  return `
-    <div class="quiz-item ${isAnswered ? (isCorrect ? 'answered-correct' : 'answered-wrong') : ''}" id="quiz-item-${qi}" data-qi="${qi}">
-      <div class="quiz-meta">
-        <span class="quiz-tag year">${q.year || '歷屆'}</span>
-        <span class="quiz-tag">${q.sourceLabel || '甄試考題'}</span>
-        <span class="quiz-tag q-status-tag ${isAnswered ? (isCorrect ? 'correct' : 'wrong') : ''}" id="q-status-tag-${qi}">
-          ${isAnswered ? (isCorrect ? '✅ 答對' : '❌ 答錯') : '尚未作答'}
-        </span>
-      </div>
-      <div class="quiz-q">${qi + 1}. ${q.question}</div>
-      ${q.image ? `
-        <div class="quiz-qimage-wrap">
-          <div class="m2-qimage-box" onclick="openImageModal('${escapeHtml(q.image)}')">
-            <img src="${escapeHtml(q.image)}" alt="題目心電圖/附圖" class="m2-qimage">
-            <div class="m2-qimage-hint">🔍 點擊圖片可放大檢視心電圖細節</div>
-          </div>
-        </div>` : ''}
-      <div class="quiz-options">
-        ${q.options.map((opt, oi) => {
-          let extraClass = '';
-          if (isAnswered) {
-            if (oi === q.answer) extraClass = 'correct';
-            else if (oi === userAns && !isCorrect) extraClass = 'wrong';
-          }
-          return `
-            <button class="quiz-option ${extraClass}" data-qi="${qi}" data-oi="${oi}"
-                    ${isAnswered ? 'disabled' : ''}
-                    onclick="selectOption(${qi}, ${oi}, '${chId}')">
-              <span class="opt-label">${String.fromCharCode(65 + oi)}</span>
-              <span class="opt-text">${cleanOptionText(opt)}</span>
-            </button>`;
-        }).join('')}
-      </div>
-      <div class="quiz-explanation ${isAnswered ? 'show' : ''}" id="quiz-exp-${qi}">
-        <div class="exp-header">
-          <div class="exp-title">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            詳解與核心解析
-          </div>
-          <button class="quiz-reset-btn" onclick="resetQuiz(${qi}, '${chId}')" title="重新作答此題">🔄 重做</button>
-        </div>
-        <div class="exp-result-banner" id="exp-banner-${qi}">
-          ${isAnswered ? (isCorrect 
-            ? '<span class="banner-correct">✅ 恭喜答對！請研讀下方考題解析：</span>' 
-            : `<span class="banner-wrong">❌ 答錯了！正確答案為：<strong>(${String.fromCharCode(65 + q.answer)})</strong></span>`) : ''}
-        </div>
-        <div class="exp-body">${q.explanation || '（詳解整理中）'}</div>
-        ${q.source ? `<div class="exp-source">📖 出處：${q.source}</div>` : ''}
-      </div>
-    </div>`;
-}
-
-function selectOption(qi, oi, chId) {
-  const item = $(`#quiz-item-${qi}`);
-  if (!item || item.classList.contains('answered-correct') || item.classList.contains('answered-wrong')) return;
-
-  const cd = state.currentChData;
-  if (!cd || !cd.quizzes || !cd.quizzes[qi]) return;
-  const q = cd.quizzes[qi];
-
-  state.quizAnswers[chId][qi] = oi;
-  const isCorrect = (oi === q.answer);
-
-  // Style options immediately
-  item.querySelectorAll('.quiz-option').forEach((btn, idx) => {
-    btn.disabled = true;
-    if (idx === q.answer) {
-      btn.classList.add('correct');
-    } else if (idx === oi && !isCorrect) {
-      btn.classList.add('wrong');
-    }
-  });
-
-  item.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
-
-  // Update status badge
-  const statusTag = $(`#q-status-tag-${qi}`);
-  if (statusTag) {
-    statusTag.textContent = isCorrect ? '✅ 答對' : '❌ 答錯';
-    statusTag.className = `quiz-tag q-status-tag ${isCorrect ? 'correct' : 'wrong'}`;
-  }
-
-  // Update banner in explanation
-  const banner = $(`#exp-banner-${qi}`);
-  if (banner) {
-    banner.innerHTML = isCorrect 
-      ? '<span class="banner-correct">✅ 恭喜答對！請研讀下方考題解析：</span>' 
-      : `<span class="banner-wrong">❌ 答錯了！正確答案為：<strong>(${String.fromCharCode(65 + q.answer)})</strong></span>`;
-  }
-
-  // Reveal explanation immediately!
-  const exp = $(`#quiz-exp-${qi}`);
-  if (exp) {
-    exp.classList.add('show');
-    // Scroll smoothly to explanation if needed
-    setTimeout(() => {
-      exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 80);
-  }
-
-  // Update score bar
-  if (!state.quizScores[chId]) state.quizScores[chId] = { correct: 0, total: 0 };
-  state.quizScores[chId].total++;
-  if (isCorrect) state.quizScores[chId].correct++;
-  updateQuizScore(chId);
-}
-
-function resetQuiz(qi, chId) {
-  if (state.quizAnswers[chId]) {
-    delete state.quizAnswers[chId][qi];
-  }
-  const item = $(`#quiz-item-${qi}`);
-  if (!item) return;
-  item.classList.remove('answered-correct', 'answered-wrong');
-  item.querySelectorAll('.quiz-option').forEach(btn => {
-    btn.disabled = false;
-    btn.classList.remove('correct', 'wrong', 'selected');
-  });
-  const statusTag = $(`#q-status-tag-${qi}`);
-  if (statusTag) {
-    statusTag.textContent = '尚未作答';
-    statusTag.className = 'quiz-tag q-status-tag';
-  }
-  const exp = $(`#quiz-exp-${qi}`);
-  if (exp) exp.classList.remove('show');
-}
-
-function updateQuizScore(chId) {
-  const score = state.quizScores[chId];
-  const bar = $('#quiz-score-bar');
-  const text = $('#quiz-score-text');
-  const fill = $('#quiz-score-fill');
-  if (!score || score.total === 0 || !bar) {
-    if (bar) bar.style.display = 'none';
-    return;
-  }
-  bar.style.display = 'flex';
-  if (text) text.textContent = `${score.correct} / ${score.total}`;
-  const pct = Math.round((score.correct / score.total) * 100);
-  if (fill) fill.style.width = pct + '%';
 }
 
 // ── Render: Summary ───────────────────────────────────
@@ -2673,8 +2504,6 @@ function escapeHtml(str) {
 }
 
 // ── Expose globals for inline handlers ────────────────
-window.selectOption = selectOption;
-window.resetQuiz = resetQuiz;
 window.selectChapter = selectChapter;
 window.prevChapter = prevChapter;
 window.nextChapter = nextChapter;
