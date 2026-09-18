@@ -35,10 +35,10 @@ async function loadFirebase() {
    （這組值本來就是公開的，安全性由 Firestore 規則 + 登入帳號把關。）
    也可以留空，改在網頁的「☁️ 同步」視窗裡貼上，設定會存在本機。      */
 const FIREBASE_CONFIG = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  appId: ''
+  apiKey: "AIzaSyBWRAIzrGo4GHta371qNf18w57KMhH9jEM",
+  authDomain: "mytp-ed0f5.firebaseapp.com",
+  projectId: "mytp-ed0f5",
+  appId: "1:624541117334:web:6d70087c912d71c25dcbb7"
 };
 
 /* ── 2. 常數 ───────────────────────────────────────────────────────── */

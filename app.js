@@ -114,6 +114,7 @@ async function init() {
   applyTheme(state.theme);
   await loadChapterIndex();
   await loadAllQuizzes();
+  sanitizeStoredQuizzes();
   buildSidebar();
   bindEvents();
   initMode2();
@@ -1306,6 +1307,7 @@ function submitRunnerQuiz() {
     if (isCorrect) {
       correctCount++;
     } else {
+      const resolved = resolveQuestionChapter(q);
       const wrongItem = {
         id: q.id || `m2-${Date.now()}-${i}`,
         question: q.question,
@@ -1313,9 +1315,9 @@ function submitRunnerQuiz() {
         answer: q.answer,
         userAnswer: userChoice !== undefined ? userChoice : -1,
         explanation: q.explanation || '依據教科書臨床指引解析。',
-        chId: q.chId || 'ch01',
-        chNum: q.chNum || 'CH01',
-        chTitle: q.chTitle || '未分類章節',
+        chId: resolved.chId,
+        chNum: resolved.chNum,
+        chTitle: resolved.chTitle,
         timestamp: Date.now()
       };
       // 依題目內容去重
@@ -1727,13 +1729,19 @@ function selectAllChapters(checked) {
 
 function selectPresetChapters(category) {
   selectAllChapters(false);
-  const targetIds = [];
-  if (category === 'trauma') {
-    for (let i = 28; i <= 36; i++) targetIds.push(`ch${String(i).padStart(2, '0')}`);
-  } else if (category === 'cardio') {
-    for (let i = 20; i <= 23; i++) targetIds.push(`ch${String(i).padStart(2, '0')}`);
+  let targetIds = [];
+  if (category === 'cardio') {
+    targetIds = ['ch23', 'ch24', 'ch33', 'ch34'];
+  } else if (category === 'trauma') {
+    targetIds = ['ch25', 'ch26', 'ch27', 'ch28', 'ch29', 'ch30', 'ch31', 'ch32'];
   } else if (category === 'airway') {
-    for (let i = 9; i <= 11; i++) targetIds.push(`ch${String(i).padStart(2, '0')}`);
+    targetIds = ['ch14', 'ch15', 'ch35'];
+  } else if (category === 'neuro') {
+    targetIds = ['ch20', 'ch36', 'ch37', 'ch46'];
+  } else if (category === 'peds') {
+    targetIds = ['ch48', 'ch49'];
+  } else if (category === 'toxic') {
+    targetIds = ['ch44', 'ch45', 'ch50', 'ch52', 'ch53', 'ch57'];
   }
   const set = new Set(targetIds);
   $$('.m2-ch-cb').forEach(cb => {
@@ -1860,45 +1868,257 @@ function playSuccessBeep() {
   }
 }
 
+// ── 台灣高級救護技術員教科書（大白第三版）權威 60 章節目錄 ──
+const CHAPTER_CATALOG = [
+  { id: 'ch01', num: 'CH01', title: '緊急醫療救護體系概論' },
+  { id: 'ch02', num: 'CH02', title: '台灣緊急醫療救護體系' },
+  { id: 'ch03', num: 'CH03', title: '救護技術員的角色與責任' },
+  { id: 'ch04', num: 'CH04', title: '緊急醫療救護相關法律規範' },
+  { id: 'ch05', num: 'CH05', title: '救護技術員的職業安全與傳染病防治' },
+  { id: 'ch06', num: 'CH06', title: '救護技術員的心理衛生' },
+  { id: 'ch07', num: 'CH07', title: '緊急醫療救護派遣系統' },
+  { id: 'ch08', num: 'CH08', title: '社區層級的緊急醫療反應' },
+  { id: 'ch09', num: 'CH09', title: '緊急醫療救護的品質管理' },
+  { id: 'ch10', num: 'CH10', title: '緊急救護之新科技應用' },
+  { id: 'ch11', num: 'CH11', title: '救護技術員的科學思考基礎' },
+  { id: 'ch12', num: 'CH12', title: '人體基本解剖與生理' },
+  { id: 'ch13', num: 'CH13', title: '從出生到死亡：一生的成長與發展' },
+  { id: 'ch14', num: 'CH14', title: '呼吸道處置與通氣-原理篇' },
+  { id: 'ch15', num: 'CH15', title: '呼吸道處置與通氣-技術篇' },
+  { id: 'ch16', num: 'CH16', title: '緊急救護藥理學' },
+  { id: 'ch17', num: 'CH17', title: '藥物給予及給藥途徑' },
+  { id: 'ch18', num: 'CH18', title: '醫病關係與溝通技巧' },
+  { id: 'ch19', num: 'CH19', title: '病史詢問' },
+  { id: 'ch20', num: 'CH20', title: '身體診察' },
+  { id: 'ch21', num: 'CH21', title: '到院前超音波應用' },
+  { id: 'ch22', num: 'CH22', title: '病人評估與決策策' },
+  { id: 'ch23', num: 'CH23', title: '基本生命支持與急救' },
+  { id: 'ch24', num: 'CH24', title: '復甦醫學新進展' },
+  { id: 'ch25', num: 'CH25', title: '外傷總論與重大外傷' },
+  { id: 'ch26', num: 'CH26', title: '出血、休克與止血治療' },
+  { id: 'ch27', num: 'CH27', title: '頭頸脊椎與顏面外傷' },
+  { id: 'ch28', num: 'CH28', title: '胸部外傷' },
+  { id: 'ch29', num: 'CH29', title: '腹骨盆部外傷' },
+  { id: 'ch30', num: 'CH30', title: '軟組織肌肉骨骼外傷與壓砸傷' },
+  { id: 'ch31', num: 'CH31', title: '灼傷與電灼害' },
+  { id: 'ch32', num: 'CH32', title: '特殊創傷族群及親密伴侶暴力' },
+  { id: 'ch33', num: 'CH33', title: '心電圖判定' },
+  { id: 'ch34', num: 'CH34', title: '心臟與血管急症' },
+  { id: 'ch35', num: 'CH35', title: '呼吸系統急症' },
+  { id: 'ch36', num: 'CH36', title: '神經系統急症與急性腦中風' },
+  { id: 'ch37', num: 'CH37', title: '內分泌與代謝急症' },
+  { id: 'ch38', num: 'CH38', title: '腸胃急症' },
+  { id: 'ch39', num: 'CH39', title: '血液與腫瘤急症' },
+  { id: 'ch40', num: 'CH40', title: '過敏與免疫急症' },
+  { id: 'ch41', num: 'CH41', title: '泌尿與腎臟急症' },
+  { id: 'ch42', num: 'CH42', title: '感染急症' },
+  { id: 'ch43', num: 'CH43', title: '新興傳染病與疫災防治' },
+  { id: 'ch44', num: 'CH44', title: '環境急症' },
+  { id: 'ch45', num: 'CH45', title: '野外醫學' },
+  { id: 'ch46', num: 'CH46', title: '行為急症與精神急症' },
+  { id: 'ch47', num: 'CH47', title: '高齡緊急救護概論' },
+  { id: 'ch48', num: 'CH48', title: '新生兒急救與小兒急症' },
+  { id: 'ch49', num: 'CH49', title: '婦產急症' },
+  { id: 'ch50', num: 'CH50', title: '毒物學' },
+  { id: 'ch51', num: 'CH51', title: '醫療管路、維生器材與常見的院內檢查' },
+  { id: 'ch52', num: 'CH52', title: '大量病人與災難應變' },
+  { id: 'ch53', num: 'CH53', title: '危害物質與核生化應變' },
+  { id: 'ch54', num: 'CH54', title: '大型活動之緊急醫療救護' },
+  { id: 'ch55', num: 'CH55', title: '運動賽事救護人員的角色與任務' },
+  { id: 'ch56', num: 'CH56', title: '高危情境或侷限空間病人之緊急醫療救護' },
+  { id: 'ch57', num: 'CH57', title: '常見天然災害' },
+  { id: 'ch58', num: 'CH58', title: '空中救護體系' },
+  { id: 'ch59', num: 'CH59', title: '緊急救護中的團隊資源管理' },
+  { id: 'ch60', num: 'CH60', title: '緊急救護技術的教學技巧' }
+];
+
 // ── 智慧章節校驗與歸類函式 ──
 function resolveQuestionChapter(q) {
   if (!q) return { chId: 'ch01', chNum: 'CH01', chTitle: '緊急醫療救護體系概論' };
 
-  // 1. 若現有 chId 直接命中合法章節
-  if (q.chId && state.chapters && state.chapters.length > 0) {
-    const directMatch = state.chapters.find(c => c.id.toLowerCase() === String(q.chId).toLowerCase());
-    if (directMatch) {
-      return { chId: directMatch.id, chNum: directMatch.num, chTitle: directMatch.title };
+  const getChapterById = (id) => {
+    const cleanId = String(id || '').toLowerCase();
+    const foundInState = state.chapters && state.chapters.find(c => c.id.toLowerCase() === cleanId);
+    if (foundInState) return { chId: foundInState.id, chNum: foundInState.num, chTitle: foundInState.title };
+    const foundInCatalog = CHAPTER_CATALOG.find(c => c.id.toLowerCase() === cleanId);
+    if (foundInCatalog) return { chId: foundInCatalog.id, chNum: foundInCatalog.num, chTitle: foundInCatalog.title };
+    return null;
+  };
+
+  const fullText = `${q.chNum || ''} ${q.chTitle || ''} ${q.chapterTitle || ''} ${q.explanation || ''} ${q.question || ''} ${Array.isArray(q.options) ? q.options.join(' ') : ''}`.toLowerCase();
+
+  // 1. 臨床關鍵語意最高優先度判定 (Clinical Semantic Priority)
+  // ① 毒物學 (CH50) - 包含解毒劑、有機磷、沙林毒氣、Atropine、中毒症候群等臨床毒藥物處置
+  const isToxic = /(沙林|sarin|atropine|阿托平|2-pam|pralidoxime|有機磷|氨基甲酸|sludge|膽鹼性|抗膽鹼|解毒劑|毒物|中毒|巴拉刈|除草劑|農藥|氰化物|一氧化碳|naloxone|納洛酮|安非他命|古柯鹼|大花曼陀羅|曼陀羅|毒蛇|抗毒素血清|肉毒桿菌|烏頭|毒性物質)/i.test(fullText);
+  if (isToxic) {
+    // 若明確為純除污走廊/防護衣等級且無臨床解毒處置才歸 CH53，其餘毒物學一律強制歸入 CH50 毒物學
+    const isPureHazmat = /(除污走廊|除污帳棚|黃區除污|防護衣等級|level a|level b|初級除污)/i.test(fullText) && !/(atropine|阿托平|2-pam|解毒|sludge|阿托平化)/i.test(fullText);
+    if (isPureHazmat) {
+      const match53 = getChapterById('ch53');
+      if (match53) return match53;
     }
+    const match50 = getChapterById('ch50');
+    if (match50) return match50;
   }
 
-  // 2. 從 chNum, chTitle, explanation 或 question 中正則搜尋 CHxx / 第xx章
-  const fullText = `${q.chNum || ''} ${q.chTitle || ''} ${q.explanation || ''} ${q.question || ''}`;
-  const chNumMatch = fullText.match(/(?:CH|第)\s*([0-9]{1,2})\s*(?:章)?/i);
-  if (chNumMatch && state.chapters && state.chapters.length > 0) {
-    const numInt = parseInt(chNumMatch[1], 10);
-    const targetId = `ch${String(numInt).padStart(2, '0')}`;
-    const match = state.chapters.find(c => c.id === targetId);
-    if (match) {
-      return { chId: match.id, chNum: match.num, chTitle: match.title };
-    }
+  // ② 出血、休克與止血治療 (CH26)
+  const isBleedingShock = /(大出血|出血性休克|失血性休克|低容積休克|止血帶|止血包紮|骨盆帶|休克指數|大量輸血)/i.test(fullText);
+  if (isBleedingShock) {
+    const match26 = getChapterById('ch26');
+    if (match26) return match26;
   }
 
-  // 3. 嘗試由章節標題關鍵字模糊比對
-  if (state.chapters && state.chapters.length > 0) {
-    for (const c of state.chapters) {
-      if (c.title && fullText.includes(c.title)) {
-        return { chId: c.id, chNum: c.num, chTitle: c.title };
+  // ③ 心電圖判定 (CH33)
+  const isEcg = /(心電圖|ecg|ekg|stemi|心室顫動|vf|vt|心室頻脈|房室傳導阻滯|av block|st段|導程)/i.test(fullText);
+  if (isEcg) {
+    const match33 = getChapterById('ch33');
+    if (match33) return match33;
+  }
+
+  // ④ 心臟血管急症 (CH34)
+  const isCardio = /(急性冠心症|acs|心肌梗塞|心絞痛|心因性休克|主動脈剝離|心衰竭)/i.test(fullText);
+  if (isCardio) {
+    const match34 = getChapterById('ch34');
+    if (match34) return match34;
+  }
+
+  // ⑤ 困難呼吸道與通氣技術 (CH15)
+  const isAirwayTech = /(氣管內管|插管|聲門上呼吸道|sga|lma|burp|lemon|甦醒球|bvm|環甲膜)/i.test(fullText);
+  if (isAirwayTech) {
+    const match15 = getChapterById('ch15');
+    if (match15) return match15;
+  }
+
+  // ⑥ 呼吸系統急症 (CH35)
+  const isAirwayMed = /(氣喘|copd|慢性阻塞性肺病|呼吸窘迫|喘鳴|哮鳴)/i.test(fullText);
+  if (isAirwayMed) {
+    const match35 = getChapterById('ch35');
+    if (match35) return match35;
+  }
+
+  // ⑦ 神經急症與腦中風 (CH36)
+  const isNeuro = /(腦中風|辛辛那提|cpss|lams|lvo|大血管阻塞|tpa|血栓溶解|癲癇重積)/i.test(fullText);
+  if (isNeuro) {
+    const match36 = getChapterById('ch36');
+    if (match36) return match36;
+  }
+
+  // ⑧ 新生兒與小兒急症 (CH48)
+  const isPeds = /(新生兒急救|小兒急症|小兒|兒童|pat|小兒三角|nrp)/i.test(fullText);
+  if (isPeds) {
+    const match48 = getChapterById('ch48');
+    if (match48) return match48;
+  }
+
+  // ⑨ 婦產急症 (CH49)
+  const isOb = /(分娩|產婦|臍帶脫垂|前置胎盤|胎盤早期剝離|子癇|產後大出血|妊娠)/i.test(fullText);
+  if (isOb) {
+    const match49 = getChapterById('ch49');
+    if (match49) return match49;
+  }
+
+  // ⑩ 環境急症 (CH44)
+  const isEnv = /(熱中暑|中暑|熱衰竭|失溫|低體溫|高山症|潛水伕病|減壓病|雷擊|溺水)/i.test(fullText);
+  if (isEnv) {
+    const match44 = getChapterById('ch44');
+    if (match44) return match44;
+  }
+
+  // 2. 出處明確引用匹配 (例如【出處：大白 CHxx】)
+  const explCitationMatch = (q.explanation || '').match(/(?:大白|教科書)\s*(?:CH|第)\s*([0-9]{1,2})/i);
+  if (explCitationMatch) {
+    const cid = `ch${String(parseInt(explCitationMatch[1], 10)).padStart(2, '0')}`;
+    const matched = getChapterById(cid);
+    if (matched) return matched;
+  }
+
+  // 3. 原 chId / chNum 匹配 (若未被關鍵字攔截且符合標準)
+  if (q.chId) {
+    const matched = getChapterById(q.chId);
+    if (matched) {
+      // 額外防呆：若 q.chId 是 ch41 但標題包含毒物
+      if (q.chId.toLowerCase() === 'ch41' && /毒/i.test(q.chTitle || '')) {
+        return getChapterById('ch50');
       }
+      return matched;
+    }
+  }
+
+  // 4. 章節標題關鍵字匹配
+  for (const c of CHAPTER_CATALOG) {
+    if (c.title && fullText.includes(c.title.toLowerCase())) {
+      return getChapterById(c.id);
     }
   }
 
   // 兜底預設
-  return {
-    chId: q.chId || 'ch01',
-    chNum: q.chNum || 'CH01',
-    chTitle: q.chTitle || '重點章節'
-  };
+  return { chId: 'ch01', num: 'CH01', chNum: 'CH01', title: '緊急醫療救護體系概論', chTitle: '緊急醫療救護體系概論' };
+}
+
+// ── 歷史題目與錯題本資料自動校正修復 ──
+function sanitizeStoredQuizzes() {
+  let dirtyWrong = false;
+
+  // 1. 校驗並修復 state.wrongQuestions
+  if (Array.isArray(state.wrongQuestions)) {
+    state.wrongQuestions.forEach(q => {
+      if (!q) return;
+      const resolved = resolveQuestionChapter(q);
+      if (q.chId !== resolved.chId || q.chTitle !== resolved.chTitle || q.chNum !== resolved.chNum) {
+        q.chId = resolved.chId;
+        q.chNum = resolved.chNum;
+        q.chTitle = resolved.chTitle;
+        q.chapterTitle = resolved.chTitle;
+        dirtyWrong = true;
+      }
+    });
+    if (dirtyWrong) {
+      try {
+        localStorage.setItem('m2_wrong_questions', JSON.stringify(state.wrongQuestions));
+        console.log('已自動校正錯題本中的章節歸類與標籤。');
+      } catch (e) {}
+    }
+  }
+
+  // 2. 校驗並修復 m2_ai_chapter_quizzes
+  let aiStored = [];
+  try {
+    aiStored = JSON.parse(localStorage.getItem('m2_ai_chapter_quizzes') || '[]');
+  } catch (e) {
+    aiStored = [];
+  }
+  let aiDirty = false;
+  if (Array.isArray(aiStored) && aiStored.length > 0) {
+    aiStored.forEach(q => {
+      if (!q) return;
+      const resolved = resolveQuestionChapter(q);
+      if (q.chId !== resolved.chId || q.chTitle !== resolved.chTitle || q.chNum !== resolved.chNum) {
+        q.chId = resolved.chId;
+        q.chNum = resolved.chNum;
+        q.chTitle = resolved.chTitle;
+        q.chapterTitle = resolved.chTitle;
+        aiDirty = true;
+      }
+    });
+    if (aiDirty) {
+      try {
+        localStorage.setItem('m2_ai_chapter_quizzes', JSON.stringify(aiStored));
+        console.log('已自動校正 AI 專項題庫中的章節歸類與標籤。');
+      } catch (e) {}
+    }
+  }
+
+  // 3. 同步校驗 state.allQuizzes 中 AI 題目
+  if (Array.isArray(state.allQuizzes)) {
+    state.allQuizzes.forEach(q => {
+      if (!q || !q.isAiGenerated) return;
+      const resolved = resolveQuestionChapter(q);
+      q.chId = resolved.chId;
+      q.chNum = resolved.chNum;
+      q.chTitle = resolved.chTitle;
+      q.chapterTitle = resolved.chTitle;
+    });
+  }
 }
 
 // ── 將 AI 題目自動歸檔至章節專項題庫 ──
@@ -2030,21 +2250,30 @@ async function generateAiQuiz() {
       `  - 第 ${medCount + 1}～${count} 題【中等偏上甚至困難】：評量進階臨床決策、非典型症狀鑑別、高難度心電圖判讀、矛盾生命徵象的急救優先順序抉擇、特殊族群處置陷阱。`;
 
   const prompt = `你是一位具有20年急診醫學臨床專科與高級救護技術員(EMT-P)甄試命題委員經驗的資深醫學教授。
-請依據台灣高級救護技術員教科書（大白）及最新國際與台灣急救指引命題：
+請依據台灣高級救護技術員教科書（大白第三版）及最新國際與台灣急救指引命題：
 【主題】：${topicDesc}
 【難易度】：${diffDesc}
+
+【台灣高級救護技術員教科書（大白第三版）標準 60 章節權威對照表】：
+CH01 緊急醫療救護體系概論, CH02 台灣緊急醫療救護體系, CH03 救護技術員的角色與責任, CH04 緊急醫療救護相關法律規範, CH05 救護技術員的職業安全與傳染病防治, CH06 救護技術員的心理衛生, CH07 緊急醫療救護派遣系統, CH08 社區層級的緊急醫療反應, CH09 緊急醫療救護的品質管理, CH10 緊急救護之新科技應用, CH11 救護技術員的科學思考基礎, CH12 人體基本解剖與生理, CH13 從出生到死亡：一生的成長與發展, CH14 呼吸道處置與通氣-原理篇, CH15 呼吸道處置與通氣-技術篇, CH16 緊急救護藥理學, CH17 藥物給予及給藥途徑, CH18 醫病關係與溝通技巧, CH19 病史詢問, CH20 身體診察, CH21 到院前超音波應用, CH22 病人評估與決策, CH23 基本生命支持與急救, CH24 復甦醫學新進展, CH25 外傷總論與重大外傷, CH26 出血、休克與止血治療, CH27 頭頸脊椎與顏面外傷, CH28 胸部外傷, CH29 腹骨盆部外傷, CH30 軟組織肌肉骨骼外傷與壓砸傷, CH31 灼傷與電灼害, CH32 特殊創傷族群及親密伴侶暴力, CH33 心電圖判定, CH34 心臟與血管急症, CH35 呼吸系統急症, CH36 神經系統急症與急性腦中風, CH37 內分泌與代謝急症, CH38 腸胃急症, CH39 血液與腫瘤急症, CH40 過敏與免疫急症, CH41 泌尿與腎臟急症, CH42 感染急症, CH43 新興傳染病與疫災防治, CH44 環境急症, CH45 野外醫學, CH46 行為急症與精神急症, CH47 高齡緊急救護概論, CH48 新生兒急救與小兒急症, CH49 婦產急症, CH50 毒物學, CH51 醫療管路、維生器材與常見的院內檢查, CH52 大量病人與災難應變, CH53 危害物質與核生化應變, CH54 大型活動之緊急醫療救護, CH55 運動賽事救護人員的角色與任務, CH56 高危情境或侷限空間病人之緊急醫療救護, CH57 常見天然災害, CH58 空中救護體系, CH59 緊急救護中的團隊資源管理, CH60 緊急救護技術的教學技巧。
+
+【章節分類絕對嚴格要求（防呆規範）】：
+1. 毒物、有機磷、沙林毒氣、Atropine、2-PAM、Naloxone、一氧化碳、化學毒物過量等題目【必須且只能歸為 CH50 毒物學】（若情境涉及化災熱區恐攻應變則為 CH53 危害物質與核生化應變）。【嚴禁將毒物題目誤標為 CH41 或 CH26】！
+2. 創傷出血、止血帶、低容積休克、骨盆帶、大量輸血【必須歸為 CH26 出血、休克與止血治療】！
+3. 泌尿急症、腎衰竭、透析、高血鉀【才是 CH41 泌尿與腎臟急症】！
+4. 回傳之 chId、chNum、chTitle 必須完全精確符合上述 60 章標準名稱（例如 chId: "ch50", chNum: "CH50", chTitle: "毒物學"），不得隨意拼湊自創名稱（如不可自創「毒物急症」）！
 
 【嚴格規則】：
 1. 嚴格產出剛好「${count} 題」單選題。
 2. 每題包含 4 個選項（A, B, C, D），單一正解。
 3. 每題必須提供極為詳細的中文解析（解釋正解原因、各干擾選項錯誤點、關鍵生理機轉）。
-4. 每題附上對應章節資訊（chId 例如 ch21, chNum 例如 CH21, chTitle 例如 心律不整之判讀與處置）。
+4. 每題附上對應章節資訊（chId 例如 ch50, chNum 例如 CH50, chTitle 例如 毒物學）。
 5. 回傳必須是純標準 JSON 陣列格式，嚴禁任何 markdown 包裝或多餘前言，直接以 [ 開頭、以 ] 結尾。
 6. 難易度配比嚴格要求：
    - 若難易度為「甄試全真強度」，第 1～${medCount} 題必須為「中等」難度，第 ${medCount + 1}～${count} 題必須為「中等偏上」或「困難」難度。
    - 若難易度為「教授級地獄挑戰」，全部 ${count} 題皆為「困難」難度。
    - 每題 JSON 必須包含 "difficulty" 欄位，值為 "中等"、"中等偏上" 或 "困難"。
-7. 章節分類與出處要求：每題必須精準歸屬至台灣高級救護技術員教科書（大白）CH01～CH60 之一，並於 chId、chNum、chTitle 清楚標明（例如 ch21, CH21, 心律不整之判讀與處置），詳解開頭包含【出處：大白 CHxx ...】以利系統依詳解自動歸入專項題庫。
+7. 章節分類與出處要求：每題必須精準歸屬至上述 60 章之一，詳解開頭包含【出處：大白 CHxx ...】以利系統依詳解自動歸入專項題庫。
 
 JSON 陣列結構：
 [
@@ -2054,9 +2283,9 @@ JSON 陣列結構：
     "answer": 0,
     "explanation": "詳細解析...",
     "difficulty": "中等",
-    "chId": "ch21",
-    "chNum": "CH21",
-    "chTitle": "心律不整之判讀與處置"
+    "chId": "ch50",
+    "chNum": "CH50",
+    "chTitle": "毒物學"
   }
 ]`;
 
@@ -2070,17 +2299,21 @@ JSON 陣列結構：
       throw new Error('AI 未能生成題目陣列，請重試！');
     }
 
-    const validatedQuestions = parsed.map((item, idx) => ({
-      id: `ai-${Date.now()}-${idx + 1}`,
-      question: item.question || `AI 題目 ${idx + 1}`,
-      options: Array.isArray(item.options) && item.options.length >= 4 ? item.options.slice(0, 4) : ['選項A', '選項B', '選項C', '選項D'],
-      answer: typeof item.answer === 'number' && item.answer >= 0 && item.answer <= 3 ? item.answer : 0,
-      explanation: item.explanation || '依據教科書臨床指引解析。',
-      difficulty: item.difficulty || (diff === 'expert' ? '困難' : (idx < medCount ? '中等' : '中等偏上')),
-      chId: item.chId || 'ch01',
-      chNum: item.chNum || 'CH01',
-      chTitle: item.chTitle || '重點章節'
-    })).slice(0, count);
+    const validatedQuestions = parsed.map((item, idx) => {
+      const resolved = resolveQuestionChapter(item);
+      return {
+        id: `ai-${Date.now()}-${idx + 1}`,
+        question: item.question || `AI 題目 ${idx + 1}`,
+        options: Array.isArray(item.options) && item.options.length >= 4 ? item.options.slice(0, 4) : ['選項A', '選項B', '選項C', '選項D'],
+        answer: typeof item.answer === 'number' && item.answer >= 0 && item.answer <= 3 ? item.answer : 0,
+        explanation: item.explanation || '依據教科書臨床指引解析。',
+        difficulty: item.difficulty || (diff === 'expert' ? '困難' : (idx < medCount ? '中等' : '中等偏上')),
+        chId: resolved.chId,
+        chNum: resolved.chNum,
+        chTitle: resolved.chTitle,
+        chapterTitle: resolved.chTitle
+      };
+    }).slice(0, count);
 
     state.aiGenInProgress = false;
     const title = `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真強度'} ‧ ${validatedQuestions.length}題)`;
@@ -2113,6 +2346,7 @@ JSON 陣列結構：
 
 // ── 功能四：錯題本 & AI 核心觀念弱點診斷 ──────────────
 function openWrongBookView() {
+  sanitizeStoredQuizzes();
   showM2Subview('m2-wrong-book');
   renderWrongBookContent();
 }
