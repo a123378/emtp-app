@@ -820,16 +820,30 @@ function closeProgressModal() {
 
 // ── Pagination helpers ─────────────────────────────────
 function prevChapter() {
+  if (!state.chapters || state.chapters.length === 0) return;
   const curIdx = state.chapters.findIndex(c => c.id === state.currentChId);
   if (curIdx > 0) {
     selectChapter(state.chapters[curIdx - 1].id);
+  } else if (curIdx === 0) {
+    // 若在第一章，循環至最後一章
+    selectChapter(state.chapters[state.chapters.length - 1].id);
+  } else {
+    // 尚未選中任何章節時（如首頁），直接進入第一章
+    selectChapter(state.chapters[0].id);
   }
 }
 
 function nextChapter() {
+  if (!state.chapters || state.chapters.length === 0) return;
   const curIdx = state.chapters.findIndex(c => c.id === state.currentChId);
-  if (curIdx < state.chapters.length - 1) {
+  if (curIdx >= 0 && curIdx < state.chapters.length - 1) {
     selectChapter(state.chapters[curIdx + 1].id);
+  } else if (curIdx >= state.chapters.length - 1) {
+    // 若在最後一章，循環至第一章
+    selectChapter(state.chapters[0].id);
+  } else {
+    // 尚未選中任何章節時（如首頁），直接進入第一章
+    selectChapter(state.chapters[0].id);
   }
 }
 
@@ -906,10 +920,14 @@ function bindEvents() {
   });
 
   // ── 鍵盤快捷鍵 (電腦端友善操作) ──
-  document.addEventListener('keydown', (e) => {
+  window.addEventListener('keydown', (e) => {
     // 1. 若處於輸入框、文字區域、下拉選單或可編輯元素中，不觸發導航與選題快捷鍵
-    const tag = (document.activeElement && document.activeElement.tagName) || '';
-    const isEditing = ['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || document.activeElement?.isContentEditable;
+    const targetTag = (e.target && e.target.tagName) || '';
+    const activeTag = (document.activeElement && document.activeElement.tagName) || '';
+    const isEditing = ['INPUT', 'TEXTAREA', 'SELECT'].includes(targetTag) ||
+                      ['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag) ||
+                      e.target?.isContentEditable ||
+                      document.activeElement?.isContentEditable;
 
     // 快捷鍵: / 聚焦搜尋框 (若非輸入中)
     if (e.key === '/' && !isEditing && document.activeElement !== els.searchInput) {
@@ -931,32 +949,49 @@ function bindEvents() {
       closeAiCompleteModal();
       closeImageModal();
       closePwaInstallModal();
+      if (typeof window.closeSyncModal === 'function') window.closeSyncModal();
       return;
     }
 
     // 若使用者正在輸入，不執行後續快捷鍵
     if (isEditing) return;
 
-    // 若有非 runner 的浮動彈窗開啟，不觸發模式一/二快捷鍵
-    const openModal = document.querySelector('.modal-overlay:not(.hidden)');
+    // 檢查是否有開啟中的浮動彈窗 (display 不為 none 且 不含 hidden)
+    const openModal = Array.from(document.querySelectorAll('.modal-overlay')).find(m => {
+      return !m.classList.contains('hidden') && window.getComputedStyle(m).display !== 'none';
+    });
     if (openModal) return;
+
+    const isUp = e.key === 'ArrowUp' || e.key === 'Up' || e.code === 'ArrowUp';
+    const isDown = e.key === 'ArrowDown' || e.key === 'Down' || e.code === 'ArrowDown';
+    const isLeft = e.key === 'ArrowLeft' || e.key === 'Left' || e.code === 'ArrowLeft';
+    const isRight = e.key === 'ArrowRight' || e.key === 'Right' || e.code === 'ArrowRight';
 
     // ── 模式一快捷鍵 ──
     // 方向鍵上下控制捲動、左右控制章節
     if (state.currentMode === 1) {
-      const scrollEl = els.mainContent || window;
-      if (e.key === 'ArrowUp') {
+      if (isUp || isDown) {
         e.preventDefault();
-        scrollEl.scrollBy({ top: -160, behavior: 'smooth' });
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        scrollEl.scrollBy({ top: 160, behavior: 'smooth' });
-      } else if (e.key === 'ArrowLeft') {
+        const scrollEl = els.mainContent || document.getElementById('main-content') || window;
+        const delta = isUp ? -180 : 180;
+        if (scrollEl && typeof scrollEl.scrollBy === 'function') {
+          scrollEl.scrollBy({ top: delta, behavior: 'smooth' });
+        } else {
+          window.scrollBy({ top: delta, behavior: 'smooth' });
+        }
+        return;
+      }
+
+      if (isLeft) {
         e.preventDefault();
         prevChapter();
-      } else if (e.key === 'ArrowRight') {
+        return;
+      }
+
+      if (isRight) {
         e.preventDefault();
         nextChapter();
+        return;
       }
       return;
     }
@@ -968,15 +1003,25 @@ function bindEvents() {
       const isRunnerActive = runnerEl && !runnerEl.classList.contains('hidden') && state.m2Runner?.questions?.length > 0;
       if (!isRunnerActive) return;
 
-      if (e.key === 'ArrowLeft') {
+      if (isLeft) {
         e.preventDefault();
         prevRunnerQ();
-      } else if (e.key === 'ArrowRight') {
+        return;
+      }
+      if (isRight) {
         e.preventDefault();
         nextRunnerQ();
-      } else if (['1', '2', '3', '4'].includes(e.key)) {
+        return;
+      }
+
+      const numMap = {
+        '1': 0, '2': 1, '3': 2, '4': 3,
+        'Digit1': 0, 'Digit2': 1, 'Digit3': 2, 'Digit4': 3,
+        'Numpad1': 0, 'Numpad2': 1, 'Numpad3': 2, 'Numpad4': 3
+      };
+      const optIdx = numMap[e.key] !== undefined ? numMap[e.key] : numMap[e.code];
+      if (optIdx !== undefined) {
         e.preventDefault();
-        const optIdx = parseInt(e.key, 10) - 1;
         const curQ = state.m2Runner.questions[state.m2Runner.currentIndex];
         if (curQ && curQ.options && curQ.options[optIdx] !== undefined) {
           selectRunnerOption(state.m2Runner.currentIndex, optIdx);
