@@ -146,7 +146,9 @@
   },
   {
    "type": "orange",
-   "text": "出血"
+   "text": "出血",
+   "pdfPage": 3,
+   "page": 701
   },
   {
    "type": "blue",
@@ -294,7 +296,9 @@
   },
   {
    "type": "orange",
-   "text": "休克"
+   "text": "休克",
+   "pdfPage": 5,
+   "page": 703
   },
   {
    "type": "blue",
@@ -490,7 +494,9 @@
   },
   {
    "type": "orange",
-   "text": "微血管–組織細胞於休克時微循環的交互關係"
+   "text": "微血管–組織細胞於休克時微循環的交互關係",
+   "pdfPage": 7,
+   "page": 705
   },
   {
    "type": "blue",
@@ -599,7 +605,9 @@
   },
   {
    "type": "orange",
-   "text": "休克的分期"
+   "text": "休克的分期",
+   "pdfPage": 8,
+   "page": 706
   },
   {
    "type": "text",
@@ -695,7 +703,9 @@
   },
   {
    "type": "orange",
-   "text": "休克的類型"
+   "text": "休克的類型",
+   "pdfPage": 9,
+   "page": 707
   },
   {
    "type": "blue",
@@ -1075,7 +1085,9 @@
   },
   {
    "type": "orange",
-   "text": "休克病人到院前評估"
+   "text": "休克病人到院前評估",
+   "pdfPage": 11,
+   "page": 709
   },
   {
    "type": "text",
@@ -1167,7 +1179,9 @@
   },
   {
    "type": "orange",
-   "text": "休克急救處置"
+   "text": "休克急救處置",
+   "pdfPage": 12,
+   "page": 710
   },
   {
    "type": "text",
@@ -1471,7 +1485,9 @@
   },
   {
    "type": "orange",
-   "text": "致命性出血急救處置–止血治療"
+   "text": "致命性出血急救處置–止血治療",
+   "pdfPage": 15,
+   "page": 713
   },
   {
    "type": "text",
@@ -1843,7 +1859,9 @@
   },
   {
    "type": "orange",
-   "text": "休克急救處置–輸血"
+   "text": "休克急救處置–輸血",
+   "pdfPage": 22,
+   "page": 720
   },
   {
    "type": "text",

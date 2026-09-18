@@ -198,7 +198,9 @@
   },
   {
    "type": "orange",
-   "text": "危害物質的範疇"
+   "text": "危害物質的範疇",
+   "pdfPage": 3,
+   "page": 1449
   },
   {
    "type": "blue",
@@ -475,7 +477,9 @@
   },
   {
    "type": "orange",
-   "text": "辨識危害物質"
+   "text": "辨識危害物質",
+   "pdfPage": 6,
+   "page": 1452
   },
   {
    "type": "blue",
@@ -605,7 +609,9 @@
   },
   {
    "type": "orange",
-   "text": "個人防護裝備"
+   "text": "個人防護裝備",
+   "pdfPage": 9,
+   "page": 1455
   },
   {
    "type": "text",
@@ -736,7 +742,9 @@
   },
   {
    "type": "orange",
-   "text": "危害物質對健康的傷害"
+   "text": "危害物質對健康的傷害",
+   "pdfPage": 10,
+   "page": 1456
   },
   {
    "type": "text",
@@ -913,7 +921,9 @@
   },
   {
    "type": "orange",
-   "text": "危害物質災難事件的應變"
+   "text": "危害物質災難事件的應變",
+   "pdfPage": 12,
+   "page": 1458
   },
   {
    "type": "text",
@@ -1120,7 +1130,9 @@
   },
   {
    "type": "orange",
-   "text": "緊急應變指南(ERG)查詢及使用方式"
+   "text": "緊急應變指南(ERG)查詢及使用方式",
+   "pdfPage": 14,
+   "page": 1460
   },
   {
    "type": "text",
@@ -1221,7 +1233,9 @@
   },
   {
    "type": "orange",
-   "text": "緊急救護人員醫療評估及監測"
+   "text": "緊急救護人員醫療評估及監測",
+   "pdfPage": 16,
+   "page": 1462
   },
   {
    "type": "text",
@@ -1267,7 +1281,9 @@
   },
   {
    "type": "orange",
-   "text": "毒化災病人緊急處理"
+   "text": "毒化災病人緊急處理",
+   "pdfPage": 16,
+   "page": 1462
   },
   {
    "type": "text",
@@ -1357,7 +1373,9 @@
   },
   {
    "type": "orange",
-   "text": "輻射災害應變的處理原則"
+   "text": "輻射災害應變的處理原則",
+   "pdfPage": 17,
+   "page": 1463
   },
   {
    "type": "text",
@@ -1508,7 +1526,9 @@
   },
   {
    "type": "orange",
-   "text": "輻射傷害的急性效應"
+   "text": "輻射傷害的急性效應",
+   "pdfPage": 19,
+   "page": 1465
   },
   {
    "type": "text",
@@ -1774,7 +1794,9 @@
   },
   {
    "type": "orange",
-   "text": "輻射災害事件的現場救護"
+   "text": "輻射災害事件的現場救護",
+   "pdfPage": 21,
+   "page": 1467
   },
   {
    "type": "text",
@@ -1947,7 +1969,9 @@
   },
   {
    "type": "orange",
-   "text": "輻射污染的現場除污"
+   "text": "輻射污染的現場除污",
+   "pdfPage": 23,
+   "page": 1469
   },
   {
    "type": "blue",
@@ -2083,7 +2107,9 @@
   },
   {
    "type": "orange",
-   "text": "危害物質災難事件的災後清潔消毒"
+   "text": "危害物質災難事件的災後清潔消毒",
+   "pdfPage": 25,
+   "page": 1471
   },
   {
    "type": "blue",
@@ -2151,7 +2177,9 @@
   },
   {
    "type": "orange",
-   "text": "核化災恐怖攻擊事件大量病人的處置"
+   "text": "核化災恐怖攻擊事件大量病人的處置",
+   "pdfPage": 27,
+   "page": 1473
   },
   {
    "type": "text",

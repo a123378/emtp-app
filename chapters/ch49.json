@@ -147,7 +147,9 @@
   },
   {
    "type": "orange",
-   "text": "胚胎、子宮及胎兒之解剖構造"
+   "text": "胚胎、子宮及胎兒之解剖構造",
+   "pdfPage": 4,
+   "page": 1296
   },
   {
    "type": "blue",
@@ -207,7 +209,9 @@
   },
   {
    "type": "orange",
-   "text": "懷孕之分期"
+   "text": "懷孕之分期",
+   "pdfPage": 5,
+   "page": 1297
   },
   {
    "type": "text",
@@ -255,7 +259,9 @@
   },
   {
    "type": "orange",
-   "text": "懷孕過程中母體之生理變化"
+   "text": "懷孕過程中母體之生理變化",
+   "pdfPage": 5,
+   "page": 1297
   },
   {
    "type": "blue",
@@ -410,7 +416,9 @@
   },
   {
    "type": "orange",
-   "text": "急產介紹與處置"
+   "text": "急產介紹與處置",
+   "pdfPage": 5,
+   "page": 1297
   },
   {
    "type": "blue",
@@ -537,7 +545,9 @@
   },
   {
    "type": "orange",
-   "text": "接生流程"
+   "text": "接生流程",
+   "pdfPage": 7,
+   "page": 1299
   },
   {
    "type": "blue",
@@ -790,7 +800,9 @@
   },
   {
    "type": "orange",
-   "text": "生產相關急症與處置"
+   "text": "生產相關急症與處置",
+   "pdfPage": 9,
+   "page": 1301
   },
   {
    "type": "blue",
@@ -1092,7 +1104,9 @@
   },
   {
    "type": "orange",
-   "text": "婦科急症"
+   "text": "婦科急症",
+   "pdfPage": 13,
+   "page": 1305
   },
   {
    "type": "text",
@@ -1282,7 +1296,9 @@
   },
   {
    "type": "orange",
-   "text": "性侵案件之處置"
+   "text": "性侵案件之處置",
+   "pdfPage": 15,
+   "page": 1307
   },
   {
    "type": "blue",

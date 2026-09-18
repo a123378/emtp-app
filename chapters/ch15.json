@@ -126,7 +126,9 @@
   },
   {
    "type": "orange",
-   "text": "呼吸系統處置 ‧ 氧氣治療"
+   "text": "呼吸系統處置 ‧ 氧氣治療",
+   "pdfPage": 3,
+   "page": 355
   },
   {
    "type": "blue",
@@ -312,7 +314,9 @@
   },
   {
    "type": "orange",
-   "text": "人工輔助呼吸"
+   "text": "人工輔助呼吸",
+   "pdfPage": 5,
+   "page": 357
   },
   {
    "type": "text",
@@ -462,7 +466,9 @@
   },
   {
    "type": "orange",
-   "text": "呼吸道處置的徒手操作"
+   "text": "呼吸道處置的徒手操作",
+   "pdfPage": 7,
+   "page": 359
   },
   {
    "type": "text",
@@ -509,7 +515,9 @@
   },
   {
    "type": "orange",
-   "text": "抽吸"
+   "text": "抽吸",
+   "pdfPage": 8,
+   "page": 360
   },
   {
    "type": "list",
@@ -588,7 +596,9 @@
   },
   {
    "type": "orange",
-   "text": "鼻咽呼吸道"
+   "text": "鼻咽呼吸道",
+   "pdfPage": 8,
+   "page": 360
   },
   {
    "type": "list",
@@ -680,7 +690,9 @@
   },
   {
    "type": "orange",
-   "text": "口咽呼吸道"
+   "text": "口咽呼吸道",
+   "pdfPage": 9,
+   "page": 361
   },
   {
    "type": "list",
@@ -776,7 +788,9 @@
   },
   {
    "type": "orange",
-   "text": "氣管內管插管"
+   "text": "氣管內管插管",
+   "pdfPage": 9,
+   "page": 361
   },
   {
    "type": "blue",
@@ -1153,7 +1167,9 @@
   },
   {
    "type": "orange",
-   "text": "聲門上呼吸道(SGA)"
+   "text": "聲門上呼吸道(SGA)",
+   "pdfPage": 16,
+   "page": 368
   },
   {
    "type": "list",
@@ -1288,7 +1304,9 @@
   },
   {
    "type": "orange",
-   "text": "快速程序插管(RSI)"
+   "text": "快速程序插管(RSI)",
+   "pdfPage": 17,
+   "page": 369
   },
   {
    "type": "text",
@@ -1420,7 +1438,9 @@
   },
   {
    "type": "orange",
-   "text": "到院前困難插管評估 ‧ HEAVEN 法則"
+   "text": "到院前困難插管評估 ‧ HEAVEN 法則",
+   "pdfPage": 19,
+   "page": 371
   },
   {
    "type": "text",
@@ -1600,7 +1620,9 @@
   },
   {
    "type": "orange",
-   "text": "經喉頭管路通氣術"
+   "text": "經喉頭管路通氣術",
+   "pdfPage": 21,
+   "page": 373
   },
   {
    "type": "text",
@@ -1664,7 +1686,9 @@
   },
   {
    "type": "orange",
-   "text": "環甲膜切開術"
+   "text": "環甲膜切開術",
+   "pdfPage": 21,
+   "page": 373
   },
   {
    "type": "text",
@@ -1735,7 +1759,9 @@
   },
   {
    "type": "orange",
-   "text": "抽吸輔助氣道除污喉頭鏡插管(SALAD)"
+   "text": "抽吸輔助氣道除污喉頭鏡插管(SALAD)",
+   "pdfPage": 22,
+   "page": 374
   },
   {
    "type": "text",
@@ -1769,7 +1795,9 @@
   },
   {
    "type": "orange",
-   "text": "非侵襲性正壓呼吸器(NIPPV)"
+   "text": "非侵襲性正壓呼吸器(NIPPV)",
+   "pdfPage": 24,
+   "page": 376
   },
   {
    "type": "text",
@@ -1860,7 +1888,9 @@
   },
   {
    "type": "orange",
-   "text": "高流量鼻導管(HFNC)"
+   "text": "高流量鼻導管(HFNC)",
+   "pdfPage": 24,
+   "page": 376
   },
   {
    "type": "text",

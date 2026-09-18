@@ -148,7 +148,9 @@
   },
   {
    "type": "orange",
-   "text": "病人醫療管路"
+   "text": "病人醫療管路",
+   "pdfPage": 3,
+   "page": 1381
   },
   {
    "type": "text",
@@ -760,7 +762,9 @@
   },
   {
    "type": "orange",
-   "text": "維生器材"
+   "text": "維生器材",
+   "pdfPage": 11,
+   "page": 1389
   },
   {
    "type": "text",
@@ -1123,7 +1127,9 @@
   },
   {
    "type": "orange",
-   "text": "院內檢查"
+   "text": "院內檢查",
+   "pdfPage": 18,
+   "page": 1396
   },
   {
    "type": "text",

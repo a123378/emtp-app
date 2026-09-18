@@ -136,7 +136,9 @@
   },
   {
    "type": "orange",
-   "text": "病人評估"
+   "text": "病人評估",
+   "pdfPage": 3,
+   "page": 597
   },
   {
    "type": "blue",
@@ -797,7 +799,9 @@
   },
   {
    "type": "orange",
-   "text": "臨床決策"
+   "text": "臨床決策",
+   "pdfPage": 11,
+   "page": 605
   },
   {
    "type": "blue",
@@ -965,7 +969,9 @@
   },
   {
    "type": "orange",
-   "text": "評估後處置的實際應用"
+   "text": "評估後處置的實際應用",
+   "pdfPage": 14,
+   "page": 608
   },
   {
    "type": "text",
@@ -1169,7 +1175,9 @@
   },
   {
    "type": "orange",
-   "text": "以評估為基礎的處置"
+   "text": "以評估為基礎的處置",
+   "pdfPage": 16,
+   "page": 610
   },
   {
    "type": "blue",
@@ -1253,7 +1261,9 @@
   },
   {
    "type": "orange",
-   "text": "影響評估與決策的因素"
+   "text": "影響評估與決策的因素",
+   "pdfPage": 17,
+   "page": 611
   },
   {
    "type": "text",
@@ -1580,7 +1590,9 @@
   },
   {
    "type": "orange",
-   "text": "病況回報"
+   "text": "病況回報",
+   "pdfPage": 23,
+   "page": 617
   },
   {
    "type": "text",

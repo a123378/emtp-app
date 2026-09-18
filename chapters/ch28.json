@@ -135,7 +135,9 @@
   },
   {
    "type": "orange",
-   "text": "胸腔結構與呼吸生理"
+   "text": "胸腔結構與呼吸生理",
+   "pdfPage": 2,
+   "page": 748
   },
   {
    "type": "text",
@@ -553,7 +555,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷超音波在胸部外傷之應用"
+   "text": "外傷超音波在胸部外傷之應用",
+   "pdfPage": 10,
+   "page": 756
   },
   {
    "type": "list",
@@ -605,7 +609,9 @@
   },
   {
    "type": "orange",
-   "text": "六種致命胸部外傷"
+   "text": "六種致命胸部外傷",
+   "pdfPage": 10,
+   "page": 756
   },
   {
    "type": "blue",
@@ -1065,7 +1071,9 @@
   },
   {
    "type": "orange",
-   "text": "胸部外傷個論"
+   "text": "胸部外傷個論",
+   "pdfPage": 17,
+   "page": 763
   },
   {
    "type": "blue",

@@ -150,7 +150,9 @@
   },
   {
    "type": "orange",
-   "text": "抗原–抗體反應"
+   "text": "抗原–抗體反應",
+   "pdfPage": 3,
+   "page": 1053
   },
   {
    "type": "text",
@@ -294,7 +296,9 @@
   },
   {
    "type": "orange",
-   "text": "嚴重過敏反應(Anaphylaxis)"
+   "text": "嚴重過敏反應(Anaphylaxis)",
+   "pdfPage": 5,
+   "page": 1055
   },
   {
    "type": "text",
@@ -353,7 +357,9 @@
   },
   {
    "type": "orange",
-   "text": "病態生理學"
+   "text": "病態生理學",
+   "pdfPage": 6,
+   "page": 1056
   },
   {
    "type": "text",
@@ -435,7 +441,9 @@
   },
   {
    "type": "orange",
-   "text": "嚴重過敏反應的症狀及癥候"
+   "text": "嚴重過敏反應的症狀及癥候",
+   "pdfPage": 8,
+   "page": 1058
   },
   {
    "type": "text",
@@ -592,7 +600,9 @@
   },
   {
    "type": "orange",
-   "text": "初步評估與病史採集"
+   "text": "初步評估與病史採集",
+   "pdfPage": 9,
+   "page": 1059
   },
   {
    "type": "blue",
@@ -683,7 +693,9 @@
   },
   {
    "type": "orange",
-   "text": "預防心肺停止的關鍵處置"
+   "text": "預防心肺停止的關鍵處置",
+   "pdfPage": 11,
+   "page": 1061
   },
   {
    "type": "text",
@@ -853,7 +865,9 @@
   },
   {
    "type": "orange",
-   "text": "心肺停止時的關鍵處置"
+   "text": "心肺停止時的關鍵處置",
+   "pdfPage": 12,
+   "page": 1062
   },
   {
    "type": "text",
@@ -893,7 +907,9 @@
   },
   {
    "type": "orange",
-   "text": "自體免疫系統疾病"
+   "text": "自體免疫系統疾病",
+   "pdfPage": 12,
+   "page": 1062
   },
   {
    "type": "text",

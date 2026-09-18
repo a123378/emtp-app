@@ -136,7 +136,9 @@
   },
   {
    "type": "orange",
-   "text": "空中救護目的"
+   "text": "空中救護目的",
+   "pdfPage": 3,
+   "page": 1563
   },
   {
    "type": "blue",
@@ -211,7 +213,9 @@
   },
   {
    "type": "orange",
-   "text": "我國空中救護發展史"
+   "text": "我國空中救護發展史",
+   "pdfPage": 4,
+   "page": 1564
   },
   {
    "type": "blue",
@@ -347,7 +351,9 @@
   },
   {
    "type": "orange",
-   "text": "台灣現行空中救護運輸工具"
+   "text": "台灣現行空中救護運輸工具",
+   "pdfPage": 5,
+   "page": 1565
   },
   {
    "type": "blue",
@@ -480,7 +486,9 @@
   },
   {
    "type": "orange",
-   "text": "我國現行離島空中轉診執行現況"
+   "text": "我國現行離島空中轉診執行現況",
+   "pdfPage": 9,
+   "page": 1569
   },
   {
    "type": "blue",
@@ -558,7 +566,9 @@
   },
   {
    "type": "orange",
-   "text": "空中救護實務——航空環境與生理的關係"
+   "text": "空中救護實務——航空環境與生理的關係",
+   "pdfPage": 9,
+   "page": 1569
   },
   {
    "type": "blue",
@@ -879,7 +889,9 @@
   },
   {
    "type": "orange",
-   "text": "空中救護障礙排除"
+   "text": "空中救護障礙排除",
+   "pdfPage": 12,
+   "page": 1572
   },
   {
    "type": "blue",
@@ -1167,7 +1179,9 @@
   },
   {
    "type": "orange",
-   "text": "專用救護直昇機救護裝備（附表一摘要）"
+   "text": "專用救護直昇機救護裝備（附表一摘要）",
+   "pdfPage": 31,
+   "page": 1591
   },
   {
    "type": "blue",

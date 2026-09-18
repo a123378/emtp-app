@@ -176,7 +176,9 @@
   },
   {
    "type": "orange",
-   "text": "神經系統構造概論"
+   "text": "神經系統構造概論",
+   "pdfPage": 3,
+   "page": 961
   },
   {
    "type": "blue",
@@ -306,7 +308,9 @@
   },
   {
    "type": "orange",
-   "text": "神經病理學"
+   "text": "神經病理學",
+   "pdfPage": 5,
+   "page": 963
   },
   {
    "type": "text",
@@ -334,7 +338,9 @@
   },
   {
    "type": "orange",
-   "text": "病人評估原則及常用的神經學檢查"
+   "text": "病人評估原則及常用的神經學檢查",
+   "pdfPage": 5,
+   "page": 963
   },
   {
    "type": "text",
@@ -485,7 +491,9 @@
   },
   {
    "type": "orange",
-   "text": "常見神經系統急症的介紹及治療處置"
+   "text": "常見神經系統急症的介紹及治療處置",
+   "pdfPage": 8,
+   "page": 966
   },
   {
    "type": "blue",
@@ -596,7 +604,9 @@
   },
   {
    "type": "orange",
-   "text": "急性腦中風(acute stroke)"
+   "text": "急性腦中風(acute stroke)",
+   "pdfPage": 10,
+   "page": 968
   },
   {
    "type": "blue",
@@ -1200,7 +1210,9 @@
   },
   {
    "type": "orange",
-   "text": "抽搐或癲癇"
+   "text": "抽搐或癲癇",
+   "pdfPage": 16,
+   "page": 974
   },
   {
    "type": "blue",
@@ -1426,7 +1438,9 @@
   },
   {
    "type": "orange",
-   "text": "頭痛"
+   "text": "頭痛",
+   "pdfPage": 18,
+   "page": 976
   },
   {
    "type": "blue",
@@ -1552,7 +1566,9 @@
   },
   {
    "type": "orange",
-   "text": "眩暈"
+   "text": "眩暈",
+   "pdfPage": 19,
+   "page": 977
   },
   {
    "type": "text",
@@ -1612,7 +1628,9 @@
   },
   {
    "type": "orange",
-   "text": "顏面神經麻痺(facial palsy)"
+   "text": "顏面神經麻痺(facial palsy)",
+   "pdfPage": 19,
+   "page": 977
   },
   {
    "type": "blue",
@@ -1691,7 +1709,9 @@
   },
   {
    "type": "orange",
-   "text": "重症肌無力(Myasthenia gravis)"
+   "text": "重症肌無力(Myasthenia gravis)",
+   "pdfPage": 20,
+   "page": 978
   },
   {
    "type": "blue",
@@ -1773,7 +1793,9 @@
   },
   {
    "type": "orange",
-   "text": "運動神經元疾病(Motor Neuron Disease)"
+   "text": "運動神經元疾病(Motor Neuron Disease)",
+   "pdfPage": 21,
+   "page": 979
   },
   {
    "type": "blue",

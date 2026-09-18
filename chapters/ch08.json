@@ -126,7 +126,9 @@
   },
   {
    "type": "orange",
-   "text": "第一反應員"
+   "text": "第一反應員",
+   "pdfPage": 3,
+   "page": 177
   },
   {
    "type": "blue",
@@ -222,7 +224,9 @@
   },
   {
    "type": "orange",
-   "text": "重大外傷"
+   "text": "重大外傷",
+   "pdfPage": 4,
+   "page": 178
   },
   {
    "type": "blue",
@@ -301,7 +305,9 @@
   },
   {
    "type": "orange",
-   "text": "急性腦中風"
+   "text": "急性腦中風",
+   "pdfPage": 4,
+   "page": 178
   },
   {
    "type": "blue",
@@ -387,7 +393,9 @@
   },
   {
    "type": "orange",
-   "text": "急性心肌梗塞"
+   "text": "急性心肌梗塞",
+   "pdfPage": 5,
+   "page": 179
   },
   {
    "type": "blue",
@@ -486,7 +494,9 @@
   },
   {
    "type": "orange",
-   "text": "到院前心肺停止"
+   "text": "到院前心肺停止",
+   "pdfPage": 6,
+   "page": 180
   },
   {
    "type": "text",
@@ -514,7 +524,9 @@
   },
   {
    "type": "orange",
-   "text": "旁觀者 CPR 和儘早電擊的重要性"
+   "text": "旁觀者 CPR 和儘早電擊的重要性",
+   "pdfPage": 7,
+   "page": 181
   },
   {
    "type": "blue",
@@ -614,7 +626,9 @@
   },
   {
    "type": "orange",
-   "text": "推展全民 CPR ＋ AED"
+   "text": "推展全民 CPR ＋ AED",
+   "pdfPage": 7,
+   "page": 181
   },
   {
    "type": "blue",
@@ -915,7 +929,9 @@
   },
   {
    "type": "orange",
-   "text": "召喚志願施救者的 APP"
+   "text": "召喚志願施救者的 APP",
+   "pdfPage": 8,
+   "page": 182
   },
   {
    "type": "blue",
@@ -1003,7 +1019,9 @@
   },
   {
    "type": "orange",
-   "text": "台灣推行第一反應員的重要性"
+   "text": "台灣推行第一反應員的重要性",
+   "pdfPage": 10,
+   "page": 184
   },
   {
    "type": "blue",

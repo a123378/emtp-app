@@ -133,7 +133,9 @@
   },
   {
    "type": "orange",
-   "text": "復甦醫學新進展：發展背景與本章架構"
+   "text": "復甦醫學新進展：發展背景與本章架構",
+   "pdfPage": 3,
+   "page": 661
   },
   {
    "type": "blue",
@@ -207,7 +209,9 @@
   },
   {
    "type": "orange",
-   "text": "初步穩定：血壓管理"
+   "text": "初步穩定：血壓管理",
+   "pdfPage": 3,
+   "page": 661
   },
   {
    "type": "blue",
@@ -269,7 +273,9 @@
   },
   {
    "type": "orange",
-   "text": "初步穩定：復甦後的血氧濃度"
+   "text": "初步穩定：復甦後的血氧濃度",
+   "pdfPage": 3,
+   "page": 661
   },
   {
    "type": "blue",
@@ -328,7 +334,9 @@
   },
   {
    "type": "orange",
-   "text": "初步穩定：復甦後的二氧化碳濃度"
+   "text": "初步穩定：復甦後的二氧化碳濃度",
+   "pdfPage": 3,
+   "page": 661
   },
   {
    "type": "blue",
@@ -391,7 +399,9 @@
   },
   {
    "type": "orange",
-   "text": "目標體溫管理(targeted temperature management，TTM)"
+   "text": "目標體溫管理(targeted temperature management，TTM)",
+   "pdfPage": 4,
+   "page": 662
   },
   {
    "type": "blue",
@@ -647,7 +657,9 @@
   },
   {
    "type": "orange",
-   "text": "葉克膜體外維生系統(Extracorporeal Membrane Oxygenation，ECMO)"
+   "text": "葉克膜體外維生系統(Extracorporeal Membrane Oxygenation，ECMO)",
+   "pdfPage": 6,
+   "page": 664
   },
   {
    "type": "blue",
@@ -898,7 +910,9 @@
   },
   {
    "type": "orange",
-   "text": "復甦中心的觀念與後送規劃"
+   "text": "復甦中心的觀念與後送規劃",
+   "pdfPage": 8,
+   "page": 666
   },
   {
    "type": "text",

@@ -150,7 +150,9 @@
   },
   {
    "type": "orange",
-   "text": "呼吸生理學"
+   "text": "呼吸生理學",
+   "pdfPage": 4,
+   "page": 330
   },
   {
    "type": "blue",
@@ -566,7 +568,9 @@
   },
   {
    "type": "orange",
-   "text": "呼吸病理生理學"
+   "text": "呼吸病理生理學",
+   "pdfPage": 13,
+   "page": 339
   },
   {
    "type": "blue",
@@ -730,7 +734,9 @@
   },
   {
    "type": "orange",
-   "text": "呼吸系統評估"
+   "text": "呼吸系統評估",
+   "pdfPage": 14,
+   "page": 340
   },
   {
    "type": "text",
@@ -882,7 +888,9 @@
   },
   {
    "type": "orange",
-   "text": "通氣與灌流的對應 (Ventilation vs Perfusion)"
+   "text": "通氣與灌流的對應 (Ventilation vs Perfusion)",
+   "pdfPage": 16,
+   "page": 342
   },
   {
    "type": "blue",
@@ -1062,7 +1070,9 @@
   },
   {
    "type": "orange",
-   "text": "潮氣末二氧化碳 (End-tidal CO₂) 與血氧監測"
+   "text": "潮氣末二氧化碳 (End-tidal CO₂) 與血氧監測",
+   "pdfPage": 17,
+   "page": 343
   },
   {
    "type": "text",

@@ -161,7 +161,9 @@
   },
   {
    "type": "orange",
-   "text": "野外的醫學"
+   "text": "野外的醫學",
+   "pdfPage": 3,
+   "page": 1177
   },
   {
    "type": "blue",
@@ -292,7 +294,9 @@
   },
   {
    "type": "orange",
-   "text": "野外醫學的通用原則"
+   "text": "野外醫學的通用原則",
+   "pdfPage": 5,
+   "page": 1179
   },
   {
    "type": "blue",
@@ -467,7 +471,9 @@
   },
   {
    "type": "orange",
-   "text": "野外醫療救護系統"
+   "text": "野外醫療救護系統",
+   "pdfPage": 7,
+   "page": 1181
   },
   {
    "type": "blue",
@@ -603,7 +609,9 @@
   },
   {
    "type": "orange",
-   "text": "野外醫療救護的執行準備"
+   "text": "野外醫療救護的執行準備",
+   "pdfPage": 9,
+   "page": 1183
   },
   {
    "type": "blue",
@@ -750,7 +758,9 @@
   },
   {
    "type": "orange",
-   "text": "野外醫學的病人評估系統"
+   "text": "野外醫學的病人評估系統",
+   "pdfPage": 11,
+   "page": 1185
   },
   {
    "type": "text",
@@ -1444,7 +1454,9 @@
   },
   {
    "type": "orange",
-   "text": "長時間病人現場照護(PFC)的考量"
+   "text": "長時間病人現場照護(PFC)的考量",
+   "pdfPage": 21,
+   "page": 1195
   },
   {
    "type": "text",
@@ -1815,7 +1827,9 @@
   },
   {
    "type": "orange",
-   "text": "野外醫療協定(Wilderness Protocol)"
+   "text": "野外醫療協定(Wilderness Protocol)",
+   "pdfPage": 26,
+   "page": 1200
   },
   {
    "type": "text",
@@ -2345,7 +2359,9 @@
   },
   {
    "type": "orange",
-   "text": "執行野外醫療救護的裝備"
+   "text": "執行野外醫療救護的裝備",
+   "pdfPage": 32,
+   "page": 1206
   },
   {
    "type": "text",

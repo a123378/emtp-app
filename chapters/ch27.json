@@ -165,7 +165,9 @@
   },
   {
    "type": "orange",
-   "text": "頭部外傷"
+   "text": "頭部外傷",
+   "pdfPage": 3,
+   "page": 727
   },
   {
    "type": "text",
@@ -427,7 +429,9 @@
   },
   {
    "type": "orange",
-   "text": "腦部損傷之生理與病理變化"
+   "text": "腦部損傷之生理與病理變化",
+   "pdfPage": 6,
+   "page": 730
   },
   {
    "type": "blue",
@@ -600,7 +604,9 @@
   },
   {
    "type": "orange",
-   "text": "頭部外傷到院前之評估與處置"
+   "text": "頭部外傷到院前之評估與處置",
+   "pdfPage": 8,
+   "page": 732
   },
   {
    "type": "blue",
@@ -911,7 +917,9 @@
   },
   {
    "type": "orange",
-   "text": "頸部外傷"
+   "text": "頸部外傷",
+   "pdfPage": 9,
+   "page": 733
   },
   {
    "type": "text",
@@ -1054,7 +1062,9 @@
   },
   {
    "type": "orange",
-   "text": "脊椎損傷"
+   "text": "脊椎損傷",
+   "pdfPage": 11,
+   "page": 735
   },
   {
    "type": "blue",
@@ -1314,7 +1324,9 @@
   },
   {
    "type": "orange",
-   "text": "頸椎脊髓損傷病人到院前評估"
+   "text": "頸椎脊髓損傷病人到院前評估",
+   "pdfPage": 14,
+   "page": 738
   },
   {
    "type": "blue",
@@ -1546,7 +1558,9 @@
   },
   {
    "type": "orange",
-   "text": "頸椎脊髓損傷病人到院前處置"
+   "text": "頸椎脊髓損傷病人到院前處置",
+   "pdfPage": 16,
+   "page": 740
   },
   {
    "type": "text",
@@ -1641,7 +1655,9 @@
   },
   {
    "type": "orange",
-   "text": "顏面部外傷"
+   "text": "顏面部外傷",
+   "pdfPage": 17,
+   "page": 741
   },
   {
    "type": "text",
@@ -1784,7 +1800,9 @@
   },
   {
    "type": "orange",
-   "text": "顏面附屬器官損傷"
+   "text": "顏面附屬器官損傷",
+   "pdfPage": 19,
+   "page": 743
   },
   {
    "type": "text",

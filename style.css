@@ -2962,3 +2962,53 @@ body {
   cursor: pointer; font-size: 0.82rem; font-weight: 700; color: var(--text-muted);
   user-select: none; padding: 4px 0;
 }
+
+/* ── 全文搜尋結果 ──────────────────────────────────────── */
+#search-view { padding: 18px 22px 40px; }
+.sr-bar {
+  font-size: 0.9rem; font-weight: 700; color: var(--text);
+  padding: 10px 14px; margin-bottom: 14px;
+  background: var(--surface-2, var(--surface)); border: 1px solid var(--border); border-radius: 10px;
+}
+.sr-bar b { color: var(--orange); }
+.sr-hint { display: block; font-weight: 500; font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+.sr-item {
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 11px 14px; margin-bottom: 9px; background: var(--surface);
+  cursor: pointer; transition: border-color var(--transition), transform var(--transition);
+}
+.sr-item:hover { border-color: var(--orange); transform: translateX(2px); }
+.sr-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.sr-ch {
+  font-size: 0.74rem; font-weight: 800; color: #fff; background: var(--orange);
+  padding: 2px 7px; border-radius: 5px; flex-shrink: 0;
+}
+.sr-sec { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+.sr-page {
+  margin-left: auto; font-size: 0.76rem; font-weight: 700;
+  color: var(--blue); background: var(--clinical-bg);
+  border: 1px solid var(--blue-border); padding: 2px 8px; border-radius: 5px; white-space: nowrap;
+}
+.sr-pdfp { font-weight: 500; opacity: 0.75; }
+.sr-snip { font-size: 0.85rem; line-height: 1.7; color: var(--text-muted); }
+.sr-snip mark {
+  background: #fde68a; color: #92400e; font-weight: 700;
+  padding: 0 2px; border-radius: 3px;
+}
+[data-theme="dark"] .sr-snip mark { background: #78350f; color: #fde68a; }
+.sr-loading { display: flex; align-items: center; gap: 10px; padding: 40px 10px; color: var(--text-muted); font-size: 0.9rem; }
+.sr-empty { padding: 40px 10px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; text-align: center; }
+
+/* 大標旁的教科書頁碼 */
+.sec-page {
+  margin-left: 10px; font-size: 0.74rem; font-weight: 700; vertical-align: middle;
+  color: var(--blue); background: var(--clinical-bg);
+  border: 1px solid var(--blue-border); padding: 1px 7px; border-radius: 5px; white-space: nowrap;
+}
+
+/* 從搜尋結果跳過來時的閃爍提示 */
+@keyframes secFlash {
+  0%, 100% { background: transparent; }
+  25%, 60% { background: var(--orange-light); }
+}
+.sec-flash { animation: secFlash 1.8s ease; border-radius: 6px; }

@@ -204,7 +204,9 @@
   },
   {
    "type": "orange",
-   "text": "心肺復甦術與生存之鏈"
+   "text": "心肺復甦術與生存之鏈",
+   "pdfPage": 3,
+   "page": 625
   },
   {
    "type": "blue",
@@ -392,7 +394,9 @@
   },
   {
    "type": "orange",
-   "text": "成人基本救命術"
+   "text": "成人基本救命術",
+   "pdfPage": 5,
+   "page": 627
   },
   {
    "type": "blue",
@@ -1127,7 +1131,9 @@
   },
   {
    "type": "orange",
-   "text": "成人高級心臟救命術"
+   "text": "成人高級心臟救命術",
+   "pdfPage": 17,
+   "page": 639
   },
   {
    "type": "text",
@@ -1441,7 +1447,9 @@
   },
   {
    "type": "orange",
-   "text": "高效能心肺復甦術(High Performance CPR，HPCPR)"
+   "text": "高效能心肺復甦術(High Performance CPR，HPCPR)",
+   "pdfPage": 21,
+   "page": 643
   },
   {
    "type": "text",
@@ -1551,7 +1559,9 @@
   },
   {
    "type": "orange",
-   "text": "現場死亡判定與急救終止(TOR)"
+   "text": "現場死亡判定與急救終止(TOR)",
+   "pdfPage": 23,
+   "page": 645
   },
   {
    "type": "text",
@@ -1660,7 +1670,9 @@
   },
   {
    "type": "orange",
-   "text": "兒童的基本救命術"
+   "text": "兒童的基本救命術",
+   "pdfPage": 24,
+   "page": 646
   },
   {
    "type": "blue",
@@ -2094,7 +2106,9 @@
   },
   {
    "type": "orange",
-   "text": "體外循環復甦(Extracorporeal CPR，E-CPR)"
+   "text": "體外循環復甦(Extracorporeal CPR，E-CPR)",
+   "pdfPage": 28,
+   "page": 650
   },
   {
    "type": "blue",
@@ -2214,7 +2228,9 @@
   },
   {
    "type": "orange",
-   "text": "溺水的急救復甦"
+   "text": "溺水的急救復甦",
+   "pdfPage": 29,
+   "page": 651
   },
   {
    "type": "text",
@@ -2309,7 +2325,9 @@
   },
   {
    "type": "orange",
-   "text": "異物哽塞與復甦姿勢"
+   "text": "異物哽塞與復甦姿勢",
+   "pdfPage": 29,
+   "page": 651
   },
   {
    "type": "blue",
@@ -2432,7 +2450,9 @@
   },
   {
    "type": "orange",
-   "text": "復甦後的急救措施"
+   "text": "復甦後的急救措施",
+   "pdfPage": 31,
+   "page": 653
   },
   {
    "type": "text",

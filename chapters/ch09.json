@@ -158,7 +158,9 @@
   },
   {
    "type": "orange",
-   "text": "何謂「品質」與「管理」？"
+   "text": "何謂「品質」與「管理」？",
+   "pdfPage": 3,
+   "page": 191
   },
   {
    "type": "blue",
@@ -334,7 +336,9 @@
   },
   {
    "type": "orange",
-   "text": "品質的測量與品質指標的訂定"
+   "text": "品質的測量與品質指標的訂定",
+   "pdfPage": 4,
+   "page": 192
   },
   {
    "type": "blue",
@@ -678,7 +682,9 @@
   },
   {
    "type": "orange",
-   "text": "品質指標資料庫的登錄"
+   "text": "品質指標資料庫的登錄",
+   "pdfPage": 8,
+   "page": 196
   },
   {
    "type": "blue",
@@ -849,7 +855,9 @@
   },
   {
    "type": "orange",
-   "text": "品質指標的分析"
+   "text": "品質指標的分析",
+   "pdfPage": 10,
+   "page": 198
   },
   {
    "type": "blue",
@@ -940,7 +948,9 @@
   },
   {
    "type": "orange",
-   "text": "品質改善"
+   "text": "品質改善",
+   "pdfPage": 18,
+   "page": 206
   },
   {
    "type": "blue",
@@ -1011,7 +1021,9 @@
   },
   {
    "type": "orange",
-   "text": "成功品管實例"
+   "text": "成功品管實例",
+   "pdfPage": 18,
+   "page": 206
   },
   {
    "type": "blue",

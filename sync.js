@@ -68,6 +68,7 @@ const app  = () => { try { return state; } catch (e) { return null; } };
 let fbApp = null, fbAuth = null, fbDb = null;
 let user = null;
 let applyingRemote = false;
+let syncReady = false;      // 首次遠端合併完成前，不把本機清空當成「使用者刪除」
 let pushTimer = null;
 let unsubDoc = null;
 let lastPushedJson = '';
@@ -104,7 +105,9 @@ localStorage.setItem = function (key, value) {
   const before = SYNCED.includes(key) ? rawGet(key) : null;
   rawSet(key, value);
   if (applyingRemote || !SYNCED.includes(key)) return;
-  updateTombstones(key, before, value);
+  // 啟動流程（例如 red_initialized 重置）會在使用者還沒操作前清空資料，
+  // 首次遠端合併完成前一律不記墓碑，避免把它當成使用者的刪除意圖同步出去。
+  if (syncReady) updateTombstones(key, before, value);
   schedulePush();
 };
 
@@ -242,6 +245,7 @@ async function startSync(u) {
     const snap = await FB.getDoc(ref);
     if (snap.exists()) await applyRemote(snap.data());
     await pushNow();                                  // 把本機獨有的資料補上去
+    syncReady = true;                                 // 從這一刻起，刪除才算使用者意圖
     unsubDoc = FB.onSnapshot(ref, s => {                 // 之後另一台裝置改動就即時拉下來
       if (s.exists() && !s.metadata.hasPendingWrites) applyRemote(s.data());
     }, err => setStatus('連線中斷：' + err.message, 'bad'));
@@ -254,6 +258,7 @@ async function startSync(u) {
 function stopSync() {
   if (unsubDoc) { unsubDoc(); unsubDoc = null; }
   user = null;
+  syncReady = false;
   lastPushedJson = '';
   setStatus('未登入', '');
   renderSyncModal();

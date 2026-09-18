@@ -131,7 +131,9 @@
   },
   {
    "type": "orange",
-   "text": "灼傷的流行病學"
+   "text": "灼傷的流行病學",
+   "pdfPage": 3,
+   "page": 813
   },
   {
    "type": "text",
@@ -178,7 +180,9 @@
   },
   {
    "type": "orange",
-   "text": "灼傷的種類"
+   "text": "灼傷的種類",
+   "pdfPage": 4,
+   "page": 814
   },
   {
    "type": "text",
@@ -274,7 +278,9 @@
   },
   {
    "type": "orange",
-   "text": "灼傷的病理生理反應"
+   "text": "灼傷的病理生理反應",
+   "pdfPage": 4,
+   "page": 814
   },
   {
    "type": "blue",
@@ -389,7 +395,9 @@
   },
   {
    "type": "orange",
-   "text": "灼傷嚴重度評估"
+   "text": "灼傷嚴重度評估",
+   "pdfPage": 5,
+   "page": 815
   },
   {
    "type": "text",
@@ -696,7 +704,9 @@
   },
   {
    "type": "orange",
-   "text": "灼傷病人到院前評估"
+   "text": "灼傷病人到院前評估",
+   "pdfPage": 9,
+   "page": 819
   },
   {
    "type": "text",
@@ -787,7 +797,9 @@
   },
   {
    "type": "orange",
-   "text": "灼傷病人到院前處置"
+   "text": "灼傷病人到院前處置",
+   "pdfPage": 10,
+   "page": 820
   },
   {
    "type": "list",
@@ -1005,7 +1017,9 @@
   },
   {
    "type": "orange",
-   "text": "吸入性灼傷"
+   "text": "吸入性灼傷",
+   "pdfPage": 12,
+   "page": 822
   },
   {
    "type": "list",
@@ -1190,7 +1204,9 @@
   },
   {
    "type": "orange",
-   "text": "化學性灼傷"
+   "text": "化學性灼傷",
+   "pdfPage": 13,
+   "page": 823
   },
   {
    "type": "text",
@@ -1293,7 +1309,9 @@
   },
   {
    "type": "orange",
-   "text": "電灼傷"
+   "text": "電灼傷",
+   "pdfPage": 14,
+   "page": 824
   },
   {
    "type": "text",

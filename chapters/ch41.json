@@ -137,7 +137,9 @@
   },
   {
    "type": "orange",
-   "text": "前言與概論"
+   "text": "前言與概論",
+   "pdfPage": 4,
+   "page": 1074
   },
   {
    "type": "blue",
@@ -202,7 +204,9 @@
   },
   {
    "type": "orange",
-   "text": "常見腎臟泌尿系統急症"
+   "text": "常見腎臟泌尿系統急症",
+   "pdfPage": 4,
+   "page": 1074
   },
   {
    "type": "blue",
@@ -458,7 +462,9 @@
   },
   {
    "type": "orange",
-   "text": "男性外生殖器常見急症"
+   "text": "男性外生殖器常見急症",
+   "pdfPage": 7,
+   "page": 1077
   },
   {
    "type": "text",
@@ -644,7 +650,9 @@
   },
   {
    "type": "orange",
-   "text": "腎臟衰竭"
+   "text": "腎臟衰竭",
+   "pdfPage": 9,
+   "page": 1079
   },
   {
    "type": "text",
@@ -788,7 +796,9 @@
   },
   {
    "type": "orange",
-   "text": "透析治療"
+   "text": "透析治療",
+   "pdfPage": 11,
+   "page": 1081
   },
   {
    "type": "text",
@@ -921,7 +931,9 @@
   },
   {
    "type": "orange",
-   "text": "腎衰竭及透析病人常見急症"
+   "text": "腎衰竭及透析病人常見急症",
+   "pdfPage": 12,
+   "page": 1082
   },
   {
    "type": "text",
@@ -1059,7 +1071,9 @@
   },
   {
    "type": "orange",
-   "text": "透析病人於透析前、透析中、透析後急性併發症"
+   "text": "透析病人於透析前、透析中、透析後急性併發症",
+   "pdfPage": 13,
+   "page": 1083
   },
   {
    "type": "text",
@@ -1274,7 +1288,9 @@
   },
   {
    "type": "orange",
-   "text": "泌尿與腎臟急症病人到院前救護提示"
+   "text": "泌尿與腎臟急症病人到院前救護提示",
+   "pdfPage": 15,
+   "page": 1085
   },
   {
    "type": "list",

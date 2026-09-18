@@ -296,7 +296,9 @@
   },
   {
    "type": "orange",
-   "text": "什麼是「事故」？"
+   "text": "什麼是「事故」？",
+   "pdfPage": 5,
+   "page": 1411
   },
   {
    "type": "text",
@@ -408,7 +410,9 @@
   },
   {
    "type": "orange",
-   "text": "事故指揮系統"
+   "text": "事故指揮系統",
+   "page": 1412,
+   "pdfPage": 6
   },
   {
    "type": "blue",
@@ -1018,7 +1022,9 @@
   },
   {
    "type": "orange",
-   "text": "大量病人檢傷分類"
+   "text": "大量病人檢傷分類",
+   "pdfPage": 17,
+   "page": 1423
   },
   {
    "type": "blue",
@@ -1799,7 +1805,9 @@
   },
   {
    "type": "orange",
-   "text": "事故應變的現場作業"
+   "text": "事故應變的現場作業",
+   "pdfPage": 29,
+   "page": 1435
   },
   {
    "type": "blue",

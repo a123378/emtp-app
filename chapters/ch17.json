@@ -130,7 +130,9 @@
   },
   {
    "type": "orange",
-   "text": "正確給藥的基本觀念"
+   "text": "正確給藥的基本觀念",
+   "pdfPage": 3,
+   "page": 431
   },
   {
    "type": "text",
@@ -146,7 +148,9 @@
   },
   {
    "type": "orange",
-   "text": "靜脈留置管路"
+   "text": "靜脈留置管路",
+   "pdfPage": 3,
+   "page": 431
   },
   {
    "type": "blue",
@@ -324,7 +328,9 @@
   },
   {
    "type": "orange",
-   "text": "準備靜脈輸液"
+   "text": "準備靜脈輸液",
+   "pdfPage": 5,
+   "page": 433
   },
   {
    "type": "blue",
@@ -412,7 +418,9 @@
   },
   {
    "type": "orange",
-   "text": "更換點滴袋"
+   "text": "更換點滴袋",
+   "pdfPage": 6,
+   "page": 434
   },
   {
    "type": "blue",
@@ -464,7 +472,9 @@
   },
   {
    "type": "orange",
-   "text": "調整流速"
+   "text": "調整流速",
+   "pdfPage": 7,
+   "page": 435
   },
   {
    "type": "blue",
@@ -560,7 +570,9 @@
   },
   {
    "type": "orange",
-   "text": "點滴精密輸液幫浦"
+   "text": "點滴精密輸液幫浦",
+   "pdfPage": 7,
+   "page": 435
   },
   {
    "type": "blue",
@@ -649,7 +661,9 @@
   },
   {
    "type": "orange",
-   "text": "周邊靜脈留置針部位的照護"
+   "text": "周邊靜脈留置針部位的照護",
+   "pdfPage": 8,
+   "page": 436
   },
   {
    "type": "blue",
@@ -713,7 +727,9 @@
   },
   {
    "type": "orange",
-   "text": "移除周邊靜脈留置針"
+   "text": "移除周邊靜脈留置針",
+   "pdfPage": 10,
+   "page": 438
   },
   {
    "type": "blue",
@@ -764,7 +780,9 @@
   },
   {
    "type": "orange",
-   "text": "給藥原則"
+   "text": "給藥原則",
+   "pdfPage": 10,
+   "page": 438
   },
   {
    "type": "blue",
@@ -858,7 +876,9 @@
   },
   {
    "type": "orange",
-   "text": "口服給藥"
+   "text": "口服給藥",
+   "pdfPage": 11,
+   "page": 439
   },
   {
    "type": "blue",
@@ -1224,7 +1244,9 @@
   },
   {
    "type": "orange",
-   "text": "骨內注射(Intraosseous injection, IO)"
+   "text": "骨內注射(Intraosseous injection, IO)",
+   "pdfPage": 16,
+   "page": 444
   },
   {
    "type": "box",
@@ -1505,7 +1527,9 @@
   },
   {
    "type": "orange",
-   "text": "局部給藥(Topical medication)"
+   "text": "局部給藥(Topical medication)",
+   "pdfPage": 24,
+   "page": 452
   },
   {
    "type": "list",

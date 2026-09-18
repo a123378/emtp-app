@@ -124,7 +124,9 @@
   },
   {
    "type": "orange",
-   "text": "臨床教學能力概論"
+   "text": "臨床教學能力概論",
+   "pdfPage": 3,
+   "page": 1611
   },
   {
    "type": "text",
@@ -278,7 +280,9 @@
   },
   {
    "type": "orange",
-   "text": "課程設計"
+   "text": "課程設計",
+   "pdfPage": 4,
+   "page": 1612
   },
   {
    "type": "blue",
@@ -434,7 +438,9 @@
   },
   {
    "type": "orange",
-   "text": "臨床醫療救護訓練課程設計架構"
+   "text": "臨床醫療救護訓練課程設計架構",
+   "pdfPage": 6,
+   "page": 1614
   },
   {
    "type": "text",
@@ -656,7 +662,9 @@
   },
   {
    "type": "orange",
-   "text": "教學策略"
+   "text": "教學策略",
+   "pdfPage": 8,
+   "page": 1616
   },
   {
    "type": "text",
@@ -894,7 +902,9 @@
   },
   {
    "type": "orange",
-   "text": "反饋技巧"
+   "text": "反饋技巧",
+   "pdfPage": 10,
+   "page": 1618
   },
   {
    "type": "blue",

@@ -135,7 +135,9 @@
   },
   {
    "type": "orange",
-   "text": "到院前超音波概論"
+   "text": "到院前超音波概論",
+   "pdfPage": 3,
+   "page": 577
   },
   {
    "type": "blue",
@@ -286,7 +288,9 @@
   },
   {
    "type": "orange",
-   "text": "醫用超音波基本原理"
+   "text": "醫用超音波基本原理",
+   "pdfPage": 3,
+   "page": 577
   },
   {
    "type": "text",
@@ -409,7 +413,9 @@
   },
   {
    "type": "orange",
-   "text": "執行超音波檢查前須具備的基礎知識"
+   "text": "執行超音波檢查前須具備的基礎知識",
+   "pdfPage": 5,
+   "page": 579
   },
   {
    "type": "blue",
@@ -564,7 +570,9 @@
   },
   {
    "type": "orange",
-   "text": "臺灣超音波運用場域"
+   "text": "臺灣超音波運用場域",
+   "pdfPage": 6,
+   "page": 580
   },
   {
    "type": "text",
@@ -1214,7 +1222,9 @@
   },
   {
    "type": "orange",
-   "text": "非外傷之院前超音波運用"
+   "text": "非外傷之院前超音波運用",
+   "pdfPage": 14,
+   "page": 588
   },
   {
    "type": "text",
@@ -1309,7 +1319,9 @@
   },
   {
    "type": "orange",
-   "text": "到院前超音波相關議題"
+   "text": "到院前超音波相關議題",
+   "pdfPage": 15,
+   "page": 589
   },
   {
    "type": "blue",

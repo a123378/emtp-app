@@ -130,7 +130,9 @@
   },
   {
    "type": "orange",
-   "text": "戰術緊急病人救護(TECC)"
+   "text": "戰術緊急病人救護(TECC)",
+   "pdfPage": 3,
+   "page": 1531
   },
   {
    "type": "blue",
@@ -380,7 +382,9 @@
   },
   {
    "type": "orange",
-   "text": "城市搜救隊侷限空間醫療"
+   "text": "城市搜救隊侷限空間醫療",
+   "pdfPage": 6,
+   "page": 1534
   },
   {
    "type": "text",
@@ -477,7 +481,9 @@
   },
   {
    "type": "orange",
-   "text": "城市搜救隊(Urban Search And Rescue Team，USAR Team)"
+   "text": "城市搜救隊(Urban Search And Rescue Team，USAR Team)",
+   "pdfPage": 7,
+   "page": 1535
   },
   {
    "type": "blue",
@@ -550,7 +556,9 @@
   },
   {
    "type": "orange",
-   "text": "侷限空間醫療"
+   "text": "侷限空間醫療",
+   "pdfPage": 8,
+   "page": 1536
   },
   {
    "type": "text",
@@ -668,7 +676,9 @@
   },
   {
    "type": "orange",
-   "text": "侷限空間病人處置"
+   "text": "侷限空間病人處置",
+   "pdfPage": 9,
+   "page": 1537
   },
   {
    "type": "blue",

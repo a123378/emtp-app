@@ -126,7 +126,9 @@
   },
   {
    "type": "orange",
-   "text": "問題導向診斷與臨床推理"
+   "text": "問題導向診斷與臨床推理",
+   "pdfPage": 4,
+   "page": 486
   },
   {
    "type": "blue",
@@ -233,7 +235,9 @@
   },
   {
    "type": "orange",
-   "text": "一般病人的病史詢問"
+   "text": "一般病人的病史詢問",
+   "pdfPage": 4,
+   "page": 486
   },
   {
    "type": "blue",
@@ -489,7 +493,9 @@
   },
   {
    "type": "orange",
-   "text": "病史詢問的內容：主訴"
+   "text": "病史詢問的內容：主訴",
+   "pdfPage": 8,
+   "page": 490
   },
   {
    "type": "text",
@@ -569,7 +575,9 @@
   },
   {
    "type": "orange",
-   "text": "現病史：釐清主要症狀特徵（OPQRST）"
+   "text": "現病史：釐清主要症狀特徵（OPQRST）",
+   "pdfPage": 8,
+   "page": 490
   },
   {
    "type": "text",
@@ -1182,7 +1190,9 @@
   },
   {
    "type": "orange",
-   "text": "過去病史與現有健康狀態（SAMPLE）"
+   "text": "過去病史與現有健康狀態（SAMPLE）",
+   "pdfPage": 14,
+   "page": 496
   },
   {
    "type": "text",
@@ -1444,7 +1454,9 @@
   },
   {
    "type": "orange",
-   "text": "病史詢問的技巧"
+   "text": "病史詢問的技巧",
+   "pdfPage": 19,
+   "page": 501
   },
   {
    "type": "text",
@@ -1576,7 +1588,9 @@
   },
   {
    "type": "orange",
-   "text": "特殊病人或狀況之病史詢問"
+   "text": "特殊病人或狀況之病史詢問",
+   "pdfPage": 20,
+   "page": 502
   },
   {
    "type": "text",

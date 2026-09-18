@@ -136,7 +136,9 @@
   },
   {
    "type": "orange",
-   "text": "緊急醫療救護派遣介紹"
+   "text": "緊急醫療救護派遣介紹",
+   "pdfPage": 4,
+   "page": 152
   },
   {
    "type": "text",
@@ -359,7 +361,9 @@
   },
   {
    "type": "orange",
-   "text": "醫療優先派遣"
+   "text": "醫療優先派遣",
+   "pdfPage": 7,
+   "page": 155
   },
   {
    "type": "blue",
@@ -842,7 +846,9 @@
   },
   {
    "type": "orange",
-   "text": "派遣在 OHCA 生存之鏈中的關鍵角色"
+   "text": "派遣在 OHCA 生存之鏈中的關鍵角色",
+   "pdfPage": 12,
+   "page": 160
   },
   {
    "type": "blue",
@@ -1007,7 +1013,9 @@
   },
   {
    "type": "orange",
-   "text": "派遣員協助心肺復甦術(DA-CPR)"
+   "text": "派遣員協助心肺復甦術(DA-CPR)",
+   "pdfPage": 14,
+   "page": 162
   },
   {
    "type": "blue",
@@ -1212,7 +1220,9 @@
   },
   {
    "type": "orange",
-   "text": "派遣員協助心肺復甦術延伸計畫"
+   "text": "派遣員協助心肺復甦術延伸計畫",
+   "pdfPage": 17,
+   "page": 165
   },
   {
    "type": "blue",
@@ -1378,7 +1388,9 @@
   },
   {
    "type": "orange",
-   "text": "派遣與後送模式"
+   "text": "派遣與後送模式",
+   "pdfPage": 18,
+   "page": 166
   },
   {
    "type": "text",

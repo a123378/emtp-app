@@ -138,7 +138,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷與重大外傷概論"
+   "text": "外傷與重大外傷概論",
+   "pdfPage": 5,
+   "page": 675
   },
   {
    "type": "blue",
@@ -227,7 +229,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷流行病學"
+   "text": "外傷流行病學",
+   "page": 676,
+   "pdfPage": 6
   },
   {
    "type": "blue",
@@ -311,7 +315,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷照護體系"
+   "text": "外傷照護體系",
+   "page": 676,
+   "pdfPage": 6
   },
   {
    "type": "blue",
@@ -814,7 +820,9 @@
   },
   {
    "type": "orange",
-   "text": "損傷預防"
+   "text": "損傷預防",
+   "pdfPage": 12,
+   "page": 682
   },
   {
    "type": "blue",
@@ -917,7 +925,9 @@
   },
   {
    "type": "orange",
-   "text": "現場管理"
+   "text": "現場管理",
+   "page": 683,
+   "pdfPage": 13
   },
   {
    "type": "blue",
@@ -999,7 +1009,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷物理學－機轉與形式"
+   "text": "外傷物理學－機轉與形式",
+   "pdfPage": 14,
+   "page": 684
   },
   {
    "type": "blue",
@@ -1194,7 +1206,9 @@
   },
   {
    "type": "orange",
-   "text": "重大外傷到院前處置黃金原則"
+   "text": "重大外傷到院前處置黃金原則",
+   "pdfPage": 16,
+   "page": 686
   },
   {
    "type": "text",
@@ -1245,7 +1259,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷病人到院前評估與處置"
+   "text": "外傷病人到院前評估與處置",
+   "pdfPage": 17,
+   "page": 687
   },
   {
    "type": "blue",
@@ -1445,7 +1461,9 @@
   },
   {
    "type": "orange",
-   "text": "病情危急度判斷及後送"
+   "text": "病情危急度判斷及後送",
+   "pdfPage": 20,
+   "page": 690
   },
   {
    "type": "blue",
@@ -1507,7 +1525,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷嚴重度評估"
+   "text": "外傷嚴重度評估",
+   "pdfPage": 20,
+   "page": 690
   },
   {
    "type": "text",
@@ -1693,7 +1713,9 @@
   },
   {
    "type": "orange",
-   "text": "送醫姿勢選擇"
+   "text": "送醫姿勢選擇",
+   "pdfPage": 22,
+   "page": 692
   },
   {
    "type": "text",
@@ -1740,7 +1762,9 @@
   },
   {
    "type": "orange",
-   "text": "外傷相關研究實證"
+   "text": "外傷相關研究實證",
+   "pdfPage": 22,
+   "page": 692
   },
   {
    "type": "blue",

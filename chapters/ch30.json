@@ -147,7 +147,9 @@
   },
   {
    "type": "orange",
-   "text": "軟組織的解剖與生理功能"
+   "text": "軟組織的解剖與生理功能",
+   "pdfPage": 3,
+   "page": 789
   },
   {
    "type": "text",
@@ -234,7 +236,9 @@
   },
   {
    "type": "orange",
-   "text": "常見軟組織傷害之型式"
+   "text": "常見軟組織傷害之型式",
+   "pdfPage": 5,
+   "page": 791
   },
   {
    "type": "text",
@@ -380,7 +384,9 @@
   },
   {
    "type": "orange",
-   "text": "常見肌肉骨骼外傷之型式"
+   "text": "常見肌肉骨骼外傷之型式",
+   "pdfPage": 8,
+   "page": 794
   },
   {
    "type": "text",
@@ -567,7 +573,9 @@
   },
   {
    "type": "orange",
-   "text": "軟組織及肌肉骨骼外傷到院前評估與處置"
+   "text": "軟組織及肌肉骨骼外傷到院前評估與處置",
+   "pdfPage": 9,
+   "page": 795
   },
   {
    "type": "text",
@@ -889,7 +897,9 @@
   },
   {
    "type": "orange",
-   "text": "肌肉骨骼外傷個論"
+   "text": "肌肉骨骼外傷個論",
+   "pdfPage": 14,
+   "page": 800
   },
   {
    "type": "text",
@@ -1040,7 +1050,9 @@
   },
   {
    "type": "orange",
-   "text": "壓砸傷與壓砸傷症候群"
+   "text": "壓砸傷與壓砸傷症候群",
+   "pdfPage": 15,
+   "page": 801
   },
   {
    "type": "text",
@@ -1143,7 +1155,9 @@
   },
   {
    "type": "orange",
-   "text": "腔室症候群"
+   "text": "腔室症候群",
+   "pdfPage": 16,
+   "page": 802
   },
   {
    "type": "text",
@@ -1217,7 +1231,9 @@
   },
   {
    "type": "orange",
-   "text": "電傷害"
+   "text": "電傷害",
+   "pdfPage": 18,
+   "page": 804
   },
   {
    "type": "text",

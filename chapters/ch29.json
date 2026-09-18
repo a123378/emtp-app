@@ -153,7 +153,9 @@
   },
   {
    "type": "orange",
-   "text": "腹部外傷概論"
+   "text": "腹部外傷概論",
+   "pdfPage": 3,
+   "page": 775
   },
   {
    "type": "text",
@@ -205,7 +207,9 @@
   },
   {
    "type": "orange",
-   "text": "腹骨盆的解剖構造"
+   "text": "腹骨盆的解剖構造",
+   "pdfPage": 3,
+   "page": 775
   },
   {
    "type": "text",
@@ -355,7 +359,9 @@
   },
   {
    "type": "orange",
-   "text": "腹部外傷機轉"
+   "text": "腹部外傷機轉",
+   "pdfPage": 5,
+   "page": 777
   },
   {
    "type": "text",
@@ -513,7 +519,9 @@
   },
   {
    "type": "orange",
-   "text": "特定腹部外傷與徵候"
+   "text": "特定腹部外傷與徵候",
+   "pdfPage": 6,
+   "page": 778
   },
   {
    "type": "text",
@@ -803,7 +811,9 @@
   },
   {
    "type": "orange",
-   "text": "到院前評估與處置"
+   "text": "到院前評估與處置",
+   "pdfPage": 9,
+   "page": 781
   },
   {
    "type": "blue",
@@ -949,7 +959,9 @@
   },
   {
    "type": "orange",
-   "text": "腹部外傷超音波 E-FAST 檢查"
+   "text": "腹部外傷超音波 E-FAST 檢查",
+   "pdfPage": 11,
+   "page": 783
   },
   {
    "type": "text",
@@ -998,7 +1010,9 @@
   },
   {
    "type": "orange",
-   "text": "腹骨盆及後腹腔出血特殊止血方法"
+   "text": "腹骨盆及後腹腔出血特殊止血方法",
+   "pdfPage": 11,
+   "page": 783
   },
   {
    "type": "text",

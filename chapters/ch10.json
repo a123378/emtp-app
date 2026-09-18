@@ -114,7 +114,9 @@
   },
   {
    "type": "orange",
-   "text": "科技應用與緊急醫療救護"
+   "text": "科技應用與緊急醫療救護",
+   "pdfPage": 3,
+   "page": 215
   },
   {
    "type": "blue",
@@ -538,7 +540,9 @@
   },
   {
    "type": "orange",
-   "text": "發展中之新科技應用"
+   "text": "發展中之新科技應用",
+   "pdfPage": 9,
+   "page": 221
   },
   {
    "type": "blue",
@@ -782,7 +786,9 @@
   },
   {
    "type": "orange",
-   "text": "科技應用之倫理與法律考量"
+   "text": "科技應用之倫理與法律考量",
+   "pdfPage": 11,
+   "page": 223
   },
   {
    "type": "blue",

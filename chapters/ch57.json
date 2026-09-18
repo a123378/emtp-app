@@ -122,7 +122,9 @@
   },
   {
    "type": "orange",
-   "text": "颱風災害"
+   "text": "颱風災害",
+   "pdfPage": 3,
+   "page": 1547
   },
   {
    "type": "blue",
@@ -644,7 +646,9 @@
   },
   {
    "type": "orange",
-   "text": "地震災害"
+   "text": "地震災害",
+   "pdfPage": 7,
+   "page": 1551
   },
   {
    "type": "blue",
@@ -1077,7 +1081,9 @@
   },
   {
    "type": "orange",
-   "text": "海嘯災害"
+   "text": "海嘯災害",
+   "pdfPage": 10,
+   "page": 1554
   },
   {
    "type": "blue",

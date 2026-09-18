@@ -125,7 +125,9 @@
   },
   {
    "type": "orange",
-   "text": "特殊外傷族群相關流行病學"
+   "text": "特殊外傷族群相關流行病學",
+   "pdfPage": 3,
+   "page": 831
   },
   {
    "type": "text",
@@ -286,7 +288,9 @@
   },
   {
    "type": "orange",
-   "text": "小兒外傷"
+   "text": "小兒外傷",
+   "pdfPage": 12,
+   "page": 840
   },
   {
    "type": "text",
@@ -1186,7 +1190,9 @@
   },
   {
    "type": "orange",
-   "text": "懷孕婦女外傷"
+   "text": "懷孕婦女外傷",
+   "pdfPage": 16,
+   "page": 844
   },
   {
    "type": "blue",

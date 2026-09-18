@@ -132,7 +132,9 @@
   },
   {
    "type": "orange",
-   "text": "新興感染症"
+   "text": "新興感染症",
+   "pdfPage": 3,
+   "page": 1113
   },
   {
    "type": "blue",
@@ -880,7 +882,9 @@
   },
   {
    "type": "orange",
-   "text": "面對新興感染症的自我防護和環境維護"
+   "text": "面對新興感染症的自我防護和環境維護",
+   "pdfPage": 12,
+   "page": 1122
   },
   {
    "type": "text",
@@ -994,7 +998,9 @@
   },
   {
    "type": "orange",
-   "text": "認識生物恐怖主義與其威脅"
+   "text": "認識生物恐怖主義與其威脅",
+   "pdfPage": 14,
+   "page": 1124
   },
   {
    "type": "blue",
@@ -1175,7 +1181,9 @@
   },
   {
    "type": "orange",
-   "text": "有哪些可能被使用的生物戰劑？"
+   "text": "有哪些可能被使用的生物戰劑？",
+   "pdfPage": 15,
+   "page": 1125
   },
   {
    "type": "text",
@@ -1337,7 +1345,9 @@
   },
   {
    "type": "orange",
-   "text": "各種生物戰劑的特性"
+   "text": "各種生物戰劑的特性",
+   "pdfPage": 15,
+   "page": 1125
   },
   {
    "type": "text",
@@ -1731,7 +1741,9 @@
   },
   {
    "type": "orange",
-   "text": "生物防護(biodefense)"
+   "text": "生物防護(biodefense)",
+   "pdfPage": 20,
+   "page": 1130
   },
   {
    "type": "text",
@@ -1804,7 +1816,9 @@
   },
   {
    "type": "orange",
-   "text": "新興感染症與生物恐怖事件的感控措施"
+   "text": "新興感染症與生物恐怖事件的感控措施",
+   "pdfPage": 22,
+   "page": 1132
   },
   {
    "type": "text",
@@ -2014,7 +2028,9 @@
   },
   {
    "type": "orange",
-   "text": "個人防護裝備(Personal Protective Equipment，PPE)"
+   "text": "個人防護裝備(Personal Protective Equipment，PPE)",
+   "pdfPage": 24,
+   "page": 1134
   },
   {
    "type": "text",

@@ -74,6 +74,7 @@ const els = {
   chNav:          $('#chapter-nav'),
   searchInput:    $('#search-input'),
   searchCount:    $('#search-count'),
+  searchView:     $('#search-view'),
   welcomeScreen:  $('#welcome-screen'),
   chapterView:    $('#chapter-view'),
   notesLoading:   $('#notes-loading'),
@@ -350,7 +351,9 @@ function renderContentBlocks(blocks, chId) {
     }
     switch (block.type) {
       case 'orange':
-        html += `<div class="orange-heading">${mdInline(block.text)}</div>`;
+        html += `<div class="orange-heading" id="sec-${bi}">${mdInline(block.text)}` +
+                (block.page ? `<span class="sec-page" title="大白第三版 PDF 第 ${block.pdfPage} 頁">📖 p.${block.page}</span>` : '') +
+                `</div>`;
         break;
       case 'blue':
         html += `<div class="blue-heading">${mdInline(block.text)}</div>`;
@@ -609,9 +612,117 @@ function handleSearch(query) {
     item.classList.toggle('hidden', !match);
     if (match) visible++;
   });
-  els.searchCount.textContent = state.searchQuery
-    ? `找到 ${visible} 個章節`
-    : '';
+
+  clearTimeout(_searchTimer);
+  const q = state.searchQuery;
+  if (q.length < 2) {
+    hideSearchView();
+    els.searchCount.textContent = q ? `找到 ${visible} 個章節` : '';
+    return;
+  }
+  els.searchCount.textContent = '搜尋內文中…';
+  _searchTimer = setTimeout(() => runFullTextSearch(q), 250);
+}
+
+// ── 全文搜尋：搜 60 章重點整理內文，並標出教科書頁碼 ──────────
+let _searchTimer = null, _searchIndex = null, _searchIndexPromise = null;
+
+async function ensureSearchIndex() {
+  if (_searchIndex) return _searchIndex;
+  if (!_searchIndexPromise) {
+    _searchIndexPromise = fetch(dataUrl('chapters/search_index.json'))
+      .then(r => { if (!r.ok) throw new Error('index http ' + r.status); return r.json(); })
+      .then(j => (_searchIndex = j))
+      .catch(err => { _searchIndexPromise = null; throw err; });
+  }
+  return _searchIndexPromise;
+}
+
+function showSearchView() {
+  if (els.welcomeScreen) els.welcomeScreen.classList.add('hidden');
+  if (els.chapterView) els.chapterView.classList.add('hidden');
+  if (els.searchView) els.searchView.classList.remove('hidden');
+}
+function hideSearchView() {
+  if (els.searchView) els.searchView.classList.add('hidden');
+  if (state.currentChId) {
+    if (els.chapterView) els.chapterView.classList.remove('hidden');
+  } else if (els.welcomeScreen) {
+    els.welcomeScreen.classList.remove('hidden');
+  }
+}
+
+async function runFullTextSearch(q) {
+  if (!els.searchView) return;
+  showSearchView();
+  els.searchView.innerHTML = `<div class="sr-loading"><div class="spinner"></div><span>載入全文索引…</span></div>`;
+  let idx;
+  try {
+    idx = await ensureSearchIndex();
+  } catch (e) {
+    els.searchView.innerHTML = `<div class="sr-empty">搜尋索引載入失敗，請確認網路後再試。</div>`;
+    els.searchCount.textContent = '';
+    return;
+  }
+  if (state.searchQuery !== q) return;
+
+  const hits = [];
+  for (let i = 0; i < idx.blocks.length; i++) {
+    const b = idx.blocks[i];
+    const pos = b[2].toLowerCase().indexOf(q);
+    if (pos < 0) continue;
+    const sec = idx.secs[b[0]];
+    const inTitle = sec && sec[2] && sec[2].toLowerCase().includes(q);
+    hits.push({ sr: b[0], bi: b[1], txt: b[2], pos, score: (inTitle ? 1000 : 0) + Math.max(0, 300 - pos) });
+    if (hits.length >= 600) break;
+  }
+  hits.sort((a, b) => b.score - a.score);
+  renderSearchResults(idx, hits, q);
+}
+
+function renderSearchResults(idx, hits, q) {
+  els.searchCount.textContent = hits.length ? `內文命中 ${hits.length} 處` : '內文找不到';
+  if (!hits.length) {
+    els.searchView.innerHTML = `<div class="sr-empty">「${escapeHtml(q)}」在 60 章內文中沒有找到。<br>試試更短的關鍵字，或改用中文專有名詞。</div>`;
+    return;
+  }
+  const items = hits.slice(0, 60).map(h => {
+    const sec = idx.secs[h.sr];
+    const ch = sec ? idx.chs[sec[0]] : null;
+    const st = Math.max(0, h.pos - 34);
+    const en = Math.min(h.txt.length, h.pos + q.length + 70);
+    const snip = (st > 0 ? '…' : '') + escapeHtml(h.txt.slice(st, h.pos))
+      + '<mark>' + escapeHtml(h.txt.substr(h.pos, q.length)) + '</mark>'
+      + escapeHtml(h.txt.slice(h.pos + q.length, en)) + (en < h.txt.length ? '…' : '');
+    const page = sec && sec[3] ? sec[3] : 0;
+    const pdfp = sec && sec[4] ? sec[4] : 0;
+    return `
+      <div class="sr-item" onclick="openSearchHit('${ch ? ch[0] : ''}', ${sec ? sec[1] : -1})">
+        <div class="sr-head">
+          <span class="sr-ch">${escapeHtml(ch ? ch[1] : '')}</span>
+          <span class="sr-sec">${escapeHtml(sec ? sec[2] : '')}</span>
+          ${page ? `<span class="sr-page">📖 教科書 p.${page}<span class="sr-pdfp"> ‧ PDF 第 ${pdfp} 頁</span></span>` : ''}
+        </div>
+        <div class="sr-snip">${snip}</div>
+      </div>`;
+  }).join('');
+  els.searchView.innerHTML = `
+    <div class="sr-bar">🔍 「${escapeHtml(q)}」在重點整理內文中找到 <b>${hits.length}</b> 處${hits.length > 60 ? '（顯示前 60 筆）' : ''}
+      <span class="sr-hint">點一下可跳到該段落 ‧ 📖 頁碼對應大白第三版</span></div>
+    ${items}`;
+}
+
+async function openSearchHit(chId, secIdx) {
+  if (!chId) return;
+  hideSearchView();
+  await selectChapter(chId);
+  setTimeout(() => {
+    const el = document.getElementById('sec-' + secIdx);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.add('sec-flash');
+    setTimeout(() => el.classList.remove('sec-flash'), 1800);
+  }, 400);
 }
 
 // ── Theme ─────────────────────────────────────────────
@@ -2608,6 +2719,7 @@ function escapeHtml(str) {
 }
 
 // ── Expose globals for inline handlers ────────────────
+window.openSearchHit = openSearchHit;
 window.answerInlineQuiz = answerInlineQuiz;
 window.resetInlineQuiz = resetInlineQuiz;
 window.loadTextbook = loadTextbook;

@@ -141,7 +141,9 @@
   },
   {
    "type": "orange",
-   "text": "危機處置"
+   "text": "危機處置",
+   "pdfPage": 3,
+   "page": 1213
   },
   {
    "type": "text",
@@ -236,7 +238,9 @@
   },
   {
    "type": "orange",
-   "text": "精神危機的態樣"
+   "text": "精神危機的態樣",
+   "pdfPage": 4,
+   "page": 1214
   },
   {
    "type": "text",
@@ -290,7 +294,9 @@
   },
   {
    "type": "orange",
-   "text": "情緒曲線與暴力風險"
+   "text": "情緒曲線與暴力風險",
+   "pdfPage": 5,
+   "page": 1215
   },
   {
    "type": "text",
@@ -417,7 +423,9 @@
   },
   {
    "type": "orange",
-   "text": "言語降階技巧"
+   "text": "言語降階技巧",
+   "pdfPage": 6,
+   "page": 1216
   },
   {
    "type": "text",
@@ -523,7 +531,9 @@
   },
   {
    "type": "orange",
-   "text": "強制拘束"
+   "text": "強制拘束",
+   "pdfPage": 7,
+   "page": 1217
   },
   {
    "type": "text",
@@ -635,7 +645,9 @@
   },
   {
    "type": "orange",
-   "text": "化學約束"
+   "text": "化學約束",
+   "pdfPage": 9,
+   "page": 1219
   },
   {
    "type": "text",
@@ -716,7 +728,9 @@
   },
   {
    "type": "orange",
-   "text": "精神危機處理團隊"
+   "text": "精神危機處理團隊",
+   "pdfPage": 10,
+   "page": 1220
   },
   {
    "type": "blue",
@@ -1002,7 +1016,9 @@
   },
   {
    "type": "orange",
-   "text": "精神危機的次級評估"
+   "text": "精神危機的次級評估",
+   "pdfPage": 13,
+   "page": 1223
   },
   {
    "type": "text",
@@ -1170,7 +1186,9 @@
   },
   {
    "type": "orange",
-   "text": "護送就醫的法定義務與資源轉介"
+   "text": "護送就醫的法定義務與資源轉介",
+   "pdfPage": 25,
+   "page": 1235
   },
   {
    "type": "blue",

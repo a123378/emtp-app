@@ -163,7 +163,9 @@
   },
   {
    "type": "orange",
-   "text": "病理機轉"
+   "text": "病理機轉",
+   "pdfPage": 3,
+   "page": 933
   },
   {
    "type": "text",
@@ -351,7 +353,9 @@
   },
   {
    "type": "orange",
-   "text": "環境安全評估及救護人員安全"
+   "text": "環境安全評估及救護人員安全",
+   "pdfPage": 5,
+   "page": 935
   },
   {
    "type": "text",
@@ -382,7 +386,9 @@
   },
   {
    "type": "orange",
-   "text": "病人照護"
+   "text": "病人照護",
+   "pdfPage": 5,
+   "page": 935
   },
   {
    "type": "blue",
@@ -629,7 +635,9 @@
   },
   {
    "type": "orange",
-   "text": "會厭炎"
+   "text": "會厭炎",
+   "pdfPage": 8,
+   "page": 938
   },
   {
    "type": "text",
@@ -703,7 +711,9 @@
   },
   {
    "type": "orange",
-   "text": "上呼吸道血管性水腫"
+   "text": "上呼吸道血管性水腫",
+   "pdfPage": 8,
+   "page": 938
   },
   {
    "type": "text",
@@ -804,7 +814,9 @@
   },
   {
    "type": "orange",
-   "text": "阻塞性呼吸道疾病"
+   "text": "阻塞性呼吸道疾病",
+   "pdfPage": 10,
+   "page": 940
   },
   {
    "type": "text",
@@ -1459,7 +1471,9 @@
   },
   {
    "type": "orange",
-   "text": "肺炎"
+   "text": "肺炎",
+   "pdfPage": 16,
+   "page": 946
   },
   {
    "type": "text",
@@ -1682,7 +1696,9 @@
   },
   {
    "type": "orange",
-   "text": "成人呼吸窘迫症候群(ARDS)"
+   "text": "成人呼吸窘迫症候群(ARDS)",
+   "pdfPage": 20,
+   "page": 950
   },
   {
    "type": "text",
@@ -1747,7 +1763,9 @@
   },
   {
    "type": "orange",
-   "text": "肺水腫"
+   "text": "肺水腫",
+   "pdfPage": 21,
+   "page": 951
   },
   {
    "type": "text",
@@ -1855,7 +1873,9 @@
   },
   {
    "type": "orange",
-   "text": "自發性氣胸"
+   "text": "自發性氣胸",
+   "pdfPage": 22,
+   "page": 952
   },
   {
    "type": "text",
@@ -1929,7 +1949,9 @@
   },
   {
    "type": "orange",
-   "text": "肺癌"
+   "text": "肺癌",
+   "pdfPage": 23,
+   "page": 953
   },
   {
    "type": "text",
@@ -2013,7 +2035,9 @@
   },
   {
    "type": "orange",
-   "text": "肺栓塞"
+   "text": "肺栓塞",
+   "pdfPage": 23,
+   "page": 953
   },
   {
    "type": "text",
@@ -2144,7 +2168,9 @@
   },
   {
    "type": "orange",
-   "text": "上呼吸道感染"
+   "text": "上呼吸道感染",
+   "pdfPage": 25,
+   "page": 955
   },
   {
    "type": "text",
@@ -2184,7 +2210,9 @@
   },
   {
    "type": "orange",
-   "text": "過度換氣症候群"
+   "text": "過度換氣症候群",
+   "pdfPage": 25,
+   "page": 955
   },
   {
    "type": "text",

@@ -155,7 +155,9 @@
   },
   {
    "type": "orange",
-   "text": "心電圖基本原理"
+   "text": "心電圖基本原理",
+   "pdfPage": 7,
+   "page": 857
   },
   {
    "type": "text",
@@ -179,7 +181,9 @@
   },
   {
    "type": "orange",
-   "text": "十二導程心電圖之組成與操作"
+   "text": "十二導程心電圖之組成與操作",
+   "pdfPage": 7,
+   "page": 857
   },
   {
    "type": "text",
@@ -290,7 +294,9 @@
   },
   {
    "type": "orange",
-   "text": "心電圖各個組成分的認識"
+   "text": "心電圖各個組成分的認識",
+   "pdfPage": 7,
+   "page": 857
   },
   {
    "type": "text",
@@ -383,7 +389,9 @@
   },
   {
    "type": "orange",
-   "text": "系統性的心電圖判讀"
+   "text": "系統性的心電圖判讀",
+   "pdfPage": 10,
+   "page": 860
   },
   {
    "type": "text",
@@ -527,7 +535,9 @@
   },
   {
    "type": "orange",
-   "text": "常見組成成分異常與心軸偏轉的相關問題與疾病"
+   "text": "常見組成成分異常與心軸偏轉的相關問題與疾病",
+   "pdfPage": 11,
+   "page": 861
   },
   {
    "type": "blue",
@@ -875,7 +885,9 @@
   },
   {
    "type": "orange",
-   "text": "常見的節律異常"
+   "text": "常見的節律異常",
+   "pdfPage": 17,
+   "page": 867
   },
   {
    "type": "blue",
@@ -1563,7 +1575,9 @@
   },
   {
    "type": "orange",
-   "text": "常見傳導異常與障礙"
+   "text": "常見傳導異常與障礙",
+   "pdfPage": 25,
+   "page": 875
   },
   {
    "type": "blue",
@@ -2003,7 +2017,9 @@
   },
   {
    "type": "orange",
-   "text": "心肌缺血與心肌梗塞的心電圖變化"
+   "text": "心肌缺血與心肌梗塞的心電圖變化",
+   "pdfPage": 30,
+   "page": 880
   },
   {
    "type": "text",
@@ -2460,7 +2476,9 @@
   },
   {
    "type": "orange",
-   "text": "到院前心電圖(PHECG)"
+   "text": "到院前心電圖(PHECG)",
+   "pdfPage": 40,
+   "page": 890
   },
   {
    "type": "text",

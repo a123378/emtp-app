@@ -107,7 +107,9 @@
   },
   {
    "type": "orange",
-   "text": "職業傷害"
+   "text": "職業傷害",
+   "pdfPage": 3,
+   "page": 101
   },
   {
    "type": "blue",
@@ -381,7 +383,9 @@
   },
   {
    "type": "orange",
-   "text": "救護技術員常見的職業傷害與管理"
+   "text": "救護技術員常見的職業傷害與管理",
+   "pdfPage": 5,
+   "page": 103
   },
   {
    "type": "text",
@@ -536,7 +540,9 @@
   },
   {
    "type": "orange",
-   "text": "救護運輸的安全"
+   "text": "救護運輸的安全",
+   "pdfPage": 6,
+   "page": 104
   },
   {
    "type": "text",
@@ -637,7 +643,9 @@
   },
   {
    "type": "orange",
-   "text": "救護技術員的職業性感染"
+   "text": "救護技術員的職業性感染",
+   "pdfPage": 6,
+   "page": 104
   },
   {
    "type": "text",

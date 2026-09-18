@@ -90,7 +90,9 @@
   },
   {
    "type": "orange",
-   "text": "緊急醫療系統的相關研究(research in Emergency Medical Service)"
+   "text": "緊急醫療系統的相關研究(research in Emergency Medical Service)",
+   "pdfPage": 3,
+   "page": 231
   },
   {
    "type": "blue",
@@ -193,7 +195,9 @@
   },
   {
    "type": "orange",
-   "text": "研究的種類(type of research)"
+   "text": "研究的種類(type of research)",
+   "pdfPage": 4,
+   "page": 232
   },
   {
    "type": "text",
@@ -360,7 +364,9 @@
   },
   {
    "type": "orange",
-   "text": "研究的過程與基本原則(the process and basic principles of research)"
+   "text": "研究的過程與基本原則(the process and basic principles of research)",
+   "pdfPage": 5,
+   "page": 233
   },
   {
    "type": "text",
@@ -960,7 +966,9 @@
   },
   {
    "type": "orange",
-   "text": "問卷設計的基本概念"
+   "text": "問卷設計的基本概念",
+   "pdfPage": 11,
+   "page": 239
   },
   {
    "type": "text",

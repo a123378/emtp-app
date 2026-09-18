@@ -208,7 +208,9 @@
   },
   {
    "type": "orange",
-   "text": "基本藥理學"
+   "text": "基本藥理學",
+   "pdfPage": 4,
+   "page": 384
   },
   {
    "type": "blue",
@@ -303,7 +305,9 @@
   },
   {
    "type": "orange",
-   "text": "藥物資訊"
+   "text": "藥物資訊",
+   "pdfPage": 5,
+   "page": 385
   },
   {
    "type": "blue",
@@ -467,7 +471,9 @@
   },
   {
    "type": "orange",
-   "text": "藥物如何發生作用"
+   "text": "藥物如何發生作用",
+   "pdfPage": 7,
+   "page": 387
   },
   {
    "type": "blue",
@@ -1184,7 +1190,9 @@
   },
   {
    "type": "orange",
-   "text": "急救藥物與神經系統"
+   "text": "急救藥物與神經系統",
+   "pdfPage": 19,
+   "page": 399
   },
   {
    "type": "blue",
@@ -1396,7 +1404,9 @@
   },
   {
    "type": "orange",
-   "text": "影響神經系統的急救藥物"
+   "text": "影響神經系統的急救藥物",
+   "pdfPage": 22,
+   "page": 402
   },
   {
    "type": "blue",
@@ -1664,7 +1674,9 @@
   },
   {
    "type": "orange",
-   "text": "急救藥物與心血管系統"
+   "text": "急救藥物與心血管系統",
+   "pdfPage": 24,
+   "page": 404
   },
   {
    "type": "blue",
@@ -1971,7 +1983,9 @@
   },
   {
    "type": "orange",
-   "text": "急性冠心症所使用的藥物"
+   "text": "急性冠心症所使用的藥物",
+   "pdfPage": 28,
+   "page": 408
   },
   {
    "type": "text",
@@ -2255,7 +2269,9 @@
   },
   {
    "type": "orange",
-   "text": "降血壓藥與強心配醣體"
+   "text": "降血壓藥與強心配醣體",
+   "pdfPage": 32,
+   "page": 412
   },
   {
    "type": "text",
@@ -2353,7 +2369,9 @@
   },
   {
    "type": "orange",
-   "text": "藥物輔助插管(DAI)介紹與常見用藥"
+   "text": "藥物輔助插管(DAI)介紹與常見用藥",
+   "pdfPage": 34,
+   "page": 414
   },
   {
    "type": "text",
@@ -2981,7 +2999,9 @@
   },
   {
    "type": "orange",
-   "text": "各種類型輸液介紹"
+   "text": "各種類型輸液介紹",
+   "pdfPage": 40,
+   "page": 420
   },
   {
    "type": "text",
@@ -3062,7 +3082,9 @@
   },
   {
    "type": "orange",
-   "text": "台灣到院前可給予藥物一覽"
+   "text": "台灣到院前可給予藥物一覽",
+   "pdfPage": 42,
+   "page": 422
   },
   {
    "type": "blue",
