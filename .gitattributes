@@ -1,0 +1,13 @@
+# 一律以 LF 儲存；Windows 編輯器若存成 CRLF，git 比對時會自動正規化，
+# 不會再出現「整份檔案每一行都被改過」的假差異。
+* text=auto eol=lf
+
+# 二進位檔不做行尾轉換
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.svg  text eol=lf
+*.gz   binary
+*.zip  binary
