@@ -124,11 +124,22 @@ async function init() {
 async function loadAllQuizzes() {
   try {
     const r = await fetch(dataUrl('chapters/all_quizzes.json'));
-    state.allQuizzes = await r.json();
-    console.log(`Loaded ${state.allQuizzes.length} quiz questions.`);
+    const fetched = await r.json();
+    let storedAiQuizzes = [];
+    try {
+      storedAiQuizzes = JSON.parse(localStorage.getItem('m2_ai_chapter_quizzes') || '[]');
+    } catch (err) {
+      storedAiQuizzes = [];
+    }
+    state.allQuizzes = [...fetched, ...storedAiQuizzes];
+    console.log(`Loaded ${state.allQuizzes.length} quiz questions (includes ${storedAiQuizzes.length} AI saved questions).`);
   } catch (e) {
     console.error('Failed to load all_quizzes.json:', e);
-    state.allQuizzes = [];
+    try {
+      state.allQuizzes = JSON.parse(localStorage.getItem('m2_ai_chapter_quizzes') || '[]');
+    } catch (err) {
+      state.allQuizzes = [];
+    }
   }
 }
 
@@ -287,8 +298,9 @@ function renderNotes(cd, chId) {
     </div>`;
 
   // ② 歷屆試題（直接嵌入在最開頭）
+  let secNum = 1;
   if (cd.quizzes && cd.quizzes.length) {
-    html += `<div class="section-label"><span class="s-num">1</span> 歷屆試題（共 ${cd.quizzes.length} 題）</div>`;
+    html += `<div class="section-label"><span class="s-num">${secNum++}</span> 歷屆試題（共 ${cd.quizzes.length} 題）</div>`;
     html += `<div class="quiz-score-bar" id="quiz-score-bar" style="display:none">
       <div>
         <div class="score-label">本章得分</div>
@@ -305,38 +317,15 @@ function renderNotes(cd, chId) {
     html += `</div>`;
   }
 
-  // ③ 關鍵詞句
-  if (cd.keywords && cd.keywords.length) {
-    html += `<div class="section-label"><span class="s-num">2</span> 關鍵詞句及定義</div>`;
-    html += `
-      <div class="table-responsive">
-        <table class="keyword-table">
-          <thead><tr>
-            <th style="min-width:110px">中文術語</th>
-            <th style="min-width:110px">English</th>
-            <th style="min-width:180px">定義與核心精神</th>
-          </tr></thead>
-          <tbody>
-            ${cd.keywords.map(kw => `
-              <tr>
-                <td><span class="keyword-zh">${kw.zh}</span></td>
-                <td><span class="keyword-en">${kw.en || '—'}</span></td>
-                <td>${kw.def}</td>
-              </tr>`).join('')}
-          </tbody>
-        </table>
-      </div>`;
-  }
-
-  // ④ 內文重點
+  // ③ 內文重點
   if (cd.content && cd.content.length) {
-    html += `<div class="section-label"><span class="s-num">3</span> 內文重點整理</div>`;
+    html += `<div class="section-label"><span class="s-num">${secNum++}</span> 內文重點整理</div>`;
     html += renderContentBlocks(cd.content);
   }
 
-  // ⑤ 重點一覽入口
+  // ④ 重點一覽入口
   html += `
-    <div class="section-label"><span class="s-num">4</span> 重點一覽</div>
+    <div class="section-label"><span class="s-num">${secNum++}</span> 重點一覽</div>
     <div class="summary-entry-card" onclick="switchTab('summary')">
       <div class="summary-entry-icon">⚡</div>
       <div class="summary-entry-text">
@@ -902,7 +891,7 @@ function initMode2() {
   updateApiStatusBtn();
 
   // Close modals on overlay backdrop click
-  ['gemini-api-modal', 'm2-ch-modal', 'm2-ai-modal', 'manual-add-modal', 'ai-complete-modal'].forEach(id => {
+  ['gemini-api-modal', 'm2-ch-modal', 'm2-ai-modal', 'manual-add-modal', 'ai-complete-modal', 'm2-past-modal'].forEach(id => {
     const modal = $(`#${id}`);
     if (modal) {
       modal.addEventListener('click', (e) => {
@@ -1107,8 +1096,8 @@ function startM2Quiz(type, title, questions) {
     return;
   }
 
-  // 確保每輪最多 10 題
-  const finalQuestions = questions.slice(0, 10);
+  // 支援自由自訂題數（不再強制截斷為 10 題）
+  const finalQuestions = questions;
 
   if (state.m2Runner.timerInterval) {
     clearInterval(state.m2Runner.timerInterval);
@@ -1351,6 +1340,12 @@ function submitRunnerQuiz() {
   const statsEl = $('#m2-res-stats');
   const msgEl = $('#m2-res-msg');
 
+  // 若為 AI 測驗，答題結束後依照詳解歸類自動加入章節專項題庫
+  let autoSavedAiCount = 0;
+  if (state.m2Runner.type === 'ai') {
+    autoSavedAiCount = saveAiQuestionsToChapterPool(state.m2Runner.questions);
+  }
+
   if (scoreEl) scoreEl.textContent = score;
   if (titleEl) {
     if (score >= 90) titleEl.textContent = '🌟 卓越神準！甄試實力頂尖！';
@@ -1362,9 +1357,15 @@ function submitRunnerQuiz() {
     statsEl.textContent = `答對 ${correctCount} / ${total} 題 ‧ 測驗用時 ${formatTimer(state.m2Runner.timerSeconds)}`;
   }
   if (msgEl) {
-    if (score === 100) msgEl.textContent = '全對滿分！臨床鑑別與處置思維完美無缺！';
-    else if (newWrongQuestions.length > 0) msgEl.textContent = `已自動將本次 ${newWrongQuestions.length} 道錯題收錄至錯題本，點擊筆記連結即可複習！`;
-    else msgEl.textContent = '請仔細檢閱下方 10 題完整詳解與考點關鍵，加深記憶！';
+    let baseMsg = '';
+    if (score === 100) baseMsg = '全對滿分！臨床鑑別與處置思維完美無缺！';
+    else if (newWrongQuestions.length > 0) baseMsg = `已自動將本次 ${newWrongQuestions.length} 道錯題收錄至錯題本，點擊筆記連結即可複習！`;
+    else baseMsg = `請仔細檢閱下方 ${total} 題完整詳解與考點關鍵，加深記憶！`;
+
+    if (autoSavedAiCount > 0) {
+      baseMsg += ` 🎯 同步將本次 ${autoSavedAiCount} 道 AI 臨床精選試題依章節解析歸入「章節專項題庫」！`;
+    }
+    msgEl.textContent = baseMsg;
   }
 
   // 渲染逐題詳解與跳轉筆記連結
@@ -1561,6 +1562,11 @@ function renderQuizReviewList(questions, userAnswers) {
   container.innerHTML = '';
   const letters = ['A', 'B', 'C', 'D'];
 
+  const titleEl = $('#m2-review-title');
+  if (titleEl) {
+    titleEl.textContent = `📋 本次測驗逐題詳解與考點對照 (共 ${questions.length} 題)`;
+  }
+
   questions.forEach((q, i) => {
     const userChoice = userAnswers[i];
     const isCorrect = (userChoice === q.answer);
@@ -1649,27 +1655,49 @@ function jumpToMode1Chapter(chId) {
   }, 120);
 }
 
-// ── 功能二：歷屆試題全真抽測 (10題) ──────────────────
-function startPastExamQuiz() {
+// ── 功能二：歷屆試題全真抽測 ──────────────────
+function openPastExamModal() {
+  $('#m2-past-modal')?.classList.remove('hidden');
+}
+
+function closePastExamModal() {
+  $('#m2-past-modal')?.classList.add('hidden');
+}
+
+function confirmStartPastExam() {
+  const select = $('#past-count-select');
+  const count = select ? parseInt(select.value, 10) || 10 : 10;
+  closePastExamModal();
+  startPastExamQuiz(count);
+}
+
+function startPastExamQuiz(count = 10) {
   if (!state.allQuizzes || state.allQuizzes.length === 0) {
     alert('正在載入歷屆試題庫，請稍候重試…');
     return;
   }
   const shuffled = [...state.allQuizzes].sort(() => Math.random() - 0.5);
-  const selected = shuffled.slice(0, 10);
-  startM2Quiz('past', '🎲 歷屆全真抽測 (10題)', selected);
+  const selected = shuffled.slice(0, count);
+  startM2Quiz('past', `🎲 歷屆全真抽測 (${selected.length}題)`, selected);
 }
 
-// ── 功能三：章節專項出題 (10題) ──────────────────────
+// ── 功能三：章節專項出題 ──────────────────────
 function openChapterQuizModal() {
   const grid = $('#m2-ch-grid');
-  if (grid && grid.children.length === 0) {
+  if (grid) {
+    grid.innerHTML = '';
     state.chapters.forEach(ch => {
+      const totalInCh = state.allQuizzes.filter(q => q.chId === ch.id).length;
+      const aiInCh = state.allQuizzes.filter(q => q.chId === ch.id && q.isAiGenerated).length;
       const label = document.createElement('label');
       label.className = 'ch-checkbox-label';
       label.innerHTML = `
         <input type="checkbox" value="${ch.id}" class="m2-ch-cb" onchange="updateChSelectCount()">
-        <span><b>${ch.num}</b> ${escapeHtml(ch.title)}</span>
+        <span style="display:flex;align-items:center;width:100%">
+          <b>${ch.num}</b>&nbsp;${escapeHtml(ch.title)}
+          ${aiInCh > 0 ? `<span class="ch-ai-badge" title="收錄 ${aiInCh} 道 AI 精選題">🤖 +${aiInCh}</span>` : ''}
+          <span class="ch-total-badge">${totalInCh}題</span>
+        </span>
       `;
       grid.appendChild(label);
     });
@@ -1683,9 +1711,13 @@ function closeChapterQuizModal() {
 }
 
 function updateChSelectCount() {
-  const cbs = $$('.m2-ch-cb:checked');
+  const cbs = Array.from($$('.m2-ch-cb:checked')).map(cb => cb.value);
   const countEl = $('#ch-selected-count');
-  if (countEl) countEl.textContent = `已選 ${cbs.length} 個章節`;
+  if (countEl) {
+    const selectedSet = new Set(cbs);
+    const totalInSelected = state.allQuizzes.filter(q => selectedSet.has(q.chId)).length;
+    countEl.textContent = `已選 ${cbs.length} 個章節 (共 ${totalInSelected} 題)`;
+  }
 }
 
 function selectAllChapters(checked) {
@@ -1716,26 +1748,32 @@ function startSelectedChapterQuiz() {
     alert('請至少勾選一個章節！');
     return;
   }
+  const countSelect = $('#ch-quiz-count-select');
+  const countVal = countSelect ? countSelect.value : '10';
+
   const selectedSet = new Set(selectedCbs);
   const matched = state.allQuizzes.filter(q => selectedSet.has(q.chId));
 
   if (matched.length === 0) {
-    alert('所選章節在歷屆甄試中題目較少，為您隨機抽取題目進行專項挑戰！');
-    const shuffled = [...state.allQuizzes].sort(() => Math.random() - 0.5).slice(0, 10);
+    alert('所選章節目前題目較少，為您隨機抽取題目進行專項挑戰！');
+    const targetCount = countVal === 'all' ? 10 : (parseInt(countVal, 10) || 10);
+    const shuffled = [...state.allQuizzes].sort(() => Math.random() - 0.5).slice(0, targetCount);
     closeChapterQuizModal();
-    startM2Quiz('chapter', `📚 章節專項抽測 (精選10題)`, shuffled);
+    startM2Quiz('chapter', `📚 章節專項抽測 (${shuffled.length}題)`, shuffled);
     return;
   }
 
   let pool = [...matched].sort(() => Math.random() - 0.5);
-  // 若所選章節不足 10 題，自其他題目補足至 10 題
-  if (pool.length < 10) {
+  let targetCount = countVal === 'all' ? pool.length : (parseInt(countVal, 10) || 10);
+
+  // 若所選章節不足目標題數且非全選，自其他題目補足
+  if (pool.length < targetCount && countVal !== 'all') {
     const others = state.allQuizzes.filter(q => !selectedSet.has(q.chId)).sort(() => Math.random() - 0.5);
-    pool = pool.concat(others.slice(0, 10 - pool.length));
+    pool = pool.concat(others.slice(0, targetCount - pool.length));
   }
-  const selected = pool.slice(0, 10);
+  const selected = pool.slice(0, targetCount);
   closeChapterQuizModal();
-  startM2Quiz('chapter', `📚 章節專項抽測 (${selectedCbs.length} 個章節)`, selected);
+  startM2Quiz('chapter', `📚 章節專項抽測 (${selected.length}題 ‧ ${selectedCbs.length}章節)`, selected);
 }
 
 // ── 功能一：AI 智慧出題 (10題) ──────────────────────
@@ -1822,6 +1860,99 @@ function playSuccessBeep() {
   }
 }
 
+// ── 智慧章節校驗與歸類函式 ──
+function resolveQuestionChapter(q) {
+  if (!q) return { chId: 'ch01', chNum: 'CH01', chTitle: '緊急醫療救護體系概論' };
+
+  // 1. 若現有 chId 直接命中合法章節
+  if (q.chId && state.chapters && state.chapters.length > 0) {
+    const directMatch = state.chapters.find(c => c.id.toLowerCase() === String(q.chId).toLowerCase());
+    if (directMatch) {
+      return { chId: directMatch.id, chNum: directMatch.num, chTitle: directMatch.title };
+    }
+  }
+
+  // 2. 從 chNum, chTitle, explanation 或 question 中正則搜尋 CHxx / 第xx章
+  const fullText = `${q.chNum || ''} ${q.chTitle || ''} ${q.explanation || ''} ${q.question || ''}`;
+  const chNumMatch = fullText.match(/(?:CH|第)\s*([0-9]{1,2})\s*(?:章)?/i);
+  if (chNumMatch && state.chapters && state.chapters.length > 0) {
+    const numInt = parseInt(chNumMatch[1], 10);
+    const targetId = `ch${String(numInt).padStart(2, '0')}`;
+    const match = state.chapters.find(c => c.id === targetId);
+    if (match) {
+      return { chId: match.id, chNum: match.num, chTitle: match.title };
+    }
+  }
+
+  // 3. 嘗試由章節標題關鍵字模糊比對
+  if (state.chapters && state.chapters.length > 0) {
+    for (const c of state.chapters) {
+      if (c.title && fullText.includes(c.title)) {
+        return { chId: c.id, chNum: c.num, chTitle: c.title };
+      }
+    }
+  }
+
+  // 兜底預設
+  return {
+    chId: q.chId || 'ch01',
+    chNum: q.chNum || 'CH01',
+    chTitle: q.chTitle || '重點章節'
+  };
+}
+
+// ── 將 AI 題目自動歸檔至章節專項題庫 ──
+function saveAiQuestionsToChapterPool(questions) {
+  if (!Array.isArray(questions) || questions.length === 0) return 0;
+  let stored = [];
+  try {
+    stored = JSON.parse(localStorage.getItem('m2_ai_chapter_quizzes') || '[]');
+  } catch (e) {
+    stored = [];
+  }
+
+  let addedCount = 0;
+  questions.forEach(q => {
+    if (!q || !q.question) return;
+    const cleanQText = q.question.trim();
+    // 依題幹去重，避免重複添加
+    const alreadyExists = stored.some(item => item.question && item.question.trim() === cleanQText) ||
+                          state.allQuizzes.some(item => item.question && item.question.trim() === cleanQText && item.isAiGenerated);
+    if (!alreadyExists) {
+      const resolved = resolveQuestionChapter(q);
+      const newAiItem = {
+        id: q.id || `ai-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        question: q.question,
+        options: q.options,
+        answer: q.answer,
+        explanation: q.explanation || '依據教科書臨床指引解析。',
+        difficulty: q.difficulty || '中等偏上',
+        chId: resolved.chId,
+        chNum: resolved.chNum,
+        chTitle: resolved.chTitle,
+        chapterTitle: resolved.chTitle,
+        sourceLabel: '🤖 AI 精選',
+        source: `AI 智慧出題 (${q.difficulty || '全真模擬'})`,
+        isAiGenerated: true,
+        addedAt: Date.now()
+      };
+      stored.unshift(newAiItem);
+      state.allQuizzes.push(newAiItem);
+      addedCount++;
+    }
+  });
+
+  if (addedCount > 0) {
+    try {
+      localStorage.setItem('m2_ai_chapter_quizzes', JSON.stringify(stored));
+      console.log(`成功將 ${addedCount} 道 AI 題目歸檔至章節題庫，總計 ${stored.length} 題。`);
+    } catch (err) {
+      console.warn('儲存 AI 題目至 localStorage 失敗:', err);
+    }
+  }
+  return addedCount;
+}
+
 // ── AI 出題完成醒目彈出視窗控制 ──
 function showAiCompleteModal(title, questions, topicDesc, diff) {
   const titleEl = $('#ai-complete-title');
@@ -1833,7 +1964,11 @@ function showAiCompleteModal(title, questions, topicDesc, diff) {
     topicEl.textContent = cleanTopic.length > 12 ? cleanTopic.slice(0, 12) + '…' : cleanTopic;
   }
   if (diffEl) {
-    diffEl.textContent = diff === 'expert' ? '教授級地獄挑戰' : '甄試全真 (4中+6難)';
+    diffEl.textContent = diff === 'expert' ? '教授級地獄挑戰' : '甄試全真 (40%中+60%難)';
+  }
+  const metaItems = $$('#ai-complete-modal .ai-meta-val');
+  if (metaItems && metaItems.length >= 3) {
+    metaItems[2].textContent = `精選 ${questions.length} 題`;
   }
   $('#ai-complete-modal')?.classList.remove('hidden');
   playSuccessBeep();
@@ -1867,8 +2002,12 @@ async function generateAiQuiz() {
 
   const topicSelect = $('#ai-topic-select');
   const diffSelect = $('#ai-diff-select');
+  const countSelect = $('#ai-count-select');
   const topic = topicSelect ? topicSelect.value : 'all';
   const diff = diffSelect ? diffSelect.value : 'high';
+  const count = countSelect ? parseInt(countSelect.value, 10) || 10 : 10;
+  const medCount = Math.max(1, Math.round(count * 0.4));
+  const hardCount = count - medCount;
 
   state.aiGenInProgress = true;
   setAiGenModalUI(true);
@@ -1885,10 +2024,10 @@ async function generateAiQuiz() {
 
   const topicDesc = topicMap[topic] || topicMap.all;
   const diffDesc = (diff === 'expert')
-    ? '教授級地獄挑戰：全卷10題皆為極高難度，包含複合臨床情境、雙重陷阱、生理數值邊緣變動與處置邏輯先後抉擇，難度超越歷屆甄試。'
-    : '甄試全真強度（結構化 4:6 配比）：\n' +
-      '  - 第 1～4 題【中等難度】：評量核心法規、標準作業程序(SOP)、常規藥物劑量與基礎急救評估機轉。\n' +
-      '  - 第 5～10 題【中等偏上甚至困難】：評量進階臨床決策、非典型症狀鑑別、高難度心電圖判讀、矛盾生命徵象的急救優先順序抉擇、特殊族群處置陷阱。';
+    ? `教授級地獄挑戰：全卷 ${count} 題皆為極高難度，包含複合臨床情境、雙重陷阱、生理數值邊緣變動與處置邏輯先後抉擇，難度超越歷屆甄試。`
+    : `甄試全真強度（依 4:6 配比共 ${count} 題）：\n` +
+      `  - 第 1～${medCount} 題【中等難度】：評量核心法規、標準作業程序(SOP)、常規藥物劑量與基礎急救評估機轉。\n` +
+      `  - 第 ${medCount + 1}～${count} 題【中等偏上甚至困難】：評量進階臨床決策、非典型症狀鑑別、高難度心電圖判讀、矛盾生命徵象的急救優先順序抉擇、特殊族群處置陷阱。`;
 
   const prompt = `你是一位具有20年急診醫學臨床專科與高級救護技術員(EMT-P)甄試命題委員經驗的資深醫學教授。
 請依據台灣高級救護技術員教科書（大白）及最新國際與台灣急救指引命題：
@@ -1896,15 +2035,16 @@ async function generateAiQuiz() {
 【難易度】：${diffDesc}
 
 【嚴格規則】：
-1. 嚴格產出剛好「10 題」單選題。
+1. 嚴格產出剛好「${count} 題」單選題。
 2. 每題包含 4 個選項（A, B, C, D），單一正解。
 3. 每題必須提供極為詳細的中文解析（解釋正解原因、各干擾選項錯誤點、關鍵生理機轉）。
 4. 每題附上對應章節資訊（chId 例如 ch21, chNum 例如 CH21, chTitle 例如 心律不整之判讀與處置）。
 5. 回傳必須是純標準 JSON 陣列格式，嚴禁任何 markdown 包裝或多餘前言，直接以 [ 開頭、以 ] 結尾。
 6. 難易度配比嚴格要求：
-   - 若難易度為「甄試全真強度」，第 1～4 題必須為「中等」難度，第 5～10 題必須為「中等偏上」或「困難」難度。
-   - 若難易度為「教授級地獄挑戰」，全部 10 題皆為「困難」難度。
+   - 若難易度為「甄試全真強度」，第 1～${medCount} 題必須為「中等」難度，第 ${medCount + 1}～${count} 題必須為「中等偏上」或「困難」難度。
+   - 若難易度為「教授級地獄挑戰」，全部 ${count} 題皆為「困難」難度。
    - 每題 JSON 必須包含 "difficulty" 欄位，值為 "中等"、"中等偏上" 或 "困難"。
+7. 章節分類與出處要求：每題必須精準歸屬至台灣高級救護技術員教科書（大白）CH01～CH60 之一，並於 chId、chNum、chTitle 清楚標明（例如 ch21, CH21, 心律不整之判讀與處置），詳解開頭包含【出處：大白 CHxx ...】以利系統依詳解自動歸入專項題庫。
 
 JSON 陣列結構：
 [
@@ -1936,14 +2076,14 @@ JSON 陣列結構：
       options: Array.isArray(item.options) && item.options.length >= 4 ? item.options.slice(0, 4) : ['選項A', '選項B', '選項C', '選項D'],
       answer: typeof item.answer === 'number' && item.answer >= 0 && item.answer <= 3 ? item.answer : 0,
       explanation: item.explanation || '依據教科書臨床指引解析。',
-      difficulty: item.difficulty || (diff === 'expert' ? '困難' : (idx < 4 ? '中等' : '中等偏上')),
+      difficulty: item.difficulty || (diff === 'expert' ? '困難' : (idx < medCount ? '中等' : '中等偏上')),
       chId: item.chId || 'ch01',
       chNum: item.chNum || 'CH01',
       chTitle: item.chTitle || '重點章節'
-    })).slice(0, 10);
+    })).slice(0, count);
 
     state.aiGenInProgress = false;
-    const title = `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真強度'})`;
+    const title = `🤖 AI 智慧出題 (${diff === 'expert' ? '地獄挑戰級' : '甄試全真強度'} ‧ ${validatedQuestions.length}題)`;
 
     // 關閉出題等待視窗並重置表單按鈕
     closeAiQuizModal();

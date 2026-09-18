@@ -1393,6 +1393,25 @@ body {
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
+/* ── 章節題庫中的 AI 收錄標記 ── */
+.ch-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-left: 6px;
+  border: 1px solid #c7d2fe;
+}
+.ch-total-badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
 /* ── Lobby: 背景生成的 AI 測驗完成提示橫幅 ── */
 .ai-pending-banner {
   display: flex;
@@ -2045,6 +2064,11 @@ body {
 .m2-rev-opt.is-user-answer.is-correct-answer {
   border-color: #86efac;
   background: #f0fdf4;
+}
+[data-theme="dark"] .m2-rev-opt.is-user-answer.is-correct-answer {
+  border-color: #22c55e;
+  background: #052e16;
+  color: var(--text);
 }
 
 .review-expl-box {
