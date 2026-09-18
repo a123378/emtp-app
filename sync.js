@@ -291,8 +291,23 @@ function renderSyncModal() {
   }
   if (!user) {
     body.innerHTML = `
-      <p class="sync-note">用同一組帳號在手機和電腦登入，錯題本、已讀進度、統計與 AI 題庫就會自動同步。
-      第一次使用請先「註冊」，之後在另一台裝置用同一組帳密「登入」即可。</p>
+      <p class="sync-note">在手機和電腦登入同一個帳號，錯題本、已讀進度、統計與 AI 題庫就會自動雙向同步。</p>
+      <div class="sync-row" style="margin-bottom:12px">
+        <button class="modal-btn" id="sync-google" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:11px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;font-weight:700;font-size:0.92rem;cursor:pointer;color:var(--text)">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.37 7.33 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.17 0 9.99 0 12s.46 3.83 1.26 5.42l4.02-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.63 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+          </svg>
+          使用 Google 帳號快速登入
+        </button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--text-muted);font-size:0.8rem">
+        <div style="flex:1;height:1px;background:var(--border)"></div>
+        <span>或使用 Email 帳密</span>
+        <div style="flex:1;height:1px;background:var(--border)"></div>
+      </div>
       <div class="sync-row"><input type="email" id="sync-email" placeholder="電子郵件" autocomplete="username"></div>
       <div class="sync-row"><input type="password" id="sync-pass" placeholder="密碼（至少 6 碼）" autocomplete="current-password"></div>
       <div class="sync-row">
@@ -300,6 +315,7 @@ function renderSyncModal() {
         <button class="modal-btn" id="sync-register">註冊新帳號</button>
       </div>
       <div class="sync-row"><button class="modal-btn ghost" id="sync-reset-cfg">重新設定 Firebase</button></div>`;
+    document.getElementById('sync-google').onclick = doGoogleAuth;
     document.getElementById('sync-login').onclick = () => doAuth('login');
     document.getElementById('sync-register').onclick = () => doAuth('register');
     document.getElementById('sync-reset-cfg').onclick = () => { localStorage.removeItem(L_CFG); location.reload(); };
@@ -332,6 +348,27 @@ function saveConfig() {
     boot().then(renderSyncModal);
   } catch (err) {
     setStatus('設定格式有誤：' + err.message, 'bad');
+  }
+}
+
+async function doGoogleAuth() {
+  setStatus('Google 登入中…', 'busy');
+  try {
+    await FB.setPersistence(fbAuth, FB.browserLocalPersistence);
+    const provider = new FB.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    await FB.signInWithPopup(fbAuth, provider);
+  } catch (err) {
+    if (err.code === 'auth/popup-closed-by-user') {
+      setStatus('已取消 Google 登入', '');
+      return;
+    }
+    const msg = {
+      'auth/operation-not-allowed': 'Firebase 尚未啟用「Google」登入（請至 Firebase Authentication ➔ 登入方式 啟用 Google）',
+      'auth/unauthorized-domain': '目前網域尚未授權（請至 Firebase Authentication ➔ 設定 ➔ 已授權網域 新增目前網址）',
+      'auth/popup-blocked': '瀏覽器封鎖了彈出視窗，請在網址列允許彈出視窗後重試'
+    }[err.code] || err.message;
+    setStatus('Google 登入失敗：' + msg, 'bad');
   }
 }
 
