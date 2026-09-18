@@ -52,6 +52,12 @@
   </div>
 
   <div class="header-actions">
+    <button class="icon-btn" id="sync-btn" title="跨裝置同步（手機／電腦共用錯題本）" aria-label="sync" onclick="openSyncModal()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+      </svg>
+      <span id="sync-dot" class="sync-dot"></span>
+    </button>
     <button class="icon-btn" id="theme-toggle" title="切換深色/淺色模式" aria-label="toggle theme">
       <svg id="theme-icon-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="5"/>
@@ -693,6 +699,25 @@
   </div>
 </div>
 
+<!-- ── 跨裝置同步 ── -->
+<div id="sync-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>☁️ 跨裝置同步</h3>
+      <button class="modal-close" onclick="closeSyncModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="sync-status-line" class="sync-status">未設定</div>
+      <div id="sync-modal-body"></div>
+      <p class="sync-note" style="margin-top:14px;border-top:1px solid var(--border);padding-top:10px">
+        同步項目：錯題本、已研讀章節、模式二累計統計、AI 出題歸檔。<br>
+        資料採「合併」而非覆蓋；在某台裝置移出錯題本的題目，另一台同步後也會一併移除。
+      </p>
+    </div>
+  </div>
+</div>
+
 <script src="app.js?v=20260910_0006"></script>
+<script src="sync.js?v=20260918_0002"></script>
 </body>
 </html>

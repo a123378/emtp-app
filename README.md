@@ -45,3 +45,48 @@
 - **純前端無後端依賴**：標準 HTML5、CSS3 (CSS Variables)、原生 JavaScript (ES6+)。
 - **完全靜態部署**：可直接透過 GitHub Pages 進行雲端託管，免架設伺服器即可全球存取。
 - **隱私安全**：Google Gemini API Key 僅儲存於使用者瀏覽器本機的 `localStorage`，不經過第三方伺服器。
+
+---
+
+## ☁️ 跨裝置同步（手機 ↔ 電腦）
+
+錯題本、已研讀章節、模式二累計統計與 AI 出題歸檔預設存在瀏覽器的 localStorage，**綁單一裝置**。
+接上免費的 Firebase 之後，用同一組帳號登入手機與電腦即可自動同步（另一台改動會即時拉下來）。
+
+### 一次性設定（約 10 分鐘）
+
+1. 到 [Firebase Console](https://console.firebase.google.com) → **建立專案**（Google Analytics 可略過）。
+2. 左側 **Firestore Database** → 建立資料庫 → 選「**正式環境模式**」→ 位置建議 `asia-east1`。
+3. 切到 **規則** 分頁，整段換成：
+
+   ```
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /emtp/{uid} {
+         allow read, write: if request.auth != null && request.auth.uid == uid;
+       }
+     }
+   }
+   ```
+
+   這條規則的意思是：**只有登入者本人讀得到、寫得進自己的資料**。
+
+4. 左側 **Authentication** → 開始使用 → 登入方式選 **電子郵件/密碼** → 啟用。
+5. **專案設定（齒輪）→ 一般 → 我的應用程式 → 網頁 `</>`** → 註冊應用程式 → 複製 `firebaseConfig` 那段。
+6. 打開網頁右上角 **☁️** → 把 `firebaseConfig` 整段貼進去 → 儲存 → **註冊**一組帳號。
+7. 手機打開同一個網址 → ☁️ → 貼同一段設定 → 用同一組帳密 **登入**。完成。
+
+> 想省去在每台裝置貼設定的步驟，也可以把設定直接寫進 `sync.js` 最上面的 `FIREBASE_CONFIG` 並提交。
+> Firebase 的網頁設定值本來就是公開資訊，安全性由上面的 Firestore 規則與登入帳號把關。
+
+### 同步行為
+
+| 資料 | 合併方式 |
+| --- | --- |
+| 錯題本 | 取聯集；在任一台移出錯題本的題目，另一台同步後也會移除；之後再答錯會重新加回 |
+| 已研讀章節 | 取聯集；取消已讀同樣會同步 |
+| 模式二統計 | 取較多者，避免被舊裝置蓋掉；按「清空統計」則以清空為準 |
+| AI 出題歸檔 | 依題目 id 取聯集 |
+
+沒設定、沒登入或離線時，網頁行為與原本完全相同，資料照常存在本機。
