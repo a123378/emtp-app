@@ -905,20 +905,83 @@ function bindEvents() {
     });
   });
 
-  // Keyboard shortcut: / to focus search
+  // ── 鍵盤快捷鍵 (電腦端友善操作) ──
   document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== els.searchInput) {
+    // 1. 若處於輸入框、文字區域、下拉選單或可編輯元素中，不觸發導航與選題快捷鍵
+    const tag = (document.activeElement && document.activeElement.tagName) || '';
+    const isEditing = ['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || document.activeElement?.isContentEditable;
+
+    // 快捷鍵: / 聚焦搜尋框 (若非輸入中)
+    if (e.key === '/' && !isEditing && document.activeElement !== els.searchInput) {
       e.preventDefault();
-      els.searchInput.focus();
+      els.searchInput?.focus();
+      return;
     }
+
+    // 快捷鍵: Escape 關閉所有彈窗與失焦搜尋
     if (e.key === 'Escape') {
-      els.searchInput.blur();
+      els.searchInput?.blur();
       closeProgressModal();
       closeMobileSidebar();
       closeApiModal();
       closeChapterQuizModal();
       closeAiQuizModal();
       closeManualAddModal();
+      closePastExamModal();
+      closeAiCompleteModal();
+      closeImageModal();
+      closePwaInstallModal();
+      return;
+    }
+
+    // 若使用者正在輸入，不執行後續快捷鍵
+    if (isEditing) return;
+
+    // 若有非 runner 的浮動彈窗開啟，不觸發模式一/二快捷鍵
+    const openModal = document.querySelector('.modal-overlay:not(.hidden)');
+    if (openModal) return;
+
+    // ── 模式一快捷鍵 ──
+    // 方向鍵上下控制捲動、左右控制章節
+    if (state.currentMode === 1) {
+      const scrollEl = els.mainContent || window;
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        scrollEl.scrollBy({ top: -160, behavior: 'smooth' });
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        scrollEl.scrollBy({ top: 160, behavior: 'smooth' });
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevChapter();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextChapter();
+      }
+      return;
+    }
+
+    // ── 模式二快捷鍵 (僅在測驗進行中生效) ──
+    // 方向鍵左右控制上一題下一題，數字鍵 1234 對應選項 ABCD
+    if (state.currentMode === 2) {
+      const runnerEl = document.getElementById('m2-quiz-runner');
+      const isRunnerActive = runnerEl && !runnerEl.classList.contains('hidden') && state.m2Runner?.questions?.length > 0;
+      if (!isRunnerActive) return;
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevRunnerQ();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextRunnerQ();
+      } else if (['1', '2', '3', '4'].includes(e.key)) {
+        e.preventDefault();
+        const optIdx = parseInt(e.key, 10) - 1;
+        const curQ = state.m2Runner.questions[state.m2Runner.currentIndex];
+        if (curQ && curQ.options && curQ.options[optIdx] !== undefined) {
+          selectRunnerOption(state.m2Runner.currentIndex, optIdx);
+        }
+      }
     }
   });
 
@@ -1726,9 +1789,15 @@ function startPastExamQuiz(count = 10) {
     alert('正在載入歷屆試題庫，請稍候重試…');
     return;
   }
-  const shuffled = [...state.allQuizzes].sort(() => Math.random() - 0.5);
+  // 依使用者要求：歷屆全真嚴格限定新北小考與衛福部甄試真題，排除所有 AI 題目
+  const pastExamPool = state.allQuizzes.filter(q => !q.isAiGenerated && !String(q.id || '').startsWith('ai-'));
+  if (pastExamPool.length === 0) {
+    alert('歷屆真題載入中，請稍候重試…');
+    return;
+  }
+  const shuffled = [...pastExamPool].sort(() => Math.random() - 0.5);
   const selected = shuffled.slice(0, count);
-  startM2Quiz('past', `🎲 歷屆全真抽測 (${selected.length}題)`, selected);
+  startM2Quiz('past', `🎲 歷屆全真抽測 (${selected.length}題 ‧ 純歷屆真題)`, selected);
 }
 
 // ── 功能三：章節專項出題 ──────────────────────
