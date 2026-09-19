@@ -462,14 +462,101 @@ async function loadChapterCached(chId) {
   return _chCache[chId];
 }
 
+// ── 教科書段落即時比對（AI 題目沒有預先算好的 secIdx 時使用）──────────
+const _SEC_SKIP = new Set(['情境', '情境解答', '問題交流', '重點整理', '參考資料']);
+function _blockText(b) {
+  if (!b) return '';
+  const deep = x => typeof x === 'string' ? x : Array.isArray(x) ? x.map(deep).join(' ')
+             : (x && typeof x === 'object') ? Object.values(x).map(deep).join(' ') : '';
+  switch (b.type) {
+    case 'text': case 'blue': case 'orange': case 'mnemonic': return b.text || '';
+    case 'list': return deep(b.items);
+    case 'box': return (b.title || '') + ' ' + String(b.html || '').replace(/<[^>]+>/g, ' ');
+    case 'clinical': return (b.label || '') + ' ' + deep(b.points);
+    case 'table': return deep(b.headers) + ' ' + deep(b.rows);
+    default: return deep(b);
+  }
+}
+function _norm(s) { return String(s || '').replace(/[\s*_`#>()（）、，。：；？！]/g, ''); }
+function _grams(s) { const t = _norm(s); const g = new Set(); for (let i = 0; i + 3 <= t.length; i++) g.add(t.slice(i, i + 3)); return g; }
+
+function matchSectionInChapter(content, q, relaxed) {
+  const idxs = content.map((b, i) => b.type === 'orange' ? i : -1).filter(i => i >= 0);
+  const secs = [];
+  idxs.forEach((i, k) => {
+    const title = (content[i].text || '').trim();
+    if (_SEC_SKIP.has(title)) return;
+    const end = k + 1 < idxs.length ? idxs[k + 1] : content.length;
+    const heads = content.slice(i + 1, end).filter(b => b.type === 'blue').map(b => b.text || '');
+    const body = content.slice(i + 1, end).map(_blockText).join(' ').slice(0, 8000);
+    secs.push({ idx: i, title, heads, norm: _norm(title + heads.join('') + body), g: _grams(title + ' ' + heads.join(' ') + ' ' + body) });
+  });
+  if (!secs.length) return -1;
+  const df = new Map();
+  secs.forEach(s => s.g.forEach(g => df.set(g, (df.get(g) || 0) + 1)));
+  const N = secs.length;
+  const qText = (q.question || '') + ' ' + (q.options || []).join(' ');
+  // 去掉【出處：大白 CHxx 章名】——章名會誤配到標題含章名的段落（如「泌尿與腎臟急症病人到院前救護提示」）
+  const ex = String(q.explanation || '').replace(/【出處[^】]*】/g, ' ').replace(/出處[:：][^\n]*/g, ' ').slice(0, 1500);
+  const qg = _grams(qText + ' ' + ex);
+  const labels = (ex.match(/(?:表|Box|圖)\s?\d+[-–]\d+/g) || []).map(x => x.replace(/\s/g, ''));
+  const qn = _norm(qText + ex.slice(0, 600));
+  const scored = secs.map(s => {
+    let sc = 0;
+    qg.forEach(g => { if (s.g.has(g)) sc += Math.log(1 + N / df.get(g)); });
+    sc /= Math.sqrt(s.g.size + 50);
+    labels.forEach(L => { if (s.norm.includes(L)) sc += 12; });
+    if (s.title.length >= 3 && qn.includes(_norm(s.title))) sc += 4;
+    s.heads.forEach(h => { if (h.length >= 4 && qn.includes(_norm(h))) sc += 2; });
+    return { idx: s.idx, sc };
+  }).sort((a, b) => b.sc - a.sc);
+  const best = scored[0], second = scored[1] || { sc: 0 };
+  const confident = best.sc >= 0.8 && (second.sc === 0 || best.sc >= second.sc * 1.25);
+  if (confident) { if (q) q.secGuess = false; return best.idx; }
+  // 寬鬆模式（AI 題）：題目常同時涉及多段，沒有壓倒性的段落時仍取最相關的一段，
+  // 並標記 secGuess，讓介面標示「最相關段落」而不是「這一段」。整章仍可展開。
+  if (relaxed && (best.sc >= 0.45 || (best.sc >= 0.15 && best.sc >= second.sc * 1.15))) { if (q) q.secGuess = true; return best.idx; }
+  return -1;
+}
+
+/** 補齊一題的段落／頁碼（AI 題目），完成後更新畫面上對應的元素 */
+const _secResolving = new Map();
+function resolveQuestionSection(q) {
+  if (!q || !q.chId) return Promise.resolve(false);
+  if (q.secIdx !== undefined && q.secIdx !== null && q.secIdx >= 0) return Promise.resolve(true);
+  if (_secResolving.has(q.id)) return _secResolving.get(q.id);
+  const p = loadChapterCached(q.chId).then(cd => {
+    const content = cd.content || [];
+    const idx = matchSectionInChapter(content, q, true);
+    if (idx < 0) return false;
+    const blk = content[idx];
+    q.secIdx = idx; q.secTitle = (blk.text || '').trim();
+    if (blk.page) { q.page = blk.page; q.pdfPage = blk.pdfPage; }
+    document.querySelectorAll(`[data-qpage="${CSS.escape(String(q.id))}"]`).forEach(el => { el.outerHTML = renderQuizPageLine(q); });
+    return true;
+  }).catch(() => false);
+  _secResolving.set(q.id, p);
+  return p;
+}
+
+/** 詳解區塊裡的「📖 教科書 CHxx p.NNN」一行 */
+function renderQuizPageLine(q) {
+  const ch = `${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || q.chapterTitle || '')}`.trim();
+  if (q.page) {
+    return `<div class="expl-page" data-qpage="${escapeHtml(String(q.id))}">📖 教科書 ${ch}${q.secTitle ? ' ‧ ' + escapeHtml(q.secTitle) : ''} ‧ <b>p.${q.page}</b>${q.pdfPage ? `（PDF 第 ${q.pdfPage} 頁）` : ''}${q.secGuess ? '<span class="expl-guess">自動比對</span>' : ''}</div>`;
+  }
+  return `<div class="expl-page muted" data-qpage="${escapeHtml(String(q.id))}">📖 教科書 ${ch}${q.secTitle ? ' ‧ ' + escapeHtml(q.secTitle) : ''}</div>`;
+}
+
 function renderTextbookDetails(q) {
-  const hasSec = q.secIdx !== undefined && q.secIdx !== null;
+  const hasSec = q.secIdx !== undefined && q.secIdx !== null && q.secIdx >= 0;
+  const pageTxt = q.page ? ` ‧ p.${q.page}${q.pdfPage ? `（PDF 第 ${q.pdfPage} 頁）` : ''}` : '';
   const label = hasSec
-    ? `看教科書這一段：${escapeHtml(q.secTitle || '')}`
-    : `看教科書：${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || '本章')}重點整理`;
+    ? `看教科書這一段：${escapeHtml(q.secTitle || '')}${pageTxt}`
+    : `看教科書：${escapeHtml(q.chNum || '')} ${escapeHtml(q.chTitle || q.chapterTitle || '本章')}`;
   return `
-    <details class="tb-details" ontoggle="loadTextbook(this, '${escapeHtml(q.chId || '')}', ${hasSec ? q.secIdx : -1})">
-      <summary>📖 ${label}</summary>
+    <details class="tb-details" data-qid="${escapeHtml(String(q.id))}" ontoggle="loadTextbook(this, '${escapeHtml(q.chId || '')}', ${hasSec ? q.secIdx : -1})">
+      <summary>📖 <span class="tb-label">${label}</span></summary>
       <div class="tb-body"><div class="tb-msg">載入中…</div></div>
     </details>`;
 }
@@ -478,11 +565,22 @@ async function loadTextbook(el, chId, secIdx) {
   if (!el.open || el.dataset.loaded) return;
   el.dataset.loaded = '1';
   const body = el.querySelector('.tb-body');
+  const labelEl = el.querySelector('.tb-label');
+  let guess = false;
   try {
     const cd = await loadChapterCached(chId);
     const content = cd.content || [];
+    // 沒有預先對應的段落（AI 題）→ 現場比對
+    if (!(secIdx >= 0 && content[secIdx])) {
+      const q = (state.allQuizzes || []).find(x => String(x.id) === el.dataset.qid);
+      if (q) { const idx = matchSectionInChapter(content, q, true); if (idx >= 0) { guess = !!q.secGuess; secIdx = idx; q.secIdx = idx; q.secTitle = (content[idx].text || '').trim(); if (content[idx].page) { q.page = content[idx].page; q.pdfPage = content[idx].pdfPage; } } }
+    }
     let html = '';
     if (secIdx >= 0 && content[secIdx]) {
+      const blk = content[secIdx];
+      const title = (blk.text || '').trim();
+      const pageTxt = blk.page ? ` ‧ p.${blk.page}${blk.pdfPage ? `（PDF 第 ${blk.pdfPage} 頁）` : ''}` : '';
+      if (labelEl) labelEl.textContent = `${guess ? '看教科書最相關段落（自動比對）' : '看教科書這一段'}：${title}${pageTxt}`;
       const next = content.findIndex((b, i) => i > secIdx && b.type === 'orange');
       html += renderContentBlocks(content.slice(secIdx, next === -1 ? content.length : next));
       html += `<details class="tb-full"><summary>📚 展開整章重點整理</summary>
@@ -1789,6 +1887,7 @@ function renderQuizReviewList(questions, userAnswers) {
         <div class="full-expl-container" style="display:none">
           <div class="full-expl-divider"></div>
           <div class="full-expl-title">📋 完整教材／法規詳解：</div>
+          ${renderQuizPageLine(q)}
           <div class="full-expl-content">${escapeHtml(q.explanation || '暫無完整解析')}</div>
         </div>
       </div>
@@ -1796,6 +1895,7 @@ function renderQuizReviewList(questions, userAnswers) {
     `;
 
     container.appendChild(card);
+    if (!q.page && q.chId) resolveQuestionSection(q);   // AI 題：補齊段落與教科書頁碼
   });
 }
 
@@ -2107,20 +2207,41 @@ function resolveQuestionChapter(q) {
     return null;
   };
 
-  const fullText = `${q.chNum || ''} ${q.chTitle || ''} ${q.chapterTitle || ''} ${q.explanation || ''} ${q.question || ''} ${Array.isArray(q.options) ? q.options.join(' ') : ''}`.toLowerCase();
+  const explanation = String(q.explanation || '');
+  const fullText = `${q.chNum || ''} ${q.chTitle || ''} ${q.chapterTitle || ''} ${explanation} ${q.question || ''} ${Array.isArray(q.options) ? q.options.join(' ') : ''}`.toLowerCase();
 
-  // 1. 臨床關鍵語意最高優先度判定 (Clinical Semantic Priority)
-  // ① 毒物學 (CH50) - 包含解毒劑、有機磷、沙林毒氣、Atropine、中毒症候群等臨床毒藥物處置
-  const isToxic = /(沙林|sarin|atropine|阿托平|2-pam|pralidoxime|有機磷|氨基甲酸|sludge|膽鹼性|抗膽鹼|解毒劑|毒物|中毒|巴拉刈|除草劑|農藥|氰化物|一氧化碳|naloxone|納洛酮|安非他命|古柯鹼|大花曼陀羅|曼陀羅|毒蛇|抗毒素血清|肉毒桿菌|烏頭|毒性物質)/i.test(fullText);
-  if (isToxic) {
-    // 若明確為純除污走廊/防護衣等級且無臨床解毒處置才歸 CH53，其餘毒物學一律強制歸入 CH50 毒物學
-    const isPureHazmat = /(除污走廊|除污帳棚|黃區除污|防護衣等級|level a|level b|初級除污)/i.test(fullText) && !/(atropine|阿托平|2-pam|解毒|sludge|阿托平化)/i.test(fullText);
-    if (isPureHazmat) {
-      const match53 = getChapterById('ch53');
-      if (match53) return match53;
+  // ── 1. 詳解的【出處：大白 CHxx】是最可靠的訊號 ──────────────────────
+  //   AI 出題 prompt 第 7 條明確要求附上，且它描述的是「題目考什麼」，
+  //   比題幹裡偶然出現的藥名（如 Atropine 也用於心搏過緩）可靠得多。
+  //   取「出處」後面出現的第一個章號；沒有「出處」字樣時退而取第一個「大白 CHxx」。
+  const citeHead = explanation.match(/出處[^\n】]{0,60}?(?:CH|ch|第)\s*0?([1-9][0-9]?)/);
+  const citeAny  = explanation.match(/(?:大白|教科書)\s*(?:第三版)?\s*(?:CH|第)\s*0?([1-9][0-9]?)(?!\s*頁)/i);
+  const cite = citeHead || citeAny;
+  if (cite) {
+    const matched = getChapterById(`ch${String(parseInt(cite[1], 10)).padStart(2, '0')}`);
+    if (matched) return matched;
+  }
+
+  // ── 2. 題目自帶的 chId（AI 回傳或歷屆題原本的歸屬）────────────────
+  if (q.chId) {
+    const matched = getChapterById(q.chId);
+    if (matched) {
+      // 防呆：AI 偶爾把毒物題回成 ch41 但標題寫毒物
+      if (String(q.chId).toLowerCase() === 'ch41' && /毒/i.test(q.chTitle || '')) {
+        return getChapterById('ch50') || matched;
+      }
+      return matched;
     }
-    const match50 = getChapterById('ch50');
-    if (match50) return match50;
+  }
+
+  // ── 3. 關鍵字兜底（前兩者都拿不到才用）────────────────────────────
+  //   毒物學觸發詞已拿掉 atropine / naloxone / 阿托平 / 納洛酮：
+  //   這些藥在心搏過緩、RSI、鴉片類過量之外也常見，單獨出現不代表中毒。
+  const isToxic = /(沙林|sarin|2-pam|pralidoxime|有機磷|氨基甲酸|sludge|膽鹼性危象|解毒劑|毒物學|中毒|巴拉刈|除草劑|農藥|氰化物|一氧化碳中毒|安非他命|古柯鹼|大花曼陀羅|曼陀羅|毒蛇|抗毒素血清|肉毒桿菌|烏頭|毒性物質)/i.test(fullText);
+  if (isToxic) {
+    const isPureHazmat = /(除污走廊|除污帳棚|黃區除污|防護衣等級|level a|level b|初級除污)/i.test(fullText) && !/(2-pam|解毒|sludge)/i.test(fullText);
+    if (isPureHazmat) { const m53 = getChapterById('ch53'); if (m53) return m53; }
+    const m50 = getChapterById('ch50'); if (m50) return m50;
   }
 
   // ② 出血、休克與止血治療 (CH26)
@@ -2131,21 +2252,21 @@ function resolveQuestionChapter(q) {
   }
 
   // ③ 心電圖判定 (CH33)
-  const isEcg = /(心電圖|ecg|ekg|stemi|心室顫動|vf|vt|心室頻脈|房室傳導阻滯|av block|st段|導程)/i.test(fullText);
+  const isEcg = /(心電圖|\becg\b|\bekg\b|\bstemi\b|心室顫動|\bvf\b|\bvt\b|心室頻脈|房室傳導阻滯|av block|st段|導程)/i.test(fullText);
   if (isEcg) {
     const match33 = getChapterById('ch33');
     if (match33) return match33;
   }
 
   // ④ 心臟血管急症 (CH34)
-  const isCardio = /(急性冠心症|acs|心肌梗塞|心絞痛|心因性休克|主動脈剝離|心衰竭)/i.test(fullText);
+  const isCardio = /(急性冠心症|\bacs\b|心肌梗塞|心絞痛|心因性休克|主動脈剝離|心衰竭)/i.test(fullText);
   if (isCardio) {
     const match34 = getChapterById('ch34');
     if (match34) return match34;
   }
 
   // ⑤ 困難呼吸道與通氣技術 (CH15)
-  const isAirwayTech = /(氣管內管|插管|聲門上呼吸道|sga|lma|burp|lemon|甦醒球|bvm|環甲膜)/i.test(fullText);
+  const isAirwayTech = /(氣管內管|插管|聲門上呼吸道|\bsga\b|\blma\b|\bburp\b|\blemon\b|甦醒球|\bbvm\b|環甲膜)/i.test(fullText);
   if (isAirwayTech) {
     const match15 = getChapterById('ch15');
     if (match15) return match15;
@@ -2159,14 +2280,14 @@ function resolveQuestionChapter(q) {
   }
 
   // ⑦ 神經急症與腦中風 (CH36)
-  const isNeuro = /(腦中風|辛辛那提|cpss|lams|lvo|大血管阻塞|tpa|血栓溶解|癲癇重積)/i.test(fullText);
+  const isNeuro = /(腦中風|辛辛那提|\bcpss\b|\blams\b|\blvo\b|大血管阻塞|\btpa\b|血栓溶解|癲癇重積)/i.test(fullText);
   if (isNeuro) {
     const match36 = getChapterById('ch36');
     if (match36) return match36;
   }
 
   // ⑧ 新生兒與小兒急症 (CH48)
-  const isPeds = /(新生兒急救|小兒急症|小兒|兒童|pat|小兒三角|nrp)/i.test(fullText);
+  const isPeds = /(新生兒急救|小兒急症|小兒|兒童|\bpat\b|小兒三角|\bnrp\b)/i.test(fullText);
   if (isPeds) {
     const match48 = getChapterById('ch48');
     if (match48) return match48;
@@ -2186,25 +2307,6 @@ function resolveQuestionChapter(q) {
     if (match44) return match44;
   }
 
-  // 2. 出處明確引用匹配 (例如【出處：大白 CHxx】)
-  const explCitationMatch = (q.explanation || '').match(/(?:大白|教科書)\s*(?:CH|第)\s*([0-9]{1,2})/i);
-  if (explCitationMatch) {
-    const cid = `ch${String(parseInt(explCitationMatch[1], 10)).padStart(2, '0')}`;
-    const matched = getChapterById(cid);
-    if (matched) return matched;
-  }
-
-  // 3. 原 chId / chNum 匹配 (若未被關鍵字攔截且符合標準)
-  if (q.chId) {
-    const matched = getChapterById(q.chId);
-    if (matched) {
-      // 額外防呆：若 q.chId 是 ch41 但標題包含毒物
-      if (q.chId.toLowerCase() === 'ch41' && /毒/i.test(q.chTitle || '')) {
-        return getChapterById('ch50');
-      }
-      return matched;
-    }
-  }
 
   // 4. 章節標題關鍵字匹配
   for (const c of CHAPTER_CATALOG) {
@@ -2213,7 +2315,7 @@ function resolveQuestionChapter(q) {
     }
   }
 
-  // 兜底預設
+    // 兜底預設
   return { chId: 'ch01', num: 'CH01', chNum: 'CH01', title: '緊急醫療救護體系概論', chTitle: '緊急醫療救護體系概論' };
 }
 
@@ -2222,9 +2324,24 @@ function sanitizeStoredQuizzes() {
   let dirtyWrong = false;
 
   // 1. 校驗並修復 state.wrongQuestions
+  //   官方題（id 在 all_quizzes.json 裡）一律以題庫為準：章節、段落、頁碼、校正過的題目文字
+  //   都直接覆蓋，不再跑關鍵字規則——舊版曾把「Patient-centered」當成小兒 PAT 而誤歸 CH48。
+  const canon = new Map();
+  (state.allQuizzes || []).forEach(c => { if (c && c.id && !c.isAiGenerated) canon.set(String(c.id), c); });
+  const CANON_KEYS = ['question', 'options', 'answer', 'explanation', 'chId', 'chNum', 'chapter', 'chapterTitle',
+                      'secIdx', 'secTitle', 'page', 'pdfPage', 'source', 'sourceLabel', 'year', 'qnum'];
   if (Array.isArray(state.wrongQuestions)) {
     state.wrongQuestions.forEach(q => {
       if (!q) return;
+      const c = canon.get(String(q.id));
+      if (c && !q.isAiGenerated) {
+        CANON_KEYS.forEach(k => {
+          if (c[k] !== undefined && JSON.stringify(q[k]) !== JSON.stringify(c[k])) { q[k] = c[k]; dirtyWrong = true; }
+        });
+        const title = c.chapterTitle || q.chTitle || '';
+        if (q.chTitle !== title) { q.chTitle = title; dirtyWrong = true; }
+        return;
+      }
       const resolved = resolveQuestionChapter(q);
       if (q.chId !== resolved.chId || q.chTitle !== resolved.chTitle || q.chNum !== resolved.chNum) {
         q.chId = resolved.chId;
@@ -2640,6 +2757,7 @@ function filterWrongBook() {
         <div class="full-expl-container" style="display:none">
           <div class="full-expl-divider"></div>
           <div class="full-expl-title">📋 完整教材／法規詳解：</div>
+          ${renderQuizPageLine(q)}
           <div class="full-expl-content">${escapeHtml(q.explanation || '暫無完整解析')}</div>
         </div>
       </div>
@@ -2648,6 +2766,7 @@ function filterWrongBook() {
       </div>
     `;
     listEl.appendChild(card);
+    if (!q.page && q.chId) resolveQuestionSection(q);   // AI 題：補齊段落與教科書頁碼
   });
 }
 

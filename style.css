@@ -3012,3 +3012,14 @@ body {
   25%, 60% { background: var(--orange-light); }
 }
 .sec-flash { animation: secFlash 1.8s ease; border-radius: 6px; }
+
+/* ── 詳解裡的教科書頁碼行 ─────────────────────────────── */
+.expl-page {
+  font-size: 0.8rem; font-weight: 700; color: var(--blue);
+  background: var(--clinical-bg); border: 1px solid var(--blue-border);
+  border-radius: 6px; padding: 5px 10px; margin: 6px 0 10px; display: inline-block;
+}
+.expl-page b { color: var(--orange); }
+.expl-page.muted { color: var(--text-muted); background: transparent; border-style: dashed; font-weight: 600; }
+
+.expl-page .expl-guess{margin-left:6px;font-size:.72em;padding:1px 6px;border-radius:8px;background:var(--tag-bg,rgba(127,127,127,.15));opacity:.8}
