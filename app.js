@@ -111,6 +111,7 @@ async function init() {
     state.readChapters.clear();
     localStorage.setItem('red_initialized_v3', '1');
   }
+  document.body.classList.add('mode-1');
   applyTheme(state.theme);
   await loadChapterIndex();
   await loadAllQuizzes();
@@ -119,6 +120,7 @@ async function init() {
   bindEvents();
   initMode2();
   initPwaInstallPrompt();
+  initLandscapeController();
 }
 
 // ── Load all past exams for Mode 2 ────────────────────
@@ -195,6 +197,7 @@ async function selectChapter(chId) {
 
   // Auto close mobile sidebar on select
   closeMobileSidebar();
+  toggleLandscapeHeader(false);
 
   // Update sidebar active state
   $$('.ch-item').forEach(el => el.classList.remove('active'));
@@ -1205,6 +1208,9 @@ async function callGeminiApi(prompt, jsonMode = false, apiKey = state.geminiApiK
 // ── 模式切換 ─────────────────────────────────────────
 function switchMode(mode) {
   state.currentMode = mode;
+  document.body.classList.toggle('mode-1', mode === 1);
+  document.body.classList.toggle('mode-2', mode === 2);
+  toggleLandscapeHeader(false);
   if (mode === 1) {
     $('#mode1-btn')?.classList.add('active');
     $('#mode2-btn')?.classList.remove('active');
@@ -3086,6 +3092,102 @@ function closeImageModal() {
 
 window.openImageModal = openImageModal;
 window.closeImageModal = closeImageModal;
+
+// ── 行動端橫向全螢幕沉浸閱讀控制器 ──
+function isMobileLandscape() {
+  return window.matchMedia('(orientation: landscape) and (max-height: 500px)').matches;
+}
+
+function toggleLandscapeHeader(forceState) {
+  const isOpen = (typeof forceState === 'boolean')
+    ? forceState
+    : !document.body.classList.contains('landscape-header-open');
+
+  document.body.classList.toggle('landscape-header-open', isOpen);
+
+  const iconEl = document.getElementById('landscape-pull-icon');
+  const textEl = document.getElementById('landscape-pull-text');
+  if (iconEl) iconEl.textContent = isOpen ? '▲' : '▼';
+  if (textEl) textEl.textContent = isOpen ? '收起' : '選單';
+}
+
+function initLandscapeController() {
+  // 1. 監聽滾動：向下滾動自動隱藏，向上回拉或到頂部時自動展開
+  let lastScrollTop = 0;
+  let scrollTicking = false;
+
+  const mainEl = els.mainContent || document.getElementById('main-content');
+  if (mainEl) {
+    mainEl.addEventListener('scroll', () => {
+      if (!isMobileLandscape() || state.currentMode !== 1) return;
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          const st = mainEl.scrollTop;
+          // 滑到頂端 (5px 內) 直接展開選單
+          if (st <= 5) {
+            toggleLandscapeHeader(true);
+          } else if (st > lastScrollTop + 15 && st > 40) {
+            // 向下閱讀滾動超過 15px：自動收起
+            toggleLandscapeHeader(false);
+          } else if (lastScrollTop - st > 30) {
+            // 向上回拉滾動超過 30px：自動喚出選單
+            toggleLandscapeHeader(true);
+          }
+          lastScrollTop = Math.max(0, st);
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+  }
+
+  // 2. 螢幕頂緣觸控下拉手勢感知 (Swipe down from top edge)
+  let touchStartY = 0;
+  let touchStartX = 0;
+  window.addEventListener('touchstart', (e) => {
+    if (!isMobileLandscape() || state.currentMode !== 1) return;
+    const touch = e.touches[0];
+    if (touch) {
+      touchStartY = touch.clientY;
+      touchStartX = touch.clientX;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isMobileLandscape() || state.currentMode !== 1) return;
+    const touch = e.touches[0];
+    if (touch && touchStartY <= 50) {
+      const deltaY = touch.clientY - touchStartY;
+      const deltaX = Math.abs(touch.clientX - touchStartX);
+      // 由螢幕頂部 50px 內向下拖動超過 30px，且垂直大於水平：喚出選單
+      if (deltaY > 30 && deltaY > deltaX) {
+        toggleLandscapeHeader(true);
+      }
+    }
+  }, { passive: true });
+
+  // 3. 旋轉螢幕與視窗尺寸變化監聽
+  window.addEventListener('resize', () => {
+    if (!isMobileLandscape()) {
+      // 回到直向或桌面時清除狀態
+      document.body.classList.remove('landscape-header-open');
+      const iconEl = document.getElementById('landscape-pull-icon');
+      const textEl = document.getElementById('landscape-pull-text');
+      if (iconEl) iconEl.textContent = '▼';
+      if (textEl) textEl.textContent = '選單';
+    }
+  });
+
+  if (window.screen && window.screen.orientation) {
+    window.screen.orientation.addEventListener('change', () => {
+      if (!isMobileLandscape()) {
+        document.body.classList.remove('landscape-header-open');
+      }
+    });
+  }
+}
+
+window.toggleLandscapeHeader = toggleLandscapeHeader;
 
 // Keyboard shortcuts (Esc to close modals)
 document.addEventListener('keydown', (e) => {
