@@ -186,6 +186,9 @@ function buildSidebar() {
 
 // ── Select chapter ────────────────────────────────────
 async function selectChapter(chId) {
+  if (window.podcastPlayer) {
+    podcastPlayer.stop();
+  }
   if (state.currentMode === 2) {
     switchMode(1);
   }
@@ -267,6 +270,11 @@ async function loadChapterData(chId) {
   // Render notes (includes inline quizzes)
   els.notesContent.innerHTML = renderNotes(cd, chId);
 
+  // Init podcast player for this chapter
+  if (window.podcastPlayer) {
+    podcastPlayer.init(chId, cd);
+  }
+
   // Render summary
   els.summaryContent.innerHTML = renderSummary(cd);
 }
@@ -321,6 +329,57 @@ function renderNotes(cd, chId) {
           <span class="overlay-btn">🔍 點擊展開全螢幕高清探索</span>
         </div>
       </div>
+    </div>`;
+
+  // ②-2 本章專屬 Podcast 導讀播放器 (Dual-Mode: MP3 / AI 語音導讀)
+  html += `
+    <div id="chapter-podcast-card" class="chapter-podcast-card">
+      <div class="podcast-card-header">
+        <div class="podcast-badge">
+          <span class="podcast-badge-icon">🎙️</span>
+          <span class="podcast-badge-text">章節導讀 Podcast</span>
+          <span id="podcast-mode-tag" class="podcast-mode-tag">AI 臨床講堂</span>
+        </div>
+        <button id="podcast-speed-btn" class="podcast-speed-btn" onclick="podcastPlayer.cycleSpeed()" title="點擊切換播放倍速">1.0x</button>
+      </div>
+      <div class="podcast-body">
+        <div class="podcast-cover">
+          <span>🎧</span>
+          <div class="podcast-equalizer">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+        </div>
+        <div class="podcast-info">
+          <div class="podcast-title">${escapeHtml(cd.num)} ${escapeHtml(cd.title)}</div>
+          <div class="podcast-subtitle">
+            <span id="podcast-subtitle-text">雙向臨床導讀 ‧ 核心觀念與國考避坑講義</span>
+          </div>
+        </div>
+      </div>
+      <div class="podcast-progress-section">
+        <input type="range" id="podcast-scrubber" class="podcast-scrubber" min="0" max="100" value="0" step="0.1" oninput="podcastPlayer.onSeekInput(this.value)" onchange="podcastPlayer.onSeekChange(this.value)">
+        <div class="podcast-time-row">
+          <span id="podcast-time-cur">00:00</span>
+          <span id="podcast-time-dur">--:--</span>
+        </div>
+      </div>
+      <div class="podcast-controls">
+        <button class="podcast-ctrl-btn btn-skip" onclick="podcastPlayer.skip(-15)" title="倒退 15 秒">
+          <span>⏪</span>
+          <span style="font-size:0.6rem">15s</span>
+        </button>
+        <button id="podcast-play-btn" class="podcast-ctrl-btn btn-play-main" onclick="podcastPlayer.togglePlay()" title="播放 / 暫停">
+          ▶
+        </button>
+        <button class="podcast-ctrl-btn btn-skip" onclick="podcastPlayer.skip(15)" title="快轉 15 秒">
+          <span>⏩</span>
+          <span style="font-size:0.6rem">15s</span>
+        </button>
+      </div>
+      <audio id="chapter-audio-el" preload="metadata" style="display:none"></audio>
     </div>`;
 
   let secNum = 1;
@@ -1230,6 +1289,9 @@ async function callGeminiApi(prompt, jsonMode = false, apiKey = state.geminiApiK
 
 // ── 模式切換 ─────────────────────────────────────────
 function switchMode(mode) {
+  if (window.podcastPlayer) {
+    podcastPlayer.stop();
+  }
   state.currentMode = mode;
   document.body.classList.toggle('mode-1', mode === 1);
   document.body.classList.toggle('mode-2', mode === 2);
@@ -3115,6 +3177,292 @@ function closeImageModal() {
 
 window.openImageModal = openImageModal;
 window.closeImageModal = closeImageModal;
+
+// ── Chapter Podcast Player (Dual-Mode: MP3 / Web Speech) ──
+const podcastPlayer = {
+  currentChId: null,
+  isPlaying: false,
+  mode: 'speech', // 'audio' (mp3 file) | 'speech' (Web Speech API)
+  speed: parseFloat(localStorage.getItem('podcast_speed') || '1.0'),
+  speeds: [1.0, 1.25, 1.5, 2.0],
+  audioEl: null,
+  speechSynth: window.speechSynthesis || null,
+  speechUtterance: null,
+  speechText: '',
+  progressTimer: null,
+  virtualCurrentTime: 0,
+  virtualDuration: 180,
+
+  init(chId, chapterData) {
+    this.stop();
+    this.currentChId = chId;
+    this.audioEl = document.getElementById('chapter-audio-el');
+    this.virtualCurrentTime = 0;
+    this.updateSpeedUI();
+
+    // Check if MP3 file exists
+    const mp3Url = dataUrl(`audio/podcasts/${chId}.mp3`);
+    if (this.audioEl) {
+      this.audioEl.src = mp3Url;
+      this.audioEl.playbackRate = this.speed;
+
+      this.audioEl.onloadedmetadata = () => {
+        this.mode = 'audio';
+        const tag = document.getElementById('podcast-mode-tag');
+        if (tag) tag.textContent = 'MP3 原聲廣播';
+        const sub = document.getElementById('podcast-subtitle-text');
+        if (sub) sub.textContent = 'NotebookLM 雙人深度對談原聲錄音';
+        const dur = document.getElementById('podcast-time-dur');
+        if (dur) dur.textContent = this.formatTime(this.audioEl.duration);
+      };
+
+      this.audioEl.onerror = () => {
+        this.mode = 'speech';
+        const tag = document.getElementById('podcast-mode-tag');
+        if (tag) tag.textContent = 'AI 智慧語音';
+        const sub = document.getElementById('podcast-subtitle-text');
+        if (sub) sub.textContent = 'AI 臨床重點精華快讀導讀電台';
+      };
+
+      this.audioEl.ontimeupdate = () => {
+        if (this.mode === 'audio' && this.isPlaying) {
+          this.updateAudioProgress();
+        }
+      };
+
+      this.audioEl.onended = () => {
+        this.stop();
+      };
+    }
+
+    this.prepareSpeechScript(chapterData);
+  },
+
+  prepareSpeechScript(cd) {
+    if (!cd) return;
+    const parts = [];
+    parts.push(`歡迎收聽高級救護技術員重點導讀電台。今天我們來探討 ${cd.num}，${cd.title}。`);
+    
+    if (cd.learningGoals && cd.learningGoals.length) {
+      parts.push(`本章學習目標包含：${cd.learningGoals.slice(0, 4).join('。')}。`);
+    }
+
+    if (cd.keywords && cd.keywords.length) {
+      const kwList = cd.keywords.slice(0, 5).map(k => `${k.zh}，也就是 ${k.en || ''}，定義是：${k.def || ''}`).join('。');
+      parts.push(`在核心觀念部分，必須掌握的專有名詞有：${kwList}。`);
+    }
+
+    if (cd.content && cd.content.length) {
+      const orangeSections = cd.content.filter(b => b.type === 'orange' && !['情境', '解答', '複習思考題'].includes(b.text)).map(b => b.text);
+      if (orangeSections.length) {
+        parts.push(`本章主要核心大綱分為：${orangeSections.slice(0, 5).join('、')}。請在複習時特別注意各環節的臨床處置順序與鑑別重點。`);
+      }
+    }
+
+    parts.push(`以上是 ${cd.num} 的核心重點快讀，祝您複習順利！`);
+    this.speechText = parts.join('\n');
+    this.virtualDuration = Math.max(60, Math.round(this.speechText.length / 4));
+    const dur = document.getElementById('podcast-time-dur');
+    if (dur && this.mode === 'speech') {
+      dur.textContent = this.formatTime(this.virtualDuration);
+    }
+  },
+
+  togglePlay() {
+    if (this.isPlaying) {
+      this.pause();
+    } else {
+      this.play();
+    }
+  },
+
+  play() {
+    if (this.mode === 'audio' && this.audioEl && this.audioEl.src && !this.audioEl.error) {
+      this.audioEl.playbackRate = this.speed;
+      this.audioEl.play().then(() => {
+        this.setPlayingState(true);
+      }).catch(() => {
+        this.mode = 'speech';
+        this.playSpeech();
+      });
+    } else {
+      this.playSpeech();
+    }
+  },
+
+  playSpeech() {
+    if (!this.speechSynth) {
+      alert('您的瀏覽器不支援語音合成功能，建議使用 Chrome 或 Safari 瀏覽器。');
+      return;
+    }
+
+    if (this.speechSynth.paused) {
+      this.speechSynth.resume();
+      this.setPlayingState(true);
+      this.startVirtualTimer();
+      return;
+    }
+
+    this.speechSynth.cancel();
+    const ratio = this.virtualDuration > 0 ? (this.virtualCurrentTime / this.virtualDuration) : 0;
+    const startChar = Math.floor(this.speechText.length * ratio);
+    const textToSpeak = this.speechText.slice(startChar) || this.speechText;
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = 'zh-TW';
+    utterance.rate = this.speed;
+
+    const voices = this.speechSynth.getVoices();
+    const twVoice = voices.find(v => v.lang === 'zh-TW' || v.lang === 'zh_TW') ||
+                    voices.find(v => v.lang.startsWith('zh'));
+    if (twVoice) utterance.voice = twVoice;
+
+    utterance.onend = () => {
+      this.stop();
+    };
+
+    utterance.onerror = () => {
+      this.stop();
+    };
+
+    this.speechUtterance = utterance;
+    this.speechSynth.speak(utterance);
+    this.setPlayingState(true);
+    this.startVirtualTimer();
+  },
+
+  pause() {
+    if (this.mode === 'audio' && this.audioEl) {
+      this.audioEl.pause();
+    } else if (this.speechSynth) {
+      this.speechSynth.pause();
+    }
+    this.setPlayingState(false);
+    this.stopVirtualTimer();
+  },
+
+  stop() {
+    if (this.audioEl) {
+      this.audioEl.pause();
+      this.audioEl.currentTime = 0;
+    }
+    if (this.speechSynth) {
+      this.speechSynth.cancel();
+    }
+    this.setPlayingState(false);
+    this.stopVirtualTimer();
+    this.virtualCurrentTime = 0;
+    this.updateProgressUI(0, this.mode === 'audio' && this.audioEl?.duration ? this.audioEl.duration : this.virtualDuration);
+  },
+
+  setPlayingState(isPlaying) {
+    this.isPlaying = isPlaying;
+    const card = document.getElementById('chapter-podcast-card');
+    const playBtn = document.getElementById('podcast-play-btn');
+    if (card) {
+      card.classList.toggle('is-playing', isPlaying);
+    }
+    if (playBtn) {
+      playBtn.textContent = isPlaying ? '⏸' : '▶';
+    }
+  },
+
+  skip(seconds) {
+    if (this.mode === 'audio' && this.audioEl) {
+      this.audioEl.currentTime = Math.max(0, Math.min(this.audioEl.duration || 0, this.audioEl.currentTime + seconds));
+      this.updateAudioProgress();
+    } else {
+      this.virtualCurrentTime = Math.max(0, Math.min(this.virtualDuration, this.virtualCurrentTime + seconds));
+      this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
+      if (this.isPlaying && this.speechSynth) {
+        this.playSpeech();
+      }
+    }
+  },
+
+  onSeekInput(val) {
+    const ratio = parseFloat(val) / 100;
+    const duration = this.mode === 'audio' && this.audioEl?.duration ? this.audioEl.duration : this.virtualDuration;
+    const curSpan = document.getElementById('podcast-time-cur');
+    if (curSpan) curSpan.textContent = this.formatTime(duration * ratio);
+  },
+
+  onSeekChange(val) {
+    const ratio = parseFloat(val) / 100;
+    const duration = this.mode === 'audio' && this.audioEl?.duration ? this.audioEl.duration : this.virtualDuration;
+    const targetTime = duration * ratio;
+    if (this.mode === 'audio' && this.audioEl) {
+      this.audioEl.currentTime = targetTime;
+    } else {
+      this.virtualCurrentTime = targetTime;
+      if (this.isPlaying && this.speechSynth) {
+        this.playSpeech();
+      }
+    }
+  },
+
+  cycleSpeed() {
+    const idx = this.speeds.indexOf(this.speed);
+    const nextIdx = (idx + 1) % this.speeds.length;
+    this.speed = this.speeds[nextIdx];
+    localStorage.setItem('podcast_speed', this.speed.toString());
+    this.updateSpeedUI();
+    if (this.mode === 'audio' && this.audioEl) {
+      this.audioEl.playbackRate = this.speed;
+    } else if (this.isPlaying && this.speechSynth) {
+      this.playSpeech();
+    }
+  },
+
+  updateSpeedUI() {
+    const btn = document.getElementById('podcast-speed-btn');
+    if (btn) btn.textContent = `${this.speed}x`;
+  },
+
+  startVirtualTimer() {
+    this.stopVirtualTimer();
+    this.progressTimer = setInterval(() => {
+      this.virtualCurrentTime += 0.5 * this.speed;
+      if (this.virtualCurrentTime >= this.virtualDuration) {
+        this.stop();
+      } else {
+        this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
+      }
+    }, 500);
+  },
+
+  stopVirtualTimer() {
+    if (this.progressTimer) {
+      clearInterval(this.progressTimer);
+      this.progressTimer = null;
+    }
+  },
+
+  updateAudioProgress() {
+    if (!this.audioEl) return;
+    this.updateProgressUI(this.audioEl.currentTime, this.audioEl.duration || 1);
+  },
+
+  updateProgressUI(current, total) {
+    const scrubber = document.getElementById('podcast-scrubber');
+    const curSpan = document.getElementById('podcast-time-cur');
+    const durSpan = document.getElementById('podcast-time-dur');
+    if (scrubber && total > 0) {
+      scrubber.value = ((current / total) * 100).toFixed(1);
+    }
+    if (curSpan) curSpan.textContent = this.formatTime(current);
+    if (durSpan && total > 0) durSpan.textContent = this.formatTime(total);
+  },
+
+  formatTime(secs) {
+    if (!secs || isNaN(secs)) return '00:00';
+    const m = Math.floor(secs / 60);
+    const s = Math.floor(secs % 60);
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+};
+
+window.podcastPlayer = podcastPlayer;
 
 // ── Chapter Mindmap Modal Controller (Zoom & Pan Lightbox) ──
 const mindmapViewer = {
