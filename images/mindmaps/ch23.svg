@@ -1,0 +1,358 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 2252" width="100%" height="100%" style="background: transparent;">
+  <defs>
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <filter id="drop-shadow-lg" x="-15%" y="-15%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Connectors -->
+  <g class="connectors">
+    <path d="M 310 1126.0 C 341.5 1126.0, 348.5 320.0, 380 320.0" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 320.0 C 636.0 320.0, 644.0 152.0, 680 152.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 152.0 C 951.5 152.0, 958.5 104.0, 990 104.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 152.0 C 951.5 152.0, 958.5 152.0, 990 152.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 152.0 C 951.5 152.0, 958.5 200.0, 990 200.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 248.0, 680 248.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 248.0 C 951.5 248.0, 958.5 248.0, 990 248.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 344.0, 680 344.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 344.0 C 951.5 344.0, 958.5 296.0, 990 296.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 344.0 C 951.5 344.0, 958.5 344.0, 990 344.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 344.0 C 951.5 344.0, 958.5 392.0, 990 392.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 488.0, 680 488.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 488.0 C 951.5 488.0, 958.5 440.0, 990 440.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 488.0 C 951.5 488.0, 958.5 488.0, 990 488.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 488.0 C 951.5 488.0, 958.5 536.0, 990 536.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1126.0 C 341.5 1126.0, 348.5 848.0, 380 848.0" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 848.0 C 636.0 848.0, 644.0 632.0, 680 632.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 632.0 C 951.5 632.0, 958.5 584.0, 990 584.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 632.0 C 951.5 632.0, 958.5 632.0, 990 632.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 632.0 C 951.5 632.0, 958.5 680.0, 990 680.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 848.0 C 636.0 848.0, 644.0 776.0, 680 776.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 776.0 C 951.5 776.0, 958.5 728.0, 990 728.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 776.0 C 951.5 776.0, 958.5 776.0, 990 776.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 776.0 C 951.5 776.0, 958.5 824.0, 990 824.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 848.0 C 636.0 848.0, 644.0 920.0, 680 920.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 920.0 C 951.5 920.0, 958.5 872.0, 990 872.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 920.0 C 951.5 920.0, 958.5 920.0, 990 920.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 920.0 C 951.5 920.0, 958.5 968.0, 990 968.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 848.0 C 636.0 848.0, 644.0 1064.0, 680 1064.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1064.0 C 951.5 1064.0, 958.5 1016.0, 990 1016.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1064.0 C 951.5 1064.0, 958.5 1064.0, 990 1064.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1064.0 C 951.5 1064.0, 958.5 1112.0, 990 1112.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1126.0 C 341.5 1126.0, 348.5 1376.0, 380 1376.0" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1376.0 C 636.0 1376.0, 644.0 1208.0, 680 1208.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1208.0 C 951.5 1208.0, 958.5 1160.0, 990 1160.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1208.0 C 951.5 1208.0, 958.5 1208.0, 990 1208.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1208.0 C 951.5 1208.0, 958.5 1256.0, 990 1256.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1376.0 C 636.0 1376.0, 644.0 1352.0, 680 1352.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1352.0 C 951.5 1352.0, 958.5 1304.0, 990 1304.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1352.0 C 951.5 1352.0, 958.5 1352.0, 990 1352.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1352.0 C 951.5 1352.0, 958.5 1400.0, 990 1400.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1376.0 C 636.0 1376.0, 644.0 1496.0, 680 1496.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1448.0, 990 1448.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1496.0, 990 1496.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1544.0, 990 1544.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1376.0 C 636.0 1376.0, 644.0 1592.0, 680 1592.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 310 1126.0 C 341.5 1126.0, 348.5 1760.0, 380 1760.0" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1760.0 C 636.0 1760.0, 644.0 1688.0, 680 1688.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1688.0 C 951.5 1688.0, 958.5 1640.0, 990 1640.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1688.0 C 951.5 1688.0, 958.5 1688.0, 990 1688.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1688.0 C 951.5 1688.0, 958.5 1736.0, 990 1736.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1760.0 C 636.0 1760.0, 644.0 1832.0, 680 1832.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1832.0 C 951.5 1832.0, 958.5 1784.0, 990 1784.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1832.0 C 951.5 1832.0, 958.5 1832.0, 990 1832.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1832.0 C 951.5 1832.0, 958.5 1880.0, 990 1880.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1126.0 C 341.5 1126.0, 348.5 2048.0, 380 2048.0" fill="none" stroke="#e11d48" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 2048.0 C 636.0 2048.0, 644.0 1976.0, 680 1976.0" fill="none" stroke="#fda4af" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1976.0 C 951.5 1976.0, 958.5 1928.0, 990 1928.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1976.0 C 951.5 1976.0, 958.5 1976.0, 990 1976.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1976.0 C 951.5 1976.0, 958.5 2024.0, 990 2024.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 2048.0 C 636.0 2048.0, 644.0 2120.0, 680 2120.0" fill="none" stroke="#fda4af" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 2120.0 C 951.5 2120.0, 958.5 2072.0, 990 2072.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2120.0 C 951.5 2120.0, 958.5 2120.0, 990 2120.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2120.0 C 951.5 2120.0, 958.5 2168.0, 990 2168.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Nodes -->
+  <g class="nodes">
+    
+    <g class="node root-node" transform="translate(60, 1087.0)">
+      <defs>
+        <linearGradient id="rootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E87722"/>
+          <stop offset="100%" stop-color="#C2410C"/>
+        </linearGradient>
+      </defs>
+      <rect width="250" height="78" rx="16" fill="url(#rootGrad)" stroke="#ea580c" stroke-width="2" filter="url(#drop-shadow-lg)"/>
+      <text x="20" y="30" font-size="13" font-weight="800" fill="#fed7aa" letter-spacing="1">🧠 CH23 核心知識圖譜</text>
+      <text x="20" y="56" font-size="15.5" font-weight="800" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif">基本生命支持與急救</text>
+    </g>
+    
+    
+        <g class="node branch-node" transform="translate(380, 296.0)">
+          <rect width="220" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#2563eb"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#1e40af" font-family="system-ui, -apple-system, sans-serif">心肺復甦術與生存之鏈 ‧ 成人基本救命術</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 131.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">心肺復甦術的發展史</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 87.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">心肺復甦術(Cardiopulmonary Res…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 135.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">多種古老醫學技術的集合</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 183.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">人工呼吸的概念最早出現</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 227.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">自動體外去顫器的發展史</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 231.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">電擊去顫成為猝死病人急救的重要措施</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 323.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">生存之鏈</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 279.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">1992 年</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 327.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">國際復甦聯盟(International Liai…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 375.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">生存之鏈(chain of survival)</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 467.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">猝死四節律</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 423.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">時間</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 471.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">醫學證據顯示：這些病人若能在 4 分鐘內接受心肺復甦術，並且在 8 分鐘內…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 519.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">失去脈搏（意即心跳停止）</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 824.0)">
+          <rect width="220" height="48" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#059669"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#065f46" font-family="system-ui, -apple-system, sans-serif">高效能心肺復甦術(High Perfo…</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 611.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 567.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">高品質的 CPR 始終是無法取代的一環</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 615.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">院前救護對 CPR 要求已經從「高品質」進展到「高…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 663.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">透過團隊的完美合作、在細節上的要求，最小化壓胸間的…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 755.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">步驟1：任務前分工</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 711.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Leader 或主手在到達現場前，藉由派遣資訊推估…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 759.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">一同口頭推演急救流程並分派任務</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 807.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">減少救護人員對疑似 OHCA 病人的處置延遲或手忙…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 899.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">步驟2：全回彈式壓胸</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 855.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">每次壓胸回彈時，壓胸手的掌根完全離開病人胸部，確保胸部可以完全回彈。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 903.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">練習方式：先在急救安妮上以傳統式壓胸開始，進行幾循環後開始慢慢抬高掌根，間…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 951.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">壓胸時下方手指改輕貼在側胸，以輔助掌根在每次壓胸時可維持在正確位置。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1043.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">步驟3：電擊手懸停</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 999.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">AED 心律分析時，通氣手大喊：「分析心律，手懸停！」，壓胸手保持「手懸停…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1047.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">「快看」：通氣手專注 AED 分析，透過螢幕預判心律，如為可電擊心律，喊出…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1095.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">「電擊手勢」：通氣手一手手指擺至 AED 電擊鈕旁 standby；另一手…</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1352.0)">
+          <rect width="220" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#d97706"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#92400e" font-family="system-ui, -apple-system, sans-serif">體外循環復甦(Extracorpore…</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1187.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">何謂體外膜氧合(ECMO)</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1143.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">體外膜氧合(Extra-Corporeal Mem…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1191.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">葉克膜</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1239.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">支持心肺功能的技術</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1331.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">ECMO 於心搏停止的急救復甦中所扮演的角色</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1287.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">急救的首要目標就是盡可能恢復病人的循環功能，以維持…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1335.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">立即為病人放置機器建立體外膜氧合（即所謂的 E-C…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1383.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">保存病人的腦、心、肺、肝、腎等重要器官的循環</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1475.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">EMT 於 E-CPR 系統中所扮演的角色</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1431.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">會是首位接觸病人的專業急救人員</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1479.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">未來隨著醫療的進步，ECMO 機器的體積會越來越小，照護成本也將逐漸下降，…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1527.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">最新的復甦指引也支持 E-CPR 作為成人心搏停止病人的復甦策略，但前提是…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1571.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">台灣於到院前啟動 E-CPR 的挑戰</text>
+            </g>
+            
+        <g class="node branch-node" transform="translate(380, 1736.0)">
+          <rect width="220" height="48" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#7c3aed"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#5b21b6" font-family="system-ui, -apple-system, sans-serif">復甦後的急救措施 ‧ 情境解答</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1667.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1623.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">經急救且恢復自發性循環後</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1671.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">身體各部位的器官曾經歷一段時間的缺血和缺氧</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1719.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">血液重新灌流後</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1811.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1767.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">① 你會如何評估病人？優先做哪些事情？</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1815.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">優先評估病人呼吸及脈搏（專業人員檢查脈搏不超過 10 秒）。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1863.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">在評估時因病人為吃飯中倒下，需要注意嘴巴裡是否有異物。</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 2024.0)">
+          <rect width="220" height="48" rx="10" fill="#fff1f2" stroke="#e11d48" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#e11d48"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#9f1239" font-family="system-ui, -apple-system, sans-serif">重點整理 ‧ 參考資料</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1955.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fda4af" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1911.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">在病人猝死的瞬間，存活的機會端賴社區生存之鏈的良好運作；生存之鏈的關鍵，往…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1959.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">生存之鏈的六環節包括：「儘早求救」（派遣員應能提供線上指導，社區中可能取得…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2007.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">兒童由於生理構造與傷病原因與成人不同，故生存之鏈的內容與順序也有所差異，但…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 2099.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fda4af" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 2055.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">2020 American Heart Association Guide…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2103.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">European Resuscitation Council Guidel…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2151.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">2023 International Consensus on Cardi…</text>
+                </g>
+                
+  </g>
+</svg>

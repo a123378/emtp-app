@@ -1,0 +1,323 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 2012" width="100%" height="100%" style="background: transparent;">
+  <defs>
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <filter id="drop-shadow-lg" x="-15%" y="-15%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Connectors -->
+  <g class="connectors">
+    <path d="M 310 1006.0 C 341.5 1006.0, 348.5 344.0, 380 344.0" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 344.0 C 636.0 344.0, 644.0 128.0, 680 128.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 128.0 C 951.5 128.0, 958.5 104.0, 990 104.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 128.0 C 951.5 128.0, 958.5 152.0, 990 152.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 344.0 C 636.0 344.0, 644.0 248.0, 680 248.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 248.0 C 951.5 248.0, 958.5 200.0, 990 200.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 248.0 C 951.5 248.0, 958.5 248.0, 990 248.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 248.0 C 951.5 248.0, 958.5 296.0, 990 296.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 344.0 C 636.0 344.0, 644.0 392.0, 680 392.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 392.0 C 951.5 392.0, 958.5 344.0, 990 344.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 392.0 C 951.5 392.0, 958.5 392.0, 990 392.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 392.0 C 951.5 392.0, 958.5 440.0, 990 440.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 344.0 C 636.0 344.0, 644.0 536.0, 680 536.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 536.0 C 951.5 536.0, 958.5 488.0, 990 488.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 536.0 C 951.5 536.0, 958.5 536.0, 990 536.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 536.0 C 951.5 536.0, 958.5 584.0, 990 584.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1006.0 C 341.5 1006.0, 348.5 896.0, 380 896.0" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 896.0 C 636.0 896.0, 644.0 680.0, 680 680.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 680.0 C 951.5 680.0, 958.5 632.0, 990 632.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 680.0 C 951.5 680.0, 958.5 680.0, 990 680.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 680.0 C 951.5 680.0, 958.5 728.0, 990 728.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 896.0 C 636.0 896.0, 644.0 824.0, 680 824.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 824.0 C 951.5 824.0, 958.5 776.0, 990 776.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 824.0 C 951.5 824.0, 958.5 824.0, 990 824.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 824.0 C 951.5 824.0, 958.5 872.0, 990 872.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 896.0 C 636.0 896.0, 644.0 968.0, 680 968.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 968.0 C 951.5 968.0, 958.5 920.0, 990 920.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 968.0 C 951.5 968.0, 958.5 968.0, 990 968.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 968.0 C 951.5 968.0, 958.5 1016.0, 990 1016.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 896.0 C 636.0 896.0, 644.0 1112.0, 680 1112.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1112.0 C 951.5 1112.0, 958.5 1064.0, 990 1064.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1112.0 C 951.5 1112.0, 958.5 1112.0, 990 1112.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1112.0 C 951.5 1112.0, 958.5 1160.0, 990 1160.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1006.0 C 341.5 1006.0, 348.5 1424.0, 380 1424.0" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1424.0 C 636.0 1424.0, 644.0 1256.0, 680 1256.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1256.0 C 951.5 1256.0, 958.5 1208.0, 990 1208.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1256.0 C 951.5 1256.0, 958.5 1256.0, 990 1256.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1256.0 C 951.5 1256.0, 958.5 1304.0, 990 1304.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1424.0 C 636.0 1424.0, 644.0 1352.0, 680 1352.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 600 1424.0 C 636.0 1424.0, 644.0 1448.0, 680 1448.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1448.0 C 951.5 1448.0, 958.5 1400.0, 990 1400.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1448.0 C 951.5 1448.0, 958.5 1448.0, 990 1448.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1448.0 C 951.5 1448.0, 958.5 1496.0, 990 1496.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1424.0 C 636.0 1424.0, 644.0 1592.0, 680 1592.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1592.0 C 951.5 1592.0, 958.5 1544.0, 990 1544.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1592.0 C 951.5 1592.0, 958.5 1592.0, 990 1592.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1592.0 C 951.5 1592.0, 958.5 1640.0, 990 1640.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1006.0 C 341.5 1006.0, 348.5 1736.0, 380 1736.0" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1736.0 C 636.0 1736.0, 644.0 1736.0, 680 1736.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1736.0 C 951.5 1736.0, 958.5 1688.0, 990 1688.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1736.0 C 951.5 1736.0, 958.5 1736.0, 990 1736.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1736.0 C 951.5 1736.0, 958.5 1784.0, 990 1784.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1006.0 C 341.5 1006.0, 348.5 1880.0, 380 1880.0" fill="none" stroke="#e11d48" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1880.0 C 636.0 1880.0, 644.0 1880.0, 680 1880.0" fill="none" stroke="#fda4af" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1880.0 C 951.5 1880.0, 958.5 1832.0, 990 1832.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1880.0 C 951.5 1880.0, 958.5 1880.0, 990 1880.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1880.0 C 951.5 1880.0, 958.5 1928.0, 990 1928.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Nodes -->
+  <g class="nodes">
+    
+    <g class="node root-node" transform="translate(60, 967.0)">
+      <defs>
+        <linearGradient id="rootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E87722"/>
+          <stop offset="100%" stop-color="#C2410C"/>
+        </linearGradient>
+      </defs>
+      <rect width="250" height="78" rx="16" fill="url(#rootGrad)" stroke="#ea580c" stroke-width="2" filter="url(#drop-shadow-lg)"/>
+      <text x="20" y="30" font-size="13" font-weight="800" fill="#fed7aa" letter-spacing="1">🧠 CH28 核心知識圖譜</text>
+      <text x="20" y="56" font-size="15.5" font-weight="800" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif">胸部外傷</text>
+    </g>
+    
+    
+        <g class="node branch-node" transform="translate(380, 320.0)">
+          <rect width="220" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#2563eb"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#1e40af" font-family="system-ui, -apple-system, sans-serif">胸腔結構與呼吸生理 ‧ 胸部外傷之初步…</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 107.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 87.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">心臟、肺臟與大血管，受到胸廓完整的保護</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 135.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">當胸廓受創，即可能無法保護裡面的重要器官而發生致命…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 227.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">胸腔</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 183.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸腔(thoracic cavity) 位於人體的上半部，與頸部相通。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 231.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸腔下方有橫膈肌附著，將胸腔和腹腔分開。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 279.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">橫膈肌向上進入胸部，最高位可達第 4 肋；因此胸壁不僅保護胸部器官，亦同時…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 371.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">胸腔內主要器官</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 327.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸腔的主要功用是保護胸腔內的重要器官，例如肺部(lung)、食道(esop…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 375.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">兩肺葉之間藏起心臟及較大血管的空隙，稱為縱膈腔(mediastinum)。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 423.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">縱膈腔內的器官</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 515.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">肋膜與肋膜腔</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 471.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸腔兩側為肋膜(pleura)，是包圍著左右肺部外圍的一層漿膜。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 519.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">壁層肋膜(parietal pleura)：黏附在肋骨、胸骨、肋軟骨、肋間…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 567.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">臟層肋膜(visceral pleura)：黏附在肺部的表面。</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 872.0)">
+          <rect width="220" height="48" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#059669"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#065f46" font-family="system-ui, -apple-system, sans-serif">外傷超音波在胸部外傷之應用 ‧ 六種致…</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 659.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 615.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">超音波應用在診治外傷病人身上越來越有舉足輕重的地位。臨床身體診察固然非常重…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 663.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">美國一篇院前研究：共 51 位在院前接受針刺減壓的病人中，有 16 位（2…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 711.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">超音波可以提供更客觀及正確的即時診斷，且非侵入性、無輻射線暴露。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 803.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">① 張力性氣胸(tension pneum…</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 759.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">病生理如同「單向活瓣」：空氣由肺部漏出進入肋膜腔，但這些空氣無法回到肺部中…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 807.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">吸氣時活瓣開放空氣進入肋膜腔，呼氣時活瓣關閉空氣卻不能排出，使傷側肋膜腔內…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 855.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">壓迫肺部而使患側肺部塌陷；持續增大的壓力亦會把縱隔和氣管往對側壓迫，對心臟…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 947.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">張力性氣胸—高風險族群</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 903.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">任何胸部受傷的病人都有發展張力性氣胸的風險。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 951.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">很可能已經有氣胸的病人（例如有肋骨骨折徵象者）。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 999.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">已知有氣胸的病人（例如胸部有穿透性傷口者）。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1091.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">張力性氣胸—臨床徵候</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1047.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">呼吸困難</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1095.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">氣管偏向對側</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1143.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸部兩邊不對稱（患側脹大且無呼吸起伏）及患側呼吸聲變小或聽不到</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1400.0)">
+          <rect width="220" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#d97706"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#92400e" font-family="system-ui, -apple-system, sans-serif">胸部外傷個論 ‧ 情境解答</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1235.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">肋骨、胸骨及肩胛骨骨折(sternum, …</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1191.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">肋骨骨折相當常見。最常見的位置為中段第 3 至 8 根肋骨的側面，因為此處…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1239.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">單純的肋骨骨折很少致命，但某些情況暗示有高能量的外傷機轉，可能合併胸壁血腫…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1287.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">上段肋骨骨折（第 1 至 3 根）代表病人遭受高能量撞擊，可能隱藏其他嚴重…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1331.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">肋骨骨折—臨床徵候與救護處置</text>
+            </g>
+            
+            <g class="node subbranch-node" transform="translate(680, 1427.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">連枷胸(flail chest)</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1383.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">通常是因胸骨或外側的胸部受到撞擊引起。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1431.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">構成條件：兩根或以上相鄰的肋骨骨折至少兩處（必考定義）。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1479.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">連枷胸肋骨骨折因失去其兩端的肋骨支持和胸廓的依附，會出現呼氣時胸壁凸出、吸…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1571.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">連枷胸—臨床徵候</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1527.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">呼吸困難</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1575.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸壁骨折部位不穩定</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1623.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸壁兩側不對稱</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1712.0)">
+          <rect width="220" height="48" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#7c3aed"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#5b21b6" font-family="system-ui, -apple-system, sans-serif">問題交流 ‧ 重點整理</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1715.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1671.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸腔內主要器官有肺臟、氣管、食道、心臟、主動脈等，以橫膈膜與腹腔分隔。體表…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1719.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">呼吸中樞位於延腦，受許多刺激調控呼吸速率及深淺（血液二氧化碳濃度、血氧濃度…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1767.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胸部外傷病人初步評估如同其他外傷病人以 XABCDE 進行，辨識危急問題並…</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1856.0)">
+          <rect width="220" height="48" rx="10" fill="#fff1f2" stroke="#e11d48" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#e11d48"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#9f1239" font-family="system-ui, -apple-system, sans-serif">參考資料</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1859.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fda4af" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1815.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">The American College of Surgeons, ATL…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1863.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Mick J. Sanders, MSA, EMT-P. Mosby&#x27;s …</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1911.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">NAEMT, PHTLS Prehospital Trauma Life …</text>
+                </g>
+                
+  </g>
+</svg>

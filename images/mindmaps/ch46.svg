@@ -1,0 +1,418 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 2684" width="100%" height="100%" style="background: transparent;">
+  <defs>
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <filter id="drop-shadow-lg" x="-15%" y="-15%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Connectors -->
+  <g class="connectors">
+    <path d="M 310 1342.0 C 341.5 1342.0, 348.5 344.0, 380 344.0" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 344.0 C 636.0 344.0, 644.0 128.0, 680 128.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 128.0 C 951.5 128.0, 958.5 104.0, 990 104.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 128.0 C 951.5 128.0, 958.5 152.0, 990 152.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 344.0 C 636.0 344.0, 644.0 248.0, 680 248.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 248.0 C 951.5 248.0, 958.5 200.0, 990 200.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 248.0 C 951.5 248.0, 958.5 248.0, 990 248.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 248.0 C 951.5 248.0, 958.5 296.0, 990 296.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 344.0 C 636.0 344.0, 644.0 392.0, 680 392.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 392.0 C 951.5 392.0, 958.5 344.0, 990 344.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 392.0 C 951.5 392.0, 958.5 392.0, 990 392.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 392.0 C 951.5 392.0, 958.5 440.0, 990 440.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 344.0 C 636.0 344.0, 644.0 536.0, 680 536.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 536.0 C 951.5 536.0, 958.5 488.0, 990 488.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 536.0 C 951.5 536.0, 958.5 536.0, 990 536.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 536.0 C 951.5 536.0, 958.5 584.0, 990 584.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1342.0 C 341.5 1342.0, 348.5 896.0, 380 896.0" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 896.0 C 636.0 896.0, 644.0 680.0, 680 680.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 680.0 C 951.5 680.0, 958.5 632.0, 990 632.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 680.0 C 951.5 680.0, 958.5 680.0, 990 680.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 680.0 C 951.5 680.0, 958.5 728.0, 990 728.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 896.0 C 636.0 896.0, 644.0 824.0, 680 824.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 824.0 C 951.5 824.0, 958.5 776.0, 990 776.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 824.0 C 951.5 824.0, 958.5 824.0, 990 824.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 824.0 C 951.5 824.0, 958.5 872.0, 990 872.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 896.0 C 636.0 896.0, 644.0 968.0, 680 968.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 968.0 C 951.5 968.0, 958.5 920.0, 990 920.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 968.0 C 951.5 968.0, 958.5 968.0, 990 968.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 968.0 C 951.5 968.0, 958.5 1016.0, 990 1016.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 896.0 C 636.0 896.0, 644.0 1112.0, 680 1112.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1112.0 C 951.5 1112.0, 958.5 1064.0, 990 1064.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1112.0 C 951.5 1112.0, 958.5 1112.0, 990 1112.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1112.0 C 951.5 1112.0, 958.5 1160.0, 990 1160.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1342.0 C 341.5 1342.0, 348.5 1472.0, 380 1472.0" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1472.0 C 636.0 1472.0, 644.0 1256.0, 680 1256.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1256.0 C 951.5 1256.0, 958.5 1208.0, 990 1208.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1256.0 C 951.5 1256.0, 958.5 1256.0, 990 1256.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1256.0 C 951.5 1256.0, 958.5 1304.0, 990 1304.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1472.0 C 636.0 1472.0, 644.0 1400.0, 680 1400.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1400.0 C 951.5 1400.0, 958.5 1352.0, 990 1352.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1400.0 C 951.5 1400.0, 958.5 1400.0, 990 1400.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1400.0 C 951.5 1400.0, 958.5 1448.0, 990 1448.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1472.0 C 636.0 1472.0, 644.0 1544.0, 680 1544.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1544.0 C 951.5 1544.0, 958.5 1496.0, 990 1496.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1544.0 C 951.5 1544.0, 958.5 1544.0, 990 1544.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1544.0 C 951.5 1544.0, 958.5 1592.0, 990 1592.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1472.0 C 636.0 1472.0, 644.0 1688.0, 680 1688.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1688.0 C 951.5 1688.0, 958.5 1640.0, 990 1640.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1688.0 C 951.5 1688.0, 958.5 1688.0, 990 1688.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1688.0 C 951.5 1688.0, 958.5 1736.0, 990 1736.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1342.0 C 341.5 1342.0, 348.5 2048.0, 380 2048.0" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 2048.0 C 636.0 2048.0, 644.0 1832.0, 680 1832.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1832.0 C 951.5 1832.0, 958.5 1784.0, 990 1784.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1832.0 C 951.5 1832.0, 958.5 1832.0, 990 1832.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1832.0 C 951.5 1832.0, 958.5 1880.0, 990 1880.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 2048.0 C 636.0 2048.0, 644.0 1976.0, 680 1976.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1976.0 C 951.5 1976.0, 958.5 1928.0, 990 1928.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1976.0 C 951.5 1976.0, 958.5 1976.0, 990 1976.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1976.0 C 951.5 1976.0, 958.5 2024.0, 990 2024.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 2048.0 C 636.0 2048.0, 644.0 2120.0, 680 2120.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 2120.0 C 951.5 2120.0, 958.5 2072.0, 990 2072.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2120.0 C 951.5 2120.0, 958.5 2120.0, 990 2120.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2120.0 C 951.5 2120.0, 958.5 2168.0, 990 2168.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 2048.0 C 636.0 2048.0, 644.0 2264.0, 680 2264.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 2264.0 C 951.5 2264.0, 958.5 2216.0, 990 2216.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2264.0 C 951.5 2264.0, 958.5 2264.0, 990 2264.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2264.0 C 951.5 2264.0, 958.5 2312.0, 990 2312.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 1342.0 C 341.5 1342.0, 348.5 2480.0, 380 2480.0" fill="none" stroke="#e11d48" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 2480.0 C 636.0 2480.0, 644.0 2408.0, 680 2408.0" fill="none" stroke="#fda4af" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 2408.0 C 951.5 2408.0, 958.5 2360.0, 990 2360.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2408.0 C 951.5 2408.0, 958.5 2408.0, 990 2408.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2408.0 C 951.5 2408.0, 958.5 2456.0, 990 2456.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 2480.0 C 636.0 2480.0, 644.0 2552.0, 680 2552.0" fill="none" stroke="#fda4af" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 2552.0 C 951.5 2552.0, 958.5 2504.0, 990 2504.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2552.0 C 951.5 2552.0, 958.5 2552.0, 990 2552.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 2552.0 C 951.5 2552.0, 958.5 2600.0, 990 2600.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Nodes -->
+  <g class="nodes">
+    
+    <g class="node root-node" transform="translate(60, 1303.0)">
+      <defs>
+        <linearGradient id="rootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E87722"/>
+          <stop offset="100%" stop-color="#C2410C"/>
+        </linearGradient>
+      </defs>
+      <rect width="250" height="78" rx="16" fill="url(#rootGrad)" stroke="#ea580c" stroke-width="2" filter="url(#drop-shadow-lg)"/>
+      <text x="20" y="30" font-size="13" font-weight="800" fill="#fed7aa" letter-spacing="1">🧠 CH46 核心知識圖譜</text>
+      <text x="20" y="56" font-size="15.5" font-weight="800" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif">行為急症與精神急症</text>
+    </g>
+    
+    
+        <g class="node branch-node" transform="translate(380, 320.0)">
+          <rect width="220" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#2563eb"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#1e40af" font-family="system-ui, -apple-system, sans-serif">危機處置 ‧ 精神危機的態樣</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 107.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 87.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">病人急性混亂期間，需主動採取的短暫動作</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 135.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">處置目標：穩定情勢或病人情緒、動員現場人力資源、使病人情緒恢復正常。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 227.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">危機處置的五個步驟</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 183.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第一步：建立心理接觸──救護員必須先自我介紹並表達幫忙的意圖。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 231.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第二步：探索問題──藉由詢問以瞭解目前情勢並發現過去病史。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 279.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第三步：分析此次狀況可能的解決辦法。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 371.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">病人的情緒反應與攻擊型態</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 327.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">邏輯和理性思考能力會降低</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 375.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">解組性思考</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 423.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">偏執的想法</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 515.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">處理危機事件的三個技巧</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 471.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第一，減少外界刺激──讓病人遠離會引起激動之事件和人物。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 519.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第二，保持適當距離──與病人對話時建議保持至少 1.2 公尺以上距離，避免…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 567.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第三，動員親友協助──請家屬、朋友幫忙，動員可以幫助或勸服病人的親友到現場…</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 872.0)">
+          <rect width="220" height="48" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#059669"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#065f46" font-family="system-ui, -apple-system, sans-serif">言語降階技巧 ‧ 強制拘束</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 659.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 615.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">使用適當的言語降階技巧是至關重要的</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 663.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">穩定病人的情緒</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 711.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">最大程度地減少可能發生暴力衝突和傷害的機會</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 803.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">選擇策略(Decide)──選擇適合言語降…</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 759.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">病人是否適合言語降階</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 807.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">並非所有病人都能夠通過言語降階來穩定情緒</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 855.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">判斷的線索：病人是否有反應、是否能夠參與對話、是否存在即時的安全威脅。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 947.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">確保安全(Ensure Safety)──…</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 903.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">確保有足夠的後援，以應對可能出現的突發情況。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 951.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">清除現場所有可能被用作武器的物品（尖銳物品、重物等）。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 999.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">尊重病人的個人空間，保持兩個手臂的距離，避免過於接近病人，給予病人足夠空間…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1091.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">建立關係(Form Relationshi…</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1047.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">透過介紹自己、詢問病人的稱呼來建立初步的信任關係。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1095.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">使用簡短、簡單的句子，並詢問病人是否允許我們的幫助，讓病人感到被尊重和理解。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1143.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">切記不可說病人是精神病或神經病，以免激怒病人。</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1448.0)">
+          <rect width="220" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#d97706"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#92400e" font-family="system-ui, -apple-system, sans-serif">精神危機處理團隊 ‧ 精神危機的次級評估</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1235.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">精神危機的初級評估與行前評估</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1191.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">前往現場與警察、衛生單位配合接觸病人前，應做好行前…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1239.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">先清楚理解派遣令提供的資訊</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1287.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">詢問勤務指揮中心或與報案人進行三方通話確認案件資訊</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1379.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">團隊資源管理(TRM)</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1335.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">個案和周遭的人都可能有安全威脅，單一專業不足以保障…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1383.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">啟動警察、消防、衛生等跨局處的合作，各司其職</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1431.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">OHCA 案件所運用的團隊資源管理(Team Re…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1523.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">領導</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1479.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">CIT 團隊最重要的任務目標就是「安全」。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1527.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">要達到安全就需要各職類做好分工，並有明確的領導者，跟各職類溝通。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1575.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">領導者可以是帶隊或資深同仁，此人必須要有承擔責任及指揮分工的能力。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1667.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">溝通</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1623.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">提升團隊人員的安全、效率、士氣</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1671.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">沒有絕對的操作步驟</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1719.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">確保彼此有效地傾聽，以及資訊和資源被有效地傳遞和管理</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 2024.0)">
+          <rect width="220" height="48" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#7c3aed"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#5b21b6" font-family="system-ui, -apple-system, sans-serif">精神疾病各論 ‧ 情境解答</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1811.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">焦慮症──臨床案例</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1767.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">28 歲的江女士</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1815.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">胃翻滾合併頭暈冒冷汗</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1863.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">臉色蒼白、頭暈冒冷汗</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1955.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">焦慮症的特徵與分類</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1911.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">焦慮症為最常見的精神疾病</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1959.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">極度害怕和慮病</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2007.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">憤怒、失去自信、自尊心差、罪惡感</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 2099.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">焦慮症的鑑別診斷</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 2055.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">最重要的是找出可能伴隨的內科疾病</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2103.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">甲狀腺功能亢進、低血糖、肺栓塞、安非他命等藥物中毒…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2151.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">會有生命危險的內科急症</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 2243.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">焦慮症的常見原因</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 2199.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">生理激發狀態高──研究指出焦慮症病人的自主神經系統較一般人容易被激發。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2247.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">神經質傾向高、容易緊張或擔心性格的人容易罹患焦慮症。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2295.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">認知偏誤──容易把事情想得很嚴重，或認為事情不是黑就是白、沒有轉圜餘地。</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 2456.0)">
+          <rect width="220" height="48" rx="10" fill="#fff1f2" stroke="#e11d48" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#e11d48"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#9f1239" font-family="system-ui, -apple-system, sans-serif">重點整理 ‧ 參考資料</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 2387.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fda4af" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 2343.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">精神危機的狀態，可能是失去現實感、失去希望、失去控制、或失去穩定的想法。在…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2391.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">用「眼、耳、鼻、舌、身、意」的暴力風險評估工具，可以評估病人是否處於暴力行…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2439.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">適合的情況下，用 DEFUSE 言語降階技巧，可以穩定病人情緒，減少暴力風…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 2531.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fda4af" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 2487.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Mick J. Sanders, MSA, EMT-P. Mosby&#x27;s …</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2535.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Alice Dalton, Richard Allen Walker: M…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 2583.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">內政部消防署，中級救護技術員教科書第二版。內政部消防署出版。2021年。</text>
+                </g>
+                
+  </g>
+</svg>

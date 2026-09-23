@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 1628" width="100%" height="100%" style="background: transparent;">
+  <defs>
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <filter id="drop-shadow-lg" x="-15%" y="-15%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Connectors -->
+  <g class="connectors">
+    <path d="M 310 814.0 C 341.5 814.0, 348.5 320.0, 380 320.0" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 320.0 C 636.0 320.0, 644.0 104.0, 680 104.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 104.0 C 951.5 104.0, 958.5 104.0, 990 104.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 200.0, 680 200.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 200.0 C 951.5 200.0, 958.5 152.0, 990 152.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 200.0 C 951.5 200.0, 958.5 200.0, 990 200.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 200.0 C 951.5 200.0, 958.5 248.0, 990 248.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 344.0, 680 344.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 344.0 C 951.5 344.0, 958.5 296.0, 990 296.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 344.0 C 951.5 344.0, 958.5 344.0, 990 344.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 344.0 C 951.5 344.0, 958.5 392.0, 990 392.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 488.0, 680 488.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 488.0 C 951.5 488.0, 958.5 440.0, 990 440.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 488.0 C 951.5 488.0, 958.5 488.0, 990 488.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 488.0 C 951.5 488.0, 958.5 536.0, 990 536.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 814.0 C 341.5 814.0, 348.5 848.0, 380 848.0" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 848.0 C 636.0 848.0, 644.0 632.0, 680 632.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 632.0 C 951.5 632.0, 958.5 584.0, 990 584.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 632.0 C 951.5 632.0, 958.5 632.0, 990 632.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 632.0 C 951.5 632.0, 958.5 680.0, 990 680.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 848.0 C 636.0 848.0, 644.0 776.0, 680 776.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 776.0 C 951.5 776.0, 958.5 728.0, 990 728.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 776.0 C 951.5 776.0, 958.5 776.0, 990 776.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 776.0 C 951.5 776.0, 958.5 824.0, 990 824.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 848.0 C 636.0 848.0, 644.0 920.0, 680 920.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 920.0 C 951.5 920.0, 958.5 872.0, 990 872.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 920.0 C 951.5 920.0, 958.5 920.0, 990 920.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 920.0 C 951.5 920.0, 958.5 968.0, 990 968.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 848.0 C 636.0 848.0, 644.0 1064.0, 680 1064.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1064.0 C 951.5 1064.0, 958.5 1016.0, 990 1016.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1064.0 C 951.5 1064.0, 958.5 1064.0, 990 1064.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1064.0 C 951.5 1064.0, 958.5 1112.0, 990 1112.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 814.0 C 341.5 814.0, 348.5 1208.0, 380 1208.0" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1208.0 C 636.0 1208.0, 644.0 1208.0, 680 1208.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1208.0 C 951.5 1208.0, 958.5 1160.0, 990 1160.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1208.0 C 951.5 1208.0, 958.5 1208.0, 990 1208.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1208.0 C 951.5 1208.0, 958.5 1256.0, 990 1256.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 814.0 C 341.5 814.0, 348.5 1424.0, 380 1424.0" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1424.0 C 636.0 1424.0, 644.0 1352.0, 680 1352.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1352.0 C 951.5 1352.0, 958.5 1304.0, 990 1304.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1352.0 C 951.5 1352.0, 958.5 1352.0, 990 1352.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1352.0 C 951.5 1352.0, 958.5 1400.0, 990 1400.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1424.0 C 636.0 1424.0, 644.0 1496.0, 680 1496.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1448.0, 990 1448.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1496.0, 990 1496.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1544.0, 990 1544.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Nodes -->
+  <g class="nodes">
+    
+    <g class="node root-node" transform="translate(60, 775.0)">
+      <defs>
+        <linearGradient id="rootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E87722"/>
+          <stop offset="100%" stop-color="#C2410C"/>
+        </linearGradient>
+      </defs>
+      <rect width="250" height="78" rx="16" fill="url(#rootGrad)" stroke="#ea580c" stroke-width="2" filter="url(#drop-shadow-lg)"/>
+      <text x="20" y="30" font-size="13" font-weight="800" fill="#fed7aa" letter-spacing="1">🧠 CH52 核心知識圖譜</text>
+      <text x="20" y="56" font-size="15.5" font-weight="800" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif">大量病人與災難應變</text>
+    </g>
+    
+    
+        <g class="node branch-node" transform="translate(380, 296.0)">
+          <rect width="220" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#2563eb"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#1e40af" font-family="system-ui, -apple-system, sans-serif">什麼是「事故」？ ‧ 事故指揮系統</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 83.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 87.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">1996 年賀伯風災、1999 年 921 集集地…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 179.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">事件與事故的區別</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 135.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">事件(event)：指計劃好的、非急迫性的活動，例如球賽、音樂會、遊行等等。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 183.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">事故(incident)：指必須啟動緊急應變作為的意外事件，例如救護技術員…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 231.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">兩者在口語上常被混用，但對於緊急管理而言具有不同的意涵（圖52-1）。</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 323.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重大事故和災難的區別</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 279.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">出於意外嗎？</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 327.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">會造成重大效應、必須採取異常作為或額外資源嗎？</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 375.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">應變後仍無法達到原本應有的水準嗎？</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 467.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">多重病人事故和大量病人事故的區別</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 423.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">病人(casualty)</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 471.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">因為受到危害而必須尋求醫療援助（包含心理和生理的醫…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 519.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">我國法規定義：根據緊急醫療救護法施行細則第二條第三項，大量病人指單一事故、…</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 824.0)">
+          <rect width="220" height="48" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#059669"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#065f46" font-family="system-ui, -apple-system, sans-serif">大量病人檢傷分類 ‧ 事故應變的現場作業</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 611.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">檢傷分類的基本概念</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 567.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">triage 源自法文的動詞「trier」，意思是…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 615.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">最早是指農夫挑選、分類咖啡豆</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 663.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">拉雷(Dominique Jean Larrey)</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 755.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">大量病人檢傷分類的作法</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 711.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">沒有統一的作法</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 759.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">輻射傷害、危害物質、生物恐怖攻擊</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 807.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">處置流程、後送</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 899.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">已明顯死亡的病人該不該送醫？</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 855.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">如果該病人不是因為鈍傷而心肺停止，那麼積極送醫搶救其實還是有存活的機會。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 903.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">但根據目前已知的研究，到院前心肺停止的鈍傷病人，即使送到醫院，幾乎是沒有可…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 951.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">在此前提下，以鈍傷為主的大量病人事故（例如地震），已經明顯死亡的病人所面臨…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1043.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">檢傷分類系統的選擇與動態特性</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 999.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">完整的評估與診斷耗時甚久，但檢傷分類必須在短時間內完成；全世界並沒有統一的…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1047.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">簡單的系統：容易記憶、一致性高，然而較不精密。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1095.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">複雜的系統：鑑別力比較好，但不容易記憶，也需要長時間的訓練。</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1184.0)">
+          <rect width="220" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#d97706"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#92400e" font-family="system-ui, -apple-system, sans-serif">情境解答 ‧ 問題交流</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1187.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1143.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">粉塵爆炸造成的大量燒燙傷病人</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1191.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">START 檢傷法對燒燙傷病人並不可靠</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1239.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">呼吸道嗆傷</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1400.0)">
+          <rect width="220" height="48" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#7c3aed"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#5b21b6" font-family="system-ui, -apple-system, sans-serif">重點整理 ‧ 參考資料</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1331.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1287.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">「多重病人事故」和「大量病人事故」的區別是很重要的觀念。地區的緊急醫療救護…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1335.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">事故指揮系統是簡單有效的管理方式，特別是在重大事故格外能彰顯它的效用。但要…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1383.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">檢傷分類是一種非常表淺的診治病人方式，所著重的是在短時間內區別出病人的嚴重…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1475.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1431.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">石富元：北區國家級災難醫療援助隊基礎及進階課程 at http://dma…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1479.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Joseph A. Barbera, Anthony G. Macinty…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1527.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Hank Christen, Paul M. Maniscalco. EM…</text>
+                </g>
+                
+  </g>
+</svg>

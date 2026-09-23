@@ -1,0 +1,307 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 1916" width="100%" height="100%" style="background: transparent;">
+  <defs>
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <filter id="drop-shadow-lg" x="-15%" y="-15%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Connectors -->
+  <g class="connectors">
+    <path d="M 310 958.0 C 341.5 958.0, 348.5 320.0, 380 320.0" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 320.0 C 636.0 320.0, 644.0 152.0, 680 152.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 152.0 C 951.5 152.0, 958.5 104.0, 990 104.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 152.0 C 951.5 152.0, 958.5 152.0, 990 152.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 152.0 C 951.5 152.0, 958.5 200.0, 990 200.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 248.0, 680 248.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 248.0 C 951.5 248.0, 958.5 248.0, 990 248.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 344.0, 680 344.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 344.0 C 951.5 344.0, 958.5 296.0, 990 296.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 344.0 C 951.5 344.0, 958.5 344.0, 990 344.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 344.0 C 951.5 344.0, 958.5 392.0, 990 392.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 320.0 C 636.0 320.0, 644.0 488.0, 680 488.0" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 488.0 C 951.5 488.0, 958.5 440.0, 990 440.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 488.0 C 951.5 488.0, 958.5 488.0, 990 488.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 488.0 C 951.5 488.0, 958.5 536.0, 990 536.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 958.0 C 341.5 958.0, 348.5 824.0, 380 824.0" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 824.0 C 636.0 824.0, 644.0 608.0, 680 608.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 608.0 C 951.5 608.0, 958.5 584.0, 990 584.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 608.0 C 951.5 608.0, 958.5 632.0, 990 632.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 824.0 C 636.0 824.0, 644.0 728.0, 680 728.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 728.0 C 951.5 728.0, 958.5 680.0, 990 680.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 728.0 C 951.5 728.0, 958.5 728.0, 990 728.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 728.0 C 951.5 728.0, 958.5 776.0, 990 776.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 824.0 C 636.0 824.0, 644.0 872.0, 680 872.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 872.0 C 951.5 872.0, 958.5 824.0, 990 824.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 872.0 C 951.5 872.0, 958.5 872.0, 990 872.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 872.0 C 951.5 872.0, 958.5 920.0, 990 920.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 824.0 C 636.0 824.0, 644.0 1016.0, 680 1016.0" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1016.0 C 951.5 1016.0, 958.5 968.0, 990 968.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1016.0 C 951.5 1016.0, 958.5 1016.0, 990 1016.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1016.0 C 951.5 1016.0, 958.5 1064.0, 990 1064.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 958.0 C 341.5 958.0, 348.5 1328.0, 380 1328.0" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1328.0 C 636.0 1328.0, 644.0 1160.0, 680 1160.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1160.0 C 951.5 1160.0, 958.5 1112.0, 990 1112.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1160.0 C 951.5 1160.0, 958.5 1160.0, 990 1160.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1160.0 C 951.5 1160.0, 958.5 1208.0, 990 1208.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1328.0 C 636.0 1328.0, 644.0 1304.0, 680 1304.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1304.0 C 951.5 1304.0, 958.5 1256.0, 990 1256.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1304.0 C 951.5 1304.0, 958.5 1304.0, 990 1304.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1304.0 C 951.5 1304.0, 958.5 1352.0, 990 1352.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1328.0 C 636.0 1328.0, 644.0 1400.0, 680 1400.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 600 1328.0 C 636.0 1328.0, 644.0 1496.0, 680 1496.0" fill="none" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1448.0, 990 1448.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1496.0, 990 1496.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1496.0 C 951.5 1496.0, 958.5 1544.0, 990 1544.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 310 958.0 C 341.5 958.0, 348.5 1712.0, 380 1712.0" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" opacity="0.85"/><path d="M 600 1712.0 C 636.0 1712.0, 644.0 1640.0, 680 1640.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1640.0 C 951.5 1640.0, 958.5 1592.0, 990 1592.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1640.0 C 951.5 1640.0, 958.5 1640.0, 990 1640.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1640.0 C 951.5 1640.0, 958.5 1688.0, 990 1688.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 600 1712.0 C 636.0 1712.0, 644.0 1784.0, 680 1784.0" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M 920 1784.0 C 951.5 1784.0, 958.5 1736.0, 990 1736.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1784.0 C 951.5 1784.0, 958.5 1784.0, 990 1784.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/><path d="M 920 1784.0 C 951.5 1784.0, 958.5 1832.0, 990 1832.0" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/>
+  </g>
+
+  <!-- Nodes -->
+  <g class="nodes">
+    
+    <g class="node root-node" transform="translate(60, 919.0)">
+      <defs>
+        <linearGradient id="rootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E87722"/>
+          <stop offset="100%" stop-color="#C2410C"/>
+        </linearGradient>
+      </defs>
+      <rect width="250" height="78" rx="16" fill="url(#rootGrad)" stroke="#ea580c" stroke-width="2" filter="url(#drop-shadow-lg)"/>
+      <text x="20" y="30" font-size="13" font-weight="800" fill="#fed7aa" letter-spacing="1">🧠 CH43 核心知識圖譜</text>
+      <text x="20" y="56" font-size="15.5" font-weight="800" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif">新興傳染病與疫災防治</text>
+    </g>
+    
+    
+        <g class="node branch-node" transform="translate(380, 296.0)">
+          <rect width="220" height="48" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#2563eb"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#1e40af" font-family="system-ui, -apple-system, sans-serif">新興感染症 ‧ 面對新興感染症的自我防…</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 131.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">何謂新興感染症？</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 87.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">美國醫學研究院(Institute of Medi…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 135.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">1992 年</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 183.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">新興感染症</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 227.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">新興感染症出現及增加的原因</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 231.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">六大類</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 323.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">1. 生態之改變及農業之發展</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 279.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">美國與歐洲重新造林運動→與病媒硬蜱(tick) 及傳染窩鹿接觸機會增加→造…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 327.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">以水體為病媒孳生源之傳染病，如日本腦炎(Japanese encephal…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 375.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">中國大陸豬、鴨合併養殖之傳統，提供禽流感病毒突變與重組之天然場所，屢屢發生…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 467.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">2. 人類行為及人口學之改變</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 423.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">愛滋病(AIDS) 經由性交、共用靜脈注射針筒等行為助長蔓延。</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 471.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">人口增長增加使用之儲水設備、廢輪胎、塑膠罐等人工容器成為病媒蚊孳生源，助長…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 519.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">人口高度密集的大都會、照護機構、監獄因人口密度高，為肺結核病(pulmon…</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 800.0)">
+          <rect width="220" height="48" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#059669"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#065f46" font-family="system-ui, -apple-system, sans-serif">有哪些可能被使用的生物戰劑？ ‧ 各種…</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 587.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 567.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">三類</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 615.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">它們是否可以很容易傳播，和所造成疾病的嚴重程度或死…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 707.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">A 類（最高優先級）</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 663.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">高優先級</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 711.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">構成公眾和國家安全最大的風險</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 759.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">⑴ 它們可以很容易地傳播，或由人傳染人；</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 851.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">B 類（第二個最高優先）</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 807.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第二個最高優先</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 855.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">⑴ 中等易於推廣；⑵ 帶來溫和的發病率和低死亡率；…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 903.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">布氏桿菌病(Brucellosis)、產氣莢膜梭菌…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 995.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">C 類（第三優先）</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 951.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">第三優先</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 999.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">可能在未來大規模製造、傳播的新出現的病原體</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1047.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">⑴ 它們易於提供；⑵ 它們很容易產生和蔓延；⑶ 它…</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1304.0)">
+          <rect width="220" height="48" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#d97706"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#92400e" font-family="system-ui, -apple-system, sans-serif">新興感染症與生物恐怖事件的感控措施 ‧…</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1139.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1095.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">感染如何發生</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1143.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">「感染鏈」(chain of infection)</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1191.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">有六個條件</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1283.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">常見傳染途徑</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1239.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">接觸傳染(contact transmission)</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1287.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">飛沫傳染(droplet transmission)</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1335.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">空氣傳染(airborne transmission)</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1379.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">隔離防護措施的歷史演變</text>
+            </g>
+            
+            <g class="node subbranch-node" transform="translate(680, 1475.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#fcd34d" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">1. 標準防護措施(standard pr…</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1431.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">全面性防護措施</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1479.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">身體物質隔離</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1527.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">將所有病人的血液、體液、分泌物、排泄物（除了汗液）…</text>
+                </g>
+                
+        <g class="node branch-node" transform="translate(380, 1688.0)">
+          <rect width="220" height="48" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.2" filter="url(#drop-shadow)"/>
+          <circle cx="16" cy="24.0" r="6" fill="#7c3aed"/>
+          <text x="32" y="29.0" font-size="13.5" font-weight="700" fill="#5b21b6" font-family="system-ui, -apple-system, sans-serif">問題交流 ‧ 重點整理</text>
+        </g>
+        
+            <g class="node subbranch-node" transform="translate(680, 1619.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1575.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">新興感染症為新近（通常指近 20 年以內）出現於人類的疾病，且⑴其發生率呈…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1623.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">由於生態之改變及農業之發展、人類行為及人口學之改變、國際間旅遊及貿易之頻繁…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1671.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">過去的 30 多年來，已經有超過 40 種以上的新興感染症被確認；而近年來…</text>
+                </g>
+                
+            <g class="node subbranch-node" transform="translate(680, 1763.0)">
+              <rect width="240" height="42" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.8" filter="url(#drop-shadow)"/>
+              <text x="14" y="26.0" font-size="13" font-weight="600" fill="#1e293b" font-family="system-ui, -apple-system, sans-serif">重點脈絡</text>
+            </g>
+            
+                <g class="node leaf-node" transform="translate(990, 1719.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">衛生福利部疾病管制署－傳染病防治手冊</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1767.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Siegel JD, Rhinehart E, Jackson M, Ch…</text>
+                </g>
+                
+                <g class="node leaf-node" transform="translate(990, 1815.0)">
+                  <rect width="470" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+                  <text x="12" y="21.5" font-size="12" font-weight="500" fill="#334155" font-family="system-ui, -apple-system, sans-serif">Interim Recommendations for the Selec…</text>
+                </g>
+                
+  </g>
+</svg>

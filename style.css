@@ -3030,8 +3030,9 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════
-   行動手機橫向模式 (Mobile Landscape: Mode 1 Immersive)
-   精準鎖定手機橫向（高度 <= 500px），不干擾平板與電腦
+   行動手機橫向模式 (Mobile Landscape Immersive)
+   精準鎖定手機橫向（高度 <= 500px），不干擾平板與電腦。
+   模式一、模式二都適用：頂欄與側欄預設收起，只有下拉（或點手柄）才出現。
    ══════════════════════════════════════════════════════ */
 @media (orientation: landscape) and (max-height: 500px) {
   /* 1. 側欄在橫向手機強制維持抽屜模式，禁止佔用固定寬度 */
@@ -3054,8 +3055,8 @@ body {
     display: flex !important;
   }
 
-  /* 2. 模式一橫向：預設收起頂部 Header，採 Fixed 浮層待命 */
-  body.mode-1 #app-header {
+  /* 2. 橫向：預設收起頂部 Header，採 Fixed 浮層待命 */
+  #app-header {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -3068,12 +3069,12 @@ body {
     background: var(--surface) !important;
     backdrop-filter: blur(12px);
   }
-  body.mode-1.landscape-header-open #app-header {
+  body.landscape-header-open #app-header {
     transform: translateY(0);
   }
 
-  /* 3. 橫向微型下拉手柄 (Pull-down Tab) */
-  body.mode-1 #landscape-pull-tab {
+  /* 3. 橫向微型下拉手柄 (Pull-down Tab)：收起時半透明，不搶閱讀視線 */
+  #landscape-pull-tab {
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -3087,39 +3088,379 @@ body {
     border: 1px solid var(--border);
     border-top: none;
     border-radius: 0 0 12px 12px;
-    padding: 3px 16px;
-    font-size: 0.76rem;
+    padding: 2px 14px;
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--text-muted);
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0,0,0,0.18);
     backdrop-filter: blur(10px);
+    opacity: 0.55;
     transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
-  body.mode-1.landscape-header-open #landscape-pull-tab {
+  body.landscape-header-open #landscape-pull-tab {
     top: 46px;
+    opacity: 1;
     background: var(--orange-light);
     color: var(--orange-dark);
     border-color: var(--orange-border);
   }
 
   /* 4. 側邊懸浮按鈕收起，避免遮擋文字 */
-  body.mode-1 #back-to-top {
+  #back-to-top {
     display: none !important;
   }
 
   /* 5. 滿版主閱讀區與行距微調 */
-  body.mode-1 #main-content {
+  #main-content {
     padding-top: 10px !important;
     width: 100vw !important;
     max-width: 100vw !important;
   }
-  body.mode-1 .chapter-area {
+  .chapter-area {
     padding: 10px 16px 50px !important;
   }
-  body.mode-1 .content-tabs-bar {
+  .content-tabs-bar {
     padding: 4px 12px !important;
     font-size: 0.85rem;
   }
 }
+
+/* ══════════════════════════════════════════════════════
+   章節開頭核心架構心智圖卡片 (Chapter Mindmap Card)
+   ══════════════════════════════════════════════════════ */
+.chapter-mindmap-card {
+  margin: 18px 0 28px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  cursor: zoom-in;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  position: relative;
+}
+
+.chapter-mindmap-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 28px rgba(232, 119, 34, 0.12);
+}
+
+.mindmap-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mindmap-card-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.mindmap-badge-icon {
+  font-size: 1.15rem;
+}
+
+.mindmap-badge-sub {
+  font-size: 0.72rem;
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--orange-light);
+  color: var(--orange-dark);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.mindmap-zoom-tip {
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mindmap-preview-stage {
+  height: 250px;
+  width: 100%;
+  position: relative;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .mindmap-preview-stage {
+  background: #0b1120;
+}
+
+.mindmap-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px 16px;
+  transition: transform 0.25s ease;
+  user-select: none;
+}
+
+.chapter-mindmap-card:hover .mindmap-preview-img {
+  transform: scale(1.015);
+}
+
+.mindmap-overlay-hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.chapter-mindmap-card:hover .mindmap-overlay-hover {
+  opacity: 1;
+}
+
+.overlay-btn {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(4px);
+  transition: transform 0.2s ease;
+}
+
+.chapter-mindmap-card:hover .overlay-btn {
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════════════════
+   心智圖全螢幕互動放大檢視器 (Mindmap Modal)
+   ══════════════════════════════════════════════════════ */
+.mindmap-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.mindmap-modal.hidden {
+  display: none !important;
+}
+
+.mindmap-modal-dialog {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 96vw;
+  height: 94vh;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  animation: scaleUp 0.22s ease-out;
+}
+
+.mindmap-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  flex-wrap: wrap;
+  gap: 10px;
+  z-index: 10;
+}
+
+.mindmap-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.mindmap-modal-icon {
+  font-size: 1.25rem;
+}
+
+.mindmap-modal-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mindmap-zoom-level {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 48px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.mindmap-tool-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.mindmap-tool-btn:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.mindmap-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  margin-left: 4px;
+}
+
+.mindmap-close-btn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--error);
+}
+
+.mindmap-canvas-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #f8fafc;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mindmap-canvas-container.is-dragging {
+  cursor: grabbing !important;
+}
+
+[data-theme="dark"] .mindmap-canvas-container {
+  background: #0f172a;
+}
+
+.mindmap-transform-wrapper {
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transition: transform 0.05s ease-out;
+}
+
+#mindmap-modal-img {
+  max-width: 94%;
+  max-height: 94%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.08));
+}
+
+.mindmap-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  z-index: 10;
+  gap: 10px;
+}
+
+.mindmap-footer-close-btn {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.mindmap-footer-close-btn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+  .mindmap-modal-dialog {
+    width: 98vw;
+    height: 96vh;
+    border-radius: 12px;
+  }
+  .mindmap-modal-header {
+    padding: 8px 12px;
+  }
+  .mindmap-tool-btn {
+    padding: 4px 8px;
+    font-size: 0.78rem;
+  }
+  .mindmap-footer-hint {
+    display: none;
+  }
+  .chapter-mindmap-card {
+    margin: 14px 0 20px;
+  }
+  .mindmap-preview-stage {
+    height: 190px;
+  }
+}
+

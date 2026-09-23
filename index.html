@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260921_2335">
+<link rel="stylesheet" href="style.css?v=20260923_1030">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -714,6 +714,37 @@
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════
+     章節核心架構心智圖全螢幕互動放大檢視器 (Mindmap Modal)
+     ══════════════════════════════════════════════════════ -->
+<div id="mindmap-modal" class="mindmap-modal hidden" onclick="closeMindmapModal()">
+  <div class="mindmap-modal-dialog" onclick="event.stopPropagation()">
+    <div class="mindmap-modal-header">
+      <div class="mindmap-modal-title">
+        <span class="mindmap-modal-icon">🧠</span>
+        <span id="mindmap-modal-title-text">章節核心架構圖譜</span>
+      </div>
+      <div class="mindmap-modal-tools">
+        <span id="mindmap-zoom-label" class="mindmap-zoom-level">100%</span>
+        <button class="mindmap-tool-btn" onclick="mindmapZoomIn()" title="放大 (+)">🔍+</button>
+        <button class="mindmap-tool-btn" onclick="mindmapZoomOut()" title="縮小 (−)">🔍−</button>
+        <button class="mindmap-tool-btn" onclick="mindmapResetZoom()" title="重設比例 (0)">↺ 重設</button>
+        <button class="mindmap-tool-btn" onclick="mindmapToggleFullscreen()" title="切換全螢幕">⛶ 全螢幕</button>
+        <button class="mindmap-close-btn" onclick="closeMindmapModal()" title="關閉 (Esc)">✕</button>
+      </div>
+    </div>
+    <div id="mindmap-canvas-container" class="mindmap-canvas-container">
+      <div id="mindmap-transform-wrapper" class="mindmap-transform-wrapper">
+        <img id="mindmap-modal-img" src="" alt="章節心智圖" draggable="false">
+      </div>
+    </div>
+    <div class="mindmap-modal-footer">
+      <span class="mindmap-footer-hint">💡 支援滾輪 / 雙指捏合縮放，按住滑鼠或手指拖曳可任意平移檢視細節</span>
+      <button class="mindmap-footer-close-btn" onclick="closeMindmapModal()">關閉檢視</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── 跨裝置同步 ── -->
 <div id="sync-modal" class="modal-overlay hidden">
   <div class="modal-box">
@@ -732,7 +763,7 @@
   </div>
 </div>
 
-<script src="app.js?v=20260921_2335"></script>
-<script src="sync.js?v=20260921_2335"></script>
+<script src="app.js?v=20260923_1030"></script>
+<script src="sync.js?v=20260923_1030"></script>
 </body>
 </html>

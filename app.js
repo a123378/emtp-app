@@ -300,6 +300,29 @@ function renderNotes(cd, chId) {
       </div>
     </div>`;
 
+  // ② 本章核心架構心智圖卡片 (點擊放大檢視)
+  const mindmapSrc = dataUrl(`images/mindmaps/${chId}.svg`);
+  const chFullTitle = `${cd.num} ${cd.title}`;
+  html += `
+    <div class="chapter-mindmap-card" onclick="openMindmapModal('${chId}', '${escapeHtml(chFullTitle)}')">
+      <div class="mindmap-card-header">
+        <div class="mindmap-card-badge">
+          <span class="mindmap-badge-icon">🧠</span>
+          <span class="mindmap-badge-text">本章核心架構圖譜</span>
+          <span class="mindmap-badge-sub">MIND MAP</span>
+        </div>
+        <div class="mindmap-zoom-tip">
+          <span class="zoom-icon">🔍</span> 點擊全螢幕放大探索
+        </div>
+      </div>
+      <div class="mindmap-preview-stage">
+        <img src="${mindmapSrc}" alt="${escapeHtml(cd.title)} 心智圖" class="mindmap-preview-img" loading="lazy" onerror="this.closest('.chapter-mindmap-card').style.display='none'">
+        <div class="mindmap-overlay-hover">
+          <span class="overlay-btn">🔍 點擊展開全螢幕高清探索</span>
+        </div>
+      </div>
+    </div>`;
+
   let secNum = 1;
 
   // ③ 內文重點
@@ -3093,7 +3116,194 @@ function closeImageModal() {
 window.openImageModal = openImageModal;
 window.closeImageModal = closeImageModal;
 
+// ── Chapter Mindmap Modal Controller (Zoom & Pan Lightbox) ──
+const mindmapViewer = {
+  scale: 1,
+  translateX: 0,
+  translateY: 0,
+  isDragging: false,
+  dragStartX: 0,
+  dragStartY: 0,
+  initialPinchDist: 0,
+  initialPinchScale: 1
+};
+
+function updateMindmapTransform() {
+  const wrapper = document.getElementById('mindmap-transform-wrapper');
+  const label = document.getElementById('mindmap-zoom-label');
+  if (wrapper) {
+    wrapper.style.transform = `translate(${mindmapViewer.translateX}px, ${mindmapViewer.translateY}px) scale(${mindmapViewer.scale})`;
+  }
+  if (label) {
+    label.textContent = `${Math.round(mindmapViewer.scale * 100)}%`;
+  }
+}
+
+function openMindmapModal(chId, title) {
+  if (!chId) return;
+  const modal = document.getElementById('mindmap-modal');
+  const img = document.getElementById('mindmap-modal-img');
+  const titleText = document.getElementById('mindmap-modal-title-text');
+  if (!modal || !img) return;
+
+  if (titleText) titleText.textContent = `${title || chId} 核心架構圖譜`;
+  img.src = dataUrl(`images/mindmaps/${chId}.svg`);
+
+  // Reset zoom & pan state
+  mindmapViewer.scale = 1;
+  mindmapViewer.translateX = 0;
+  mindmapViewer.translateY = 0;
+  mindmapViewer.isDragging = false;
+  updateMindmapTransform();
+
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  initMindmapInteractions();
+}
+
+function closeMindmapModal() {
+  const modal = document.getElementById('mindmap-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+
+function mindmapZoomIn() {
+  mindmapViewer.scale = Math.min(4.0, Number((mindmapViewer.scale * 1.25).toFixed(2)));
+  updateMindmapTransform();
+}
+
+function mindmapZoomOut() {
+  mindmapViewer.scale = Math.max(0.4, Number((mindmapViewer.scale / 1.25).toFixed(2)));
+  updateMindmapTransform();
+}
+
+function mindmapResetZoom() {
+  mindmapViewer.scale = 1;
+  mindmapViewer.translateX = 0;
+  mindmapViewer.translateY = 0;
+  updateMindmapTransform();
+}
+
+function mindmapToggleFullscreen() {
+  const modal = document.getElementById('mindmap-modal');
+  if (!modal) return;
+  if (!document.fullscreenElement) {
+    modal.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+
+let mindmapEventsBound = false;
+function initMindmapInteractions() {
+  if (mindmapEventsBound) return;
+  const container = document.getElementById('mindmap-canvas-container');
+  if (!container) return;
+
+  mindmapEventsBound = true;
+
+  // 1. 滑鼠拖曳平移 (Mouse Drag)
+  container.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return;
+    mindmapViewer.isDragging = true;
+    mindmapViewer.dragStartX = e.clientX - mindmapViewer.translateX;
+    mindmapViewer.dragStartY = e.clientY - mindmapViewer.translateY;
+    container.classList.add('is-dragging');
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!mindmapViewer.isDragging) return;
+    mindmapViewer.translateX = e.clientX - mindmapViewer.dragStartX;
+    mindmapViewer.translateY = e.clientY - mindmapViewer.dragStartY;
+    updateMindmapTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (mindmapViewer.isDragging) {
+      mindmapViewer.isDragging = false;
+      const c = document.getElementById('mindmap-canvas-container');
+      if (c) c.classList.remove('is-dragging');
+    }
+  });
+
+  // 2. 滑鼠滾輪縮放 (Mouse Wheel Zoom)
+  container.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.15 : 0.88;
+    const newScale = Math.min(4.0, Math.max(0.4, mindmapViewer.scale * factor));
+    mindmapViewer.scale = Number(newScale.toFixed(2));
+    updateMindmapTransform();
+  }, { passive: false });
+
+  // 3. 手機觸控操作 (單指拖曳平移、雙指捏合縮放 Pinch-to-zoom)
+  let lastTouchX = 0;
+  let lastTouchY = 0;
+
+  function getTouchDistance(e) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    return Math.hypot(dx, dy);
+  }
+
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      mindmapViewer.isDragging = true;
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+      mindmapViewer.isDragging = false;
+      mindmapViewer.initialPinchDist = getTouchDistance(e);
+      mindmapViewer.initialPinchScale = mindmapViewer.scale;
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && mindmapViewer.isDragging) {
+      const dx = e.touches[0].clientX - lastTouchX;
+      const dy = e.touches[0].clientY - lastTouchY;
+      mindmapViewer.translateX += dx;
+      mindmapViewer.translateY += dy;
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+      updateMindmapTransform();
+    } else if (e.touches.length === 2 && mindmapViewer.initialPinchDist > 0) {
+      const dist = getTouchDistance(e);
+      const ratio = dist / mindmapViewer.initialPinchDist;
+      mindmapViewer.scale = Math.min(4.0, Math.max(0.4, Number((mindmapViewer.initialPinchScale * ratio).toFixed(2))));
+      updateMindmapTransform();
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0) {
+      mindmapViewer.isDragging = false;
+      mindmapViewer.initialPinchDist = 0;
+    } else if (e.touches.length === 1) {
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+      mindmapViewer.isDragging = true;
+      mindmapViewer.initialPinchDist = 0;
+    }
+  }, { passive: true });
+}
+
+window.openMindmapModal = openMindmapModal;
+window.closeMindmapModal = closeMindmapModal;
+window.mindmapZoomIn = mindmapZoomIn;
+window.mindmapZoomOut = mindmapZoomOut;
+window.mindmapResetZoom = mindmapResetZoom;
+window.mindmapToggleFullscreen = mindmapToggleFullscreen;
+
 // ── 行動端橫向全螢幕沉浸閱讀控制器 ──
+//   手機橫向（高度 ≤ 500px）時，模式一、模式二的頂欄與側欄一律收起，
+//   只有「從螢幕頂緣下拉」「內容已在最頂端再往下拉」或「點中央手柄」才會出現；
+//   往下閱讀捲動就自動收回。不會因為捲回頂端或往上捲而自己跳出來。
 function isMobileLandscape() {
   return window.matchMedia('(orientation: landscape) and (max-height: 500px)').matches;
 }
@@ -3112,78 +3322,64 @@ function toggleLandscapeHeader(forceState) {
 }
 
 function initLandscapeController() {
-  // 1. 監聽滾動：向下滾動自動隱藏，向上回拉或到頂部時自動展開
+  // 模式一捲的是 #main-content，模式二捲的是 #mode2-container
+  const scrollers = [document.getElementById('main-content'), document.getElementById('mode2-container')].filter(Boolean);
+  const activeScroller = () => scrollers.find(el => el.offsetParent !== null) || scrollers[0];
+
+  // 1. 往下閱讀捲動：自動收起（往上捲不會自動展開）
   let lastScrollTop = 0;
   let scrollTicking = false;
-
-  const mainEl = els.mainContent || document.getElementById('main-content');
-  if (mainEl) {
-    mainEl.addEventListener('scroll', () => {
-      if (!isMobileLandscape() || state.currentMode !== 1) return;
-      if (!scrollTicking) {
-        window.requestAnimationFrame(() => {
-          const st = mainEl.scrollTop;
-          // 滑到頂端 (5px 內) 直接展開選單
-          if (st <= 5) {
-            toggleLandscapeHeader(true);
-          } else if (st > lastScrollTop + 15 && st > 40) {
-            // 向下閱讀滾動超過 15px：自動收起
-            toggleLandscapeHeader(false);
-          } else if (lastScrollTop - st > 30) {
-            // 向上回拉滾動超過 30px：自動喚出選單
-            toggleLandscapeHeader(true);
-          }
-          lastScrollTop = Math.max(0, st);
-          scrollTicking = false;
-        });
-        scrollTicking = true;
-      }
-    }, { passive: true });
-  }
-
-  // 2. 螢幕頂緣觸控下拉手勢感知 (Swipe down from top edge)
-  let touchStartY = 0;
-  let touchStartX = 0;
-  window.addEventListener('touchstart', (e) => {
-    if (!isMobileLandscape() || state.currentMode !== 1) return;
-    const touch = e.touches[0];
-    if (touch) {
-      touchStartY = touch.clientY;
-      touchStartX = touch.clientX;
+  scrollers.forEach(el => el.addEventListener('scroll', () => {
+    if (!isMobileLandscape()) return;
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        const st = el.scrollTop;
+        if (st > lastScrollTop + 15 && st > 40) toggleLandscapeHeader(false);
+        lastScrollTop = Math.max(0, st);
+        scrollTicking = false;
+      });
+      scrollTicking = true;
     }
+  }, { passive: true }));
+
+  // 2. 下拉手勢：從螢幕頂緣 60px 內往下拖，或內容已在最頂端時再往下拉 → 喚出選單
+  let touchStartY = 0, touchStartX = 0, touchAtTop = false, touchHandled = false;
+  window.addEventListener('touchstart', (e) => {
+    if (!isMobileLandscape()) return;
+    const t = e.touches[0];
+    if (!t) return;
+    touchStartY = t.clientY;
+    touchStartX = t.clientX;
+    const sc = activeScroller();
+    touchAtTop = !sc || sc.scrollTop <= 0;
+    touchHandled = false;
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
-    if (!isMobileLandscape() || state.currentMode !== 1) return;
-    const touch = e.touches[0];
-    if (touch && touchStartY <= 50) {
-      const deltaY = touch.clientY - touchStartY;
-      const deltaX = Math.abs(touch.clientX - touchStartX);
-      // 由螢幕頂部 50px 內向下拖動超過 30px，且垂直大於水平：喚出選單
-      if (deltaY > 30 && deltaY > deltaX) {
-        toggleLandscapeHeader(true);
-      }
+    if (!isMobileLandscape() || touchHandled) return;
+    const t = e.touches[0];
+    if (!t) return;
+    const dy = t.clientY - touchStartY;
+    const dx = Math.abs(t.clientX - touchStartX);
+    if (dy <= dx) return;
+    if ((touchStartY <= 60 && dy > 30) || (touchAtTop && dy > 45)) {
+      touchHandled = true;
+      toggleLandscapeHeader(true);
     }
   }, { passive: true });
 
-  // 3. 旋轉螢幕與視窗尺寸變化監聽
-  window.addEventListener('resize', () => {
-    if (!isMobileLandscape()) {
-      // 回到直向或桌面時清除狀態
-      document.body.classList.remove('landscape-header-open');
-      const iconEl = document.getElementById('landscape-pull-icon');
-      const textEl = document.getElementById('landscape-pull-text');
-      if (iconEl) iconEl.textContent = '▼';
-      if (textEl) textEl.textContent = '選單';
-    }
-  });
-
+  // 3. 旋轉螢幕／視窗尺寸變化：離開橫向就清掉狀態；進入橫向一律先收起
+  const resetLandscape = () => {
+    document.body.classList.remove('landscape-header-open');
+    const iconEl = document.getElementById('landscape-pull-icon');
+    const textEl = document.getElementById('landscape-pull-text');
+    if (iconEl) iconEl.textContent = '▼';
+    if (textEl) textEl.textContent = '選單';
+    lastScrollTop = 0;
+  };
+  window.addEventListener('resize', resetLandscape);
   if (window.screen && window.screen.orientation) {
-    window.screen.orientation.addEventListener('change', () => {
-      if (!isMobileLandscape()) {
-        document.body.classList.remove('landscape-header-open');
-      }
-    });
+    window.screen.orientation.addEventListener('change', resetLandscape);
   }
 }
 
@@ -3192,8 +3388,19 @@ window.toggleLandscapeHeader = toggleLandscapeHeader;
 // Keyboard shortcuts (Esc to close modals)
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
+    closeMindmapModal();
     closeImageModal();
     closePwaInstallModal();
+  }
+  const mindmapModal = document.getElementById('mindmap-modal');
+  if (mindmapModal && !mindmapModal.classList.contains('hidden')) {
+    if (e.key === '+' || e.key === '=') {
+      mindmapZoomIn();
+    } else if (e.key === '-' || e.key === '_') {
+      mindmapZoomOut();
+    } else if (e.key === '0') {
+      mindmapResetZoom();
+    }
   }
 });
 
