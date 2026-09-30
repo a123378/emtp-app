@@ -2244,7 +2244,7 @@ const CHAPTER_CATALOG = [
   { id: 'ch19', num: 'CH19', title: '病史詢問' },
   { id: 'ch20', num: 'CH20', title: '身體診察' },
   { id: 'ch21', num: 'CH21', title: '到院前超音波應用' },
-  { id: 'ch22', num: 'CH22', title: '病人評估與決策策' },
+  { id: 'ch22', num: 'CH22', title: '病人評估與決策' },
   { id: 'ch23', num: 'CH23', title: '基本生命支持與急救' },
   { id: 'ch24', num: 'CH24', title: '復甦醫學新進展' },
   { id: 'ch25', num: 'CH25', title: '外傷總論與重大外傷' },
@@ -2560,6 +2560,16 @@ function showAiCompleteModal(title, questions, topicDesc, diff) {
   if (metaItems && metaItems.length >= 3) {
     metaItems[2].textContent = `精選 ${questions.length} 題`;
   }
+  const chListEl = $('#ai-complete-ch-list');
+  if (chListEl) {
+    const uniqueChs = [...new Set(questions.map(q => q.chNum || q.chId).filter(Boolean))];
+    if (uniqueChs.length) {
+      chListEl.innerHTML = `<span style="font-weight:700;color:var(--text)">🎲 隨機涵蓋章節（${uniqueChs.length} 章）：</span><br>${uniqueChs.join('、')}`;
+      chListEl.style.display = 'block';
+    } else {
+      chListEl.style.display = 'none';
+    }
+  }
   $('#ai-complete-modal')?.classList.remove('hidden');
   playSuccessBeep();
 }
@@ -2603,7 +2613,7 @@ async function generateAiQuiz() {
   setAiGenModalUI(true);
 
   const topicMap = {
-    all: '高級救護技術員(EMT-P)全科綜合（涵蓋心肺復甦、困難呼吸道、重大創傷、急性冠心症、腦中風、特殊急症、毒物與災難應變）',
+    all: '高級救護技術員(EMT-P)全科綜合（全書 60 章節真隨機抽樣 ‧ 零死角）',
     cardio: '心臟急症、致命性心律不整、12導程心電圖判定、心肌梗塞併發症與ACLS急救給藥時機',
     trauma: '重大創傷機轉、大失血休克處置、張力性氣胸減壓、骨盆固定與大量輸液低體溫防範',
     airway: '困難呼吸道評估與處置(LEMON/BURP)、氣管內插管與聲門上呼吸道(SGA)技術、正壓通氣參數設定',
@@ -2612,7 +2622,37 @@ async function generateAiQuiz() {
     toxic: '常見農藥有機磷中毒、一氧化碳中毒、毒藥物過量拮抗劑(Naloxone/Atropine)與環境急症'
   };
 
-  const topicDesc = topicMap[topic] || topicMap.all;
+  let topicDesc = '';
+  let chapterAssignmentPrompt = '';
+  let selectedChapters = [];
+
+  if (topic === 'all') {
+    // ── 全書 60 章真隨機抽樣演算法 (Fisher-Yates Shuffle) ──
+    // 從大白全書 60 個章節目錄中真隨機洗牌，精確抽出 count 個互不重複的獨立章節
+    const pool = [...CHAPTER_CATALOG];
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    selectedChapters = pool.slice(0, count);
+    while (selectedChapters.length < count) {
+      selectedChapters.push(pool[Math.floor(Math.random() * pool.length)]);
+    }
+
+    topicDesc = topicMap.all;
+    chapterAssignmentPrompt = `
+【本次全科真隨機抽樣章節配比（共 ${count} 題，每題皆有指定的專屬章節，請務必完全遵循）】：
+` + selectedChapters.map((ch, idx) => `  - 第 ${idx + 1} 題：必須針對【${ch.num} ${ch.title}】核心考點命題（chId: "${ch.id}", chNum: "${ch.num}", chTitle: "${ch.title}"）`).join('\n') + `
+
+【特別嚴格要求】：
+1. 嚴禁全部題目集中在特定常見急症（如心臟、插管、外傷），每題【必須且只能】針對上方指定給該題號的章節核心知識點命題！
+2. 題目情境、考點與解析必須完全扣合該題所指派的章節核心知識（例如分配到法規題就考法規責任、分配到超音波就考POCUS評估、分配到小兒就考PAT/小兒處置、分配到空中救護就考航空生理與飛行禁忌、分配到TRM就考溝通與領導模組）。
+`;
+  } else {
+    topicDesc = topicMap[topic] || topicMap.all;
+    chapterAssignmentPrompt = `【專項重點要求】：所有題目均圍繞【${topicDesc}】深入命題。`;
+  }
+
   const diffDesc = (diff === 'expert')
     ? `教授級地獄挑戰：全卷 ${count} 題皆為極高難度，包含複合臨床情境、雙重陷阱、生理數值邊緣變動與處置邏輯先後抉擇，難度超越歷屆甄試。`
     : `甄試全真強度（依 4:6 配比共 ${count} 題）：\n` +
@@ -2623,6 +2663,7 @@ async function generateAiQuiz() {
 請依據台灣高級救護技術員教科書（大白第三版）及最新國際與台灣急救指引命題：
 【主題】：${topicDesc}
 【難易度】：${diffDesc}
+${chapterAssignmentPrompt}
 
 【台灣高級救護技術員教科書（大白第三版）標準 60 章節權威對照表】：
 CH01 緊急醫療救護體系概論, CH02 台灣緊急醫療救護體系, CH03 救護技術員的角色與責任, CH04 緊急醫療救護相關法律規範, CH05 救護技術員的職業安全與傳染病防治, CH06 救護技術員的心理衛生, CH07 緊急醫療救護派遣系統, CH08 社區層級的緊急醫療反應, CH09 緊急醫療救護的品質管理, CH10 緊急救護之新科技應用, CH11 救護技術員的科學思考基礎, CH12 人體基本解剖與生理, CH13 從出生到死亡：一生的成長與發展, CH14 呼吸道處置與通氣-原理篇, CH15 呼吸道處置與通氣-技術篇, CH16 緊急救護藥理學, CH17 藥物給予及給藥途徑, CH18 醫病關係與溝通技巧, CH19 病史詢問, CH20 身體診察, CH21 到院前超音波應用, CH22 病人評估與決策, CH23 基本生命支持與急救, CH24 復甦醫學新進展, CH25 外傷總論與重大外傷, CH26 出血、休克與止血治療, CH27 頭頸脊椎與顏面外傷, CH28 胸部外傷, CH29 腹骨盆部外傷, CH30 軟組織肌肉骨骼外傷與壓砸傷, CH31 灼傷與電灼害, CH32 特殊創傷族群及親密伴侶暴力, CH33 心電圖判定, CH34 心臟與血管急症, CH35 呼吸系統急症, CH36 神經系統急症與急性腦中風, CH37 內分泌與代謝急症, CH38 腸胃急症, CH39 血液與腫瘤急症, CH40 過敏與免疫急症, CH41 泌尿與腎臟急症, CH42 感染急症, CH43 新興傳染病與疫災防治, CH44 環境急症, CH45 野外醫學, CH46 行為急症與精神急症, CH47 高齡緊急救護概論, CH48 新生兒急救與小兒急症, CH49 婦產急症, CH50 毒物學, CH51 醫療管路、維生器材與常見的院內檢查, CH52 大量病人與災難應變, CH53 危害物質與核生化應變, CH54 大型活動之緊急醫療救護, CH55 運動賽事救護人員的角色與任務, CH56 高危情境或侷限空間病人之緊急醫療救護, CH57 常見天然災害, CH58 空中救護體系, CH59 緊急救護中的團隊資源管理, CH60 緊急救護技術的教學技巧。
@@ -2670,7 +2711,14 @@ JSON 陣列結構：
     }
 
     const validatedQuestions = parsed.map((item, idx) => {
-      const resolved = resolveQuestionChapter(item);
+      let resolved = resolveQuestionChapter(item);
+      // 若為全科隨機抽樣，且 AI 回傳未識別出有效章節，則無縫 fallback 至預先指派的章節
+      if (topic === 'all' && selectedChapters[idx]) {
+        const assigned = selectedChapters[idx];
+        if (!resolved || (resolved.chId === 'ch01' && item.chId !== 'ch01')) {
+          resolved = assigned;
+        }
+      }
       return {
         id: `ai-${Date.now()}-${idx + 1}`,
         question: item.question || `AI 題目 ${idx + 1}`,

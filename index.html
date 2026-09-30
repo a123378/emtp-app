@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260923_1040">
+<link rel="stylesheet" href="style.css?v=20260930_0835">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -490,7 +490,7 @@
       <div class="form-group" style="margin-bottom:14px">
         <label style="font-weight:700;font-size:0.85rem">出題範疇 / 專項重點</label>
         <select id="ai-topic-select" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);margin-top:4px">
-          <option value="all">全科綜合（模擬甄試高階挑戰）</option>
+          <option value="all" selected>全科綜合（全書 60 章真隨機抽樣 ‧ 零死角）</option>
           <option value="cardio">心臟急症、致命性心律不整與心電圖判定</option>
           <option value="trauma">重大創傷、大量出血休克與止血處置</option>
           <option value="airway">呼吸系統急症與困難呼吸道技術處置</option>
@@ -498,6 +498,7 @@
           <option value="peds">新生兒與小兒急症、產科急症</option>
           <option value="toxic">毒物學、環境急症與災難應變</option>
         </select>
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-top:5px;line-height:1.4">💡 「全科綜合」每次出題皆從全書 60 個章節中均勻隨機抽取，杜絕偏頗特定科目。</div>
       </div>
       <div class="form-group" style="margin-bottom:14px">
         <label style="font-weight:700;font-size:0.85rem">難易度設定</label>
@@ -555,6 +556,7 @@
             <span class="ai-meta-val">精選 10 題</span>
           </div>
         </div>
+        <div id="ai-complete-ch-list" style="display:none;margin-top:12px;font-size:0.78rem;color:var(--text-muted);background:var(--surface-2);padding:8px 12px;border-radius:8px;word-break:break-word;line-height:1.5;text-align:left"></div>
       </div>
     </div>
     <div class="modal-footer" style="justify-content:space-between">
@@ -763,7 +765,7 @@
   </div>
 </div>
 
-<script src="app.js?v=20260923_1040"></script>
-<script src="sync.js?v=20260923_1040"></script>
+<script src="app.js?v=20260930_0835"></script>
+<script src="sync.js?v=20260930_0835"></script>
 </body>
 </html>
