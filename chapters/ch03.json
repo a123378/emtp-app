@@ -208,29 +208,20 @@
    "text": "高級救護技術員與一般醫護人員一樣，是**專業醫療人員**，在幫助病人時須遵守醫療倫理。**《日內瓦宣言》闡述進入醫療專業的一員必須恪遵的誓詞**；**《里斯本宣言》闡明病人權利**。根據這兩份宣言，歸納出**醫學倫理的原則與規則**（表3-1），其內容可參考〈第4章 緊急醫療救護相關法律規範〉。"
   },
   {
-   "type": "table",
-   "headers": [
-    "項目",
-    "說明"
-   ],
-   "rows": [
-    [
-     "**醫學倫理四原則**",
-     "**行善(beneficence)**、**不傷害(nonmaleficence)**、**公正(justice)**、**尊重自主(respect for autonomy)**"
-    ],
-    [
-     "**醫學倫理四規則**",
-     "**誠實(truthfulness)**、**守密(confidentiality)**、**知情同意(informed consent)**、**尊重隱私權(respect privacy)**"
-    ]
-   ]
+   "type": "m3ref",
+   "target": "o08",
+   "text": "醫療倫理四大原則",
+   "page": 259
   },
   {
    "type": "text",
    "text": "高級救護技術員在幫助病人時，應**視病猶親**：**尊重病人的決定、不傷害病人、為病人謀求最大利益**；在**病人知情同意**下提供救護服務；**不論病人富貴貧賤，提供優質的服務，並保守病人秘密**。"
   },
   {
-   "type": "mnemonic",
-   "text": "四原則口訣：「**善、無害、公、自主**」（行善／不傷害／公正／尊重自主）；四規則口訣：「**誠、密、同意、隱私**」（誠實／守密／知情同意／尊重隱私權）。"
+   "type": "m3ref",
+   "target": "o08",
+   "text": "醫療倫理四大原則",
+   "page": 259
   },
   {
    "type": "blue",
@@ -471,8 +462,10 @@
    ]
   },
   {
-   "type": "mnemonic",
-   "text": "任務流程 8 步順口溜：**準備→啟動→評估→穩定→溝通→運輸→紀錄→教育**（「**準啟評穩、溝運記教**」）。"
+   "type": "m3ref",
+   "target": "o03",
+   "text": "高級救護技術員的任務流程",
+   "page": 258
   },
   {
    "type": "clinical",
@@ -761,8 +754,10 @@
    ]
   },
   {
-   "type": "mnemonic",
-   "text": "三段五級記法：**初段（一級健康促進＋二級特殊保護）→ 次段（三級早期診斷早期治療）→ 三段（四級限制殘障＋五級復健）**。"
+   "type": "m3ref",
+   "target": "o10",
+   "text": "疾病自然史與三段五級預防",
+   "page": 260
   },
   {
    "type": "blue",
@@ -829,53 +824,10 @@
    "html": "<ul><li><b>戒煙</b></li><li><b>改變飲食習慣，多吃食物纖維、少脂肪</b></li><li><b>不要過度陽光曝曬</b></li><li><b>定期健康檢查</b></li><li><b>小心癌症警示徵候</b>（表3-5）</li><li><b>定期癌症風險評估</b></li></ul>"
   },
   {
-   "type": "table",
-   "headers": [
-    "字母",
-    "英文",
-    "中文"
-   ],
-   "rows": [
-    [
-     "**C**",
-     "Change in bowel or bladder habits",
-     "**大小便習慣改變**"
-    ],
-    [
-     "**A**",
-     "A sore throat that does not heal",
-     "**口腔難癒合的潰瘍**"
-    ],
-    [
-     "**U**",
-     "Unusual bleeding or discharge",
-     "**不尋常的出血或分泌物**"
-    ],
-    [
-     "**T**",
-     "Thickening or lump in the breast or elsewhere",
-     "**乳房或其他地方增厚或腫塊**"
-    ],
-    [
-     "**I**",
-     "Indigestion or difficulty swallowing",
-     "**消化不良或吞嚥困難**"
-    ],
-    [
-     "**O**",
-     "Obvious change in a wart or mole",
-     "**肉贅或痣明顯的變化**"
-    ],
-    [
-     "**N**",
-     "Nagging cough or hoarseness",
-     "**擾人久咳或聲音嘶啞**"
-    ]
-   ]
-  },
-  {
-   "type": "mnemonic",
-   "text": "七項癌症警示徵候口訣＝**CAUTION**（小心）：**C**hange、**A** sore、**U**nusual、**T**hickening、**I**ndigestion、**O**bvious change、**N**agging cough。"
+   "type": "m3ref",
+   "target": "o11",
+   "text": "七項癌症警示徵候（CAUTION）",
+   "page": 260
   },
   {
    "type": "blue",
@@ -1106,29 +1058,10 @@
    ]
   },
   {
-   "type": "table",
-   "headers": [
-    "類別",
-    "症狀"
-   ],
-   "rows": [
-    [
-     "**再經驗創傷事件**",
-     "**不斷回想痛苦的記憶**；**情境再現(flashbacks)**；**夢見創傷事件或其他的恐怖事件**；**當回想到創傷事件時，易引發過大的情緒和生理反應**"
-    ],
-    [
-     "**逃避**",
-     "**逃避與創傷事件有關的活動、地點、思想、感覺**；**對事物失去興趣**"
-    ],
-    [
-     "**情緒麻木**",
-     "**對人產生疏離感**；**情緒反應侷限**"
-    ],
-    [
-     "**警覺性增加**",
-     "**睡眠困難**；**易被激怒**；**專注困難**；**過度警覺**；**驚嚇反應強烈**"
-    ]
-   ]
+   "type": "m3ref",
+   "target": "o47",
+   "text": "創傷後壓力症（Post-Traumatic Stress Disorder, PTSD）",
+   "page": 279
   },
   {
    "type": "text",
@@ -1172,8 +1105,10 @@
    "text": "另外**藥物治療也是常併用的治療方式**。藉由**藥物、心理治療及建立支持團體**，讓救護技術員**重返專業，繼續為民眾服務**。"
   },
   {
-   "type": "mnemonic",
-   "text": "PTSD 四大症狀群記法：**「再、逃、麻、警」**＝**再經驗創傷事件、逃避、情緒麻木、警覺性增加**。"
+   "type": "m3ref",
+   "target": "o47",
+   "text": "創傷後壓力症（Post-Traumatic Stress Disorder, PTSD）",
+   "page": 279
   },
   {
    "type": "blue",

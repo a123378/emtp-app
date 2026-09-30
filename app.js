@@ -134,6 +134,16 @@ async function loadAllQuizzes() {
     } catch (err) {
       storedAiQuizzes = [];
     }
+    // 2026-09-30：模式一刪除了與模式三（口試重點）重複的段落，這些章節的段落序號有變動，
+    // 已存的 AI 題目段落對應要清掉重算（只做一次）
+    if (!localStorage.getItem('secidx_reset_mode3_v1')) {
+      const touched = new Set(['ch01', 'ch02', 'ch03', 'ch09', 'ch52', 'ch53', 'ch60']);
+      storedAiQuizzes.forEach(q => {
+        if (q && touched.has(q.chId)) { delete q.secIdx; delete q.secTitle; delete q.secGuess; delete q.page; delete q.pdfPage; }
+      });
+      try { localStorage.setItem('m2_ai_chapter_quizzes', JSON.stringify(storedAiQuizzes)); } catch (err) {}
+      localStorage.setItem('secidx_reset_mode3_v1', '1');
+    }
     state.allQuizzes = [...fetched, ...storedAiQuizzes];
     console.log(`Loaded ${state.allQuizzes.length} quiz questions (includes ${storedAiQuizzes.length} AI saved questions).`);
   } catch (e) {
@@ -476,6 +486,9 @@ function renderContentBlocks(blocks, chId) {
       case 'text':
         html += `<p style="font-size:0.9rem;line-height:1.7;margin:8px 0 12px;padding-left:4px">${mdInline(block.text)}</p>`;
         break;
+      case 'm3ref':
+        html += renderM3Ref(block);
+        break;
     }
   });
   if (curSec !== null && chId) html += renderSectionQuizBox(chId, curSec);
@@ -559,6 +572,7 @@ function _blockText(b) {
     case 'box': return (b.title || '') + ' ' + String(b.html || '').replace(/<[^>]+>/g, ' ');
     case 'clinical': return (b.label || '') + ' ' + deep(b.points);
     case 'table': return deep(b.headers) + ' ' + deep(b.rows);
+    case 'm3ref': return '';
     default: return deep(b);
   }
 }
@@ -604,11 +618,17 @@ function matchSectionInChapter(content, q, relaxed) {
   return -1;
 }
 
+/** 章節內容調整後（模式一刪除與模式三重複的段落），快取裡的 secIdx 可能已不指向大標 */
+function _staleSec(q) {
+  const cd = _chCache[q.chId];
+  return !!(cd && cd.content && (!cd.content[q.secIdx] || cd.content[q.secIdx].type !== 'orange'));
+}
+
 /** 補齊一題的段落／頁碼（AI 題目），完成後更新畫面上對應的元素 */
 const _secResolving = new Map();
 function resolveQuestionSection(q) {
   if (!q || !q.chId) return Promise.resolve(false);
-  if (q.secIdx !== undefined && q.secIdx !== null && q.secIdx >= 0) return Promise.resolve(true);
+  if (q.secIdx !== undefined && q.secIdx !== null && q.secIdx >= 0 && !_staleSec(q)) return Promise.resolve(true);
   if (_secResolving.has(q.id)) return _secResolving.get(q.id);
   const p = loadChapterCached(q.chId).then(cd => {
     const content = cd.content || [];
@@ -656,12 +676,12 @@ async function loadTextbook(el, chId, secIdx) {
     const cd = await loadChapterCached(chId);
     const content = cd.content || [];
     // 沒有預先對應的段落（AI 題）→ 現場比對
-    if (!(secIdx >= 0 && content[secIdx])) {
+    if (!(secIdx >= 0 && content[secIdx] && content[secIdx].type === 'orange')) {
       const q = (state.allQuizzes || []).find(x => String(x.id) === el.dataset.qid);
       if (q) { const idx = matchSectionInChapter(content, q, true); if (idx >= 0) { guess = !!q.secGuess; secIdx = idx; q.secIdx = idx; q.secTitle = (content[idx].text || '').trim(); if (content[idx].page) { q.page = content[idx].page; q.pdfPage = content[idx].pdfPage; } } }
     }
     let html = '';
-    if (secIdx >= 0 && content[secIdx]) {
+    if (secIdx >= 0 && content[secIdx] && content[secIdx].type === 'orange') {
       const blk = content[secIdx];
       const title = (blk.text || '').trim();
       const pageTxt = blk.page ? ` ‧ p.${blk.page}${blk.pdfPage ? `（PDF 第 ${blk.pdfPage} 頁）` : ''}` : '';
@@ -1295,17 +1315,19 @@ function switchMode(mode) {
   state.currentMode = mode;
   document.body.classList.toggle('mode-1', mode === 1);
   document.body.classList.toggle('mode-2', mode === 2);
+  document.body.classList.toggle('mode-3', mode === 3);
   toggleLandscapeHeader(false);
+  [1, 2, 3].forEach(m => {
+    $(`#mode${m}-btn`)?.classList.toggle('active', m === mode);
+    $(`#side-mode${m}-btn`)?.classList.toggle('active', m === mode);
+  });
+  $('#mode2-container')?.classList.toggle('hidden', mode !== 2);
+  $('#mode3-container')?.classList.toggle('hidden', mode !== 3);
+  $('#sidebar')?.classList.remove('hidden');
+  if ($('#sidebar-toggle')) $('#sidebar-toggle').style.display = '';
   if (mode === 1) {
-    $('#mode1-btn')?.classList.add('active');
-    $('#mode2-btn')?.classList.remove('active');
-    $('#side-mode1-btn')?.classList.add('active');
-    $('#side-mode2-btn')?.classList.remove('active');
-    $('#mode2-container')?.classList.add('hidden');
-    $('#sidebar')?.classList.remove('hidden');
     $('#sidebar')?.classList.remove('hidden-desktop');
     $('#main-content')?.classList.remove('hidden');
-    if ($('#sidebar-toggle')) $('#sidebar-toggle').style.display = '';
     if (state.currentChId) {
       $('#welcome-screen')?.classList.add('hidden');
       $('#chapter-view')?.classList.remove('hidden');
@@ -1314,19 +1336,16 @@ function switchMode(mode) {
       $('#chapter-view')?.classList.add('hidden');
     }
   } else {
-    $('#mode2-btn')?.classList.add('active');
-    $('#mode1-btn')?.classList.remove('active');
-    $('#side-mode2-btn')?.classList.add('active');
-    $('#side-mode1-btn')?.classList.remove('active');
     $('#sidebar')?.classList.add('hidden-desktop');
-    $('#sidebar')?.classList.remove('hidden');
     $('#main-content')?.classList.add('hidden');
-    $('#mode2-container')?.classList.remove('hidden');
-    if ($('#sidebar-toggle')) $('#sidebar-toggle').style.display = '';
     closeMobileSidebar();
-    showM2Subview('m2-lobby');
-    updateM2LobbyStats();
-    updateApiStatusBtn();
+    if (mode === 2) {
+      showM2Subview('m2-lobby');
+      updateM2LobbyStats();
+      updateApiStatusBtn();
+    } else {
+      initMode3();
+    }
   }
 }
 
@@ -3718,8 +3737,8 @@ function toggleLandscapeHeader(forceState) {
 }
 
 function initLandscapeController() {
-  // 模式一捲的是 #main-content，模式二捲的是 #mode2-container
-  const scrollers = [document.getElementById('main-content'), document.getElementById('mode2-container')].filter(Boolean);
+  // 模式一捲的是 #main-content，模式二捲的是 #mode2-container，模式三捲的是 #mode3-container
+  const scrollers = [document.getElementById('main-content'), document.getElementById('mode2-container'), document.getElementById('mode3-container')].filter(Boolean);
   const activeScroller = () => scrollers.find(el => el.offsetParent !== null) || scrollers[0];
 
   // 1. 往下閱讀捲動：自動收起（往上捲不會自動展開）
@@ -3804,3 +3823,171 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('DOMContentLoaded', init);
 
 
+/* ════════════════════════════════════════════════════════
+   模式三：口試重點整理
+   資料：chapters/oral_ch07.json
+   （《緊急救護之道—EMT-P 術科考試全攻略》第七章 口試重點整理）
+   ════════════════════════════════════════════════════════ */
+const m3 = { data: null, loading: null, rendered: false, pendingTarget: null };
+
+async function initMode3(target) {
+  if (target) m3.pendingTarget = target;
+  if (!m3.data) {
+    if (!m3.loading) {
+      m3.loading = fetch(dataUrl('chapters/oral_ch07.json'))
+        .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(d => { m3.data = d; })
+        .catch(e => { m3.loading = null; throw e; });
+    }
+    try { await m3.loading; }
+    catch (e) {
+      const box = document.getElementById('m3-content');
+      if (box) box.innerHTML = '<div class="tb-msg" style="padding:40px 10px;text-align:center">口試重點載入失敗，請確認網路後再切換一次模式三。</div>';
+      return;
+    }
+  }
+  if (!m3.rendered) renderMode3();
+  if (m3.pendingTarget) {
+    const t = m3.pendingTarget; m3.pendingTarget = null;
+    requestAnimationFrame(() => scrollToM3(t, false));
+  }
+}
+
+function m3Text(s) {
+  return mdInline(escapeHtml(String(s == null ? '' : s)).replace(/&ast;/g, '*'));
+}
+
+function renderM3Table(b) {
+  const headers = (b.headers || []);
+  const hasHead = headers.some(h => String(h || '').trim());
+  const ncol = Math.max(headers.length, ...(b.rows || []).map(r => r.length), 1);
+  const cell = (c, tag) => `<${tag}>${m3Text(c)}</${tag}>`;
+  let head = '';
+  if (hasHead) {
+    const filled = headers.filter(h => String(h || '').trim());
+    head = filled.length === 1
+      ? `<thead><tr><th colspan="${ncol}">${m3Text(filled[0])}</th></tr></thead>`
+      : `<thead><tr>${headers.map(h => cell(h, 'th')).join('')}</tr></thead>`;
+  }
+  const body = (b.rows || []).map(r => {
+    const nonEmpty = r.filter(c => String(c || '').trim());
+    // 表內的分段小標（只有第一格有字、且是粗體）→ 跨欄顯示
+    if (nonEmpty.length === 1 && String(r[0] || '').trim().startsWith('**') && r.length > 1) {
+      return `<tr class="m3-subhead"><td colspan="${ncol}">${m3Text(r[0])}</td></tr>`;
+    }
+    return `<tr>${r.map(c => cell(c, 'td')).join('')}</tr>`;
+  }).join('');
+  return `<div class="comp-table-wrap"><table class="comp-table m3-table">${head}<tbody>${body}</tbody></table></div>`;
+}
+
+function renderM3ListItem(it) {
+  if (typeof it === 'string') return m3Text(it);
+  const sub = (it.sub || []).length ? `<ul class="sub-list">${it.sub.map(x => `<li>${renderM3ListItem(x)}</li>`).join('')}</ul>` : '';
+  return m3Text(it.text || '') + sub;
+}
+
+function renderMode3() {
+  const d = m3.data;
+  const box = document.getElementById('m3-content');
+  if (!d || !box) return;
+  let html = '';
+  let lastPage = null;
+  d.content.forEach(b => {
+    const pg = b.page && b.page !== lastPage ? `<span class="sec-page" title="術科攻略 書頁">📖 p.${b.page}</span>` : '';
+    switch (b.type) {
+      case 'topic':
+        html += `<h2 class="m3-topic" id="m3-${b.id}">${m3Text(b.text)}</h2>`;
+        break;
+      case 'orange':
+        html += `<div class="orange-heading m3-heading" id="m3-${b.id}">${m3Text(b.text)}${pg}</div>`;
+        lastPage = b.page;
+        break;
+      case 'text':
+        html += `<p class="m3-text">${m3Text(b.text)}</p>`;
+        break;
+      case 'list':
+        html += `<ul class="content-list">${(b.items || []).map(i => `<li>${renderM3ListItem(i)}</li>`).join('')}</ul>`;
+        break;
+      case 'table':
+        html += renderM3Table(b);
+        break;
+      case 'image':
+        html += `
+          <figure class="m3-figure">
+            <img src="${escapeHtml(dataUrl(b.src))}" alt="${escapeHtml(b.alt || b.caption || '')}"${b.w && b.h ? ` width="${b.w}" height="${b.h}"` : ''} loading="lazy" onclick="openImageModal(this.src)">
+            ${b.caption ? `<figcaption>${m3Text(b.caption)}<span class="m3-zoom-tip">🔍 點圖放大</span></figcaption>` : ''}
+          </figure>`;
+        break;
+    }
+  });
+  box.innerHTML = html;
+
+  // 目錄（依大標題分組）
+  let toc = '';
+  let open = false;
+  d.content.forEach(b => {
+    if (b.type === 'topic') {
+      if (open) toc += '</div>';
+      toc += `<div class="m3-toc-group"><button class="m3-toc-topic" onclick="scrollToM3('${b.id}')">${m3Text(b.text)}</button>`;
+      open = true;
+    } else if (b.type === 'orange') {
+      if (!open) { toc += '<div class="m3-toc-group">'; open = true; }
+      toc += `<button class="m3-toc-item" data-m3="${b.id}" onclick="scrollToM3('${b.id}')"><span>${m3Text(String(b.text).replace(/\*\*/g, ''))}</span><em>p.${b.page}</em></button>`;
+    }
+  });
+  if (open) toc += '</div>';
+  ['m3-toc-list', 'm3-toc-list-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = toc; });
+
+  // 捲動時標示目前段落、顯示回到頂端
+  const sc = document.getElementById('mode3-container');
+  const topBtn = document.getElementById('m3-back-to-top');
+  if (sc && !sc.dataset.m3bound) {
+    sc.dataset.m3bound = '1';
+    let ticking = false;
+    sc.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        if (topBtn) topBtn.classList.toggle('hidden', sc.scrollTop < 400);
+        const heads = sc.querySelectorAll('.m3-heading');
+        const top = sc.getBoundingClientRect().top + 90;
+        let cur = null;
+        heads.forEach(h => { if (h.getBoundingClientRect().top <= top) cur = h.id.replace('m3-', ''); });
+        document.querySelectorAll('.m3-toc-item').forEach(el => el.classList.toggle('active', el.dataset.m3 === cur));
+      });
+    }, { passive: true });
+  }
+  m3.rendered = true;
+}
+
+function scrollToM3(id, smooth = true) {
+  const el = document.getElementById('m3-' + id);
+  const sc = document.getElementById('mode3-container');
+  if (!el || !sc) return;
+  // 先收起手機版目錄（它在內容上方，收起會改變段落位置），再計算捲動位置
+  const mob = document.getElementById('m3-toc-mobile');
+  if (mob) mob.open = false;
+  const y = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - 12;
+  sc.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+  el.classList.remove('m3-flash'); void el.offsetWidth; el.classList.add('m3-flash');
+}
+
+/** 從模式一（或任何地方）跳到模式三的某個段落 */
+function openMode3(target) {
+  switchMode(3);
+  initMode3(target);
+}
+
+/** 模式一被移走的段落 → 指向模式三的連結 */
+function renderM3Ref(b) {
+  return `
+    <button class="m3-ref" onclick="openMode3('${escapeHtml(b.target)}')" title="這段內容與模式三重複，已整併過去">
+      <span class="m3-ref-icon">📘</span>
+      <span class="m3-ref-text">這段重複內容已整併至 <b>模式三：口試重點</b> › ${escapeHtml(b.text)}${b.page ? `（術科攻略 p.${b.page}）` : ''}</span>
+      <span class="m3-ref-go">前往 →</span>
+    </button>`;
+}
+
+window.openMode3 = openMode3;
+window.scrollToM3 = scrollToM3;

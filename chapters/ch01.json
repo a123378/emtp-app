@@ -595,9 +595,10 @@
    "text": "救護技術員在接到派遣指示後到達現場，根據**標準作業程序以及醫療指導所訂定的預立醫療流程**來進行病人的評估與現場處置。當有特殊狀況（例如**大量病人或特殊災變**）時，還應遵守相關的**增援與檢傷的原則規範**。"
   },
   {
-   "type": "box",
-   "title": "Box1-1 緊急救護的現場處置原則",
-   "html": "<p><b>緊急傷病型態</b></p><ul><li><b>外傷模式</b>(trauma model)</li><li><b>心臟模式</b>(cardiac model)</li></ul><p><b>現場處置原則</b></p><ul><li><b>儘速送醫(Load and Go)</b></li><li><b>現場穩定(Stay and Stabilize)</b></li></ul>"
+   "type": "m3ref",
+   "target": "o14",
+   "text": "緊急醫療處置救護原則",
+   "page": 261
   },
   {
    "type": "table",

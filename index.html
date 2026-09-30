@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260930_0835">
+<link rel="stylesheet" href="style.css?v=20260930_1700">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -48,6 +48,10 @@
       <span class="mode-text-full">📝 模式二：題庫練習</span>
       <span class="mode-text-short">📝 題庫</span>
       <span id="mode2-ready-dot" class="nav-ready-dot hidden" title="AI 測驗已生成完成"></span>
+    </button>
+    <button class="mode-btn" data-mode="3" id="mode3-btn" onclick="switchMode(3)">
+      <span class="mode-text-full">🎤 模式三：口試重點</span>
+      <span class="mode-text-short">🎤 口試</span>
     </button>
   </div>
 
@@ -96,6 +100,7 @@
     <div class="sidebar-mode-switcher">
       <button class="side-mode-btn active" id="side-mode1-btn" onclick="switchMode(1);closeMobileSidebar()">📋 模式一：重點筆記</button>
       <button class="side-mode-btn" id="side-mode2-btn" onclick="switchMode(2);closeMobileSidebar()">📝 模式二：題庫練習<span id="side-mode2-ready-dot" class="nav-ready-dot hidden" title="AI 測驗已生成完成"></span></button>
+      <button class="side-mode-btn" id="side-mode3-btn" onclick="switchMode(3);closeMobileSidebar()">🎤 模式三：口試重點</button>
     </div>
 
     <!-- PWA Install Banner in Drawer -->
@@ -362,6 +367,39 @@
       <div id="m2-wb-list"></div>
     </div>
 
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       MODE 3: 口試重點整理（緊急救護之道—EMT-P 術科考試全攻略 第七章）
+       ══════════════════════════════════════════════════════ -->
+  <section id="mode3-container" class="hidden">
+    <div class="m3-layout">
+      <aside class="m3-toc" id="m3-toc">
+        <div class="m3-toc-head">📑 本章目錄</div>
+        <nav id="m3-toc-list"></nav>
+      </aside>
+      <div class="m3-main">
+        <div class="m3-hero">
+          <div class="m3-hero-badge">🎤 模式三</div>
+          <h1>口試重點整理</h1>
+          <p class="m3-hero-src">出處：《緊急救護之道—EMT-P 術科考試全攻略》第七章（書頁 p.258–287）</p>
+          <p class="m3-hero-note">模式一中與本章重複的段落已移到這裡，模式一原處會留一個「📘 已整併至模式三」的連結可直接跳過來。</p>
+          <details class="m3-toc-mobile" id="m3-toc-mobile">
+            <summary>📑 本章目錄（點擊展開）</summary>
+            <nav id="m3-toc-list-mobile"></nav>
+          </details>
+        </div>
+        <div id="m3-content">
+          <div class="loading-overlay" style="display:flex">
+            <div class="spinner"></div>
+            <span>載入口試重點中…</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="m3-back-to-top" class="floating-btn hidden" title="回到頂端" aria-label="back to top" onclick="document.getElementById('mode3-container').scrollTo({top:0,behavior:'smooth'})">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
   </section>
 </div><!-- /app-body -->
 
@@ -765,7 +803,7 @@
   </div>
 </div>
 
-<script src="app.js?v=20260930_0835"></script>
-<script src="sync.js?v=20260930_0835"></script>
+<script src="app.js?v=20260930_1700"></script>
+<script src="sync.js?v=20260930_1700"></script>
 </body>
 </html>
