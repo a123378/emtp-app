@@ -92,8 +92,54 @@ const els = {
   mode2Container: $('#mode2-container')
 };
 
+// ── 自動清理歷史 Service Worker 與舊快取，確保手機 PWA 自動取得最新版本 ──
+async function cleanLegacyServiceWorkersAndCaches() {
+  try {
+    if ('serviceWorker' in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const reg of registrations) {
+        await reg.unregister();
+        console.log('[CacheManager] 已註銷歷史 Service Worker:', reg.scope);
+      }
+    }
+  } catch (err) {
+    console.warn('[CacheManager] 註銷 Service Worker 失敗:', err);
+  }
+
+  try {
+    if ('caches' in window) {
+      const cacheNames = await caches.keys();
+      for (const name of cacheNames) {
+        await caches.delete(name);
+        console.log('[CacheManager] 已清理 CacheStorage:', name);
+      }
+    }
+  } catch (err) {
+    console.warn('[CacheManager] 清理 CacheStorage 失敗:', err);
+  }
+}
+
+// ── 手動強制檢查並更新 App（手機端一鍵刷新最新版本）──
+async function forceAppUpdate() {
+  if (confirm('即將清除本機快取並強制下載最新版本，確定要更新嗎？')) {
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:12px 24px;border-radius:12px;font-size:0.9rem;font-weight:700;box-shadow:0 10px 25px rgba(0,0,0,0.3);z-index:99999;display:flex;align-items:center;gap:8px';
+    toast.innerHTML = '<span>🔄 正在清除快取並載入最新版本…</span>';
+    document.body.appendChild(toast);
+
+    await cleanLegacyServiceWorkersAndCaches();
+
+    setTimeout(() => {
+      const cleanUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+      window.location.href = cleanUrl + '?ts=' + Date.now();
+    }, 350);
+  }
+}
+window.forceAppUpdate = forceAppUpdate;
+
 // ── Init ──────────────────────────────────────────────
 async function init() {
+  cleanLegacyServiceWorkersAndCaches();
   // Check if API key passed in URL query param (?key=...)
   try {
     const urlParams = new URLSearchParams(window.location.search);

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260930_1700">
+<link rel="stylesheet" href="style.css?v=20260930_1730">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -112,6 +112,11 @@
     <div class="sidebar-install-banner sidebar-progress-banner" onclick="openProgressModal();closeMobileSidebar()">
       <span>📊 <b>研讀進度管理</b></span>
       <span class="install-tag" style="background:var(--surface);color:var(--text-muted);border:1px solid var(--border)">統計/重設</span>
+    </div>
+    <!-- Force Update Banner in Drawer -->
+    <div class="sidebar-install-banner sidebar-update-banner" onclick="forceAppUpdate()" style="cursor:pointer">
+      <span>🔄 <b>檢查並強制更新</b></span>
+      <span class="install-tag" style="background:var(--accent-dim);color:var(--accent);font-weight:700">更新快取</span>
     </div>
     <div class="sidebar-search">
       <div class="search-wrap">
@@ -803,7 +808,7 @@
   </div>
 </div>
 
-<script src="app.js?v=20260930_1700"></script>
-<script src="sync.js?v=20260930_1700"></script>
+<script src="app.js?v=20260930_1730"></script>
+<script src="sync.js?v=20260930_1730"></script>
 </body>
 </html>
