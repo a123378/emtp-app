@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260930_1730">
+<link rel="stylesheet" href="style.css?v=20261002_0730">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -770,21 +770,33 @@
         <span id="mindmap-modal-title-text">章節核心架構圖譜</span>
       </div>
       <div class="mindmap-modal-tools">
-        <span id="mindmap-zoom-label" class="mindmap-zoom-level">100%</span>
-        <button class="mindmap-tool-btn" onclick="mindmapZoomIn()" title="放大 (+)">🔍+</button>
-        <button class="mindmap-tool-btn" onclick="mindmapZoomOut()" title="縮小 (−)">🔍−</button>
-        <button class="mindmap-tool-btn" onclick="mindmapResetZoom()" title="重設比例 (0)">↺ 重設</button>
-        <button class="mindmap-tool-btn" onclick="mindmapToggleFullscreen()" title="切換全螢幕">⛶ 全螢幕</button>
+        <div class="mindmap-search-box">
+          <input type="text" id="mindmap-search-input" class="mindmap-search-input" placeholder="🔍 搜尋架構節點、關鍵字…" oninput="filterMindmapTree(this.value)">
+          <span id="mindmap-search-count" class="mindmap-search-count"></span>
+        </div>
+        <button class="mindmap-tool-btn" id="mm-expand-btn" onclick="mindmapExpandAll()" title="展開所有子節點">📂 全部展開</button>
+        <button class="mindmap-tool-btn" id="mm-collapse-btn" onclick="mindmapCollapseAll()" title="收合所有子節點">📁 全部收合</button>
+        <button class="mindmap-tool-btn view-toggle-btn" id="mm-view-toggle-btn" onclick="toggleMindmapViewMode()" title="切換互動架構圖與靜態 SVG">🖼️ 原始圖譜</button>
+        <span id="mindmap-zoom-label" class="mindmap-zoom-level hidden">100%</span>
+        <button class="mindmap-tool-btn zoom-btn hidden" id="mm-zoom-in-btn" onclick="mindmapZoomIn()" title="放大 (+)">🔍+</button>
+        <button class="mindmap-tool-btn zoom-btn hidden" id="mm-zoom-out-btn" onclick="mindmapZoomOut()" title="縮小 (−)">🔍−</button>
+        <button class="mindmap-tool-btn zoom-btn hidden" id="mm-reset-btn" onclick="mindmapResetZoom()" title="重設比例 (0)">↺</button>
+        <button class="mindmap-tool-btn" onclick="mindmapToggleFullscreen()" title="切換全螢幕">⛶</button>
         <button class="mindmap-close-btn" onclick="closeMindmapModal()" title="關閉 (Esc)">✕</button>
       </div>
     </div>
     <div id="mindmap-canvas-container" class="mindmap-canvas-container">
-      <div id="mindmap-transform-wrapper" class="mindmap-transform-wrapper">
+      <!-- 互動式心智圖樹狀完整架構檢視 (預設) -->
+      <div id="mindmap-interactive-view" class="mindmap-interactive-view">
+        <!-- 由 app.js 動態渲染 -->
+      </div>
+      <!-- 靜態 SVG 縮放畫布 (可切換) -->
+      <div id="mindmap-transform-wrapper" class="mindmap-transform-wrapper hidden">
         <img id="mindmap-modal-img" src="" alt="章節心智圖" draggable="false">
       </div>
     </div>
     <div class="mindmap-modal-footer">
-      <span class="mindmap-footer-hint">💡 支援滾輪 / 雙指捏合縮放，按住滑鼠或手指拖曳可任意平移檢視細節</span>
+      <span class="mindmap-footer-hint" id="mindmap-footer-hint">💡 互動模式：點擊分支標題可展開/收合，上方可直接搜尋知識點；文字完整無截斷</span>
       <button class="mindmap-footer-close-btn" onclick="closeMindmapModal()">關閉檢視</button>
     </div>
   </div>
@@ -808,7 +820,7 @@
   </div>
 </div>
 
-<script src="app.js?v=20260930_1730"></script>
-<script src="sync.js?v=20260930_1730"></script>
+<script src="app.js?v=20261002_0730"></script>
+<script src="sync.js?v=20261002_0730"></script>
 </body>
 </html>

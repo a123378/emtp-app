@@ -3132,30 +3132,29 @@ body {
    章節開頭核心架構心智圖卡片 (Chapter Mindmap Card)
    ══════════════════════════════════════════════════════ */
 .chapter-mindmap-card {
-  margin: 18px 0 28px;
+  margin: 18px 0 26px;
   background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: 16px;
-  overflow: hidden;
+  padding: 18px 20px 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  cursor: zoom-in;
+  cursor: pointer;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   position: relative;
+  overflow: hidden;
 }
 
 .chapter-mindmap-card:hover {
   transform: translateY(-2px);
   border-color: var(--primary);
-  box-shadow: 0 10px 28px rgba(232, 119, 34, 0.12);
+  box-shadow: 0 10px 28px rgba(232, 119, 34, 0.15);
 }
 
 .mindmap-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
-  background: var(--surface-2);
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
   flex-wrap: wrap;
   gap: 8px;
 }
@@ -3163,19 +3162,19 @@ body {
 .mindmap-card-badge {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.88rem;
-  font-weight: 700;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 800;
   color: var(--text);
 }
 
 .mindmap-badge-icon {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
 }
 
 .mindmap-badge-sub {
   font-size: 0.72rem;
-  padding: 1px 7px;
+  padding: 2px 7px;
   border-radius: 6px;
   background: var(--orange-light);
   color: var(--orange-dark);
@@ -3184,77 +3183,72 @@ body {
 }
 
 .mindmap-zoom-tip {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--primary);
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.mindmap-preview-stage {
-  height: 250px;
-  width: 100%;
-  position: relative;
-  background: var(--surface);
+/* Card Preview Content */
+.mindmap-dynamic-preview {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
-[data-theme="dark"] .mindmap-preview-stage {
-  background: #0b1120;
-}
-
-.mindmap-preview-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 12px 16px;
-  transition: transform 0.25s ease;
-  user-select: none;
-}
-
-.chapter-mindmap-card:hover .mindmap-preview-img {
-  transform: scale(1.015);
-}
-
-.mindmap-overlay-hover {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.35);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-}
-
-.chapter-mindmap-card:hover .mindmap-overlay-hover {
-  opacity: 1;
-}
-
-.overlay-btn {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  display: flex;
+.mm-preview-pill {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  transform: translateY(4px);
-  transition: transform 0.2s ease;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  transition: all 0.15s ease;
 }
 
-.chapter-mindmap-card:hover .overlay-btn {
-  transform: translateY(0);
+.chapter-mindmap-card:hover .mm-preview-pill {
+  background: var(--surface);
+  border-color: rgba(232, 119, 34, 0.3);
+}
+
+.mm-preview-pill .pill-icon {
+  font-size: 0.95rem;
+}
+
+.mindmap-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mindmap-stat-badge {
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mindmap-cta-btn {
+  font-weight: 800;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* ══════════════════════════════════════════════════════
@@ -3321,13 +3315,48 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+}
+
+.mindmap-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mindmap-search-input {
+  padding: 5px 12px;
+  padding-right: 50px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.82rem;
+  width: 160px;
+  transition: all 0.2s ease;
+}
+
+.mindmap-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  width: 210px;
+  box-shadow: 0 0 0 2px rgba(232, 119, 34, 0.2);
+}
+
+.mindmap-search-count {
+  position: absolute;
+  right: 8px;
+  font-size: 0.72rem;
+  color: var(--primary);
+  font-weight: 700;
+  pointer-events: none;
 }
 
 .mindmap-zoom-level {
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-muted);
-  min-width: 48px;
+  min-width: 44px;
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
@@ -3338,7 +3367,7 @@ body {
   color: var(--text);
   padding: 5px 10px;
   border-radius: 8px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -3352,6 +3381,13 @@ body {
   background: var(--primary);
   color: #ffffff;
   border-color: var(--primary);
+}
+
+.mindmap-tool-btn.view-toggle-btn {
+  background: var(--surface-2);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 700;
 }
 
 .mindmap-close-btn {
@@ -3375,23 +3411,265 @@ body {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: #f8fafc;
-  cursor: grab;
-  user-select: none;
-  touch-action: none;
+  background: var(--bg);
+  user-select: text;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 互動式心智圖樹狀完整架構檢視 ── */
+.mindmap-interactive-view {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 28px 48px;
+  box-sizing: border-box;
+  background: var(--bg);
+}
+
+.mm-tree-root {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.mm-root-card {
+  text-align: center;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #e87722, #c2410c);
+  color: #ffffff;
+  border-radius: 16px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 24px rgba(232, 119, 34, 0.28);
+}
+
+.mm-root-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.mm-root-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.mm-branches-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mm-branch-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.mm-branch-card:hover {
+  border-color: var(--primary);
+}
+
+.mm-branch-head {
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 12px 18px;
+  background: var(--surface-2);
+  cursor: pointer;
+  user-select: none;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text);
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s ease;
 }
 
-.mindmap-canvas-container.is-dragging {
-  cursor: grabbing !important;
+.mm-branch-head:hover {
+  background: rgba(232, 119, 34, 0.08);
 }
 
-[data-theme="dark"] .mindmap-canvas-container {
-  background: #0f172a;
+.mm-branch-card:not(.collapsed) .mm-branch-head {
+  border-bottom-color: var(--border);
 }
 
+.mm-toggle-icon {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+  width: 14px;
+  text-align: center;
+}
+
+.mm-branch-card.collapsed .mm-toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.mm-branch-card.collapsed .mm-branch-body {
+  display: none;
+}
+
+.mm-branch-icon {
+  font-size: 1.15rem;
+}
+
+.mm-branch-title {
+  flex: 1;
+}
+
+.mm-count-badge {
+  font-size: 0.74rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.mm-page-tag {
+  font-size: 0.72rem;
+  color: var(--orange-dark);
+  background: var(--orange-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.mm-branch-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mm-subgroup {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.mm-subgroup-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--blue, #2563eb);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-theme="dark"] .mm-subgroup-title {
+  color: #60a5fa;
+}
+
+.mm-leaf-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.mm-leaf-list li {
+  margin-bottom: 6px;
+}
+
+.mm-leaf-list li:last-child {
+  margin-bottom: 0;
+}
+
+.mm-kw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+.mm-kw-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.mm-kw-name {
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.mm-kw-en {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.mm-kw-def {
+  color: var(--text);
+  font-size: 0.82rem;
+}
+
+.mm-clinical-box, .mm-mnemonic-box, .mm-table-summary-box {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.mm-clinical-box {
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3.5px solid #ef4444;
+}
+
+.mm-mnemonic-box {
+  background: rgba(234, 179, 8, 0.1);
+  border-left: 3.5px solid #eab308;
+}
+
+.mm-table-summary-box {
+  background: rgba(16, 185, 129, 0.08);
+  border-left: 3.5px solid #10b981;
+  overflow-x: auto;
+}
+
+.mm-box-tag {
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mm-box-tag.red { color: #dc2626; }
+.mm-box-tag.yellow { color: #ca8a04; }
+.mm-box-tag.green { color: #059669; }
+
+.mm-mark {
+  background: #fef08a;
+  color: #854d0e;
+  font-weight: 700;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+[data-theme="dark"] .mm-mark {
+  background: #ca8a04;
+  color: #ffffff;
+}
+
+/* 靜態 SVG 縮放檢視模式容器 */
 .mindmap-transform-wrapper {
   will-change: transform;
   display: flex;
@@ -3449,23 +3727,36 @@ body {
   .mindmap-modal-header {
     padding: 8px 12px;
   }
+  .mindmap-search-input {
+    width: 120px;
+  }
+  .mindmap-search-input:focus {
+    width: 150px;
+  }
   .mindmap-tool-btn {
-    padding: 4px 8px;
-    font-size: 0.78rem;
+    padding: 4px 7px;
+    font-size: 0.74rem;
   }
   .mindmap-footer-hint {
     display: none;
   }
-  .chapter-mindmap-card {
-    margin: 14px 0 20px;
+  .mindmap-interactive-view {
+    padding: 14px 12px 36px;
   }
-  .mindmap-preview-stage {
-    height: 190px;
+  .mm-root-title {
+    font-size: 1.15rem;
+  }
+  .mm-branch-head {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+  }
+  .mm-branch-body {
+    padding: 12px 14px;
   }
 }
 
 /* ══════════════════════════════════════════════════════
-   章節專屬 Podcast 導讀播放器 (Chapter Podcast Card)
+   AI 臨床講師隨身課 (AI Instructor Podcast) 樣式
    ══════════════════════════════════════════════════════ */
 .chapter-podcast-card {
   margin: 0 0 28px;
@@ -3515,6 +3806,33 @@ body {
   color: var(--orange-dark);
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+
+.podcast-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.podcast-extra-btn {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  color: #ffffff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25);
+}
+
+.podcast-extra-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);
 }
 
 .podcast-speed-btn {
@@ -3664,8 +3982,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 14px;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .podcast-ctrl-btn {
@@ -3712,6 +4031,113 @@ body {
   transform: scale(1.06);
 }
 
+.podcast-transcript-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.podcast-transcript-btn:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* 講義/逐字稿展開抽屜 */
+.podcast-transcript-drawer {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+  animation: fadeIn 0.25s ease-out;
+}
+
+.podcast-transcript-drawer.hidden {
+  display: none !important;
+}
+
+.transcript-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.transcript-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.transcript-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.transcript-action-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.transcript-action-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--primary);
+}
+
+.transcript-body {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.transcript-sec-card {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.transcript-sec-card:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.transcript-sec-title {
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+}
+
+.transcript-sec-text {
+  white-space: pre-line;
+  color: var(--text);
+}
+
 @media (max-width: 640px) {
   .chapter-podcast-card {
     padding: 14px 16px;
@@ -3734,6 +4160,10 @@ body {
     width: 34px;
     height: 34px;
     font-size: 0.68rem;
+  }
+  .podcast-extra-btn {
+    font-size: 0.72rem;
+    padding: 3px 8px;
   }
 }
 

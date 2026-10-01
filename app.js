@@ -364,43 +364,49 @@ function renderNotes(cd, chId) {
       </div>
     </div>`;
 
-  // ② 本章核心架構心智圖卡片 (點擊放大檢視)
-  const mindmapSrc = dataUrl(`images/mindmaps/${chId}.svg`);
+  // ② 本章全景核心架構圖譜卡片 (動態解析・完整知識節點・無截斷)
   const chFullTitle = `${cd.num} ${cd.title}`;
+  const mmPills = renderMindmapCardPills(cd);
+  const mmCount = countChapterMindmapNodes(cd);
+
   html += `
     <div class="chapter-mindmap-card" onclick="openMindmapModal('${chId}', '${escapeHtml(chFullTitle)}')">
       <div class="mindmap-card-header">
         <div class="mindmap-card-badge">
           <span class="mindmap-badge-icon">🧠</span>
-          <span class="mindmap-badge-text">本章核心架構圖譜</span>
-          <span class="mindmap-badge-sub">MIND MAP</span>
+          <span class="mindmap-badge-text">本章全景核心架構圖譜</span>
+          <span class="mindmap-badge-sub">INTERACTIVE MIND MAP</span>
         </div>
         <div class="mindmap-zoom-tip">
-          <span class="zoom-icon">🔍</span> 點擊全螢幕放大探索
+          <span class="zoom-icon">🔍</span> 展開完整架構樹
         </div>
       </div>
-      <div class="mindmap-preview-stage">
-        <img src="${mindmapSrc}" alt="${escapeHtml(cd.title)} 心智圖" class="mindmap-preview-img" loading="lazy" onerror="this.closest('.chapter-mindmap-card').style.display='none'">
-        <div class="mindmap-overlay-hover">
-          <span class="overlay-btn">🔍 點擊展開全螢幕高清探索</span>
-        </div>
+      <div class="mindmap-dynamic-preview">
+        ${mmPills}
+      </div>
+      <div class="mindmap-card-footer">
+        <span class="mindmap-stat-badge">📊 共收錄 ${mmCount} 個知識架構分支與考點</span>
+        <span class="mindmap-cta-btn">🧠 展開完整互動心智圖（支援搜尋/展開/全文無截斷）→</span>
       </div>
     </div>`;
 
-  // ②-2 本章專屬 Podcast 導讀播放器 (Dual-Mode: MP3 / AI 語音導讀)
+  // ②-2 本章專屬 AI 臨床講師隨身課 (AI 講師精講章節內容・非導讀)
   html += `
     <div id="chapter-podcast-card" class="chapter-podcast-card">
       <div class="podcast-card-header">
         <div class="podcast-badge">
           <span class="podcast-badge-icon">🎙️</span>
-          <span class="podcast-badge-text">章節導讀 Podcast</span>
-          <span id="podcast-mode-tag" class="podcast-mode-tag">AI 臨床講堂</span>
+          <span class="podcast-badge-text">AI 臨床講師隨身課</span>
+          <span id="podcast-mode-tag" class="podcast-mode-tag">🎖️ 教官實務講堂</span>
         </div>
-        <button id="podcast-speed-btn" class="podcast-speed-btn" onclick="podcastPlayer.cycleSpeed()" title="點擊切換播放倍速">1.0x</button>
+        <div class="podcast-header-actions">
+          <button id="podcast-ai-deep-btn" class="podcast-extra-btn" onclick="podcastPlayer.generateOrSwitchAiLecture()" title="調用 Gemini 生成高階醫學教授深度串講">✨ AI 教授深度串講</button>
+          <button id="podcast-speed-btn" class="podcast-speed-btn" onclick="podcastPlayer.cycleSpeed()" title="點擊切換播放倍速">1.0x</button>
+        </div>
       </div>
       <div class="podcast-body">
         <div class="podcast-cover">
-          <span>🎧</span>
+          <span>👨‍⚕️</span>
           <div class="podcast-equalizer">
             <span class="eq-bar"></span>
             <span class="eq-bar"></span>
@@ -411,7 +417,7 @@ function renderNotes(cd, chId) {
         <div class="podcast-info">
           <div class="podcast-title">${escapeHtml(cd.num)} ${escapeHtml(cd.title)}</div>
           <div class="podcast-subtitle">
-            <span id="podcast-subtitle-text">雙向臨床導讀 ‧ 核心觀念與國考避坑講義</span>
+            <span id="podcast-subtitle-text">EMT-P 臨床指導教官精講 ‧ 深入剖析病理機轉與國考必考考點</span>
           </div>
         </div>
       </div>
@@ -434,7 +440,23 @@ function renderNotes(cd, chId) {
           <span>⏩</span>
           <span style="font-size:0.6rem">15s</span>
         </button>
+        <button id="podcast-transcript-btn" class="podcast-transcript-btn" onclick="podcastPlayer.toggleTranscript()" title="展開 / 收合講師講義">
+          📜 講師講義
+        </button>
       </div>
+
+      <!-- 講師講義 / 逐字稿展開抽屜 -->
+      <div id="podcast-transcript-drawer" class="podcast-transcript-drawer hidden">
+        <div class="transcript-header">
+          <span class="transcript-title">📋 講師授課逐字教案</span>
+          <div class="transcript-actions">
+            <button class="transcript-action-btn" onclick="podcastPlayer.copyTranscript()">📋 複製講稿</button>
+            <button class="transcript-action-btn" onclick="podcastPlayer.toggleTranscript()">✕ 收合</button>
+          </div>
+        </div>
+        <div id="podcast-transcript-body" class="transcript-body"></div>
+      </div>
+
       <audio id="chapter-audio-el" preload="metadata" style="display:none"></audio>
     </div>`;
 
@@ -3291,93 +3313,394 @@ function closeImageModal() {
 window.openImageModal = openImageModal;
 window.closeImageModal = closeImageModal;
 
-// ── Chapter Podcast Player (Dual-Mode: MP3 / Web Speech) ──
+// ── Helper: 清理 Markdown 符號以利自然語音朗讀 ───────────
+function cleanMarkdownForSpeech(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+    .replace(/`/g, '')
+    .replace(/#{1,6}\s+/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// ── Helper: 統計章節心智圖節點總數 ─────────────────────────
+function countChapterMindmapNodes(cd) {
+  if (!cd) return 0;
+  let count = 1; // 根節點
+  if (cd.learningGoals) count += cd.learningGoals.length;
+  if (cd.keywords) count += cd.keywords.length;
+  if (cd.content) {
+    cd.content.forEach(b => {
+      if (b.type === 'orange') count += 1;
+      else if (b.type === 'blue') count += 1;
+      else if (b.type === 'list' && b.items) count += b.items.length;
+      else if (b.type === 'clinical' && b.points) count += b.points.length;
+      else if (b.type === 'mnemonic') count += 1;
+      else if (b.type === 'table') count += 1;
+    });
+  }
+  return count;
+}
+
+// ── Helper: 渲染模式一卡片上的架構膠囊 (Pills Preview) ──────
+function renderMindmapCardPills(cd) {
+  if (!cd) return '';
+  const pills = [];
+
+  if (cd.learningGoals && cd.learningGoals.length) {
+    pills.push(`<span class="mm-preview-pill"><span class="pill-icon">🎯</span>學習目標 (${cd.learningGoals.length})</span>`);
+  }
+  if (cd.keywords && cd.keywords.length) {
+    pills.push(`<span class="mm-preview-pill"><span class="pill-icon">🔑</span>核心名詞 (${cd.keywords.length})</span>`);
+  }
+
+  if (cd.content && cd.content.length) {
+    const orangeSections = cd.content.filter(b => b.type === 'orange' && !['情境', '解答', '複習思考題'].includes(b.text));
+    orangeSections.slice(0, 5).forEach(sec => {
+      pills.push(`<span class="mm-preview-pill"><span class="pill-icon">📖</span>${escapeHtml(sec.text)}</span>`);
+    });
+    if (orangeSections.length > 5) {
+      pills.push(`<span class="mm-preview-pill">+${orangeSections.length - 5} 個主主題</span>`);
+    }
+
+    const clinicalCount = cd.content.filter(b => b.type === 'clinical').length;
+    if (clinicalCount > 0) {
+      pills.push(`<span class="mm-preview-pill" style="border-color:rgba(239,68,68,0.4);color:#dc2626"><span class="pill-icon">🚨</span>臨床重點 (${clinicalCount})</span>`);
+    }
+
+    const mnemonicCount = cd.content.filter(b => b.type === 'mnemonic').length;
+    if (mnemonicCount > 0) {
+      pills.push(`<span class="mm-preview-pill" style="border-color:rgba(234,179,8,0.4);color:#b45309"><span class="pill-icon">💡</span>記憶口訣 (${mnemonicCount})</span>`);
+    }
+  }
+
+  return pills.join('');
+}
+
+// ── AI 臨床講師系統：將章節內文深度轉譯為教官授課逐字教案 ──
+function buildInstructorLectureScript(cd) {
+  if (!cd) return [];
+  const sections = [];
+
+  // ① 開場：臨床戰略定位與情境導入
+  sections.push({
+    title: '🎙️ 開場：臨床戰略定位',
+    text: `各位同學大家好，我是你的高級救護技術員臨床指導教官。今天這堂課我們要深入探討的是 ${cd.num}：${cd.title}。` +
+      `在到院前急救體系與國家甄試中，這個章節不僅是理論基石，更直接關係到急救現場的處置思維與法律授權邊界。` +
+      `請大家放下死記硬背的心態，跟隨我的講解，把條文與指引轉化為直覺的臨床反應。`
+  });
+
+  // ② 核心名詞與法規概念深解
+  if (cd.keywords && cd.keywords.length) {
+    const kwExplanations = cd.keywords.map((k, idx) => {
+      let t = `第${idx + 1}個關鍵字是【${k.zh}】`;
+      if (k.en) t += `，英文縮寫或全稱是 ${k.en}`;
+      t += `。在臨床上的核心定義是：${cleanMarkdownForSpeech(k.def)}。`;
+      return t;
+    }).join('\n');
+
+    sections.push({
+      title: '🎯 核心名詞與定義深解',
+      text: `首先，我們來建立本章的核心醫學與法規詞彙。出題老師在情境題中，常會透過偷換名詞來測試大家的觀念是否扎實：\n${kwExplanations}\n教官提醒大家，在考場上看到這些名詞，一定要能立刻反射出它在現場救護車上的處置標準。`
+    });
+  }
+
+  // ③ 逐節深入講授章節內容 (橘標、藍標、表格、臨床實務、口訣)
+  if (cd.content && cd.content.length) {
+    let curSecTitle = '';
+    let curSecParts = [];
+
+    const flushSec = () => {
+      if (curSecParts.length && curSecTitle) {
+        sections.push({
+          title: `📖 ${curSecTitle}`,
+          text: curSecParts.join('\n\n')
+        });
+        curSecParts = [];
+      }
+    };
+
+    cd.content.forEach((block) => {
+      if (block.type === 'orange') {
+        if (['情境', '解答', '複習思考題'].includes(block.text)) {
+          if (block.text === '情境') {
+            flushSec();
+            curSecTitle = '現場實務情境引導';
+          }
+          return;
+        }
+        flushSec();
+        curSecTitle = block.text;
+        curSecParts.push(`現在我們進入核心主題：【${block.text}】。這是本章非常高頻的考點與實務焦點。`);
+      } else if (block.type === 'blue') {
+        const cleanTitle = cleanMarkdownForSpeech(block.text);
+        curSecParts.push(`關於【${cleanTitle}】，請大家特別記住以下幾個臨床細節：`);
+      } else if (block.type === 'text') {
+        const cleaned = cleanMarkdownForSpeech(block.text);
+        if (cleaned.length > 5) {
+          curSecParts.push(cleaned);
+        }
+      } else if (block.type === 'list') {
+        const items = (block.items || []).map((it, i) => {
+          return `第${i + 1}點，${cleanMarkdownForSpeech(it)}。`;
+        }).join(' ');
+        curSecParts.push(`請特別注意以下重要處置要點：${items}`);
+      } else if (block.type === 'clinical') {
+        const pts = (block.points || []).map(p => cleanMarkdownForSpeech(p)).join('；');
+        curSecParts.push(`🚨 教官特別提示【臨床實務重點】：${block.label || '核心考點'}。在救護現場實務上，大家務必牢記：${pts}。這是歷屆學員最容易扣分或在現場手忙腳亂的地方！`);
+      } else if (block.type === 'mnemonic') {
+        const mn = cleanMarkdownForSpeech(block.text);
+        curSecParts.push(`💡 這裡有一個超級重要的【記憶口訣】：【${mn}】！請大家在腦海裡跟著我複誦一遍。考場上遇到多重處置順序，靠這個口訣就能直接秒殺答案！`);
+      } else if (block.type === 'table') {
+        const headers = (block.headers || []).map(h => cleanMarkdownForSpeech(h)).join(' 與 ');
+        let tableSummary = `📊 大白教科書在這裡整理了重要的對照表：【${headers}】。`;
+        if (block.rows && block.rows.length) {
+          tableSummary += block.rows.slice(0, 6).map(row => {
+            const rowText = row.map(cell => cleanMarkdownForSpeech(cell)).filter(Boolean).join('，對應是：');
+            return rowText ? `其中，${rowText}。` : '';
+          }).join(' ');
+        }
+        curSecParts.push(`${tableSummary} 請大家務必分清楚兩者的界線，千萬不要混淆！`);
+      }
+    });
+
+    flushSec();
+  }
+
+  // ④ 結語：臨床思維整合與國考應試叮嚀
+  sections.push({
+    title: '🏁 總結：臨床思維整合與應試叮嚀',
+    text: `好的，學員們！我們已經把 ${cd.num} ${cd.title} 的所有核心機轉、標準處置流程與避坑考點完整梳理完畢。` +
+      `學習高級救護不僅是為了考過證照，更是在千鈞一髮的到院前現場，守護生命的專業底氣。` +
+      `請大家利用底下的題目與錯題本立即進行練習，檢驗自己是否真正吸收。我們下一堂課見！`
+  });
+
+  return sections;
+}
+
+// ── AI 臨床講師隨身課播放器 (AI Instructor Podcast Player) ──
 const podcastPlayer = {
   currentChId: null,
+  currentChData: null,
+  lectureSource: 'builtin', // 'builtin' | 'gemini'
+  lectureSections: [],
+  speechChunks: [],
+  currentChunkIndex: 0,
   isPlaying: false,
-  mode: 'speech', // 'audio' (mp3 file) | 'speech' (Web Speech API)
   speed: parseFloat(localStorage.getItem('podcast_speed') || '1.0'),
   speeds: [1.0, 1.25, 1.5, 2.0],
-  audioEl: null,
   speechSynth: window.speechSynthesis || null,
   speechUtterance: null,
-  speechText: '',
+  keepAliveTimer: null,
   progressTimer: null,
   virtualCurrentTime: 0,
   virtualDuration: 180,
+  transcriptVisible: false,
 
   init(chId, chapterData) {
     this.stop();
     this.currentChId = chId;
-    this.audioEl = document.getElementById('chapter-audio-el');
+    this.currentChData = chapterData;
     this.virtualCurrentTime = 0;
+    this.currentChunkIndex = 0;
     this.updateSpeedUI();
 
-    // Check if MP3 file exists
-    const mp3Url = dataUrl(`audio/podcasts/${chId}.mp3`);
-    if (this.audioEl) {
-      this.audioEl.src = mp3Url;
-      this.audioEl.playbackRate = this.speed;
-
-      this.audioEl.onloadedmetadata = () => {
-        this.mode = 'audio';
-        const tag = document.getElementById('podcast-mode-tag');
-        if (tag) tag.textContent = 'MP3 原聲廣播';
-        const sub = document.getElementById('podcast-subtitle-text');
-        if (sub) sub.textContent = 'NotebookLM 雙人深度對談原聲錄音';
-        const dur = document.getElementById('podcast-time-dur');
-        if (dur) dur.textContent = this.formatTime(this.audioEl.duration);
-      };
-
-      this.audioEl.onerror = () => {
-        this.mode = 'speech';
-        const tag = document.getElementById('podcast-mode-tag');
-        if (tag) tag.textContent = 'AI 智慧語音';
-        const sub = document.getElementById('podcast-subtitle-text');
-        if (sub) sub.textContent = 'AI 臨床重點精華快讀導讀電台';
-      };
-
-      this.audioEl.ontimeupdate = () => {
-        if (this.mode === 'audio' && this.isPlaying) {
-          this.updateAudioProgress();
-        }
-      };
-
-      this.audioEl.onended = () => {
-        this.stop();
-      };
+    // 檢查是否有本機快取的 Gemini 教授講稿
+    const cachedGemini = localStorage.getItem('gemini_lecture_' + chId);
+    if (cachedGemini) {
+      try {
+        this.lectureSections = JSON.parse(cachedGemini);
+        this.lectureSource = 'gemini';
+      } catch (e) {
+        this.lectureSections = buildInstructorLectureScript(chapterData);
+        this.lectureSource = 'builtin';
+      }
+    } else {
+      this.lectureSections = buildInstructorLectureScript(chapterData);
+      this.lectureSource = 'builtin';
     }
 
-    this.prepareSpeechScript(chapterData);
+    this.updateSourceUI();
+    this.prepareSpeechChunks();
+    this.renderTranscriptDrawer();
   },
 
-  prepareSpeechScript(cd) {
-    if (!cd) return;
-    const parts = [];
-    parts.push(`歡迎收聽高級救護技術員重點導讀電台。今天我們來探討 ${cd.num}，${cd.title}。`);
-    
-    if (cd.learningGoals && cd.learningGoals.length) {
-      parts.push(`本章學習目標包含：${cd.learningGoals.slice(0, 4).join('。')}。`);
+  updateSourceUI() {
+    const modeTag = document.getElementById('podcast-mode-tag');
+    const subText = document.getElementById('podcast-subtitle-text');
+    const deepBtn = document.getElementById('podcast-ai-deep-btn');
+    if (modeTag) {
+      modeTag.textContent = this.lectureSource === 'gemini' ? '✨ 教授深度串講' : '🎖️ 教官實務講堂';
     }
-
-    if (cd.keywords && cd.keywords.length) {
-      const kwList = cd.keywords.slice(0, 5).map(k => `${k.zh}，也就是 ${k.en || ''}，定義是：${k.def || ''}`).join('。');
-      parts.push(`在核心觀念部分，必須掌握的專有名詞有：${kwList}。`);
+    if (subText) {
+      subText.textContent = this.lectureSource === 'gemini'
+        ? 'Gemini 臨床醫學權威教授 ‧ 案例白話精講與國考避坑講堂'
+        : 'EMT-P 臨床指導教官精講 ‧ 深入剖析病理機轉與國考必考考點';
     }
+    if (deepBtn) {
+      deepBtn.textContent = this.lectureSource === 'gemini' ? '↺ 切換為教官教案' : '✨ AI 教授深度串講';
+    }
+  },
 
-    if (cd.content && cd.content.length) {
-      const orangeSections = cd.content.filter(b => b.type === 'orange' && !['情境', '解答', '複習思考題'].includes(b.text)).map(b => b.text);
-      if (orangeSections.length) {
-        parts.push(`本章主要核心大綱分為：${orangeSections.slice(0, 5).join('、')}。請在複習時特別注意各環節的臨床處置順序與鑑別重點。`);
+  prepareSpeechChunks() {
+    const fullText = this.lectureSections.map(s => `${s.title}。\n${s.text}`).join('\n\n');
+    // 將文本依句號、問號、驚嘆號或換行切分為 25~60 字的獨立朗讀段落，徹底防止瀏覽器 15 秒暫停 bug
+    const rawSentences = fullText.split(/([。！？\n]+)/);
+    const chunks = [];
+    let buffer = '';
+
+    for (let i = 0; i < rawSentences.length; i++) {
+      buffer += rawSentences[i];
+      if (buffer.length >= 25 || (i < rawSentences.length - 1 && rawSentences[i + 1] === '\n')) {
+        const clean = buffer.trim();
+        if (clean.length > 0) chunks.push(clean);
+        buffer = '';
       }
     }
+    if (buffer.trim().length > 0) chunks.push(buffer.trim());
 
-    parts.push(`以上是 ${cd.num} 的核心重點快讀，祝您複習順利！`);
-    this.speechText = parts.join('\n');
-    this.virtualDuration = Math.max(60, Math.round(this.speechText.length / 4));
-    const dur = document.getElementById('podcast-time-dur');
-    if (dur && this.mode === 'speech') {
-      dur.textContent = this.formatTime(this.virtualDuration);
+    this.speechChunks = chunks.length ? chunks : ['即將開始授課。'];
+    const totalChars = fullText.length;
+    this.virtualDuration = Math.max(90, Math.round(totalChars / 4.2));
+
+    const durSpan = document.getElementById('podcast-time-dur');
+    if (durSpan) durSpan.textContent = this.formatTime(this.virtualDuration);
+    this.updateProgressUI(0, this.virtualDuration);
+  },
+
+  renderTranscriptDrawer() {
+    const bodyEl = document.getElementById('podcast-transcript-body');
+    if (!bodyEl) return;
+    if (!this.lectureSections.length) {
+      bodyEl.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:12px">暫無講義內容</div>';
+      return;
+    }
+
+    bodyEl.innerHTML = this.lectureSections.map(s => `
+      <div class="transcript-sec-card">
+        <div class="transcript-sec-title">${escapeHtml(s.title)}</div>
+        <div class="transcript-sec-text">${escapeHtml(s.text)}</div>
+      </div>
+    `).join('');
+  },
+
+  toggleTranscript() {
+    const drawer = document.getElementById('podcast-transcript-drawer');
+    const btn = document.getElementById('podcast-transcript-btn');
+    if (!drawer) return;
+    this.transcriptVisible = !this.transcriptVisible;
+    drawer.classList.toggle('hidden', !this.transcriptVisible);
+    if (btn) {
+      btn.textContent = this.transcriptVisible ? '✕ 收合講義' : '📜 講師講義';
+    }
+  },
+
+  copyTranscript() {
+    const fullText = this.lectureSections.map(s => `【${s.title}】\n${s.text}`).join('\n\n');
+    navigator.clipboard.writeText(fullText).then(() => {
+      alert('📋 講師教學講義已成功複製至剪貼簿！');
+    }).catch(() => {
+      alert('講義複製失敗，請手動選取複製。');
+    });
+  },
+
+  async generateOrSwitchAiLecture() {
+    if (this.lectureSource === 'gemini') {
+      // 切換回內建教官教案
+      this.stop();
+      this.lectureSource = 'builtin';
+      this.lectureSections = buildInstructorLectureScript(this.currentChData);
+      this.updateSourceUI();
+      this.prepareSpeechChunks();
+      this.renderTranscriptDrawer();
+      this.play();
+      return;
+    }
+
+    // 檢查是否有 API Key（直接從模式二 localStorage 設定即時同步）
+    state.geminiApiKey = localStorage.getItem('gemini_api_key') || state.geminiApiKey || '';
+    state.geminiModel = localStorage.getItem('gemini_model') || state.geminiModel || 'gemini-3.8-flash';
+
+    if (!state.geminiApiKey) {
+      if (confirm('使用「AI 教授深度串講」需要設定 Gemini API Key（共用模式二題庫設定）。是否立即前往設定？')) {
+        openApiModal();
+      }
+      return;
+    }
+
+    const btn = document.getElementById('podcast-ai-deep-btn');
+    const origText = btn ? btn.textContent : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '⏳ AI 教授備課中…';
+    }
+
+    try {
+      const cd = this.currentChData;
+      const chPrompt = `你現在是台灣高級救護技術員 (EMT-P) 國家甄試權威急診醫學教授。
+請根據以下章節內容，為學員進行深入淺出、結合救護實務與臨床機轉的專題講座授課（絕對不要只做導讀或大綱速報，而是真正在講台上一題一節詳細講授內容、機轉、救護車處置步驟、口訣與常錯考題陷阱）。
+章節編號：${cd.num}
+章節名稱：${cd.title}
+學習目標：${(cd.learningGoals || []).join('；')}
+專有名詞：${(cd.keywords || []).map(k => `${k.zh}(${k.en || ''}): ${k.def}`).join('；')}
+章節內文重點：
+${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).filter(Boolean).slice(0, 30).join('\n')}
+
+請以繁體中文撰寫一份約 1000~1400 字的結構化授課講義，分成 4~6 個小節，每節開頭附上標題（如：【一、臨床戰略定位】、【二、生理機轉與流程剖析】等）。語氣生動親切、條理嚴謹。`;
+
+      const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${state.geminiModel || 'gemini-3.8-flash'}:generateContent?key=${state.geminiApiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: chPrompt }] }]
+        })
+      });
+
+      if (!resp.ok) {
+        throw new Error('Gemini API 請求失敗，狀態碼：' + resp.status);
+      }
+
+      const resData = await resp.json();
+      const rawText = resData.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      if (!rawText) throw new Error('未能取得講稿內容');
+
+      // 解析生成講稿成小節
+      const rawSections = [];
+      const parts = rawText.split(/【([^】]+)】/);
+
+      if (parts.length > 2) {
+        for (let i = 1; i < parts.length; i += 2) {
+          rawSections.push({
+            title: `✨ ${parts[i].trim()}`,
+            text: cleanMarkdownForSpeech(parts[i + 1] || '')
+          });
+        }
+      } else {
+        rawSections.push({
+          title: `✨ ${cd.num} 醫學教授深度講堂`,
+          text: cleanMarkdownForSpeech(rawText)
+        });
+      }
+
+      localStorage.setItem('gemini_lecture_' + this.currentChId, JSON.stringify(rawSections));
+      this.lectureSections = rawSections;
+      this.lectureSource = 'gemini';
+      this.updateSourceUI();
+      this.prepareSpeechChunks();
+      this.renderTranscriptDrawer();
+      this.play();
+    } catch (err) {
+      console.error('AI 深度講堂生成失敗:', err);
+      alert('AI 教授講稿生成失敗：' + err.message + '，已切回教官教案。');
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = this.lectureSource === 'gemini' ? '↺ 切換為教官教案' : origText;
+      }
     }
   },
 
@@ -3390,20 +3713,6 @@ const podcastPlayer = {
   },
 
   play() {
-    if (this.mode === 'audio' && this.audioEl && this.audioEl.src && !this.audioEl.error) {
-      this.audioEl.playbackRate = this.speed;
-      this.audioEl.play().then(() => {
-        this.setPlayingState(true);
-      }).catch(() => {
-        this.mode = 'speech';
-        this.playSpeech();
-      });
-    } else {
-      this.playSpeech();
-    }
-  },
-
-  playSpeech() {
     if (!this.speechSynth) {
       alert('您的瀏覽器不支援語音合成功能，建議使用 Chrome 或 Safari 瀏覽器。');
       return;
@@ -3416,12 +3725,21 @@ const podcastPlayer = {
       return;
     }
 
-    this.speechSynth.cancel();
-    const ratio = this.virtualDuration > 0 ? (this.virtualCurrentTime / this.virtualDuration) : 0;
-    const startChar = Math.floor(this.speechText.length * ratio);
-    const textToSpeak = this.speechText.slice(startChar) || this.speechText;
+    this.playFromChunk(this.currentChunkIndex);
+  },
 
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+  playFromChunk(index) {
+    if (!this.speechSynth) return;
+    if (index >= this.speechChunks.length) {
+      this.stop();
+      return;
+    }
+
+    this.currentChunkIndex = index;
+    this.speechSynth.cancel();
+
+    const chunkText = this.speechChunks[index];
+    const utterance = new SpeechSynthesisUtterance(chunkText);
     utterance.lang = 'zh-TW';
     utterance.rate = this.speed;
 
@@ -3431,41 +3749,70 @@ const podcastPlayer = {
     if (twVoice) utterance.voice = twVoice;
 
     utterance.onend = () => {
-      this.stop();
+      if (this.isPlaying) {
+        this.currentChunkIndex++;
+        if (this.currentChunkIndex < this.speechChunks.length) {
+          this.playFromChunk(this.currentChunkIndex);
+        } else {
+          this.stop();
+        }
+      }
     };
 
-    utterance.onerror = () => {
-      this.stop();
+    utterance.onerror = (e) => {
+      console.warn('[Podcast] Chunk speech error:', e);
+      if (this.isPlaying && this.currentChunkIndex < this.speechChunks.length - 1) {
+        this.currentChunkIndex++;
+        this.playFromChunk(this.currentChunkIndex);
+      } else {
+        this.stop();
+      }
     };
 
     this.speechUtterance = utterance;
     this.speechSynth.speak(utterance);
     this.setPlayingState(true);
     this.startVirtualTimer();
+    this.startKeepAlive();
+  },
+
+  startKeepAlive() {
+    this.stopKeepAlive();
+    // 解決 Chrome 15 秒語音合成自動凍結 bug
+    this.keepAliveTimer = setInterval(() => {
+      if (this.speechSynth && this.speechSynth.speaking && !this.speechSynth.paused) {
+        this.speechSynth.pause();
+        this.speechSynth.resume();
+      }
+    }, 10000);
+  },
+
+  stopKeepAlive() {
+    if (this.keepAliveTimer) {
+      clearInterval(this.keepAliveTimer);
+      this.keepAliveTimer = null;
+    }
   },
 
   pause() {
-    if (this.mode === 'audio' && this.audioEl) {
-      this.audioEl.pause();
-    } else if (this.speechSynth) {
+    if (this.speechSynth) {
       this.speechSynth.pause();
     }
     this.setPlayingState(false);
     this.stopVirtualTimer();
+    this.stopKeepAlive();
   },
 
   stop() {
-    if (this.audioEl) {
-      this.audioEl.pause();
-      this.audioEl.currentTime = 0;
-    }
     if (this.speechSynth) {
       this.speechSynth.cancel();
     }
     this.setPlayingState(false);
     this.stopVirtualTimer();
+    this.stopKeepAlive();
+    this.currentChunkIndex = 0;
     this.virtualCurrentTime = 0;
-    this.updateProgressUI(0, this.mode === 'audio' && this.audioEl?.duration ? this.audioEl.duration : this.virtualDuration);
+    this.updateProgressUI(0, this.virtualDuration);
   },
 
   setPlayingState(isPlaying) {
@@ -3481,36 +3828,32 @@ const podcastPlayer = {
   },
 
   skip(seconds) {
-    if (this.mode === 'audio' && this.audioEl) {
-      this.audioEl.currentTime = Math.max(0, Math.min(this.audioEl.duration || 0, this.audioEl.currentTime + seconds));
-      this.updateAudioProgress();
-    } else {
-      this.virtualCurrentTime = Math.max(0, Math.min(this.virtualDuration, this.virtualCurrentTime + seconds));
-      this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
-      if (this.isPlaying && this.speechSynth) {
-        this.playSpeech();
-      }
+    const chunkStep = Math.max(1, Math.round(seconds / 5));
+    const targetIdx = Math.max(0, Math.min(this.speechChunks.length - 1, this.currentChunkIndex + chunkStep));
+    this.currentChunkIndex = targetIdx;
+    const ratio = targetIdx / (this.speechChunks.length || 1);
+    this.virtualCurrentTime = Math.round(this.virtualDuration * ratio);
+    this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
+
+    if (this.isPlaying) {
+      this.playFromChunk(this.currentChunkIndex);
     }
   },
 
   onSeekInput(val) {
     const ratio = parseFloat(val) / 100;
-    const duration = this.mode === 'audio' && this.audioEl?.duration ? this.audioEl.duration : this.virtualDuration;
     const curSpan = document.getElementById('podcast-time-cur');
-    if (curSpan) curSpan.textContent = this.formatTime(duration * ratio);
+    if (curSpan) curSpan.textContent = this.formatTime(this.virtualDuration * ratio);
   },
 
   onSeekChange(val) {
     const ratio = parseFloat(val) / 100;
-    const duration = this.mode === 'audio' && this.audioEl?.duration ? this.audioEl.duration : this.virtualDuration;
-    const targetTime = duration * ratio;
-    if (this.mode === 'audio' && this.audioEl) {
-      this.audioEl.currentTime = targetTime;
-    } else {
-      this.virtualCurrentTime = targetTime;
-      if (this.isPlaying && this.speechSynth) {
-        this.playSpeech();
-      }
+    this.virtualCurrentTime = this.virtualDuration * ratio;
+    this.currentChunkIndex = Math.min(this.speechChunks.length - 1, Math.floor(this.speechChunks.length * ratio));
+    this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
+
+    if (this.isPlaying) {
+      this.playFromChunk(this.currentChunkIndex);
     }
   },
 
@@ -3520,10 +3863,9 @@ const podcastPlayer = {
     this.speed = this.speeds[nextIdx];
     localStorage.setItem('podcast_speed', this.speed.toString());
     this.updateSpeedUI();
-    if (this.mode === 'audio' && this.audioEl) {
-      this.audioEl.playbackRate = this.speed;
-    } else if (this.isPlaying && this.speechSynth) {
-      this.playSpeech();
+
+    if (this.isPlaying) {
+      this.playFromChunk(this.currentChunkIndex);
     }
   },
 
@@ -3551,11 +3893,6 @@ const podcastPlayer = {
     }
   },
 
-  updateAudioProgress() {
-    if (!this.audioEl) return;
-    this.updateProgressUI(this.audioEl.currentTime, this.audioEl.duration || 1);
-  },
-
   updateProgressUI(current, total) {
     const scrubber = document.getElementById('podcast-scrubber');
     const curSpan = document.getElementById('podcast-time-cur');
@@ -3577,8 +3914,9 @@ const podcastPlayer = {
 
 window.podcastPlayer = podcastPlayer;
 
-// ── Chapter Mindmap Modal Controller (Zoom & Pan Lightbox) ──
+// ── Chapter Mindmap Controller (Interactive Dynamic Tree & SVG Lightbox) ──
 const mindmapViewer = {
+  viewMode: 'interactive', // 'interactive' (動態樹狀架構) | 'svg' (靜態圖譜縮放)
   scale: 1,
   translateX: 0,
   translateY: 0,
@@ -3588,6 +3926,257 @@ const mindmapViewer = {
   initialPinchDist: 0,
   initialPinchScale: 1
 };
+
+// ── 渲染完整動態互動心智圖樹 ──
+function renderInteractiveMindmap(cd) {
+  const container = document.getElementById('mindmap-interactive-view');
+  if (!container || !cd) return;
+
+  let html = `
+    <div class="mm-tree-root">
+      <div class="mm-root-card">
+        <span class="mm-root-badge">🧠 EMT-P 全景架構圖譜</span>
+        <h2 class="mm-root-title">${escapeHtml(cd.num)} ${escapeHtml(cd.title)}</h2>
+      </div>
+      <div class="mm-branches-container">
+  `;
+
+  // 分支 1：🎯 學習目標與核心專有名詞
+  if ((cd.learningGoals && cd.learningGoals.length) || (cd.keywords && cd.keywords.length)) {
+    const goalsCount = cd.learningGoals?.length || 0;
+    const kwsCount = cd.keywords?.length || 0;
+    html += `
+      <div class="mm-branch-card mm-branch-target">
+        <div class="mm-branch-head" onclick="toggleBranchNode(this)">
+          <span class="mm-toggle-icon">▼</span>
+          <span class="mm-branch-icon">🎯</span>
+          <span class="mm-branch-title">學習目標與核心專有名詞</span>
+          <span class="mm-count-badge">${goalsCount + kwsCount} 項</span>
+        </div>
+        <div class="mm-branch-body">
+          ${cd.learningGoals && cd.learningGoals.length ? `
+            <div class="mm-subgroup">
+              <div class="mm-subgroup-title">🎯 核心學習目標</div>
+              <ul class="mm-leaf-list">
+                ${cd.learningGoals.map(g => `<li>${mdInline(g)}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+          ${cd.keywords && cd.keywords.length ? `
+            <div class="mm-subgroup">
+              <div class="mm-subgroup-title">🔑 核心專有名詞考點 (${cd.keywords.length})</div>
+              <div class="mm-kw-grid">
+                ${cd.keywords.map(k => `
+                  <div class="mm-kw-card">
+                    <div class="mm-kw-name"><strong>${escapeHtml(k.zh)}</strong> ${k.en ? `<span class="mm-kw-en">(${escapeHtml(k.en)})</span>` : ''}</div>
+                    <div class="mm-kw-def">${escapeHtml(k.def)}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  // 分支 2..N：內文各大節 (orange blocks)
+  if (cd.content && cd.content.length) {
+    const sections = [];
+    let curSec = null;
+
+    cd.content.forEach((block) => {
+      if (block.type === 'orange') {
+        if (curSec) sections.push(curSec);
+        curSec = {
+          title: block.text,
+          page: block.page,
+          subgroups: []
+        };
+      } else if (curSec) {
+        if (block.type === 'blue') {
+          curSec.subgroups.push({
+            title: block.text,
+            items: []
+          });
+        } else {
+          // 若尚未有 blue subgroup，建立預設 sub
+          if (!curSec.subgroups.length) {
+            curSec.subgroups.push({ title: '', items: [] });
+          }
+          const activeSub = curSec.subgroups[curSec.subgroups.length - 1];
+          activeSub.items.push(block);
+        }
+      }
+    });
+    if (curSec) sections.push(curSec);
+
+    sections.forEach((sec, sIdx) => {
+      const isIntro = ['情境', '解答', '複習思考題'].includes(sec.title);
+      let itemsTotal = 0;
+      sec.subgroups.forEach(g => {
+        g.items.forEach(it => {
+          if (it.type === 'list' && it.items) itemsTotal += it.items.length;
+          else if (it.type === 'clinical' && it.points) itemsTotal += it.points.length;
+          else itemsTotal++;
+        });
+      });
+
+      html += `
+        <div class="mm-branch-card mm-branch-section" data-sec-idx="${sIdx}">
+          <div class="mm-branch-head" onclick="toggleBranchNode(this)">
+            <span class="mm-toggle-icon">▼</span>
+            <span class="mm-branch-icon">${isIntro ? '💡' : '📖'}</span>
+            <span class="mm-branch-title">${escapeHtml(sec.title)}</span>
+            ${sec.page ? `<span class="mm-page-tag">p.${sec.page}</span>` : ''}
+            <span class="mm-count-badge">${itemsTotal} 個要點</span>
+          </div>
+          <div class="mm-branch-body">
+            ${sec.subgroups.map(sub => `
+              <div class="mm-subgroup">
+                ${sub.title ? `<div class="mm-subgroup-title">🔹 ${mdInline(sub.title)}</div>` : ''}
+                ${sub.items.map(it => {
+                  if (it.type === 'list' && it.items) {
+                    return `
+                      <ul class="mm-leaf-list">
+                        ${it.items.map(li => `<li>${mdInline(li)}</li>`).join('')}
+                      </ul>
+                    `;
+                  } else if (it.type === 'clinical') {
+                    return `
+                      <div class="mm-clinical-box">
+                        <div class="mm-box-tag red">🚨 臨床實務重點：${escapeHtml(it.label || '核心考點')}</div>
+                        <ul class="mm-leaf-list" style="padding-left:16px">
+                          ${(it.points || []).map(p => `<li>${mdInline(p)}</li>`).join('')}
+                        </ul>
+                      </div>
+                    `;
+                  } else if (it.type === 'mnemonic') {
+                    return `
+                      <div class="mm-mnemonic-box">
+                        <div class="mm-box-tag yellow">💡 記憶口訣</div>
+                        <div style="font-weight:700">${mdInline(it.text)}</div>
+                      </div>
+                    `;
+                  } else if (it.type === 'table') {
+                    return `
+                      <div class="mm-table-summary-box">
+                        <div class="mm-box-tag green">📊 核心對照表</div>
+                        ${renderCompTable(it)}
+                      </div>
+                    `;
+                  } else if (it.type === 'text') {
+                    return `<p style="margin:6px 0;font-size:0.88rem;line-height:1.6">${mdInline(it.text)}</p>`;
+                  }
+                  return '';
+                }).join('')}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  html += `
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
+function toggleBranchNode(headEl) {
+  const card = headEl.closest('.mm-branch-card');
+  if (card) {
+    card.classList.toggle('collapsed');
+  }
+}
+
+function mindmapExpandAll() {
+  const cards = document.querySelectorAll('.mm-branch-card');
+  cards.forEach(c => c.classList.remove('collapsed'));
+}
+
+function mindmapCollapseAll() {
+  const cards = document.querySelectorAll('.mm-branch-card');
+  cards.forEach(c => c.classList.add('collapsed'));
+}
+
+function filterMindmapTree(query) {
+  const q = (query || '').trim().toLowerCase();
+  const cards = document.querySelectorAll('.mm-branch-card');
+  const countEl = document.getElementById('mindmap-search-count');
+  let matchCount = 0;
+
+  cards.forEach(card => {
+    if (!q) {
+      card.style.display = '';
+      card.querySelectorAll('.mm-mark').forEach(m => {
+        const parent = m.parentNode;
+        parent.replaceChild(document.createTextNode(m.textContent), m);
+        parent.normalize();
+      });
+      return;
+    }
+
+    const text = card.textContent.toLowerCase();
+    if (text.includes(q)) {
+      card.style.display = '';
+      card.classList.remove('collapsed');
+      matchCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  if (countEl) {
+    countEl.textContent = q ? `${matchCount} 個分支` : '';
+  }
+}
+
+function toggleMindmapViewMode() {
+  const interView = document.getElementById('mindmap-interactive-view');
+  const svgWrapper = document.getElementById('mindmap-transform-wrapper');
+  const toggleBtn = document.getElementById('mm-view-toggle-btn');
+  const expandBtn = document.getElementById('mm-expand-btn');
+  const collapseBtn = document.getElementById('mm-collapse-btn');
+  const searchBox = document.querySelector('.mindmap-search-box');
+  const zoomBtns = document.querySelectorAll('.mindmap-tool-btn.zoom-btn');
+  const zoomLbl = document.getElementById('mindmap-zoom-label');
+  const hintEl = document.getElementById('mindmap-footer-hint');
+
+  if (mindmapViewer.viewMode === 'interactive') {
+    // 切換為靜態 SVG 模式
+    mindmapViewer.viewMode = 'svg';
+    if (interView) interView.classList.add('hidden');
+    if (svgWrapper) svgWrapper.classList.remove('hidden');
+    if (toggleBtn) toggleBtn.textContent = '🌳 互動樹狀';
+    if (expandBtn) expandBtn.classList.add('hidden');
+    if (collapseBtn) collapseBtn.classList.add('hidden');
+    if (searchBox) searchBox.classList.add('hidden');
+    zoomBtns.forEach(b => b.classList.remove('hidden'));
+    if (zoomLbl) zoomLbl.classList.remove('hidden');
+    if (hintEl) hintEl.textContent = '💡 原始 SVG 模式：支援滑鼠滾輪 / 雙指捏合縮放，按住可任意平移檢視細節';
+
+    mindmapViewer.scale = 1;
+    mindmapViewer.translateX = 0;
+    mindmapViewer.translateY = 0;
+    updateMindmapTransform();
+  } else {
+    // 切換回動態互動架構模式
+    mindmapViewer.viewMode = 'interactive';
+    if (interView) interView.classList.remove('hidden');
+    if (svgWrapper) svgWrapper.classList.add('hidden');
+    if (toggleBtn) toggleBtn.textContent = '🖼️ 原始圖譜';
+    if (expandBtn) expandBtn.classList.remove('hidden');
+    if (collapseBtn) collapseBtn.classList.remove('hidden');
+    if (searchBox) searchBox.classList.remove('hidden');
+    zoomBtns.forEach(b => b.classList.add('hidden'));
+    if (zoomLbl) zoomLbl.classList.add('hidden');
+    if (hintEl) hintEl.textContent = '💡 互動模式：點擊分支標題可展開/收合，上方可直接搜尋知識點；文字完整無截斷';
+  }
+}
 
 function updateMindmapTransform() {
   const wrapper = document.getElementById('mindmap-transform-wrapper');
@@ -3605,17 +4194,39 @@ function openMindmapModal(chId, title) {
   const modal = document.getElementById('mindmap-modal');
   const img = document.getElementById('mindmap-modal-img');
   const titleText = document.getElementById('mindmap-modal-title-text');
-  if (!modal || !img) return;
+  const searchInput = document.getElementById('mindmap-search-input');
+  const searchCount = document.getElementById('mindmap-search-count');
+  if (!modal) return;
 
   if (titleText) titleText.textContent = `${title || chId} 核心架構圖譜`;
-  img.src = dataUrl(`images/mindmaps/${chId}.svg`);
+  if (img) img.src = dataUrl(`images/mindmaps/${chId}.svg`);
+  if (searchInput) searchInput.value = '';
+  if (searchCount) searchCount.textContent = '';
 
-  // Reset zoom & pan state
-  mindmapViewer.scale = 1;
-  mindmapViewer.translateX = 0;
-  mindmapViewer.translateY = 0;
-  mindmapViewer.isDragging = false;
-  updateMindmapTransform();
+  // 渲染動態互動架構樹
+  renderInteractiveMindmap(state.currentChData);
+
+  // 預設為動態互動樹狀模式
+  mindmapViewer.viewMode = 'interactive';
+  const interView = document.getElementById('mindmap-interactive-view');
+  const svgWrapper = document.getElementById('mindmap-transform-wrapper');
+  const toggleBtn = document.getElementById('mm-view-toggle-btn');
+  const expandBtn = document.getElementById('mm-expand-btn');
+  const collapseBtn = document.getElementById('mm-collapse-btn');
+  const searchBox = document.querySelector('.mindmap-search-box');
+  const zoomBtns = document.querySelectorAll('.mindmap-tool-btn.zoom-btn');
+  const zoomLbl = document.getElementById('mindmap-zoom-label');
+  const hintEl = document.getElementById('mindmap-footer-hint');
+
+  if (interView) interView.classList.remove('hidden');
+  if (svgWrapper) svgWrapper.classList.add('hidden');
+  if (toggleBtn) toggleBtn.textContent = '🖼️ 原始圖譜';
+  if (expandBtn) expandBtn.classList.remove('hidden');
+  if (collapseBtn) collapseBtn.classList.remove('hidden');
+  if (searchBox) searchBox.classList.remove('hidden');
+  zoomBtns.forEach(b => b.classList.add('hidden'));
+  if (zoomLbl) zoomLbl.classList.add('hidden');
+  if (hintEl) hintEl.textContent = '💡 互動模式：點擊分支標題可展開/收合，上方可直接搜尋知識點；文字完整無截斷';
 
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
@@ -3669,8 +4280,9 @@ function initMindmapInteractions() {
 
   mindmapEventsBound = true;
 
-  // 1. 滑鼠拖曳平移 (Mouse Drag)
+  // 1. 滑鼠拖曳平移 (僅在 SVG 模式時啟用)
   container.addEventListener('mousedown', (e) => {
+    if (mindmapViewer.viewMode !== 'svg') return;
     if (e.button !== 0) return;
     mindmapViewer.isDragging = true;
     mindmapViewer.dragStartX = e.clientX - mindmapViewer.translateX;
@@ -3693,8 +4305,9 @@ function initMindmapInteractions() {
     }
   });
 
-  // 2. 滑鼠滾輪縮放 (Mouse Wheel Zoom)
+  // 2. 滑鼠滾輪縮放 (僅在 SVG 模式時啟用)
   container.addEventListener('wheel', (e) => {
+    if (mindmapViewer.viewMode !== 'svg') return;
     e.preventDefault();
     const factor = e.deltaY < 0 ? 1.15 : 0.88;
     const newScale = Math.min(4.0, Math.max(0.4, mindmapViewer.scale * factor));
@@ -3702,7 +4315,7 @@ function initMindmapInteractions() {
     updateMindmapTransform();
   }, { passive: false });
 
-  // 3. 手機觸控操作 (單指拖曳平移、雙指捏合縮放 Pinch-to-zoom)
+  // 3. 手機觸控操作 (SVG 模式下的縮放平移)
   let lastTouchX = 0;
   let lastTouchY = 0;
 
@@ -3713,6 +4326,7 @@ function initMindmapInteractions() {
   }
 
   container.addEventListener('touchstart', (e) => {
+    if (mindmapViewer.viewMode !== 'svg') return;
     if (e.touches.length === 1) {
       mindmapViewer.isDragging = true;
       lastTouchX = e.touches[0].clientX;
@@ -3725,6 +4339,7 @@ function initMindmapInteractions() {
   }, { passive: true });
 
   container.addEventListener('touchmove', (e) => {
+    if (mindmapViewer.viewMode !== 'svg') return;
     if (e.touches.length === 1 && mindmapViewer.isDragging) {
       const dx = e.touches[0].clientX - lastTouchX;
       const dy = e.touches[0].clientY - lastTouchY;
@@ -3760,6 +4375,11 @@ window.mindmapZoomIn = mindmapZoomIn;
 window.mindmapZoomOut = mindmapZoomOut;
 window.mindmapResetZoom = mindmapResetZoom;
 window.mindmapToggleFullscreen = mindmapToggleFullscreen;
+window.mindmapExpandAll = mindmapExpandAll;
+window.mindmapCollapseAll = mindmapCollapseAll;
+window.toggleMindmapViewMode = toggleMindmapViewMode;
+window.filterMindmapTree = filterMindmapTree;
+window.toggleBranchNode = toggleBranchNode;
 
 // ── 行動端橫向全螢幕沉浸閱讀控制器 ──
 //   手機橫向（高度 ≤ 500px）時，模式一、模式二的頂欄與側欄一律收起，
