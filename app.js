@@ -357,10 +357,6 @@ function renderNotes(cd, chId) {
       <div class="section-num">${cd.num}</div>
       <div>
         <h1>${cd.title}</h1>
-        ${cd.learningGoals && cd.learningGoals.length ? `
-          <ul class="learning-goals">
-            ${cd.learningGoals.map(g => `<li>${g}</li>`).join('')}
-          </ul>` : ''}
       </div>
     </div>`;
 
@@ -3331,8 +3327,6 @@ function cleanMarkdownForSpeech(text) {
 function countChapterMindmapNodes(cd) {
   if (!cd) return 0;
   let count = 1; // 根節點
-  if (cd.learningGoals) count += cd.learningGoals.length;
-  if (cd.keywords) count += cd.keywords.length;
   if (cd.content) {
     cd.content.forEach(b => {
       if (b.type === 'orange') count += 1;
@@ -3351,20 +3345,13 @@ function renderMindmapCardPills(cd) {
   if (!cd) return '';
   const pills = [];
 
-  if (cd.learningGoals && cd.learningGoals.length) {
-    pills.push(`<span class="mm-preview-pill"><span class="pill-icon">🎯</span>學習目標 (${cd.learningGoals.length})</span>`);
-  }
-  if (cd.keywords && cd.keywords.length) {
-    pills.push(`<span class="mm-preview-pill"><span class="pill-icon">🔑</span>核心名詞 (${cd.keywords.length})</span>`);
-  }
-
   if (cd.content && cd.content.length) {
     const orangeSections = cd.content.filter(b => b.type === 'orange' && !['情境', '解答', '複習思考題'].includes(b.text));
-    orangeSections.slice(0, 5).forEach(sec => {
+    orangeSections.slice(0, 6).forEach(sec => {
       pills.push(`<span class="mm-preview-pill"><span class="pill-icon">📖</span>${escapeHtml(sec.text)}</span>`);
     });
-    if (orangeSections.length > 5) {
-      pills.push(`<span class="mm-preview-pill">+${orangeSections.length - 5} 個主主題</span>`);
+    if (orangeSections.length > 6) {
+      pills.push(`<span class="mm-preview-pill">+${orangeSections.length - 6} 個主主題</span>`);
     }
 
     const clinicalCount = cd.content.filter(b => b.type === 'clinical').length;
@@ -3394,22 +3381,7 @@ function buildInstructorLectureScript(cd) {
       `請大家放下死記硬背的心態，跟隨我的講解，把條文與指引轉化為直覺的臨床反應。`
   });
 
-  // ② 核心名詞與法規概念深解
-  if (cd.keywords && cd.keywords.length) {
-    const kwExplanations = cd.keywords.map((k, idx) => {
-      let t = `第${idx + 1}個關鍵字是【${k.zh}】`;
-      if (k.en) t += `，英文縮寫或全稱是 ${k.en}`;
-      t += `。在臨床上的核心定義是：${cleanMarkdownForSpeech(k.def)}。`;
-      return t;
-    }).join('\n');
-
-    sections.push({
-      title: '🎯 核心名詞與定義深解',
-      text: `首先，我們來建立本章的核心醫學與法規詞彙。出題老師在情境題中，常會透過偷換名詞來測試大家的觀念是否扎實：\n${kwExplanations}\n教官提醒大家，在考場上看到這些名詞，一定要能立刻反射出它在現場救護車上的處置標準。`
-    });
-  }
-
-  // ③ 逐節深入講授章節內容 (橘標、藍標、表格、臨床實務、口訣)
+  // ② 逐節深入講授章節內容 (橘標、藍標、表格、臨床實務、口訣)
   if (cd.content && cd.content.length) {
     let curSecTitle = '';
     let curSecParts = [];
@@ -3941,46 +3913,7 @@ function renderInteractiveMindmap(cd) {
       <div class="mm-branches-container">
   `;
 
-  // 分支 1：🎯 學習目標與核心專有名詞
-  if ((cd.learningGoals && cd.learningGoals.length) || (cd.keywords && cd.keywords.length)) {
-    const goalsCount = cd.learningGoals?.length || 0;
-    const kwsCount = cd.keywords?.length || 0;
-    html += `
-      <div class="mm-branch-card mm-branch-target">
-        <div class="mm-branch-head" onclick="toggleBranchNode(this)">
-          <span class="mm-toggle-icon">▼</span>
-          <span class="mm-branch-icon">🎯</span>
-          <span class="mm-branch-title">學習目標與核心專有名詞</span>
-          <span class="mm-count-badge">${goalsCount + kwsCount} 項</span>
-        </div>
-        <div class="mm-branch-body">
-          ${cd.learningGoals && cd.learningGoals.length ? `
-            <div class="mm-subgroup">
-              <div class="mm-subgroup-title">🎯 核心學習目標</div>
-              <ul class="mm-leaf-list">
-                ${cd.learningGoals.map(g => `<li>${mdInline(g)}</li>`).join('')}
-              </ul>
-            </div>
-          ` : ''}
-          ${cd.keywords && cd.keywords.length ? `
-            <div class="mm-subgroup">
-              <div class="mm-subgroup-title">🔑 核心專有名詞考點 (${cd.keywords.length})</div>
-              <div class="mm-kw-grid">
-                ${cd.keywords.map(k => `
-                  <div class="mm-kw-card">
-                    <div class="mm-kw-name"><strong>${escapeHtml(k.zh)}</strong> ${k.en ? `<span class="mm-kw-en">(${escapeHtml(k.en)})</span>` : ''}</div>
-                    <div class="mm-kw-def">${escapeHtml(k.def)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          ` : ''}
-        </div>
-      </div>
-    `;
-  }
-
-  // 分支 2..N：內文各大節 (orange blocks)
+  // 內文各大核心主題分支 (orange blocks)
   if (cd.content && cd.content.length) {
     const sections = [];
     let curSec = null;
