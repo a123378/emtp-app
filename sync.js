@@ -44,14 +44,16 @@ const FIREBASE_CONFIG = {
 /* ── 2. 常數 ───────────────────────────────────────────────────────── */
 const K_WRONG = 'm2_wrong_questions';
 const K_READ  = 'readCh';
+const K_PROG  = 'chProgress';
 const K_STATS = 'm2_stats';
 const K_AI    = 'm2_ai_chapter_quizzes';
-const SYNCED  = [K_WRONG, K_READ, K_STATS, K_AI];
+const SYNCED  = [K_WRONG, K_READ, K_PROG, K_STATS, K_AI];
 
 const L_CFG   = 'sync_fb_config';
 const L_TWRONG= 'sync_tomb_wrong';
 const L_TREAD = 'sync_tomb_read';
 const L_EPOCH = 'sync_stats_epoch';
+const L_PEPOCH= 'sync_prog_epoch';
 const L_READD = 'sync_readd';
 const L_LAST  = 'sync_last_at';
 
@@ -96,6 +98,15 @@ function updateTombstones(key, beforeRaw, afterRaw) {
       const b = JSON.parse(beforeRaw || '{"total":0}');
       const a = JSON.parse(afterRaw  || '{"total":0}');
       if ((a.total || 0) < (b.total || 0)) jset(L_EPOCH, (jget(L_EPOCH, 0) || 0) + 1);  // 被清空 → 換代
+    } catch (e) { /* ignore */ }
+  }
+  if (key === K_PROG) {
+    try {
+      const b = JSON.parse(beforeRaw || '{}');
+      const a = JSON.parse(afterRaw  || '{}');
+      if (Object.keys(b).length > 0 && Object.keys(a).length === 0) {
+        jset(L_PEPOCH, (jget(L_PEPOCH, 0) || 0) + 1);  // 全書進度重設清空 → 換代
+      }
     } catch (e) { /* ignore */ }
   }
 }
@@ -162,6 +173,29 @@ function mergeStats(local, remote, localEpoch, remoteEpoch) {
   return (L.total || 0) >= (R.total || 0) ? L : R;   // 同一代取較多者，避免統計倒退
 }
 
+function mergeProgress(local, remote, readTomb, localEpoch, remoteEpoch) {
+  const L = local  || {};
+  const R = remote || {};
+  const lEpoch = localEpoch || 0;
+  const rEpoch = remoteEpoch || 0;
+  if (lEpoch !== rEpoch) return lEpoch > rEpoch ? L : R;
+
+  const tomb = new Set(readTomb || []);
+  const merged = { ...R, ...L };
+  const allKeys = new Set([...Object.keys(L), ...Object.keys(R)]);
+
+  allKeys.forEach(k => {
+    const lVal = typeof L[k] === 'number' ? L[k] : 0;
+    const rVal = typeof R[k] === 'number' ? R[k] : 0;
+    if (tomb.has(k)) {
+      merged[k] = Math.min(lVal, rVal);
+    } else {
+      merged[k] = Math.max(lVal, rVal);
+    }
+  });
+  return merged;
+}
+
 /* ── 8. 上傳 ───────────────────────────────────────────────────────── */
 function schedulePush() {
   if (!user || !fbDb) return;
@@ -176,6 +210,8 @@ async function pushNow() {
     wrongTomb: jget(L_TWRONG, []),
     read: jget(K_READ, []),
     readTomb: jget(L_TREAD, []),
+    progress: jget(K_PROG, {}),
+    progEpoch: jget(L_PEPOCH, 0),
     stats: jget(K_STATS, { total: 0, correct: 0 }),
     statsEpoch: jget(L_EPOCH, 0),
     ai: jget(K_AI, []),
@@ -201,6 +237,7 @@ async function applyRemote(remote) {
 
   const wrong = mergeById(jget(K_WRONG, []), await expandWrong(remote.wrong), wrongTomb);
   const read  = mergeSet(jget(K_READ, []), remote.read, readTomb);
+  const prog  = mergeProgress(jget(K_PROG, {}), remote.progress, readTomb, jget(L_PEPOCH, 0), remote.progEpoch);
   const stats = mergeStats(jget(K_STATS, null), remote.stats, jget(L_EPOCH, 0), remote.statsEpoch);
   const ai    = mergeById(jget(K_AI, []), remote.ai, []);
 
@@ -208,15 +245,22 @@ async function applyRemote(remote) {
   try {
     jset(K_WRONG, wrong);
     jset(K_READ, read);
+    jset(K_PROG, prog);
     jset(K_STATS, stats);
     jset(K_AI, ai);
     jset(L_TWRONG, wrongTomb);
     jset(L_TREAD,  readTomb);
     jset(L_EPOCH, Math.max(jget(L_EPOCH, 0) || 0, remote.statsEpoch || 0));
+    jset(L_PEPOCH, Math.max(jget(L_PEPOCH, 0) || 0, remote.progEpoch || 0));
 
     if (s) {
       s.wrongQuestions = wrong;
       s.readChapters = new Set(read);
+      s.chapterProgress = prog;
+      Object.entries(prog).forEach(([id, p]) => {
+        if (p >= 100 && !readTomb.has(id)) s.readChapters.add(id);
+        else if (p < 100 || readTomb.has(id)) s.readChapters.delete(id);
+      });
       s.m2Stats = stats;
       if (Array.isArray(s.allQuizzes)) {
         const known = new Set(s.allQuizzes.map(q => q.id));
@@ -231,6 +275,12 @@ async function applyRemote(remote) {
   try { if (s) (s.chapters || []).forEach(ch => window.updateChapterReadUi && window.updateChapterReadUi(ch.id)); } catch (e) {}
   try { window.renderWrongBookContent && window.renderWrongBookContent(); } catch (e) {}
   try { window.updateM2LobbyStats && window.updateM2LobbyStats(); } catch (e) {}
+  try {
+    const pModal = document.getElementById('progress-modal');
+    if (pModal && !pModal.classList.contains('hidden') && typeof window.openProgressModal === 'function') {
+      window.openProgressModal();
+    }
+  } catch (e) {}
 
   rawSet(L_LAST, String(Date.now()));
 }

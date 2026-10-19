@@ -1135,6 +1135,8 @@ function updateChapterReadUi(chId) {
   }
 }
 
+window.updateChapterReadUi = updateChapterReadUi;
+
 // ── 自動還原上次觀看進度 (1A + 2A + 3A) ─────────────────
 let _restoreToastTimer = null;
 
