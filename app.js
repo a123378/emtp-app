@@ -3357,7 +3357,6 @@ window.closeProgressModal = closeProgressModal;
 window.openProgressModal = openProgressModal;
 window.toggleReadStatus = toggleReadStatus;
 window.resetAllChaptersToUnread = resetAllChaptersToUnread;
-window.markAllChaptersRead = markAllChaptersRead;
 window.closeMobileSidebar = closeMobileSidebar;
 
 // Mode 2 Globals
