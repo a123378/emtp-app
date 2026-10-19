@@ -57,7 +57,7 @@ const L_PEPOCH= 'sync_prog_epoch';
 const L_READD = 'sync_readd';
 const L_LAST  = 'sync_last_at';
 
-const PUSH_DELAY = 1500;
+const PUSH_DELAY = 400;
 
 /* ── 3. 小工具 ─────────────────────────────────────────────────────── */
 const rawGet = localStorage.getItem.bind(localStorage);
@@ -477,3 +477,52 @@ async function boot() {
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
 else boot();
+
+/* ── 13. 雙向跨裝置生命週期防護（電腦 ⇄ 手機 通用）─────────────────── */
+let _pulling = false;
+async function pullNow() {
+  if (!user || !fbDb || _pulling) return;
+  _pulling = true;
+  try {
+    const ref = FB.doc(fbDb, 'emtp', user.uid);
+    const snap = await FB.getDoc(ref);
+    if (snap.exists()) {
+      await applyRemote(snap.data());
+    }
+  } catch (err) {
+    console.warn('pullNow failed:', err);
+  } finally {
+    _pulling = false;
+  }
+}
+
+// 離場保護：關閉視窗、分頁切換、手機滑回桌面或切換 App 時立即強制推送
+function onSyncLeave() {
+  if (typeof window.saveChapterProgressToStorage === 'function') {
+    window.saveChapterProgressToStorage();
+  }
+  if (pushTimer) {
+    clearTimeout(pushTimer);
+    pushTimer = null;
+  }
+  pushNow();
+}
+
+// 進場保護：視窗聚焦、切回分頁、手機喚醒或開 App 時立即自雲端拉取
+function onSyncEnter() {
+  pullNow();
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    onSyncLeave();
+  } else if (document.visibilityState === 'visible') {
+    onSyncEnter();
+  }
+});
+window.addEventListener('pagehide', onSyncLeave);
+window.addEventListener('beforeunload', onSyncLeave);
+window.addEventListener('focus', onSyncEnter);
+
+window.pushSyncNow = pushNow;
+window.pullSyncNow = pullNow;

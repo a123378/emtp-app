@@ -1032,6 +1032,8 @@ function saveChapterProgressToStorage() {
   } catch (e) {}
 }
 
+window.saveChapterProgressToStorage = saveChapterProgressToStorage;
+
 function queueSaveChapterProgress() {
   clearTimeout(_saveProgressDebounceTimer);
   _saveProgressDebounceTimer = setTimeout(saveChapterProgressToStorage, 300);
