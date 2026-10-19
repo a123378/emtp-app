@@ -1155,36 +1155,23 @@ function openProgressModal() {
   const avgPct = total > 0 ? Math.round(sumPct / total) : 0;
   const contentEl = document.getElementById('progress-modal-content');
   if (contentEl) {
-    // Generate chapter rows
-    const rowsHtml = chList.map(ch => {
+    // Generate chapter cards (一列4個，直接寫章節與 % 數)
+    const cardsHtml = chList.map(ch => {
       const p = state.chapterProgress[ch.id] || 0;
       const isDone = p >= 100 || state.readChapters.has(ch.id);
-      let badgeHtml = '';
-      if (isDone) {
-        badgeHtml = `<span style="display:inline-flex;align-items:center;gap:3px;color:var(--success);font-weight:800;font-size:0.82rem">🟢 100%</span>`;
-      } else if (p > 0) {
-        badgeHtml = `<span style="color:var(--orange);font-weight:700;font-size:0.82rem">🟡 ${p}%</span>`;
-      } else {
-        badgeHtml = `<span style="color:#ef4444;font-size:0.82rem">🔴 0%</span>`;
-      }
+      const bg = isDone ? 'rgba(22,163,74,0.1)' : (p > 0 ? 'rgba(232,119,34,0.1)' : 'var(--surface)');
+      const borderColor = isDone ? 'rgba(22,163,74,0.35)' : (p > 0 ? 'rgba(232,119,34,0.35)' : 'var(--border)');
+      const pctColor = isDone ? 'var(--success)' : (p > 0 ? 'var(--orange)' : 'var(--text-muted)');
       return `
-        <div class="progress-ch-row" onclick="selectChapter('${ch.id}');closeProgressModal()" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .2s">
-          <div style="display:flex;align-items:center;gap:8px;overflow:hidden;flex:1;margin-right:12px">
-            <span style="font-weight:700;font-size:0.82rem;color:var(--text-muted);width:45px;flex-shrink:0">${ch.num}</span>
-            <span style="font-size:0.84rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${ch.title}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-            <div style="width:65px;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
-              <div style="width:${p}%;height:100%;background:${isDone ? 'var(--success)' : (p > 0 ? 'var(--orange)' : '#ef4444')};border-radius:3px"></div>
-            </div>
-            <div style="min-width:50px;text-align:right">${badgeHtml}</div>
-          </div>
+        <div class="progress-ch-card" onclick="selectChapter('${ch.id}');closeProgressModal()" title="${ch.num} ${ch.title} (${p}%)" style="display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-radius:8px;border:1px solid ${borderColor};background:${bg};cursor:pointer;user-select:none;transition:all .15s">
+          <span style="font-size:0.8rem;font-weight:800;color:var(--text);letter-spacing:-0.2px">${ch.num}</span>
+          <span style="font-size:0.76rem;font-weight:800;color:${pctColor}">${p}%</span>
         </div>
       `;
     }).join('');
 
     contentEl.innerHTML = `
-      <div style="margin-bottom:16px">
+      <div style="margin-bottom:14px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
           <span style="font-size:1.15rem;font-weight:800;color:var(--text)">全書研讀總進度：${avgPct}%</span>
           <span style="font-size:0.85rem;font-weight:700;color:var(--text-muted)">(${readCount} / ${total} 章完讀)</span>
@@ -1200,18 +1187,18 @@ function openProgressModal() {
       </div>
 
       <div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
-        <span style="font-weight:800;font-size:0.92rem;color:var(--text)">📑 各章節 % 數進度明細</span>
+        <span style="font-weight:800;font-size:0.92rem;color:var(--text)">📑 各章 % 數進度（一列 4 章）</span>
         <button class="modal-btn" onclick="resetAllChaptersToUnread()" style="background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;padding:4px 10px;font-size:0.8rem;font-weight:700;border-radius:6px;cursor:pointer">
           🔴 一鍵全部標為未讀
         </button>
       </div>
 
-      <div class="progress-ch-list" style="max-height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;padding:4px;background:var(--bg)">
-        ${rowsHtml}
+      <div class="progress-ch-grid" style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;max-height:280px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:8px;background:var(--bg)">
+        ${cardsHtml}
       </div>
 
       <p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px;margin-bottom:0">
-        💡 提示：點擊任一章節可直接跳轉研讀。需滾動閱讀至章節最底部達 100% 才會自動判定已讀綠燈。
+        💡 提示：點擊任一章節卡片可直接跳轉。需滾動閱讀至章節最底部達 100% 才會自動判定已讀。
       </p>
     `;
   }

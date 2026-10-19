@@ -333,8 +333,11 @@ body {
   transform: scale(1.08);
   filter: brightness(1.1);
 }
-.progress-ch-row:hover {
+.progress-ch-row:hover,
+.progress-ch-card:hover {
   background: var(--surface) !important;
+  transform: translateY(-1px);
+  filter: brightness(1.08);
 }
 
 .ch-item.hidden { display: none; }
