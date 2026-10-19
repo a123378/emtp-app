@@ -173,25 +173,22 @@ function mergeStats(local, remote, localEpoch, remoteEpoch) {
   return (L.total || 0) >= (R.total || 0) ? L : R;   // 同一代取較多者，避免統計倒退
 }
 
-function mergeProgress(local, remote, readTomb, localEpoch, remoteEpoch) {
+function mergeProgress(local, remote, localEpoch, remoteEpoch) {
   const L = local  || {};
   const R = remote || {};
   const lEpoch = localEpoch || 0;
   const rEpoch = remoteEpoch || 0;
+  // 全書重設 (Epoch 提升) 時以重設端為準
   if (lEpoch !== rEpoch) return lEpoch > rEpoch ? L : R;
 
-  const tomb = new Set(readTomb || []);
   const merged = { ...R, ...L };
   const allKeys = new Set([...Object.keys(L), ...Object.keys(R)]);
 
   allKeys.forEach(k => {
     const lVal = typeof L[k] === 'number' ? L[k] : 0;
     const rVal = typeof R[k] === 'number' ? R[k] : 0;
-    if (tomb.has(k)) {
-      merged[k] = Math.min(lVal, rVal);
-    } else {
-      merged[k] = Math.max(lVal, rVal);
-    }
+    // 兩端進度強制取最大值，絕不被 0% 抹殺
+    merged[k] = Math.max(lVal, rVal);
   });
   return merged;
 }
@@ -237,7 +234,7 @@ async function applyRemote(remote) {
 
   const wrong = mergeById(jget(K_WRONG, []), await expandWrong(remote.wrong), wrongTomb);
   const read  = mergeSet(jget(K_READ, []), remote.read, readTomb);
-  const prog  = mergeProgress(jget(K_PROG, {}), remote.progress, readTomb, jget(L_PEPOCH, 0), remote.progEpoch);
+  const prog  = mergeProgress(jget(K_PROG, {}), remote.progress, jget(L_PEPOCH, 0), remote.progEpoch);
   const stats = mergeStats(jget(K_STATS, null), remote.stats, jget(L_EPOCH, 0), remote.statsEpoch);
   const ai    = mergeById(jget(K_AI, []), remote.ai, []);
 
@@ -257,10 +254,17 @@ async function applyRemote(remote) {
       s.wrongQuestions = wrong;
       s.readChapters = new Set(read);
       s.chapterProgress = prog;
-      Object.entries(prog).forEach(([id, p]) => {
-        if (p >= 100 && !readTomb.has(id)) s.readChapters.add(id);
-        else if (p < 100 || readTomb.has(id)) s.readChapters.delete(id);
+      s.readChapters.forEach(id => {
+        if (typeof s.chapterProgress[id] !== 'number' || s.chapterProgress[id] < 100) {
+          s.chapterProgress[id] = 100;
+        }
       });
+      Object.entries(s.chapterProgress).forEach(([id, p]) => {
+        if (p >= 100) s.readChapters.add(id);
+        else s.readChapters.delete(id);
+      });
+      jset(K_READ, [...s.readChapters]);
+      jset(K_PROG, s.chapterProgress);
       s.m2Stats = stats;
       if (Array.isArray(s.allQuizzes)) {
         const known = new Set(s.allQuizzes.map(q => q.id));
