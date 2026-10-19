@@ -31,6 +31,7 @@ const state = {
   theme: localStorage.getItem('theme') || 'light',
   searchQuery: '',
   inlineAnswers: {},   // qId -> 選項索引（模式一段落內嵌考題）
+  isLoadingChapter: false,
 
   // ── Mode 2 (題庫練習) 狀態 ──
   allQuizzes: [],
@@ -163,15 +164,10 @@ async function init() {
   await loadChapterIndex();
   await loadAllQuizzes();
   sanitizeStoredQuizzes();
-  // 同步現有已讀紀錄與各章 % 數進度
-  state.readChapters.forEach(id => {
-    if (typeof state.chapterProgress[id] !== 'number' || state.chapterProgress[id] < 100) {
-      state.chapterProgress[id] = 100;
-    }
-  });
+  // 同步已讀與各章 % 數進度（以各章實質百分比為準，唯有 >= 100% 才標為已讀）
+  state.readChapters = new Set();
   Object.entries(state.chapterProgress).forEach(([id, pct]) => {
     if (pct >= 100) state.readChapters.add(id);
-    else state.readChapters.delete(id);
   });
   localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
   localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
@@ -270,6 +266,7 @@ async function selectChapter(chId) {
     return;
   }
   saveChapterProgressToStorage();
+  state.isLoadingChapter = true;
   state.currentChId = chId;
   hideProgressRestoreToast();
 
@@ -301,9 +298,9 @@ async function selectChapter(chId) {
   // 1A + 2A + 3A: 自動跳轉至上次進度 (1% ~ 99%)
   restoreChapterReadingProgress(chId);
 
-  // 檢查滾動進度（若內容過短毋須滾動，則自動判定 100%）
+  // 渲染完成後解除載入鎖（唯有讀者親自滾動至底部才計 100%）
   setTimeout(() => {
-    checkChapterReadingProgress();
+    state.isLoadingChapter = false;
   }, 350);
 }
 
@@ -1041,12 +1038,15 @@ function queueSaveChapterProgress() {
 
 function checkChapterReadingProgress() {
   if (state.currentMode !== 1 || !state.currentChId) return;
+  if (state.isLoadingChapter || !state.currentChData) return;
   const sc = els.mainContent;
   if (!sc) return;
 
-  // 僅在「重點筆記」分頁計算章節閱讀進度
+  // 僅在「重點筆記」分頁且內容完全顯現時計算章節閱讀進度
   const notesPanel = $('#tab-notes');
   if (!notesPanel || notesPanel.classList.contains('hidden')) return;
+  if (!els.notesContent || els.notesContent.classList.contains('hidden')) return;
+  if (els.notesLoading && els.notesLoading.style.display !== 'none') return;
 
   const chId = state.currentChId;
   const scrollHeight = sc.scrollHeight;
@@ -1054,11 +1054,11 @@ function checkChapterReadingProgress() {
   const scrollTop = sc.scrollTop;
   const maxScroll = scrollHeight - clientHeight;
 
+  // 內容尚未載入完整或高度尚未長出，嚴禁計算
+  if (maxScroll <= 50) return;
+
   let pct = 0;
-  if (maxScroll <= 25) {
-    // 內容極短不需滾動，直接 100%
-    pct = 100;
-  } else if (scrollTop + clientHeight >= scrollHeight - 35) {
+  if (scrollTop + clientHeight >= scrollHeight - 35) {
     // 距底部小於等於 35px 視為 100% 完讀
     pct = 100;
   } else if (scrollTop <= 10) {
@@ -1093,12 +1093,17 @@ function markRead(chId) {
 function resetChapterToUnread(chId) {
   state.chapterProgress[chId] = 0;
   state.readChapters.delete(chId);
-  // 若正好是目前開啟的章節，將閱讀滾動軸重設回頂端，防止被底部的滾動偵測再次自動標記為 100%
+  // 若正好是目前開啟的章節，鎖定載入並將滾動軸歸零，避免被滾動事件誤判
   if (state.currentChId === chId && els.mainContent) {
+    state.isLoadingChapter = true;
     els.mainContent.scrollTop = 0;
+    setTimeout(() => { state.isLoadingChapter = false; }, 250);
   }
   saveChapterProgressToStorage();
   updateChapterReadUi(chId);
+  if (typeof window.pushSyncNow === 'function') {
+    window.pushSyncNow();
+  }
 }
 
 function toggleReadStatus(chId) {

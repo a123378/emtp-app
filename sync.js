@@ -52,6 +52,7 @@ const SYNCED  = [K_WRONG, K_READ, K_PROG, K_STATS, K_AI];
 const L_CFG   = 'sync_fb_config';
 const L_TWRONG= 'sync_tomb_wrong';
 const L_TREAD = 'sync_tomb_read';
+const L_TPROG = 'sync_tomb_prog';
 const L_EPOCH = 'sync_stats_epoch';
 const L_PEPOCH= 'sync_prog_epoch';
 const L_READD = 'sync_readd';
@@ -106,6 +107,22 @@ function updateTombstones(key, beforeRaw, afterRaw) {
       const a = JSON.parse(afterRaw  || '{}');
       if (Object.keys(b).length > 0 && Object.keys(a).length === 0) {
         jset(L_PEPOCH, (jget(L_PEPOCH, 0) || 0) + 1);  // 全書進度重設清空 → 換代
+        jset(L_TPROG, []);
+      } else {
+        const tomb = new Set(jget(L_TPROG, []));
+        // 若某章從 > 0 變為 0 或被刪除，記錄重設墓碑
+        Object.keys(b).forEach(id => {
+          if ((b[id] || 0) > 0 && (!a[id] || a[id] === 0)) {
+            tomb.add(id);
+          }
+        });
+        // 若某章進度 > 0，撤銷墓碑
+        Object.keys(a).forEach(id => {
+          if ((a[id] || 0) > 0) {
+            tomb.delete(id);
+          }
+        });
+        jset(L_TPROG, [...tomb]);
       }
     } catch (e) { /* ignore */ }
   }
@@ -173,7 +190,7 @@ function mergeStats(local, remote, localEpoch, remoteEpoch) {
   return (L.total || 0) >= (R.total || 0) ? L : R;   // 同一代取較多者，避免統計倒退
 }
 
-function mergeProgress(local, remote, localEpoch, remoteEpoch) {
+function mergeProgress(local, remote, progTomb, localEpoch, remoteEpoch) {
   const L = local  || {};
   const R = remote || {};
   const lEpoch = localEpoch || 0;
@@ -181,14 +198,19 @@ function mergeProgress(local, remote, localEpoch, remoteEpoch) {
   // 全書重設 (Epoch 提升) 時以重設端為準
   if (lEpoch !== rEpoch) return lEpoch > rEpoch ? L : R;
 
+  const tomb = new Set(progTomb || []);
   const merged = { ...R, ...L };
   const allKeys = new Set([...Object.keys(L), ...Object.keys(R)]);
 
   allKeys.forEach(k => {
-    const lVal = typeof L[k] === 'number' ? L[k] : 0;
-    const rVal = typeof R[k] === 'number' ? R[k] : 0;
-    // 兩端進度強制取最大值，絕不被 0% 抹殺
-    merged[k] = Math.max(lVal, rVal);
+    if (tomb.has(k)) {
+      merged[k] = 0;
+    } else {
+      const lVal = typeof L[k] === 'number' ? L[k] : 0;
+      const rVal = typeof R[k] === 'number' ? R[k] : 0;
+      // 兩端進度取最大值，絕不被新啟動設備的空狀態抹殺
+      merged[k] = Math.max(lVal, rVal);
+    }
   });
   return merged;
 }
@@ -208,6 +230,7 @@ async function pushNow() {
     read: jget(K_READ, []),
     readTomb: jget(L_TREAD, []),
     progress: jget(K_PROG, {}),
+    progTomb: jget(L_TPROG, []),
     progEpoch: jget(L_PEPOCH, 0),
     stats: jget(K_STATS, { total: 0, correct: 0 }),
     statsEpoch: jget(L_EPOCH, 0),
@@ -231,10 +254,11 @@ async function applyRemote(remote) {
   const readd     = jget(L_READD, []);
   const wrongTomb = mergeSet(jget(L_TWRONG, []), remote.wrongTomb, readd);
   const readTomb  = mergeSet(jget(L_TREAD, []),  remote.readTomb,  readd);
+  const progTomb  = mergeSet(jget(L_TPROG, []),  remote.progTomb,  []);
 
   const wrong = mergeById(jget(K_WRONG, []), await expandWrong(remote.wrong), wrongTomb);
   const read  = mergeSet(jget(K_READ, []), remote.read, readTomb);
-  const prog  = mergeProgress(jget(K_PROG, {}), remote.progress, jget(L_PEPOCH, 0), remote.progEpoch);
+  const prog  = mergeProgress(jget(K_PROG, {}), remote.progress, progTomb, jget(L_PEPOCH, 0), remote.progEpoch);
   const stats = mergeStats(jget(K_STATS, null), remote.stats, jget(L_EPOCH, 0), remote.statsEpoch);
   const ai    = mergeById(jget(K_AI, []), remote.ai, []);
 
@@ -247,21 +271,17 @@ async function applyRemote(remote) {
     jset(K_AI, ai);
     jset(L_TWRONG, wrongTomb);
     jset(L_TREAD,  readTomb);
+    jset(L_TPROG,  progTomb);
     jset(L_EPOCH, Math.max(jget(L_EPOCH, 0) || 0, remote.statsEpoch || 0));
     jset(L_PEPOCH, Math.max(jget(L_PEPOCH, 0) || 0, remote.progEpoch || 0));
 
     if (s) {
       s.wrongQuestions = wrong;
-      s.readChapters = new Set(read);
       s.chapterProgress = prog;
-      s.readChapters.forEach(id => {
-        if (typeof s.chapterProgress[id] !== 'number' || s.chapterProgress[id] < 100) {
-          s.chapterProgress[id] = 100;
-        }
-      });
+      // 以各章實質百分比為唯一已讀標準，未達 100% 絕不亮綠燈
+      s.readChapters = new Set();
       Object.entries(s.chapterProgress).forEach(([id, p]) => {
         if (p >= 100) s.readChapters.add(id);
-        else s.readChapters.delete(id);
       });
       jset(K_READ, [...s.readChapters]);
       jset(K_PROG, s.chapterProgress);
@@ -514,6 +534,12 @@ function onSyncLeave() {
 
 // 進場保護：視窗聚焦、切回分頁、手機喚醒或開 App 時立即自雲端拉取
 function onSyncEnter() {
+  if (pushTimer) {
+    clearTimeout(pushTimer);
+    pushTimer = null;
+    pushNow();
+    return;
+  }
   pullNow();
 }
 
