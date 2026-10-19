@@ -269,6 +269,7 @@ async function selectChapter(chId) {
     closeMobileSidebar();
     return;
   }
+  saveChapterProgressToStorage();
   state.currentChId = chId;
   hideProgressRestoreToast();
 
@@ -1021,6 +1022,21 @@ function applyTheme(theme) {
 }
 
 // ── Read tracking (研讀達 100% 才標記已讀，支援各章 % 數進度) ───────────
+let _saveProgressDebounceTimer = null;
+
+function saveChapterProgressToStorage() {
+  clearTimeout(_saveProgressDebounceTimer);
+  try {
+    localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
+    localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
+  } catch (e) {}
+}
+
+function queueSaveChapterProgress() {
+  clearTimeout(_saveProgressDebounceTimer);
+  _saveProgressDebounceTimer = setTimeout(saveChapterProgressToStorage, 300);
+}
+
 function checkChapterReadingProgress() {
   if (state.currentMode !== 1 || !state.currentChId) return;
   const sc = els.mainContent;
@@ -1040,23 +1056,27 @@ function checkChapterReadingProgress() {
   if (maxScroll <= 25) {
     // 內容極短不需滾動，直接 100%
     pct = 100;
+  } else if (scrollTop + clientHeight >= scrollHeight - 35) {
+    // 距底部小於等於 35px 視為 100% 完讀
+    pct = 100;
+  } else if (scrollTop <= 10) {
+    pct = 0;
   } else {
-    // 距底部小於等於 30px 或比例 >= 98% 視為 100%
-    if (scrollTop + clientHeight >= scrollHeight - 30) {
-      pct = 100;
-    } else {
-      pct = Math.min(99, Math.round((scrollTop / maxScroll) * 100));
-    }
+    // 1A: 以讀者眼睛實際看到的視線位置（視窗下緣 85%）計算閱讀進度
+    const visibleBottom = scrollTop + (clientHeight * 0.85);
+    pct = Math.min(99, Math.max(1, Math.round((visibleBottom / scrollHeight) * 100)));
   }
 
   const currentRecorded = state.chapterProgress[chId] || 0;
   if (pct > currentRecorded) {
     state.chapterProgress[chId] = pct;
-    localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
     if (pct >= 100) {
       state.readChapters.add(chId);
-      localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
+      saveChapterProgressToStorage();
+    } else {
+      queueSaveChapterProgress();
     }
+    // 2A: 0ms 即刻更新 UI
     updateChapterReadUi(chId);
   }
 }
@@ -1064,16 +1084,14 @@ function checkChapterReadingProgress() {
 function markRead(chId) {
   state.chapterProgress[chId] = 100;
   state.readChapters.add(chId);
-  localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
-  localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
+  saveChapterProgressToStorage();
   updateChapterReadUi(chId);
 }
 
 function resetChapterToUnread(chId) {
   state.chapterProgress[chId] = 0;
   state.readChapters.delete(chId);
-  localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
-  localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
+  saveChapterProgressToStorage();
   updateChapterReadUi(chId);
 }
 
@@ -1107,9 +1125,14 @@ function updateChapterReadUi(chId) {
   }
 
   statusEl.className = 'ch-status-indicator ' + (isRead ? 'is-read' : (pct > 0 ? 'in-progress' : ''));
-  statusEl.innerHTML = isRead
-    ? '<span class="ch-read-dot" title="🟢 100% 已研讀（點擊重設為未讀）"></span>'
-    : `<span class="ch-pct-tag" title="📖 研讀進度 ${pct}%（需達 100% 才能標為已讀）">${pct}%</span>`;
+  const pctTag = statusEl.querySelector('.ch-pct-tag');
+  if (pctTag && !isRead) {
+    pctTag.textContent = `${pct}%`;
+  } else {
+    statusEl.innerHTML = isRead
+      ? '<span class="ch-read-dot" title="🟢 100% 已研讀（點擊重設為未讀）"></span>'
+      : `<span class="ch-pct-tag" title="📖 研讀進度 ${pct}%（需達 100% 才能標為已讀）">${pct}%</span>`;
+  }
 }
 
 // ── 自動還原上次觀看進度 (1A + 2A + 3A) ─────────────────
@@ -1131,8 +1154,9 @@ function restoreChapterReadingProgress(chId) {
     const maxScroll = scrollHeight - clientHeight;
     if (maxScroll <= 25) return;
 
-    // 2A: 依目前紀錄之進度 % 換算位置
-    const targetTop = Math.min(maxScroll, Math.round((maxScroll * savedPct) / 100));
+    // 1A: 依視線位置反算目標捲動位置
+    const visibleBottom = (scrollHeight * savedPct) / 100;
+    const targetTop = Math.max(0, Math.min(maxScroll, Math.round(visibleBottom - clientHeight * 0.85)));
     sc.scrollTo({ top: targetTop, behavior: 'smooth' });
 
     // 3A: 顯示輕量提示標籤
@@ -1355,7 +1379,10 @@ function bindEvents() {
         });
         scrollTicking = true;
       }
-    });
+    }, { passive: true });
+
+    window.addEventListener('beforeunload', saveChapterProgressToStorage);
+    window.addEventListener('pagehide', saveChapterProgressToStorage);
 
     if (els.backToTop) {
       els.backToTop.addEventListener('click', () => {
