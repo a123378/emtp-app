@@ -399,9 +399,10 @@ body {
 
 .chapter-area {
   padding: 28px 32px 60px;
-  max-width: 960px;
+  max-width: 100%;
   width: 100%;
-  margin: 0 auto;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 /* ── Welcome Screen ── */
@@ -1324,8 +1325,8 @@ body {
 }
 
 .m2-subview {
-  max-width: 960px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   animation: m2FadeIn 0.25s ease-out;
 }
 
@@ -4215,8 +4216,8 @@ body {
   scroll-behavior: auto;
 }
 .m3-layout {
-  max-width: 1180px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   display: grid;
   grid-template-columns: 250px minmax(0, 1fr);
   gap: 28px;
