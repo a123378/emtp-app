@@ -351,7 +351,7 @@ async function loadChapterData(chId) {
   }
 
   // Render summary
-  els.summaryContent.innerHTML = renderSummary(cd);
+  els.summaryContent.innerHTML = renderSummary(cd, chId);
 }
 
 // ── Render: Chapter Not Ready ─────────────────────────
@@ -379,33 +379,7 @@ function renderNotes(cd, chId) {
       </div>
     </div>`;
 
-  // ② 本章全景核心架構圖譜卡片 (動態解析・完整知識節點・無截斷)
-  const chFullTitle = `${cd.num} ${cd.title}`;
-  const mmPills = renderMindmapCardPills(cd);
-  const mmCount = countChapterMindmapNodes(cd);
-
-  html += `
-    <div class="chapter-mindmap-card" onclick="openMindmapModal('${chId}', '${escapeHtml(chFullTitle)}')">
-      <div class="mindmap-card-header">
-        <div class="mindmap-card-badge">
-          <span class="mindmap-badge-icon">🧠</span>
-          <span class="mindmap-badge-text">本章全景核心架構圖譜</span>
-          <span class="mindmap-badge-sub">INTERACTIVE MIND MAP</span>
-        </div>
-        <div class="mindmap-zoom-tip">
-          <span class="zoom-icon">🔍</span> 展開完整架構樹
-        </div>
-      </div>
-      <div class="mindmap-dynamic-preview">
-        ${mmPills}
-      </div>
-      <div class="mindmap-card-footer">
-        <span class="mindmap-stat-badge">📊 共收錄 ${mmCount} 個知識架構分支與考點</span>
-        <span class="mindmap-cta-btn">🧠 展開完整互動心智圖（支援搜尋/展開/全文無截斷）→</span>
-      </div>
-    </div>`;
-
-  // ②-2 本章專屬 AI 臨床講師隨身課 (AI 講師精講章節內容・非導讀)
+  // ② 本章專屬 AI 臨床講師隨身課 (AI 講師精講章節內容・非導讀)
   html += `
     <div id="chapter-podcast-card" class="chapter-podcast-card">
       <div class="podcast-card-header">
@@ -490,7 +464,7 @@ function renderNotes(cd, chId) {
     <div class="summary-entry-card" onclick="switchTab('summary')">
       <div class="summary-entry-icon">⚡</div>
       <div class="summary-entry-text">
-        <strong>查看本章公式、重要數字與快速複習</strong>
+        <strong>查看本章架構心智圖、公式與重要數字</strong>
         <span>點擊快速切換至濃縮精華整理表</span>
       </div>
       <div class="summary-entry-arrow">→</div>
@@ -824,54 +798,72 @@ function renderMarkdown(text) {
 }
 
 // ── Render: Summary ───────────────────────────────────
-function renderSummary(cd) {
-  if (!cd.summary) return '<p style="color:var(--text-muted);padding:20px">此章節重點一覽尚未生成。</p>';
-
+function renderSummary(cd, chId) {
+  chId = chId || (cd && cd.id) || state.currentChId;
   let html = '';
-  const s = cd.summary;
 
-  // Formulas
-  if (s.formulas && s.formulas.length) {
+  // ① 本章全景核心架構圖譜卡片 (動態解析・完整知識節點・無截斷)
+  if (cd) {
+    const chFullTitle = `${cd.num || ''} ${cd.title || ''}`.trim();
+    const mmPills = renderMindmapCardPills(cd);
+    const mmCount = countChapterMindmapNodes(cd);
+
     html += `
-      <div class="summary-card">
-        <h3>🧮 公式彙整</h3>
-        ${s.formulas.map(f => `
-          <div class="formula-box">
-            <span class="formula-name">${f.name}</span>
-            ${f.formula}
-            ${f.note ? `<div style="margin-top:6px;font-size:0.82rem;color:#94a3b8">${f.note}</div>` : ''}
-          </div>`).join('')}
-      </div>`;
+    <div class="chapter-mindmap-card" onclick="openMindmapModal('${chId}', '${escapeHtml(chFullTitle)}')">
+      <div class="mindmap-card-header">
+        <div class="mindmap-card-badge">
+          <span class="mindmap-badge-icon">🧠</span>
+          <span class="mindmap-badge-text">本章全景核心架構圖譜</span>
+          <span class="mindmap-badge-sub">INTERACTIVE MIND MAP</span>
+        </div>
+        <div class="mindmap-zoom-tip">
+          <span class="zoom-icon">🔍</span> 展開完整架構樹
+        </div>
+      </div>
+      <div class="mindmap-dynamic-preview">
+        ${mmPills}
+      </div>
+      <div class="mindmap-card-footer">
+        <span class="mindmap-stat-badge">📊 共收錄 ${mmCount} 個知識架構分支與考點</span>
+        <span class="mindmap-cta-btn">🧠 展開完整互動心智圖（支援搜尋/展開/全文無截斷）→</span>
+      </div>
+    </div>`;
   }
 
-  // Key numbers
-  if (s.keyNumbers && s.keyNumbers.length) {
-    html += `
-      <div class="summary-card">
-        <h3>🔢 重要數字 / 數值</h3>
-        <table class="numbers-table">
-          <thead><tr><th>項目</th><th>數值</th><th>說明</th></tr></thead>
-          <tbody>
-            ${s.keyNumbers.map(n => `
-              <tr>
-                <td>${mdInline(n.label)}</td>
-                <td class="highlight-num">${mdInline(n.value)}</td>
-                <td>${mdInline(n.note || '')}</td>
-              </tr>`).join('')}
-          </tbody>
-        </table>
-      </div>`;
-  }
+  const s = cd && cd.summary;
+  if (s) {
+    // Formulas
+    if (s.formulas && s.formulas.length) {
+      html += `
+        <div class="summary-card">
+          <h3>🧮 公式彙整</h3>
+          ${s.formulas.map(f => `
+            <div class="formula-box">
+              <span class="formula-name">${f.name}</span>
+              ${f.formula}
+              ${f.note ? `<div style="margin-top:6px;font-size:0.82rem;color:#94a3b8">${f.note}</div>` : ''}
+            </div>`).join('')}
+        </div>`;
+    }
 
-  // Quick review
-  if (s.quickReview && s.quickReview.length) {
-    html += `
-      <div class="summary-card">
-        <h3>⚡ 快速複習要點</h3>
-        <ul style="padding-left:18px;font-size:0.9rem;line-height:1.8">
-          ${s.quickReview.map(r => `<li>${mdInline(r)}</li>`).join('')}
-        </ul>
-      </div>`;
+    // Key numbers
+    if (s.keyNumbers && s.keyNumbers.length) {
+      html += `
+        <div class="summary-card">
+          <h3>🔢 重要數字 / 數值</h3>
+          <table class="numbers-table">
+            <thead><tr><th>項目</th><th>數值</th><th>說明</th></tr></thead>
+            <tbody>
+              ${s.keyNumbers.map(n => `
+                <tr>
+                  <td>${mdInline(n.label)}</td>
+                  <td class="highlight-num">${mdInline(n.value)}</td>
+                  <td>${mdInline(n.note || '')}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }
   }
 
   return html || '<p style="color:var(--text-muted);padding:20px">此章節重點一覽尚未生成。</p>';
