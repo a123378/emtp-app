@@ -4282,7 +4282,7 @@ body {
   color: var(--text);
 }
 .m3-topic:first-child { margin-top: 4px; }
-.m3-heading { scroll-margin-top: 12px; }
+.m3-heading { scroll-margin-top: 70px; }
 .m3-heading.m3-flash { animation: secFlash 1.4s ease-out; }
 .m3-text { font-size: 0.92rem; line-height: 1.75; margin: 8px 0 12px; padding-left: 4px; }
 .m3-table td { vertical-align: top; }

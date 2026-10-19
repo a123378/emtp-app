@@ -1093,6 +1093,10 @@ function markRead(chId) {
 function resetChapterToUnread(chId) {
   state.chapterProgress[chId] = 0;
   state.readChapters.delete(chId);
+  // 若正好是目前開啟的章節，將閱讀滾動軸重設回頂端，防止被底部的滾動偵測再次自動標記為 100%
+  if (state.currentChId === chId && els.mainContent) {
+    els.mainContent.scrollTop = 0;
+  }
   saveChapterProgressToStorage();
   updateChapterReadUi(chId);
 }
@@ -1107,8 +1111,12 @@ function toggleReadStatus(chId) {
     if (confirm(`本章目前已完讀 (100%)。\n確定要將「${title}」的研讀進度重設為 0% (未讀) 嗎？`)) {
       resetChapterToUnread(chId);
     }
+  } else if (pct > 0) {
+    if (confirm(`本章目前研讀進度為 ${pct}%。\n確定要將「${title}」的進度重設為 0% (未讀) 嗎？`)) {
+      resetChapterToUnread(chId);
+    }
   } else {
-    alert(`💡 「${title}」目前研讀進度為 ${pct}%。\n依系統規範，需滾動研讀至章節最底部（100%）才會自動判定已讀並換為綠燈！`);
+    alert(`💡 「${title}」目前尚未研讀（0%）。\n閱讀內容累積進度至章節最底部（100%），將自動判定完讀並點亮綠燈！`);
   }
 }
 
@@ -4785,6 +4793,11 @@ async function initMode3(target) {
   }
 }
 
+/** 頁碼標籤：預設是術科攻略書頁；src（例 "CH52"）表示取自教科書該章 */
+function m3PageLabel(x) {
+  return x.src ? `${x.src} p.${x.page}` : `p.${x.page}`;
+}
+
 function m3Text(s) {
   return mdInline(escapeHtml(String(s == null ? '' : s)).replace(/&ast;/g, '*'));
 }
@@ -4844,7 +4857,10 @@ function renderMode3() {
   let html = '';
   let lastPage = null;
   d.content.forEach(b => {
-    const pg = b.page && b.page !== lastPage ? `<span class="sec-page" title="術科攻略 書頁">📖 p.${b.page}</span>` : '';
+    const pg = b.page && b.page !== lastPage
+      ? (b.src ? `<span class="sec-page" title="高級救護技術員教科書 ${escapeHtml(b.src)} 書頁">📕 ${escapeHtml(m3PageLabel(b))}</span>`
+               : `<span class="sec-page" title="術科攻略 書頁">📖 p.${b.page}</span>`)
+      : '';
     switch (b.type) {
       case 'topic':
         html += `<h2 class="m3-topic" id="m3-${b.id}">${m3Text(b.text)}</h2>`;
@@ -4869,7 +4885,7 @@ function renderMode3() {
       open = true;
     } else if (b.type === 'orange') {
       if (!open) { toc += '<div class="m3-toc-group">'; open = true; }
-      toc += `<button class="m3-toc-item" data-m3="${b.id}" onclick="m3Goto('${b.id}')"><span>${m3Text(String(b.text).replace(/\*\*/g, ''))}</span><em>p.${b.page}</em></button>`;
+      toc += `<button class="m3-toc-item" data-m3="${b.id}" onclick="m3Goto('${b.id}')"><span>${m3Text(String(b.text).replace(/\*\*/g, ''))}</span><em>${escapeHtml(m3PageLabel(b))}</em></button>`;
     }
   });
   if (open) toc += '</div>';
@@ -4920,7 +4936,7 @@ function buildM3Sections() {
   m3.data.content.forEach(b => {
     if (b.type === 'topic') { topic = b; cur = null; }
     else if (b.type === 'orange') {
-      cur = { id: b.id, topicId: topic ? topic.id : '', topicTitle: topic ? topic.text : '', title: b.text, page: b.page, q: b.q || `請說明「${String(b.text).replace(/\*\*/g, '')}」。`, blocks: [] };
+      cur = { id: b.id, topicId: topic ? topic.id : '', topicTitle: topic ? topic.text : '', title: b.text, page: b.page, src: b.src, q: b.q || `請說明「${String(b.text).replace(/\*\*/g, '')}」。`, blocks: [] };
       secs.push(cur);
     } else if (cur) cur.blocks.push(b);
   });
@@ -5090,7 +5106,7 @@ function renderM3Practice() {
         <div class="m3p-meta">
           <span>第 <b>${m3.p.idx + 1}</b> / ${n} 題</span>
           <span class="m3p-topic">${m3Text(shortTopic[sec.topicId] || sec.topicTitle)}</span>
-          <span class="m3p-page">p.${sec.page}</span>
+          <span class="m3p-page">${escapeHtml(m3PageLabel(sec))}</span>
           ${badge}
         </div>
         <div class="m3p-q"><span class="m3p-q-mark">Q</span>${m3Text(sec.q)}</div>
@@ -5142,7 +5158,9 @@ function scrollToM3(id, smooth = true) {
   // 先收起手機版目錄（它在內容上方，收起會改變段落位置），再計算捲動位置
   const mob = document.getElementById('m3-toc-mobile');
   if (mob) mob.open = false;
-  const y = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - 12;
+  const tabsEl = document.getElementById('m3-view-tabs');
+  const tabsOffset = tabsEl ? (tabsEl.offsetHeight + 18) : 70;
+  const y = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - tabsOffset;
   sc.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
   el.classList.remove('m3-flash'); void el.offsetWidth; el.classList.add('m3-flash');
 }
