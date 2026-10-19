@@ -270,6 +270,7 @@ async function selectChapter(chId) {
     return;
   }
   state.currentChId = chId;
+  hideProgressRestoreToast();
 
   // Auto close mobile sidebar on select
   closeMobileSidebar();
@@ -295,6 +296,9 @@ async function selectChapter(chId) {
 
   // Load content
   await loadChapterData(chId);
+
+  // 1A + 2A + 3A: 自動跳轉至上次進度 (1% ~ 99%)
+  restoreChapterReadingProgress(chId);
 
   // 檢查滾動進度（若內容過短毋須滾動，則自動判定 100%）
   setTimeout(() => {
@@ -871,6 +875,7 @@ function renderSummary(cd, chId) {
 
 // ── Tab Switch ────────────────────────────────────────
 function switchTab(tabName) {
+  hideProgressRestoreToast();
   $$('.c-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
   $$('.tab-panel').forEach(p => p.classList.toggle('hidden', p.id !== `tab-${tabName}`));
   // Scroll content to top
@@ -1106,6 +1111,78 @@ function updateChapterReadUi(chId) {
     ? '<span class="ch-read-dot" title="🟢 100% 已研讀（點擊重設為未讀）"></span>'
     : `<span class="ch-pct-tag" title="📖 研讀進度 ${pct}%（需達 100% 才能標為已讀）">${pct}%</span>`;
 }
+
+// ── 自動還原上次觀看進度 (1A + 2A + 3A) ─────────────────
+let _restoreToastTimer = null;
+
+function restoreChapterReadingProgress(chId) {
+  const sc = els.mainContent;
+  if (!sc) return;
+  const savedPct = state.chapterProgress[chId] || 0;
+
+  // 1A: 僅在 1% ~ 99% 時自動跳轉；若 0% 或已達 100% 則保留在頂部方便重讀
+  if (savedPct < 1 || savedPct >= 100) return;
+
+  // 等候 DOM 渲染與高度解析完成後平滑滾動
+  setTimeout(() => {
+    if (state.currentChId !== chId) return;
+    const scrollHeight = sc.scrollHeight;
+    const clientHeight = sc.clientHeight;
+    const maxScroll = scrollHeight - clientHeight;
+    if (maxScroll <= 25) return;
+
+    // 2A: 依目前紀錄之進度 % 換算位置
+    const targetTop = Math.min(maxScroll, Math.round((maxScroll * savedPct) / 100));
+    sc.scrollTo({ top: targetTop, behavior: 'smooth' });
+
+    // 3A: 顯示輕量提示標籤
+    showProgressRestoreToast(savedPct);
+  }, 120);
+}
+
+function showProgressRestoreToast(pct) {
+  let toast = document.getElementById('progress-restore-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'progress-restore-toast';
+    toast.className = 'progress-restore-toast';
+    document.body.appendChild(toast);
+  }
+
+  toast.innerHTML = `
+    <span class="toast-icon">📍</span>
+    <span>已自動跳轉至上次進度 <b>${pct}%</b></span>
+    <button class="toast-btn-top" onclick="scrollToChapterTop()">回到頂部</button>
+    <button class="toast-close" onclick="hideProgressRestoreToast()" title="關閉">✕</button>
+  `;
+
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  clearTimeout(_restoreToastTimer);
+  _restoreToastTimer = setTimeout(() => {
+    hideProgressRestoreToast();
+  }, 4500);
+}
+
+function hideProgressRestoreToast() {
+  clearTimeout(_restoreToastTimer);
+  const toast = document.getElementById('progress-restore-toast');
+  if (toast) {
+    toast.classList.remove('show');
+  }
+}
+
+function scrollToChapterTop() {
+  hideProgressRestoreToast();
+  if (els.mainContent) {
+    els.mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+window.scrollToChapterTop = scrollToChapterTop;
+window.hideProgressRestoreToast = hideProgressRestoreToast;
 
 function resetAllChaptersToUnread() {
   if (!confirm('確定要將全書 60 章的研讀進度全部重設為 0% (未讀) 嗎？')) return;

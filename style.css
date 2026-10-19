@@ -4431,3 +4431,83 @@ body.mode-3 #m3-side-nav { display: block; }
 }
 .m3-practicing .m3-hero-src, .m3-practicing .m3-hero-note { display: none; }
 .m3-practicing .m3-hero h1 { margin-bottom: 0; }
+
+/* ══════════════════════════════════════════════════════
+   章節閱讀進度自動跳轉浮動提示 (Progress Restore Toast)
+   ══════════════════════════════════════════════════════ */
+.progress-restore-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(24, 30, 42, 0.94);
+  color: #fff;
+  padding: 8px 14px 8px 14px;
+  border-radius: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 950;
+  font-size: 0.88rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
+}
+.progress-restore-toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.progress-restore-toast .toast-icon {
+  font-size: 1.05rem;
+}
+.progress-restore-toast .toast-btn-top {
+  background: rgba(232, 119, 34, 0.22);
+  color: #fb923c;
+  border: 1px solid rgba(232, 119, 34, 0.45);
+  padding: 3px 10px;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 2px;
+  font-family: inherit;
+}
+.progress-restore-toast .toast-btn-top:hover {
+  background: var(--orange, #e87722);
+  color: #fff;
+}
+.progress-restore-toast .toast-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+.progress-restore-toast .toast-close:hover {
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .progress-restore-toast {
+    bottom: 20px;
+    font-size: 0.82rem;
+    padding: 7px 12px 7px 12px;
+    gap: 8px;
+  }
+  .progress-restore-toast .toast-btn-top {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+  }
+}
+
