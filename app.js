@@ -27,6 +27,7 @@ const state = {
   currentChId: null,
   currentChData: null,
   readChapters: new Set(JSON.parse(localStorage.getItem('readCh') || '[]')),
+  chapterProgress: JSON.parse(localStorage.getItem('chProgress') || '{}'),
   theme: localStorage.getItem('theme') || 'light',
   searchQuery: '',
   inlineAnswers: {},   // qId -> 選項索引（模式一段落內嵌考題）
@@ -162,6 +163,19 @@ async function init() {
   await loadChapterIndex();
   await loadAllQuizzes();
   sanitizeStoredQuizzes();
+  // 同步現有已讀紀錄與各章 % 數進度
+  state.readChapters.forEach(id => {
+    if (typeof state.chapterProgress[id] !== 'number' || state.chapterProgress[id] < 100) {
+      state.chapterProgress[id] = 100;
+    }
+  });
+  Object.entries(state.chapterProgress).forEach(([id, pct]) => {
+    if (pct >= 100) state.readChapters.add(id);
+    else state.readChapters.delete(id);
+  });
+  localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
+  localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
+
   buildSidebar();
   bindEvents();
   initMode2();
@@ -219,17 +233,20 @@ async function loadChapterIndex() {
 function buildSidebar() {
   els.chNav.innerHTML = '';
   state.chapters.forEach(ch => {
-    const isRead = state.readChapters.has(ch.id);
+    const pct = state.chapterProgress[ch.id] || 0;
+    const isRead = pct >= 100 || state.readChapters.has(ch.id);
     const item = document.createElement('div');
     item.className = 'ch-item' + (isRead ? ' read' : '');
     item.dataset.chId = ch.id;
     item.innerHTML = `
       <span class="ch-num">${ch.num}</span>
       <span class="ch-name">${ch.title}</span>
-      <span class="ch-read-dot" title="${isRead ? '🟢 已讀（點擊切換為未讀）' : '🔴 待讀（點擊切換為已讀）'}"></span>
+      <span class="ch-status-indicator ${isRead ? 'is-read' : (pct > 0 ? 'in-progress' : '')}">
+        ${isRead ? '<span class="ch-read-dot" title="🟢 100% 已研讀（點擊重設為未讀）"></span>' : `<span class="ch-pct-tag" title="📖 研讀進度 ${pct}%（需達 100% 才能標為已讀）">${pct}%</span>`}
+      </span>
     `;
     item.addEventListener('click', (e) => {
-      if (e.target.classList.contains('ch-read-dot')) {
+      if (e.target.closest('.ch-status-indicator')) {
         e.stopPropagation();
         toggleReadStatus(ch.id);
         return;
@@ -279,8 +296,10 @@ async function selectChapter(chId) {
   // Load content
   await loadChapterData(chId);
 
-  // Mark as read
-  markRead(chId);
+  // 檢查滾動進度（若內容過短毋須滾動，則自動判定 100%）
+  setTimeout(() => {
+    checkChapterReadingProgress();
+  }, 350);
 }
 
 function openMobileSidebar() {
@@ -1004,44 +1023,104 @@ function applyTheme(theme) {
   if (els.themeIconDark) els.themeIconDark.classList.toggle('hidden', theme === 'light');
 }
 
-// ── Read tracking (🔴 紅點待讀 / 🟢 綠點已讀) ───────────
+// ── Read tracking (研讀達 100% 才標記已讀，支援各章 % 數進度) ───────────
+function checkChapterReadingProgress() {
+  if (state.currentMode !== 1 || !state.currentChId) return;
+  const sc = els.mainContent;
+  if (!sc) return;
+
+  // 僅在「重點筆記」分頁計算章節閱讀進度
+  const notesPanel = $('#tab-notes');
+  if (!notesPanel || notesPanel.classList.contains('hidden')) return;
+
+  const chId = state.currentChId;
+  const scrollHeight = sc.scrollHeight;
+  const clientHeight = sc.clientHeight;
+  const scrollTop = sc.scrollTop;
+  const maxScroll = scrollHeight - clientHeight;
+
+  let pct = 0;
+  if (maxScroll <= 25) {
+    // 內容極短不需滾動，直接 100%
+    pct = 100;
+  } else {
+    // 距底部小於等於 30px 或比例 >= 98% 視為 100%
+    if (scrollTop + clientHeight >= scrollHeight - 30) {
+      pct = 100;
+    } else {
+      pct = Math.min(99, Math.round((scrollTop / maxScroll) * 100));
+    }
+  }
+
+  const currentRecorded = state.chapterProgress[chId] || 0;
+  if (pct > currentRecorded) {
+    state.chapterProgress[chId] = pct;
+    localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
+    if (pct >= 100) {
+      state.readChapters.add(chId);
+      localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
+    }
+    updateChapterReadUi(chId);
+  }
+}
+
 function markRead(chId) {
+  state.chapterProgress[chId] = 100;
   state.readChapters.add(chId);
+  localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
+  localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
+  updateChapterReadUi(chId);
+}
+
+function resetChapterToUnread(chId) {
+  state.chapterProgress[chId] = 0;
+  state.readChapters.delete(chId);
+  localStorage.setItem('chProgress', JSON.stringify(state.chapterProgress));
   localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
   updateChapterReadUi(chId);
 }
 
 function toggleReadStatus(chId) {
-  if (state.readChapters.has(chId)) {
-    state.readChapters.delete(chId);
+  const pct = state.chapterProgress[chId] || 0;
+  const isRead = pct >= 100 || state.readChapters.has(chId);
+  const ch = (state.chapters || []).find(c => c.id === chId);
+  const title = ch ? `${ch.num} ${ch.title}` : chId;
+
+  if (isRead) {
+    if (confirm(`本章目前已完讀 (100%)。\n確定要將「${title}」的研讀進度重設為 0% (未讀) 嗎？`)) {
+      resetChapterToUnread(chId);
+    }
   } else {
-    state.readChapters.add(chId);
+    alert(`💡 「${title}」目前研讀進度為 ${pct}%。\n依系統規範，需滾動研讀至章節最底部（100%）才會自動判定已讀並換為綠燈！`);
   }
-  localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
-  updateChapterReadUi(chId);
 }
 
 function updateChapterReadUi(chId) {
   const item = $(`.ch-item[data-ch-id="${chId}"]`);
   if (!item) return;
-  const isRead = state.readChapters.has(chId);
+  const pct = state.chapterProgress[chId] || 0;
+  const isRead = pct >= 100 || state.readChapters.has(chId);
   item.classList.toggle('read', isRead);
-  const dot = item.querySelector('.ch-read-dot');
-  if (dot) {
-    dot.title = isRead ? '🟢 已讀（點擊切換為未讀）' : '🔴 待讀（點擊切換為已讀）';
+
+  let statusEl = item.querySelector('.ch-status-indicator');
+  if (!statusEl) {
+    statusEl = document.createElement('span');
+    statusEl.className = 'ch-status-indicator';
+    item.appendChild(statusEl);
   }
+
+  statusEl.className = 'ch-status-indicator ' + (isRead ? 'is-read' : (pct > 0 ? 'in-progress' : ''));
+  statusEl.innerHTML = isRead
+    ? '<span class="ch-read-dot" title="🟢 100% 已研讀（點擊重設為未讀）"></span>'
+    : `<span class="ch-pct-tag" title="📖 研讀進度 ${pct}%（需達 100% 才能標為已讀）">${pct}%</span>`;
 }
 
 function resetAllChaptersToUnread() {
+  if (!confirm('確定要將全書 60 章的研讀進度全部重設為 0% (未讀) 嗎？')) return;
+  state.chapterProgress = {};
   state.readChapters.clear();
+  localStorage.setItem('chProgress', JSON.stringify({}));
   localStorage.setItem('readCh', JSON.stringify([]));
-  state.chapters.forEach(ch => updateChapterReadUi(ch.id));
-  openProgressModal();
-}
-
-function markAllChaptersRead() {
-  state.chapters.forEach(ch => state.readChapters.add(ch.id));
-  localStorage.setItem('readCh', JSON.stringify([...state.readChapters]));
   state.chapters.forEach(ch => updateChapterReadUi(ch.id));
   openProgressModal();
 }
@@ -1055,23 +1134,86 @@ function openProgressModal() {
     return;
   }
   const total = state.chapters ? state.chapters.length : 60;
-  const read = state.readChapters ? state.readChapters.size : 0;
-  const unread = Math.max(0, total - read);
-  const pct = total > 0 ? Math.round((read / total) * 100) : 0;
+  let readCount = 0;
+  let inProgressCount = 0;
+  let unreadCount = 0;
+  let sumPct = 0;
+
+  const chList = state.chapters || [];
+  chList.forEach(ch => {
+    const p = state.chapterProgress[ch.id] || 0;
+    sumPct += p;
+    if (p >= 100 || state.readChapters.has(ch.id)) {
+      readCount++;
+    } else if (p > 0) {
+      inProgressCount++;
+    } else {
+      unreadCount++;
+    }
+  });
+
+  const avgPct = total > 0 ? Math.round(sumPct / total) : 0;
   const contentEl = document.getElementById('progress-modal-content');
   if (contentEl) {
+    // Generate chapter rows
+    const rowsHtml = chList.map(ch => {
+      const p = state.chapterProgress[ch.id] || 0;
+      const isDone = p >= 100 || state.readChapters.has(ch.id);
+      let badgeHtml = '';
+      if (isDone) {
+        badgeHtml = `<span style="display:inline-flex;align-items:center;gap:3px;color:var(--success);font-weight:800;font-size:0.82rem">🟢 100%</span>`;
+      } else if (p > 0) {
+        badgeHtml = `<span style="color:var(--orange);font-weight:700;font-size:0.82rem">🟡 ${p}%</span>`;
+      } else {
+        badgeHtml = `<span style="color:#ef4444;font-size:0.82rem">🔴 0%</span>`;
+      }
+      return `
+        <div class="progress-ch-row" onclick="selectChapter('${ch.id}');closeProgressModal()" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .2s">
+          <div style="display:flex;align-items:center;gap:8px;overflow:hidden;flex:1;margin-right:12px">
+            <span style="font-weight:700;font-size:0.82rem;color:var(--text-muted);width:45px;flex-shrink:0">${ch.num}</span>
+            <span style="font-size:0.84rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${ch.title}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+            <div style="width:65px;height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+              <div style="width:${p}%;height:100%;background:${isDone ? 'var(--success)' : (p > 0 ? 'var(--orange)' : '#ef4444')};border-radius:3px"></div>
+            </div>
+            <div style="min-width:50px;text-align:right">${badgeHtml}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
     contentEl.innerHTML = `
-      <div style="font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:8px">
-        🟢 <span style="color:var(--success)">${read}</span> 章已研讀 ‧ 🔴 <span style="color:#ef4444">${unread}</span> 章待研讀
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-size:1.15rem;font-weight:800;color:var(--text)">全書研讀總進度：${avgPct}%</span>
+          <span style="font-size:0.85rem;font-weight:700;color:var(--text-muted)">(${readCount} / ${total} 章完讀)</span>
+        </div>
+        <div style="height:10px;background:var(--border);border-radius:5px;overflow:hidden;margin-bottom:10px">
+          <div style="width:${avgPct}%;height:100%;background:linear-gradient(90deg, var(--orange), var(--success));border-radius:5px;transition:.4s"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:0.84rem;color:var(--text);padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px">
+          <span>🟢 <b>已完讀 (100%)</b>：<span style="color:var(--success);font-weight:800">${readCount}</span> 章</span>
+          <span>🟡 <b>研讀中</b>：<span style="color:var(--orange);font-weight:800">${inProgressCount}</span> 章</span>
+          <span>🔴 <b>待研讀 (0%)</b>：<span style="color:#ef4444;font-weight:800">${unreadCount}</span> 章</span>
+        </div>
       </div>
-      <div style="height:10px;background:var(--border);border-radius:5px;overflow:hidden;margin-bottom:14px">
-        <div style="width:${pct}%;height:100%;background:var(--success);border-radius:5px;transition:.4s"></div>
+
+      <div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-weight:800;font-size:0.92rem;color:var(--text)">📑 各章節 % 數進度明細</span>
+        <button class="modal-btn" onclick="resetAllChaptersToUnread()" style="background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;padding:4px 10px;font-size:0.8rem;font-weight:700;border-radius:6px;cursor:pointer">
+          🔴 一鍵全部標為未讀
+        </button>
       </div>
-      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px">總研讀完成度：${pct}%（左側圓點可直接點擊切換紅綠狀態）</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="modal-btn" onclick="resetAllChaptersToUnread()">🔴 全部重設為紅色 (待讀)</button>
-        <button class="modal-btn" onclick="markAllChaptersRead()">🟢 全部標記為綠色 (已讀)</button>
-      </div>`;
+
+      <div class="progress-ch-list" style="max-height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;padding:4px;background:var(--bg)">
+        ${rowsHtml}
+      </div>
+
+      <p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px;margin-bottom:0">
+        💡 提示：點擊任一章節可直接跳轉研讀。需滾動閱讀至章節最底部達 100% 才會自動判定已讀綠燈。
+      </p>
+    `;
   }
   modal.classList.remove('hidden');
   modal.style.cssText = 'display: flex !important; position: fixed !important; z-index: 9999 !important; inset: 0 !important;';
@@ -1139,19 +1281,31 @@ function bindEvents() {
     els.sidebarBackdrop.addEventListener('click', closeMobileSidebar);
   }
 
-  // Back to top floating button
-  if (els.mainContent && els.backToTop) {
+  // Back to top floating button & Chapter reading progress tracker
+  if (els.mainContent) {
+    let scrollTicking = false;
     els.mainContent.addEventListener('scroll', () => {
-      if (els.mainContent.scrollTop > 280) {
-        els.backToTop.classList.remove('hidden');
-      } else {
-        els.backToTop.classList.add('hidden');
+      if (els.backToTop) {
+        if (els.mainContent.scrollTop > 280) {
+          els.backToTop.classList.remove('hidden');
+        } else {
+          els.backToTop.classList.add('hidden');
+        }
+      }
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          checkChapterReadingProgress();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
       }
     });
 
-    els.backToTop.addEventListener('click', () => {
-      els.mainContent.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (els.backToTop) {
+      els.backToTop.addEventListener('click', () => {
+        els.mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   }
 
   // Search
@@ -1177,14 +1331,15 @@ function bindEvents() {
     });
   }
 
-  // Mode buttons
-  $$('.mode-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (btn.disabled) return;
-      const mode = parseInt(btn.dataset.mode || '1', 10);
-      switchMode(mode);
-    });
-  });
+  // Mode buttons：改由 HTML onclick="pickMode(n)" 處理（避免重複觸發）
+
+  // 模式三側邊目錄：點項目先收起抽屜再捲動
+  const m3Side = document.getElementById('m3-side-nav');
+  if (m3Side) {
+    m3Side.addEventListener('click', (e) => {
+      if (e.target.closest('.m3-toc-item, .m3-toc-topic')) closeMobileSidebar();
+    }, true);
+  }
 
   // ── 鍵盤快捷鍵 (電腦端友善操作) ──
   window.addEventListener('keydown', (e) => {
@@ -1370,6 +1525,22 @@ async function callGeminiApi(prompt, jsonMode = false, apiKey = state.geminiApiK
   }
   throw lastErr || new Error('所有 Gemini 模型連線嘗試皆失敗');
 }
+
+// ── 使用者點選模式（頂部按鈕 / 側邊選單）──────────────
+// 模式一、模式三：手機版直接打開側邊選單（模式一＝章節列表，模式三＝口試目錄）
+function pickMode(mode) {
+  switchMode(mode);
+  if (window.innerWidth <= 768 && (mode === 1 || mode === 3)) {
+    openMobileSidebar();
+    requestAnimationFrame(() => {
+      const sel = mode === 1 ? '#chapter-nav .ch-item.active' : '#m3-side-nav .m3-toc-item.active';
+      document.querySelector(sel)?.scrollIntoView({ block: 'center' });
+    });
+  } else {
+    closeMobileSidebar();
+  }
+}
+window.pickMode = pickMode;
 
 // ── 模式切換 ─────────────────────────────────────────
 function switchMode(mode) {
@@ -3399,8 +3570,8 @@ function buildInstructorLectureScript(cd) {
     cd.content.forEach((block) => {
       if (block.type === 'orange') {
         if (['情境', '解答', '複習思考題'].includes(block.text)) {
+          flushSec();
           if (block.text === '情境') {
-            flushSec();
             curSecTitle = '現場實務情境引導';
           }
           return;
@@ -3437,6 +3608,12 @@ function buildInstructorLectureScript(cd) {
           }).join(' ');
         }
         curSecParts.push(`${tableSummary} 請大家務必分清楚兩者的界線，千萬不要混淆！`);
+      } else if (block.type === 'box') {
+        const boxTitle = cleanMarkdownForSpeech(block.title || '重點專欄');
+        const boxContent = cleanMarkdownForSpeech(block.text || String(block.html || '').replace(/<[^>]+>/g, ' '));
+        if (boxContent) {
+          curSecParts.push(`📦 【${boxTitle}】：${boxContent}`);
+        }
       }
     });
 
@@ -3461,6 +3638,7 @@ const podcastPlayer = {
   lectureSource: 'builtin', // 'builtin' | 'gemini'
   lectureSections: [],
   speechChunks: [],
+  totalChars: 0,
   currentChunkIndex: 0,
   isPlaying: false,
   speed: parseFloat(localStorage.getItem('podcast_speed') || '1.0'),
@@ -3520,24 +3698,42 @@ const podcastPlayer = {
 
   prepareSpeechChunks() {
     const fullText = this.lectureSections.map(s => `${s.title}。\n${s.text}`).join('\n\n');
-    // 將文本依句號、問號、驚嘆號或換行切分為 25~60 字的獨立朗讀段落，徹底防止瀏覽器 15 秒暫停 bug
+    // 將文本依標點符號與換行切分為 25~55 字的獨立朗讀段落，徹底防止瀏覽器 15 秒暫停 bug
     const rawSentences = fullText.split(/([。！？\n]+)/);
     const chunks = [];
     let buffer = '';
 
     for (let i = 0; i < rawSentences.length; i++) {
-      buffer += rawSentences[i];
-      if (buffer.length >= 25 || (i < rawSentences.length - 1 && rawSentences[i + 1] === '\n')) {
+      const part = rawSentences[i];
+      if (!part) continue;
+      buffer += part;
+      if (buffer.length >= 25 || part.includes('\n')) {
         const clean = buffer.trim();
-        if (clean.length > 0) chunks.push(clean);
+        if (clean.length > 0) {
+          if (clean.length > 65) {
+            const subParts = clean.split(/([，；、]+)/);
+            let subBuf = '';
+            for (let j = 0; j < subParts.length; j++) {
+              subBuf += subParts[j];
+              if (subBuf.length >= 25 || j === subParts.length - 1) {
+                const subClean = subBuf.trim();
+                if (subClean.length > 0) chunks.push(subClean);
+                subBuf = '';
+              }
+            }
+          } else {
+            chunks.push(clean);
+          }
+        }
         buffer = '';
       }
     }
     if (buffer.trim().length > 0) chunks.push(buffer.trim());
 
     this.speechChunks = chunks.length ? chunks : ['即將開始授課。'];
-    const totalChars = fullText.length;
-    this.virtualDuration = Math.max(90, Math.round(totalChars / 4.2));
+    this.totalChars = this.speechChunks.reduce((sum, c) => sum + c.length, 0);
+    // 真實語速預估（中文 TTS 正常語速約每秒 2.6 字）
+    this.virtualDuration = Math.max(90, Math.round(this.totalChars / (2.6 * this.speed)));
 
     const durSpan = document.getElementById('podcast-time-dur');
     if (durSpan) durSpan.textContent = this.formatTime(this.virtualDuration);
@@ -3690,17 +3886,10 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
       return;
     }
 
-    if (this.speechSynth.paused) {
-      this.speechSynth.resume();
-      this.setPlayingState(true);
-      this.startVirtualTimer();
-      return;
-    }
-
-    this.playFromChunk(this.currentChunkIndex);
+    this.playFromChunk(this.currentChunkIndex, true);
   },
 
-  playFromChunk(index) {
+  playFromChunk(index, isUserSeek = false) {
     if (!this.speechSynth) return;
     if (index >= this.speechChunks.length) {
       this.stop();
@@ -3708,9 +3897,31 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
     }
 
     this.currentChunkIndex = index;
-    this.speechSynth.cancel();
+    this.setPlayingState(true);
 
-    const chunkText = this.speechChunks[index];
+    if (isUserSeek) {
+      // 使用者主動跳轉時清空當前發聲
+      try {
+        this.speechSynth.cancel();
+      } catch (e) {}
+      // 延遲 40ms 等待底層 cancel 清空
+      setTimeout(() => {
+        if (this.isPlaying) this._speakCurrentChunk();
+      }, 40);
+    } else {
+      // 連續播放銜接，直接發聲，絕不呼叫 cancel() 防止 Chrome 崩潰吃字
+      this._speakCurrentChunk();
+    }
+  },
+
+  _speakCurrentChunk() {
+    if (!this.speechSynth || !this.isPlaying) return;
+    if (this.currentChunkIndex >= this.speechChunks.length) {
+      this.stop();
+      return;
+    }
+
+    const chunkText = this.speechChunks[this.currentChunkIndex];
     const utterance = new SpeechSynthesisUtterance(chunkText);
     utterance.lang = 'zh-TW';
     utterance.rate = this.speed;
@@ -3720,11 +3931,17 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
                     voices.find(v => v.lang.startsWith('zh'));
     if (twVoice) utterance.voice = twVoice;
 
+    // 全域強參照鎖定，徹底防止長篇朗讀中途被 Chrome 垃圾回收 (Garbage Collection) 導致斷音
+    window._activePodcastUtterance = utterance;
+    this.speechUtterance = utterance;
+
     utterance.onend = () => {
-      if (this.isPlaying) {
+      // 只有在仍處於播放狀態且是當前 utterance 才接續下一段
+      if (this.isPlaying && window._activePodcastUtterance === utterance) {
         this.currentChunkIndex++;
         if (this.currentChunkIndex < this.speechChunks.length) {
-          this.playFromChunk(this.currentChunkIndex);
+          // 自然平滑銜接下一句，絕不呼叫 cancel()
+          this.playFromChunk(this.currentChunkIndex, false);
         } else {
           this.stop();
         }
@@ -3732,31 +3949,46 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
     };
 
     utterance.onerror = (e) => {
+      // 忽略使用者跳轉或暫停造成的 canceled / interrupted 事件
+      if (e && (e.error === 'canceled' || e.error === 'interrupted')) {
+        return;
+      }
       console.warn('[Podcast] Chunk speech error:', e);
       if (this.isPlaying && this.currentChunkIndex < this.speechChunks.length - 1) {
         this.currentChunkIndex++;
-        this.playFromChunk(this.currentChunkIndex);
+        this.playFromChunk(this.currentChunkIndex, false);
       } else {
         this.stop();
       }
     };
 
-    this.speechUtterance = utterance;
-    this.speechSynth.speak(utterance);
-    this.setPlayingState(true);
+    try {
+      this.speechSynth.speak(utterance);
+    } catch (err) {
+      console.error('[Podcast] Speak error:', err);
+    }
+
+    this.syncProgressFromChunks();
     this.startVirtualTimer();
     this.startKeepAlive();
   },
 
+  syncProgressFromChunks() {
+    if (!this.totalChars || !this.speechChunks.length) return;
+    const spokenChars = this.speechChunks.slice(0, this.currentChunkIndex).reduce((sum, c) => sum + c.length, 0);
+    const ratio = Math.min(1, spokenChars / this.totalChars);
+    this.virtualCurrentTime = Math.round(this.virtualDuration * ratio);
+    this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
+  },
+
   startKeepAlive() {
     this.stopKeepAlive();
-    // 解決 Chrome 15 秒語音合成自動凍結 bug
+    // 安全保活監控：若瀏覽器異常處於 paused 狀態則自動喚醒，絕不對正常朗讀中的語音強行 pause/resume
     this.keepAliveTimer = setInterval(() => {
-      if (this.speechSynth && this.speechSynth.speaking && !this.speechSynth.paused) {
-        this.speechSynth.pause();
+      if (this.isPlaying && this.speechSynth && this.speechSynth.paused) {
         this.speechSynth.resume();
       }
-    }, 10000);
+    }, 5000);
   },
 
   stopKeepAlive() {
@@ -3768,8 +4000,11 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
 
   pause() {
     if (this.speechSynth) {
-      this.speechSynth.pause();
+      try {
+        this.speechSynth.cancel();
+      } catch (e) {}
     }
+    window._activePodcastUtterance = null;
     this.setPlayingState(false);
     this.stopVirtualTimer();
     this.stopKeepAlive();
@@ -3777,8 +4012,11 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
 
   stop() {
     if (this.speechSynth) {
-      this.speechSynth.cancel();
+      try {
+        this.speechSynth.cancel();
+      } catch (e) {}
     }
+    window._activePodcastUtterance = null;
     this.setPlayingState(false);
     this.stopVirtualTimer();
     this.stopKeepAlive();
@@ -3803,12 +4041,10 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
     const chunkStep = Math.max(1, Math.round(seconds / 5));
     const targetIdx = Math.max(0, Math.min(this.speechChunks.length - 1, this.currentChunkIndex + chunkStep));
     this.currentChunkIndex = targetIdx;
-    const ratio = targetIdx / (this.speechChunks.length || 1);
-    this.virtualCurrentTime = Math.round(this.virtualDuration * ratio);
-    this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
+    this.syncProgressFromChunks();
 
     if (this.isPlaying) {
-      this.playFromChunk(this.currentChunkIndex);
+      this.playFromChunk(this.currentChunkIndex, true);
     }
   },
 
@@ -3820,12 +4056,12 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
 
   onSeekChange(val) {
     const ratio = parseFloat(val) / 100;
-    this.virtualCurrentTime = this.virtualDuration * ratio;
+    this.virtualCurrentTime = Math.round(this.virtualDuration * ratio);
     this.currentChunkIndex = Math.min(this.speechChunks.length - 1, Math.floor(this.speechChunks.length * ratio));
     this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
 
     if (this.isPlaying) {
-      this.playFromChunk(this.currentChunkIndex);
+      this.playFromChunk(this.currentChunkIndex, true);
     }
   },
 
@@ -3835,9 +4071,14 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
     this.speed = this.speeds[nextIdx];
     localStorage.setItem('podcast_speed', this.speed.toString());
     this.updateSpeedUI();
+    if (this.totalChars) {
+      this.virtualDuration = Math.max(90, Math.round(this.totalChars / (2.6 * this.speed)));
+      const durSpan = document.getElementById('podcast-time-dur');
+      if (durSpan) durSpan.textContent = this.formatTime(this.virtualDuration);
+    }
 
     if (this.isPlaying) {
-      this.playFromChunk(this.currentChunkIndex);
+      this.playFromChunk(this.currentChunkIndex, true);
     }
   },
 
@@ -3849,12 +4090,13 @@ ${(cd.content || []).map(b => b.text || (b.items ? b.items.join('；') : '')).fi
   startVirtualTimer() {
     this.stopVirtualTimer();
     this.progressTimer = setInterval(() => {
+      if (!this.isPlaying) return;
       this.virtualCurrentTime += 0.5 * this.speed;
-      if (this.virtualCurrentTime >= this.virtualDuration) {
-        this.stop();
-      } else {
-        this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
+      // 絕不讓計時器強制 stop() 語音，上限停在 virtualDuration - 1
+      if (this.virtualCurrentTime > this.virtualDuration - 1) {
+        this.virtualCurrentTime = this.virtualDuration - 1;
       }
+      this.updateProgressUI(this.virtualCurrentTime, this.virtualDuration);
     }, 500);
   },
 
@@ -4427,7 +4669,12 @@ document.addEventListener('DOMContentLoaded', init);
    資料：chapters/oral_ch07.json
    （《緊急救護之道—EMT-P 術科考試全攻略》第七章 口試重點整理）
    ════════════════════════════════════════════════════════ */
-const m3 = { data: null, loading: null, rendered: false, pendingTarget: null };
+const m3 = {
+  data: null, loading: null, rendered: false, pendingTarget: null,
+  view: (() => { try { return localStorage.getItem('m3_view') === 'practice' ? 'practice' : 'notes'; } catch (e) { return 'notes'; } })(),
+  sections: null, secById: {}, marks: {},
+  p: { filter: 'all', random: false, order: [], idx: 0, revealed: false, done: false },
+};
 
 async function initMode3(target) {
   if (target) m3.pendingTarget = target;
@@ -4485,6 +4732,25 @@ function renderM3ListItem(it) {
   return m3Text(it.text || '') + sub;
 }
 
+/** 模式三內容區塊（文字／清單／表格／圖片）→ HTML；重點整理與口試練習答案共用 */
+function m3BlockHtml(b) {
+  switch (b.type) {
+    case 'text':
+      return `<p class="m3-text">${m3Text(b.text)}</p>`;
+    case 'list':
+      return `<ul class="content-list">${(b.items || []).map(i => `<li>${renderM3ListItem(i)}</li>`).join('')}</ul>`;
+    case 'table':
+      return renderM3Table(b);
+    case 'image':
+      return `
+          <figure class="m3-figure">
+            <img src="${escapeHtml(dataUrl(b.src))}" alt="${escapeHtml(b.alt || b.caption || '')}"${b.w && b.h ? ` width="${b.w}" height="${b.h}"` : ''} loading="lazy" onclick="openImageModal(this.src)">
+            ${b.caption ? `<figcaption>${m3Text(b.caption)}<span class="m3-zoom-tip">🔍 點圖放大</span></figcaption>` : ''}
+          </figure>`;
+  }
+  return '';
+}
+
 function renderMode3() {
   const d = m3.data;
   const box = document.getElementById('m3-content');
@@ -4501,22 +4767,8 @@ function renderMode3() {
         html += `<div class="orange-heading m3-heading" id="m3-${b.id}">${m3Text(b.text)}${pg}</div>`;
         lastPage = b.page;
         break;
-      case 'text':
-        html += `<p class="m3-text">${m3Text(b.text)}</p>`;
-        break;
-      case 'list':
-        html += `<ul class="content-list">${(b.items || []).map(i => `<li>${renderM3ListItem(i)}</li>`).join('')}</ul>`;
-        break;
-      case 'table':
-        html += renderM3Table(b);
-        break;
-      case 'image':
-        html += `
-          <figure class="m3-figure">
-            <img src="${escapeHtml(dataUrl(b.src))}" alt="${escapeHtml(b.alt || b.caption || '')}"${b.w && b.h ? ` width="${b.w}" height="${b.h}"` : ''} loading="lazy" onclick="openImageModal(this.src)">
-            ${b.caption ? `<figcaption>${m3Text(b.caption)}<span class="m3-zoom-tip">🔍 點圖放大</span></figcaption>` : ''}
-          </figure>`;
-        break;
+      default:
+        html += m3BlockHtml(b);
     }
   });
   box.innerHTML = html;
@@ -4527,15 +4779,15 @@ function renderMode3() {
   d.content.forEach(b => {
     if (b.type === 'topic') {
       if (open) toc += '</div>';
-      toc += `<div class="m3-toc-group"><button class="m3-toc-topic" onclick="scrollToM3('${b.id}')">${m3Text(b.text)}</button>`;
+      toc += `<div class="m3-toc-group"><button class="m3-toc-topic" onclick="m3Goto('${b.id}')">${m3Text(b.text)}</button>`;
       open = true;
     } else if (b.type === 'orange') {
       if (!open) { toc += '<div class="m3-toc-group">'; open = true; }
-      toc += `<button class="m3-toc-item" data-m3="${b.id}" onclick="scrollToM3('${b.id}')"><span>${m3Text(String(b.text).replace(/\*\*/g, ''))}</span><em>p.${b.page}</em></button>`;
+      toc += `<button class="m3-toc-item" data-m3="${b.id}" onclick="m3Goto('${b.id}')"><span>${m3Text(String(b.text).replace(/\*\*/g, ''))}</span><em>p.${b.page}</em></button>`;
     }
   });
   if (open) toc += '</div>';
-  ['m3-toc-list', 'm3-toc-list-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = toc; });
+  ['m3-toc-list', 'm3-toc-list-mobile', 'm3-toc-list-side'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = toc; });
 
   // 捲動時標示目前段落、顯示回到頂端
   const sc = document.getElementById('mode3-container');
@@ -4549,6 +4801,7 @@ function renderMode3() {
       requestAnimationFrame(() => {
         ticking = false;
         if (topBtn) topBtn.classList.toggle('hidden', sc.scrollTop < 400);
+        if (m3.view === 'practice') return;
         const heads = sc.querySelectorAll('.m3-heading');
         const top = sc.getBoundingClientRect().top + 90;
         let cur = null;
@@ -4558,7 +4811,243 @@ function renderMode3() {
     }, { passive: true });
   }
   m3.rendered = true;
+  buildM3Sections();
+  setM3View(m3.view, false);
 }
+
+// ══════════════════════════════════════════════════════
+// 模式三：口試練習（每段一題 → 想好答案 → 翻答案 → 標記會了／不熟）
+// ══════════════════════════════════════════════════════
+const M3_MARKS_KEY = 'm3_oral_marks';
+const M3_VIEW_KEY = 'm3_view';
+
+function m3LoadMarks() {
+  try { return JSON.parse(localStorage.getItem(M3_MARKS_KEY) || '{}') || {}; } catch (e) { return {}; }
+}
+function m3SaveMarks() {
+  try { localStorage.setItem(M3_MARKS_KEY, JSON.stringify(m3.marks)); } catch (e) { /* 無法儲存時只保留本次 */ }
+}
+
+function buildM3Sections() {
+  const secs = [];
+  let topic = null, cur = null;
+  m3.data.content.forEach(b => {
+    if (b.type === 'topic') { topic = b; cur = null; }
+    else if (b.type === 'orange') {
+      cur = { id: b.id, topicId: topic ? topic.id : '', topicTitle: topic ? topic.text : '', title: b.text, page: b.page, q: b.q || `請說明「${String(b.text).replace(/\*\*/g, '')}」。`, blocks: [] };
+      secs.push(cur);
+    } else if (cur) cur.blocks.push(b);
+  });
+  m3.sections = secs;
+  m3.secById = Object.fromEntries(secs.map(x => [x.id, x]));
+  m3.marks = m3LoadMarks();
+}
+
+function setM3View(view, scroll = true) {
+  m3.view = view === 'practice' ? 'practice' : 'notes';
+  try { localStorage.setItem(M3_VIEW_KEY, m3.view); } catch (e) {}
+  document.querySelectorAll('.m3-view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === m3.view));
+  const notes = document.getElementById('m3-content');
+  const prac = document.getElementById('m3-practice');
+  if (notes) notes.classList.toggle('hidden', m3.view !== 'notes');
+  if (prac) prac.classList.toggle('hidden', m3.view !== 'practice');
+  document.getElementById('mode3-container')?.classList.toggle('m3-practicing', m3.view === 'practice');
+  if (m3.view === 'practice') {
+    if (!m3.p.order.length) m3BuildOrder();
+    renderM3Practice();
+    if (scroll) m3ScrollToPractice();
+  } else {
+    document.querySelectorAll('.m3-toc-item').forEach(el => el.classList.remove('active'));
+  }
+}
+
+function m3Shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
+  return arr;
+}
+
+/** 依目前篩選（全部／主題／不熟）與順序（依序／隨機）建立題目順序 */
+function m3BuildOrder(startId) {
+  const f = m3.p.filter;
+  let ids = m3.sections.filter(x =>
+    f === 'all' ? true : f === 'unsure' ? m3.marks[x.id] === 'unsure' : f === 'new' ? !m3.marks[x.id] : x.topicId === f
+  ).map(x => x.id);
+  if (m3.p.random) m3Shuffle(ids);
+  m3.p.order = ids;
+  m3.p.idx = Math.max(0, startId ? ids.indexOf(startId) : 0);
+  m3.p.revealed = false;
+  m3.p.done = false;
+}
+
+function m3SetFilter(f) {
+  m3.p.filter = f;
+  m3BuildOrder();
+  renderM3Practice();
+}
+function m3ToggleRandom() {
+  m3.p.random = !m3.p.random;
+  m3BuildOrder();
+  renderM3Practice();
+}
+function m3Reveal() {
+  m3.p.revealed = true;
+  renderM3Practice();
+}
+function m3Step(d) {
+  const n = m3.p.order.length;
+  if (!n) return;
+  if (m3.p.done) { m3.p.done = false; m3.p.idx = d < 0 ? n - 1 : 0; }
+  else if (m3.p.idx + d >= n) { m3.p.done = true; }
+  else m3.p.idx = Math.max(0, m3.p.idx + d);
+  m3.p.revealed = false;
+  renderM3Practice();
+  m3ScrollToPractice();
+}
+function m3Mark(v) {
+  const id = m3.p.order[m3.p.idx];
+  if (!id) return;
+  m3.marks[id] = v;
+  m3SaveMarks();
+  m3Step(1);
+}
+function m3ResetMarks() {
+  if (!Object.keys(m3.marks).length) return;
+  if (!confirm('確定要清除所有「會了／不熟」標記嗎？')) return;
+  m3.marks = {};
+  m3SaveMarks();
+  m3BuildOrder();
+  renderM3Practice();
+}
+function m3RestartUnsure() {
+  m3.p.filter = 'unsure';
+  m3BuildOrder();
+  renderM3Practice();
+  m3ScrollToPractice();
+}
+function m3SeeInNotes(id) {
+  setM3View('notes', false);
+  requestAnimationFrame(() => scrollToM3(id));
+}
+
+/** 目錄點擊：重點整理 → 捲到段落；口試練習 → 跳到該題（大標題 → 篩選該主題） */
+function m3Goto(id) {
+  if (m3.view !== 'practice') { scrollToM3(id); return; }
+  const mob = document.getElementById('m3-toc-mobile');
+  if (mob) mob.open = false;
+  if (/^t\d+$/.test(id)) { m3.p.filter = id; m3BuildOrder(); }
+  else {
+    if (!m3.p.order.includes(id)) { m3.p.filter = 'all'; m3BuildOrder(id); }
+    else { m3.p.idx = m3.p.order.indexOf(id); m3.p.revealed = false; m3.p.done = false; }
+  }
+  renderM3Practice();
+  m3ScrollToPractice();
+}
+
+function m3ScrollToPractice() {
+  const sc = document.getElementById('mode3-container');
+  const el = document.getElementById('m3-view-tabs');
+  if (!sc || !el) return;
+  const y = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - 8;
+  if (sc.scrollTop > y) sc.scrollTo({ top: Math.max(0, y), behavior: 'auto' });
+}
+
+function renderM3Practice() {
+  const box = document.getElementById('m3-practice');
+  if (!box || !m3.sections) return;
+  const marks = m3.marks;
+  const total = m3.sections.length;
+  const okN = m3.sections.filter(x => marks[x.id] === 'ok').length;
+  const unN = m3.sections.filter(x => marks[x.id] === 'unsure').length;
+  const newN = total - okN - unN;
+  const topics = (m3.data.topics || []);
+  const f = m3.p.filter;
+  const chip = (key, label) => `<button class="m3p-chip${f === key ? ' active' : ''}" onclick="m3SetFilter('${key}')">${label}</button>`;
+  const shortTopic = { t1: 'EMS 系統', t2: '大傷／災難', t3: '毒核生化' };
+
+  let html = `
+    <div class="m3p-toolbar">
+      <div class="m3p-chips">
+        ${chip('all', `全部 ${total}`)}
+        ${topics.map(t => chip(t.id, `${shortTopic[t.id] || t.title} ${m3.sections.filter(x => x.topicId === t.id).length}`)).join('')}
+        ${chip('unsure', `😵 不熟 ${unN}`)}
+        ${chip('new', `⬜ 未練 ${newN}`)}
+      </div>
+      <div class="m3p-stats">
+        <span>✅ 已會 <b>${okN}</b> / ${total} 題</span>
+        <button class="m3p-link" onclick="m3ToggleRandom()">${m3.p.random ? '🔀 隨機出題中' : '🔢 依序出題'}</button>
+        ${okN + unN ? '<button class="m3p-link m3p-reset" onclick="m3ResetMarks()">重設標記</button>' : ''}
+      </div>
+    </div>`;
+
+  const n = m3.p.order.length;
+  if (!n) {
+    html += `<div class="m3p-card m3p-empty">${f === 'unsure' ? '目前沒有標記為「不熟」的題目 👍' : f === 'new' ? '每一題都練過了 🎉' : '沒有題目'}<div class="m3p-empty-actions"><button class="m3p-btn" onclick="m3SetFilter('all')">練習全部題目</button></div></div>`;
+  } else if (m3.p.done) {
+    const inRun = m3.p.order;
+    const runOk = inRun.filter(id => marks[id] === 'ok').length;
+    const runUn = inRun.filter(id => marks[id] === 'unsure').length;
+    html += `
+      <div class="m3p-card m3p-empty">
+        <div class="m3p-done-title">🎉 這一輪 ${n} 題練完了！</div>
+        <div class="m3p-done-sub">會了 ${runOk} 題 ・ 不熟 ${runUn} 題</div>
+        <div class="m3p-empty-actions">
+          ${unN ? `<button class="m3p-btn m3p-btn-unsure" onclick="m3RestartUnsure()">😵 再練不熟的 ${unN} 題</button>` : ''}
+          <button class="m3p-btn" onclick="m3BuildOrder();renderM3Practice()">🔁 重新開始這一輪</button>
+        </div>
+      </div>`;
+  } else {
+    const sec = m3.secById[m3.p.order[m3.p.idx]];
+    const mk = marks[sec.id];
+    const badge = mk === 'ok' ? '<span class="m3p-badge ok">✅ 會了</span>' : mk === 'unsure' ? '<span class="m3p-badge unsure">😵 不熟</span>' : '';
+    html += `
+      <div class="m3p-card">
+        <div class="m3p-meta">
+          <span>第 <b>${m3.p.idx + 1}</b> / ${n} 題</span>
+          <span class="m3p-topic">${m3Text(shortTopic[sec.topicId] || sec.topicTitle)}</span>
+          <span class="m3p-page">p.${sec.page}</span>
+          ${badge}
+        </div>
+        <div class="m3p-q"><span class="m3p-q-mark">Q</span>${m3Text(sec.q)}</div>
+        ${m3.p.revealed ? `
+          <div class="m3p-answer">
+            <div class="m3p-ans-title">📌 ${m3Text(sec.title)}</div>
+            ${sec.blocks.map(m3BlockHtml).join('') || ''}
+            <button class="m3p-link" onclick="m3SeeInNotes('${sec.id}')">📖 在重點整理中查看 →</button>
+          </div>
+          <div class="m3p-judge">
+            <button class="m3p-btn m3p-btn-unsure" onclick="m3Mark('unsure')">😵 不熟</button>
+            <button class="m3p-btn m3p-btn-ok" onclick="m3Mark('ok')">✅ 會了</button>
+          </div>` : `
+          <p class="m3p-hint">先試著用口頭回答一次，再翻開答案對照。</p>
+          <button class="m3p-btn m3p-btn-reveal" onclick="m3Reveal()">👀 顯示答案</button>`}
+      </div>`;
+  }
+  if (n) {
+    html += `
+      <div class="m3p-nav">
+        <button class="m3p-btn m3p-btn-ghost" onclick="m3Step(-1)" ${!m3.p.done && m3.p.idx === 0 ? 'disabled' : ''}>‹ 上一題</button>
+        <button class="m3p-btn m3p-btn-ghost" onclick="m3Step(1)" ${m3.p.done ? 'disabled' : ''}>${m3.p.idx === n - 1 ? '完成這一輪 ›' : '跳過 ›'}</button>
+      </div>`;
+  }
+  box.innerHTML = html;
+
+  // 目錄同步標示目前題目
+  const curId = !m3.p.done && n ? m3.p.order[m3.p.idx] : null;
+  document.querySelectorAll('.m3-toc-item').forEach(el => el.classList.toggle('active', el.dataset.m3 === curId));
+}
+
+window.setM3View = setM3View;
+window.m3SetFilter = m3SetFilter;
+window.m3ToggleRandom = m3ToggleRandom;
+window.m3Reveal = m3Reveal;
+window.m3Step = m3Step;
+window.m3Mark = m3Mark;
+window.m3ResetMarks = m3ResetMarks;
+window.m3RestartUnsure = m3RestartUnsure;
+window.m3SeeInNotes = m3SeeInNotes;
+window.m3Goto = m3Goto;
+window.m3BuildOrder = m3BuildOrder;
+window.renderM3Practice = renderM3Practice;
 
 function scrollToM3(id, smooth = true) {
   const el = document.getElementById('m3-' + id);
@@ -4574,6 +5063,8 @@ function scrollToM3(id, smooth = true) {
 
 /** 從模式一（或任何地方）跳到模式三的某個段落 */
 function openMode3(target) {
+  m3.view = 'notes';
+  if (m3.rendered) setM3View('notes', false);
   switchMode(3);
   initMode3(target);
 }
