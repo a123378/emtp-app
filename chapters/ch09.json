@@ -1532,6 +1532,296 @@
    "**台東縣分級派遣**：派遣員只問**「病人叫得醒嗎？」「病人是否有呼吸？」**，**否定答案即 ALS 個案**；ALS 團隊出勤後 **ROSC 32.60％、存活住院 22.70％**。",
    "**台東「雙線救護，中途接駁」**：分隊車先處置並在離開現場時請求支援，**由指揮中心決定會合點**，高級救護技術員**上車執行 ALS 處置**後同車送醫。",
    "**高雄市**：2012 年跨部門推動**到院前十二導程心電圖**，**定心布 30 秒完成檢查**，執行率 **0％（2011）→>90％（2016）**，**door to balloon 平均 51 分鐘**。"
+  ],
+  "glossary": [
+   {
+    "group": "何謂「品質」與「管理」？",
+    "items": [
+     {
+      "term": "品質目標的六大面向",
+      "en": "dimension",
+      "plain": "品質的六個目標：安全、有效、以病人為中心、及時、效率、公平。"
+     },
+     {
+      "term": "品質",
+      "en": "quality",
+      "plain": "一件產品、服務或過程的特性，符合要求的程度。"
+     },
+     {
+      "term": "管理",
+      "en": "management",
+      "plain": "指導與管制組織協同作業的活動，例如訂政策、訂目標並達成。"
+     },
+     {
+      "term": "品質管理",
+      "en": "quality management",
+      "plain": "為了讓品質達到要求而做的指導與管制，是維持與提升品質的手段。"
+     },
+     {
+      "term": "品質管理循環",
+      "en": "PDCA cycle",
+      "plain": "計畫（Plan）→ 執行（Do）→ 查核（Check）→ 行動（Act）不斷循環來改善品質。"
+     },
+     {
+      "term": "品質指標",
+      "en": "indicators",
+      "plain": "能具體量化、用來監測與改善品質的指標；要能反映結構、過程、結果，定義明確、互不重疊、可精確測量。"
+     },
+     {
+      "term": "美國緊急醫療救護醫師協會",
+      "en": "NAEMSP",
+      "plain": "定義品質六大面向的美國組織；2024 年聲明非時間急症不應只看反應時間。"
+     }
+    ]
+   },
+   {
+    "group": "品質的測量與品質指標的訂定",
+    "items": [
+     {
+      "term": "結構面",
+      "en": "structure",
+      "plain": "系統擁有的人力、設備與資源，例如出勤人數、證照等級、裝備是否足夠。"
+     },
+     {
+      "term": "過程面",
+      "en": "process",
+      "plain": "照護過程中做了什麼，例如 OHCA 有沒有用 AED 分析、胸痛有沒有做 12 導程、意識不清有沒有驗血糖。"
+     },
+     {
+      "term": "結果面",
+      "en": "outcome",
+      "plain": "病人接受救護後健康狀態的改變，例如 VF／VT 的 OHCA 恢復心跳比例、中風病人能否康復出院。"
+     },
+     {
+      "term": "到院前心肺功能停止",
+      "en": "Out-of-Hospital Cardiac Arrest, OHCA",
+      "plain": "送醫前呼吸心跳已停止的病人；相關指標是評估 EMS 品質的重要基礎。"
+     },
+     {
+      "term": "全球復甦聯盟",
+      "en": "Global Resuscitation Alliance, GRA",
+      "plain": "2015 年成立，把提升 OHCA 存活率的 10 個步驟推廣到全世界。"
+     },
+     {
+      "term": "國家EMS品質聯盟",
+      "en": "NEMSQA",
+      "plain": "美國國家 EMS 品質聯盟，2019 年發表 11 項實證品質衡量標準。"
+     }
+    ]
+   },
+   {
+    "group": "品質指標資料庫的登錄",
+    "items": [
+     {
+      "term": "烏次坦格式",
+      "en": "Utstein style",
+      "plain": "1990 年在挪威 Utstein 修道院訂定的心跳停止登錄格式，是 EMS 科學化最重要的基石。"
+     },
+     {
+      "term": "復甦國際聯絡委員會",
+      "en": "International Liaison Committee on Resuscitation, ILCOR",
+      "plain": "主導 Utstein 格式後續修訂的國際復甦組織。"
+     },
+     {
+      "term": "系統效果",
+      "en": "effectiveness",
+      "plain": "推動計畫後實際達到的成果（真實世界）。"
+     },
+     {
+      "term": "系統效力",
+      "en": "efficacy",
+      "plain": "在嚴謹、理想條件下能達到的成果。"
+     }
+    ]
+   },
+   {
+    "group": "品質指標的分析",
+    "items": [
+     {
+      "term": "魚骨圖",
+      "en": "Fishbone Diagram",
+      "plain": "找問題根源的因果圖：魚頭在右找肇因、魚頭在左找解決方案。"
+     },
+     {
+      "term": "管制圖",
+      "en": "Control chart",
+      "plain": "平均值上下各 3 個標準差為管制界線；超出界線或連續 7 點在同一側代表有特殊原因。"
+     },
+     {
+      "term": "柏拉圖",
+      "en": "Pareto Chart",
+      "plain": "依發生頻率排序的長條圖＋累積折線，抓出影響 80％ 的關鍵 20％。"
+     },
+     {
+      "term": "層別法",
+      "en": "Stratification",
+      "plain": "把資料分類分組，找出不同組之間的差異或趨勢。"
+     },
+     {
+      "term": "標竿學習",
+      "en": "benchmarking",
+      "plain": "以表現最好的單位當標竿，學習它的流程來提升自己的品質。"
+     }
+    ]
+   },
+   {
+    "group": "其他",
+    "items": [
+     {
+      "term": "品質評估架構的三大構面",
+      "en": "three dimensions of performance measurement",
+      "plain": "評估品質的三個面向：結構面、過程面、結果面。"
+     },
+     {
+      "term": "ECRS原則",
+      "en": "Eliminate, Combine, Rearrange, Simplify",
+      "plain": "品質改善四原則：排除（優先）、組合、交換、簡化。"
+     },
+     {
+      "term": "緊急醫療救護派遣規則系統",
+      "en": "Emergency Medical Dispatch Protocol Reference System, EMDPRS",
+      "plain": "判定派遣模式與層級（ALS 或 BLS）是否合規所依據的派遣規則系統。"
+     },
+     {
+      "term": "勤務中心",
+      "en": "Public-safety Answer Point, PSAP",
+      "plain": "計算反應時間的起點：勤務中心接到電話的時間點。"
+     }
+    ]
+   }
+  ],
+  "mnemonics": [
+   {
+    "title": "本章的靈魂四句",
+    "mnemonic": "究竟多好才算是好？你要的我未必做得到。指標的定義需要共識，功力提升卻各有心法。",
+    "explain": "點出品質管理的核心是**先有共識的定義，才有可比較的指標**。"
+   },
+   {
+    "title": "六大面向記憶法",
+    "mnemonic": "安有病及效公",
+    "explain": "**安**全、**有**效、**病**人為中心、**及**時、**效**率、**公**平。（IOM／NAEMSP 版本共 **6** 項；WHO 版本多了**以人為本**、**綜效** 共 **7** 項）"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "計畫→執行→查核→行動",
+    "explain": "PDCA 循環＝，行動後再回到計畫，是**目標管理的具體措施**，也是**全面品質管理**的骨架。"
+   },
+   {
+    "title": "三大構面口訣",
+    "mnemonic": "有什麼(結構)→做了什麼(過程)→變得如何(結果)",
+    "explain": "人力設備是結構、AED／十二導程／驗血糖是過程、ROSC 與康復出院是結果。"
+   },
+   {
+    "title": "GRA 10 步驟可濃縮成三件事",
+    "mnemonic": "登錄（資料）＋派遣與 CPR 品質（流程）＋社區教育與文化（人）"
+   },
+   {
+    "title": "Utstein 五大面向口訣",
+    "mnemonic": "系‧派‧病‧過‧果",
+    "explain": "**系**統、**派**遣、**病**人資料、**過**程步驟、預**後**（第三版 2014 訂定，第四版 2024 沿用）。"
+   },
+   {
+    "title": "品管七手法記法",
+    "mnemonic": "魚直管查柏層散",
+    "explain": "**魚**骨圖、**直**方圖、**管**制圖、**查**檢表、**柏**拉圖、**層**別法、**散**佈圖。"
+   },
+   {
+    "title": "ECRS 順序不可亂",
+    "mnemonic": "排除",
+    "explain": "**先再「組合」，組合後才「交換」，最後才「簡化」**——**E→C→R→S**，排除永遠優先考慮。"
+   },
+   {
+    "title": "三個實例一句記",
+    "mnemonic": "登錄＋審核",
+    "explain": "**台北靠（Utstein 與錄音回溯）、台東靠「分級派遣＋雙線接駁」、高雄靠「定心布＋無線傳輸十二導程」**。"
+   }
+  ],
+  "tables": [
+   {
+    "title": "品質目標的六大面向(dimension)",
+    "fromContent": "品質目標的六大面向(dimension)"
+   },
+   {
+    "title": "品質目標的六大面向(dimension)（續）",
+    "fromContent": "品質目標的六大面向(dimension)",
+    "nth": 1
+   },
+   {
+    "title": "品質管理循環（PDCA，圖9-1）",
+    "fromContent": "品質管理循環（PDCA，圖9-1）"
+   },
+   {
+    "title": "品質測量的三大構面",
+    "fromContent": "品質測量的三大構面"
+   },
+   {
+    "title": "NAEMSP 2024 年聯合聲明與系統效能領域（表9-2）",
+    "fromContent": "NAEMSP 2024 年聯合聲明與系統效能領域（表9-2）"
+   },
+   {
+    "title": "提高社區存活率的10個步驟",
+    "fromContent": "提高社區存活率的10個步驟"
+   },
+   {
+    "title": "Utstein Style 的演進",
+    "fromContent": "Utstein Style 的演進"
+   },
+   {
+    "title": "2024 年版 Utstein 模式應紀錄的核心項目與補充項目（表9-4）",
+    "fromContent": "2024 年版 Utstein 模式應紀錄的核心項目與補充項目（表9-4）"
+   },
+   {
+    "title": "Utstein 模式報告框架",
+    "fromContent": "Utstein 模式報告框架"
+   },
+   {
+    "title": "常見 7 種分析方式",
+    "fromContent": "常見 7 種分析方式"
+   },
+   {
+    "title": "ECRS 原則",
+    "fromContent": "ECRS 原則"
+   },
+   {
+    "title": "台北市——CPR 品管與 Utstein 登錄的先行者",
+    "fromContent": "台北市——CPR 品管與 Utstein 登錄的先行者"
+   },
+   {
+    "title": "台北市——CPR 品管與 Utstein 登錄的先行者（續）",
+    "fromContent": "台北市——CPR 品管與 Utstein 登錄的先行者",
+    "nth": 1
+   },
+   {
+    "title": "台北市——CPR 品管與 Utstein 登錄的先行者（續）",
+    "fromContent": "台北市——CPR 品管與 Utstein 登錄的先行者",
+    "nth": 2
+   },
+   {
+    "title": "台東縣——偏遠地區的高救隊執勤模式",
+    "fromContent": "台東縣——偏遠地區的高救隊執勤模式"
+   },
+   {
+    "title": "高雄市——到院前十二導程心電圖",
+    "fromContent": "高雄市——到院前十二導程心電圖"
+   }
+  ],
+  "review": [
+   {
+    "topic": "品質目標六大面向",
+    "points": "**美國國家醫學研究院(Institute of Medicine)** 訂出之**品質目標六大面向**為：**安全(safety)、有效(effectiveness)、病人為中心(patient-centeredness)、及時(timeliness)、效率(efficiency)、公平(equity)**。"
+   },
+   {
+    "topic": "品質測量的準則",
+    "points": "**緊急醫療救護體系品質測量的準則(criteria)** 如下：以**結構面(structure)、過程面(process)、結果面(outcome)** 為出發點；與 **EMS 體系中許多構成要素的品質有相關性**；**實際的、可實行的**；**與科學證據相吻合**；其**相關性與適切性可經常被再評估**；**資料收集是容易的**；**有明確清楚的定義**，在**應用與解讀時呈現一致性**"
+   },
+   {
+    "topic": "品質指標的條件",
+    "points": "為準確測量緊急醫療救護體系的品質，所訂定出的**品質指標需能適切地反映出該體系的結構面、過程面、與結果面情況**；這些指標應該**有明確的定義、不相互重疊、並可被精確地測量**。"
+   },
+   {
+    "topic": "標竿學習",
+    "points": "一個緊急醫療救護體系可以採用**「標竿學習」** 的方式，透過**績效的評估與測量**，與**其他體系的績效相互比較**，或與**已建立的績效標準做比較**，進而達到**績效提昇**的目的。"
+   }
   ]
  }
 }

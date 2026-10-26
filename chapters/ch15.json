@@ -2326,6 +2326,294 @@
    "**HFNC 不建議用於上呼吸道阻塞、無法保護氣道、嚴重低血氧、高碳酸血症（pH＜7.25且PaCO₂＞50mmHg）**。",
    "**CICO（無法插管也無法給氧）＝準備環甲膜切開術**；**到院前遇困難插管千萬不要勉強插管，先放LMA或口／鼻咽呼吸道以BVM給氧**。",
    "**不間斷的給氧才是急救成功的關鍵**，成功插管固然重要，但確保正確給氧優先於強行插管。"
+  ],
+  "glossary": [
+   {
+    "group": "呼吸系統處置 ‧ 氧氣治療",
+    "items": [
+     {
+      "term": "凡德里面罩",
+      "en": "venturi mask",
+      "plain": "用噴射混合原理提供 24～50％ 的精確氧氣濃度，適合依賴缺氧驅動呼吸的 COPD 病人。"
+     },
+     {
+      "term": "袋瓣罩裝置（甦醒球）",
+      "en": "bag-valve-mask, BVM",
+      "plain": "甦醒球：成人球體約 1,500 mL，每次擠 500～600 mL，可給 21～100％ 氧氣。"
+     },
+     {
+      "term": "呼吸道處置的徒手操作",
+      "plain": "徒手打開呼吸道的兩招：壓額抬頷法、下顎推舉法（疑頸椎傷用推下顎）。"
+     },
+     {
+      "term": "輔助呼吸道",
+      "plain": "維持或恢復氣道通暢的器具：口咽、鼻咽呼吸道、喉罩、食道氣管併合管等。"
+     }
+    ]
+   },
+   {
+    "group": "氣管內管插管",
+    "items": [
+     {
+      "term": "嗅吸姿勢",
+      "en": "sniffing position",
+      "plain": "頸部前彎、頭部後仰，讓口、咽、氣管三軸線接近一直線，方便看到聲門。"
+     },
+     {
+      "term": "會厭谿",
+      "en": "vallecula",
+      "plain": "舌根與會厭之間的凹槽，彎式喉頭鏡葉片的前端要頂在這裡。"
+     },
+     {
+      "term": "導引通條",
+      "en": "stylet",
+      "plain": "可調彎度的金屬條，放進氣管內管塑形；前端不可露出管口，以免刺傷氣管。"
+     },
+     {
+      "term": "食道偵測裝置",
+      "en": "Esophageal Detector Device, EDD",
+      "plain": "利用食道會塌陷、氣管有軟骨撐開的差異，用吸球或針筒確認管子是否在氣管。"
+     },
+     {
+      "term": "聲門上呼吸道",
+      "en": "Supraglottic Airway, SGA",
+      "plain": "放在聲門上方的進階呼吸道（LMA、i-gel、King LT 等），常是插管失敗的備援。"
+     }
+    ]
+   },
+   {
+    "group": "快速程序插管(RSI)",
+    "items": [
+     {
+      "term": "快速程序插管",
+      "en": "Rapid Sequence Intubation, RSI",
+      "plain": "插管時同時給鎮靜劑與肌肉鬆弛劑，讓插管更順利、減少嗆入；用 6P 口訣記步驟。"
+     },
+     {
+      "term": "困難插管",
+      "plain": "多次插不進、超過預期時間，或必須改用環甲膜切開、喉罩等替代方式。"
+     },
+     {
+      "term": "3-3-2 法則",
+      "en": "3-3-2 rule",
+      "plain": "困難插管評估：張口容 3 指、下巴到舌骨 3 指、舌骨到甲狀軟骨 2 指，任一不符就是困難插管。"
+     }
+    ]
+   },
+   {
+    "group": "到院前困難插管評估 ‧ HEAVEN 法則",
+    "items": [
+     {
+      "term": "HEAVEN 法則",
+      "en": "HEAVEN criteria",
+      "plain": "到院前困難氣道評估：低血氧、極端體重、困難解剖、嘔吐物血液、出血貧血、頸部活動受限。"
+     },
+     {
+      "term": "影像式喉頭鏡",
+      "en": "Video Laryngoscope",
+      "plain": "葉片加上鏡頭的喉頭鏡，視野清楚放大，提高插管成功率，頸椎傷病人尤其適用。"
+     }
+    ]
+   },
+   {
+    "group": "經喉頭管路通氣術",
+    "items": [
+     {
+      "term": "環甲膜切開術",
+      "en": "cricothyotomy",
+      "plain": "其他方法都失敗時，切開環甲膜建立緊急呼吸道的外科手術。"
+     },
+     {
+      "term": "經喉頭管路通氣術",
+      "en": "translaryngeal cannula ventilation",
+      "plain": "用針頭穿刺環甲膜放細管，以 50 psi 高壓氧噴射通氣，是暫時性的救命手段。"
+     },
+     {
+      "term": "抽吸輔助氣道除污喉頭鏡插管",
+      "en": "Suction-assisted laryngoscopy airway decontamination, SALAD",
+      "plain": "氣道滿是嘔吐物或血時，用大號硬式抽吸管邊吸邊插管的技術。"
+     },
+     {
+      "term": "高流量鼻導管",
+      "en": "High Flow Nasal Cannula, HFNC",
+      "plain": "每分鐘 30～60 L、溫濕化的高流量氧氣，用於急性缺氧呼吸衰竭與拔管後預防再插管。"
+     }
+    ]
+   },
+   {
+    "group": "其他",
+    "items": [
+     {
+      "term": "氣切造口術",
+      "en": "tracheostomy",
+      "plain": "在前頸氣管開口放管，建立長期呼吸道，用於長期呼吸器或無法自行維持氣道的人。"
+     },
+     {
+      "term": "非侵襲性呼吸器",
+      "en": "noninvasive positive pressure ventilators, NIPPV",
+      "plain": "用面罩或鼻罩給正壓輔助呼吸，不用插管。"
+     }
+    ]
+   }
+  ],
+  "mnemonics": [
+   {
+    "title": "氧氣裝置流速口訣",
+    "mnemonic": "6-10-15-8",
+    "explain": "**鼻管1~6、簡單面罩6~10、部分再吸入6~10、非再吸入10~15、凡德里4~8**；濃度則是**鼻管24~44、兩種面罩35~60、非再吸入80~100、凡德里24~50**。記四個上限就不會錯。"
+   },
+   {
+    "title": "BVM 單手扣面罩",
+    "mnemonic": "C-E 手勢",
+    "explain": "**拇指＋食指圍成 C 壓住面罩**，**中指、無名指、小指排成 E 勾住下顎骨往上提**（教科書亦稱 **3C／3字形**）。"
+   },
+   {
+    "title": "呼吸道處置的鐵律",
+    "mnemonic": "先有氣道，才有頸椎",
+    "explain": "徒手打不開時，**寧可犧牲頸椎中立，也不能沒有呼吸道**。"
+   },
+   {
+    "title": "抽吸時間口訣",
+    "mnemonic": "大人15、小孩5；抽前吸氧2分鐘、經管抽吸5分鐘、中斷後再給氧30秒",
+    "explain": "。壓力則是「**80~120**」。"
+   },
+   {
+    "title": "兩種輔助呼吸道分辨法",
+    "mnemonic": "口咽怕嘔吐（有嘔吐反射禁用）、鼻咽怕骨折（顱底骨折禁用）"
+   },
+   {
+    "title": "可經氣管內管給的藥",
+    "mnemonic": "LEAN ＋ V",
+    "explain": "**L**idocaine、**E**pinephrine、**A**tropine、**N**aloxone，再加上 **V**asopressin。"
+   },
+   {
+    "title": "兒科插管三公式",
+    "mnemonic": "4加3.5、2加12、乘以3",
+    "explain": "**管徑＝(歲÷4)＋3.5**、**深度＝(歲÷2)＋12**、**深度＝內徑×3**。記成。"
+   },
+   {
+    "title": "LMA 最大充氣量公式",
+    "mnemonic": "（號數－1）×10 毫升",
+    "explain": "。例如 **4號＝(4-1)×10＝30毫升**、**5號＝40毫升**。"
+   },
+   {
+    "title": "RSI 六步驟＝6個P",
+    "mnemonic": "**Preparation（準備）→ Preoxygenation（前置給氧）→ Pretreatment（前置給藥）→ Paralysis（麻痺）→ Placement（插管）→ Postintubation management（插管後處置）**。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "BONES／老胖鬍缺牙打鼾",
+    "explain": "困難通氣（面罩罩不緊）記——**老人、肥胖、多鬍、缺牙、打鼾、臉部畸形、臉部凹陷**。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "HEAVEN",
+    "explain": "＝**H**ypoxia 低血氧、**E**xtremes of size 體型極端、**A**natomic challenge 解剖困難、**V**omit/blood/fluid 液體污染、**E**xsanguination 出血貧血、**N**eck mobility 頸部活動受限。這是**兼顧解剖＋生理**的到院前困難氣道工具。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "45~60度朝胸骨、邊進針邊回抽、抽到氣就到位",
+    "explain": "針頭環甲膜穿刺記；通氣比則是「**通暢1:4、全塞1:8**」。"
+   },
+   {
+    "title": "SALAD 三關鍵動作",
+    "mnemonic": "管在鏡前（抽吸管走在喉頭鏡前）→ 左架上食道（Park Maneuver）→ 雙管齊下（Double suction）"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "CPAP＝一個壓力（撐開氣道，睡眠呼吸中止症）",
+    "explain": "；**BiPAP＝兩個壓力（吸高吐低，肺水腫與 COPD 急性惡化）**。"
+   }
+  ],
+  "tables": [
+   {
+    "title": "鼻管(nasal cannula)",
+    "fromContent": "鼻管(nasal cannula)"
+   },
+   {
+    "title": "凡德里面罩(venturi mask)",
+    "fromContent": "凡德里面罩(venturi mask)"
+   },
+   {
+    "title": "人工輔助呼吸",
+    "fromContent": "人工輔助呼吸"
+   },
+   {
+    "title": "呼吸道處置的徒手操作",
+    "fromContent": "呼吸道處置的徒手操作"
+   },
+   {
+    "title": "抽吸",
+    "fromContent": "抽吸"
+   },
+   {
+    "title": "鼻咽呼吸道",
+    "fromContent": "鼻咽呼吸道"
+   },
+   {
+    "title": "鼻咽呼吸道（續）",
+    "fromContent": "鼻咽呼吸道",
+    "nth": 1
+   },
+   {
+    "title": "口咽呼吸道",
+    "fromContent": "口咽呼吸道"
+   },
+   {
+    "title": "氣管內管的尺寸",
+    "fromContent": "氣管內管的尺寸"
+   },
+   {
+    "title": "喉頭鏡",
+    "fromContent": "喉頭鏡"
+   },
+   {
+    "title": "喉罩呼吸道的構造與置放步驟",
+    "fromContent": "喉罩呼吸道的構造與置放步驟"
+   },
+   {
+    "title": "困難插管與困難通氣的評估與預測因子（表15-5）",
+    "fromContent": "困難插管與困難通氣的評估與預測因子（表15-5）"
+   },
+   {
+    "title": "McGrath video laryngoscope",
+    "fromContent": "McGrath video laryngoscope"
+   },
+   {
+    "title": "經喉頭管路通氣術",
+    "fromContent": "經喉頭管路通氣術"
+   },
+   {
+    "title": "非侵襲性正壓呼吸器(NIPPV)",
+    "fromContent": "非侵襲性正壓呼吸器(NIPPV)"
+   },
+   {
+    "title": "高流量鼻導管(HFNC)",
+    "fromContent": "高流量鼻導管(HFNC)",
+    "nth": 1
+   }
+  ],
+  "review": [
+   {
+    "topic": "給氧與通氣器材",
+    "points": "**熟練各種建立呼吸道、給氧以及人工輔助呼吸的器材與方法**。"
+   },
+   {
+    "topic": "氣管內插管與位置確認",
+    "points": "**熟悉執行氣管內插管的步驟，能使用各項工具確認插管位置正確**。"
+   },
+   {
+    "topic": "困難呼吸道評估",
+    "points": "**了解困難呼吸道評估的內容**。"
+   },
+   {
+    "topic": "延伸插管技術",
+    "points": "**認識其他氣管內插管相關的延伸技術：影像式喉頭鏡插管、環甲膜切開術、氣切造口處置、抽吸輔助氣道除污喉頭鏡插管等**。"
+   },
+   {
+    "topic": "非侵入性呼吸器",
+    "points": "**了解非侵入性呼吸器的基本原理及適應症**。"
+   }
   ]
  }
 }

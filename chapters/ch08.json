@@ -1423,6 +1423,249 @@
    "**國內尚未有第一反應員的設置與規範**；**102 年衛福部公告 8 大公共場所須設置 PAD**。",
    "推動第一反應員可**先從大型政府機關、觀光旅遊場所、大型公司行號、定期舉辦大型活動的業者**員工開始訓練。",
    "**對非心跳停止病人施行 DA-CPR 造成傷害的機率很低**：247 人中僅 **5 人（不到 2％）**有潛在併發症（如骨折），**用 2％ 風險換一條命是合理的**。"
+  ],
+  "glossary": [
+   {
+    "group": "第一反應員",
+    "items": [
+     {
+      "term": "第一反應員",
+      "en": "first responder",
+      "plain": "受過訓練、比救護車更早到場的人（常是志願者），先穩定病人並提供照顧。"
+     },
+     {
+      "term": "時間急症",
+      "en": "time-sensitive emergencies",
+      "plain": "預後取決於處置早晚的急症：重大外傷、腦中風、心肌梗塞、OHCA。"
+     },
+     {
+      "term": "黃金時間",
+      "en": "golden hour",
+      "plain": "重大外傷存活的關鍵在受傷後 1 小時內。"
+     },
+     {
+      "term": "外傷病人死亡的時間模式",
+      "en": "tri-modal death distribution",
+      "plain": "外傷死亡三高峰：立即死亡（數分鐘內）、早期死亡（2～3 小時內）、晚期死亡（數天到數週）。"
+     }
+    ]
+   },
+   {
+    "group": "急性腦中風",
+    "items": [
+     {
+      "term": "緊急醫療救護系統",
+      "en": "Emergency Medical Services Systems，EMSS",
+      "plain": "結合社區各要素所建立、提供緊急醫療救護服務的體系。"
+     },
+     {
+      "term": "辛辛那提到院前中風指標",
+      "en": "Cincinnati Prehospital Stroke Scale",
+      "plain": "到院前快速評估中風可能性的量表（臉、手臂、說話）。"
+     },
+     {
+      "term": "洛杉磯到院前中風篩檢",
+      "en": "Los Angeles Prehospital Stroke Screen，LAPSS",
+      "plain": "到院前中風篩檢表，幫助判斷是否中風並送往合適醫院。"
+     },
+     {
+      "term": "立即性經皮冠狀動脈介入",
+      "en": "Primary Percutaneous Coronary Intervention，PPCI",
+      "plain": "用心導管直接打通 STEMI 阻塞的冠狀動脈，目標到院後 90 分鐘內完成。"
+     }
+    ]
+   },
+   {
+    "group": "到院前心肺停止",
+    "items": [
+     {
+      "term": "到院前心肺停止",
+      "en": "Out-of-Hospital Cardiac Arrest，OHCA",
+      "plain": "病人在到達醫院前就已經心跳停止、無法把血液打到全身。"
+     },
+     {
+      "term": "全球復甦聯盟",
+      "en": "Global Resuscitation Alliance",
+      "plain": "2013 年提出提升心跳停止存活率的十個步驟，多項是社區層級的努力目標。"
+     }
+    ]
+   },
+   {
+    "group": "旁觀者 CPR 和儘早電擊的重要性",
+    "items": [
+     {
+      "term": "早期去顫電擊",
+      "en": "early defibrillation",
+      "plain": "心跳停止的病人越早用 AED 電擊越好，公共場所的 AED 就是為此設置。"
+     },
+     {
+      "term": "派遣員協助心肺復甦",
+      "en": "Dispatcher assisted CPR，DA-CPR",
+      "plain": "派遣員快速辨識心跳停止（問意識、問呼吸），在電話中指導民眾開始 CPR。"
+     },
+     {
+      "term": "善良的撒馬利亞人條款",
+      "en": "Good Samaritan",
+      "plain": "緊急醫療救護法第 14-2 條：非救護人員為救人使用急救設備或急救，適用緊急避難免責，讓民眾敢出手。"
+     },
+     {
+      "term": "瀕死式呼吸",
+      "en": "agonal breathing",
+      "plain": "無意識病人不正常的喘息（很慢、很淺、像打鼾），是辨識 OHCA 的線索。"
+     },
+     {
+      "term": "手機短訊反應計畫",
+      "en": "Text Message Responder，TMR",
+      "plain": "荷蘭 2010 年起：OHCA 時用手機定位通知 1 公里內登錄的志願者到場 CPR。"
+     }
+    ]
+   },
+   {
+    "group": "其他",
+    "items": [
+     {
+      "term": "旁觀者心肺復甦術",
+      "en": "bystander CPR",
+      "plain": "救護人員到場之前，周圍的人立刻對病人做 CPR。"
+     },
+     {
+      "term": "公眾使用電擊去顫器",
+      "en": "Public Access Defibrillation，PAD",
+      "plain": "放在公共場所讓民眾使用的 AED；102 年衛福部公告 8 大公共場所必須設置。"
+     },
+     {
+      "term": "ST段上升心肌梗塞",
+      "en": "ST elevation myocardial infarction，STEMI",
+      "plain": "ST 段上升型心肌梗塞，越早做心導管打通血管越好；院前心電圖能提早發現。"
+     },
+     {
+      "term": "D2B時間",
+      "en": "Door-to-balloon time",
+      "plain": "病人到院到血管打通的時間，目標 ≤90 分鐘。"
+     },
+     {
+      "term": "FMC2B時間",
+      "en": "First medical contact-to-balloon time",
+      "plain": "從院前第一次醫療接觸到血管打通的時間，2020 AHA 建議 ≤90 分鐘。"
+     }
+    ]
+   }
+  ],
+  "mnemonics": [
+   {
+    "title": "時間急症四大天王",
+    "mnemonic": "時鐘一響、預後就掉",
+    "explain": "**重大外傷、急性腦中風、急性心肌梗塞、OHCA**——每一個都是，救護的戰場都在**救護車到達之前**。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "認（辨識嚴重度）、判（是否需緊急醫療照顧）、救（處理 ABC 危及生命問題）",
+    "explain": "第一反應員訓練三件事＝。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "5.99 vs 4~6",
+    "explain": "救護車平均要 **5.99 分鐘**才到，但大腦只撐得住 **4~6 分鐘**——**空窗期只能靠社區**。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "沒有 AED 可用",
+    "explain": "**14 之一擺機器、14 之二免責任**——一個解決，一個解決「**不敢用**」。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "2 分鐘認出、3 分鐘壓下去",
+    "explain": "DA-CPR 兩個時間門檻記＝**辨識 ＜120 秒、開始 CPR ＜180 秒**。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "壓錯了怎麼辦",
+    "explain": "面對的疑慮，答案是「**寧可壓錯，不可不壓**」——**2％ 的骨折風險 vs. 100％ 的死亡風險**。"
+   }
+  ],
+  "tables": [
+   {
+    "title": "外傷病人死亡的時間模式",
+    "fromContent": "外傷病人死亡的時間模式"
+   },
+   {
+    "title": "血栓溶解與取栓治療的時間限制",
+    "fromContent": "血栓溶解與取栓治療的時間限制"
+   },
+   {
+    "title": "D2B 與 FMC2B 時間指標",
+    "fromContent": "D2B 與 FMC2B 時間指標"
+   },
+   {
+    "title": "電擊時機與存活率",
+    "fromContent": "電擊時機與存活率"
+   },
+   {
+    "title": "救護車反應時間與腦部缺氧",
+    "fromContent": "救護車反應時間與腦部缺氧"
+   },
+   {
+    "title": "推廣初期的困境",
+    "fromContent": "推廣初期的困境"
+   },
+   {
+    "title": "《緊急醫療救護法》的修法",
+    "fromContent": "《緊急醫療救護法》的修法"
+   },
+   {
+    "title": "國際指引的建議",
+    "fromContent": "國際指引的建議"
+   },
+   {
+    "title": "消防署 2018 年 DA-CPR 品管評量指標",
+    "fromContent": "消防署 2018 年 DA-CPR 品管評量指標"
+   },
+   {
+    "title": "推動成效",
+    "fromContent": "推動成效"
+   },
+   {
+    "title": "國外經驗",
+    "fromContent": "國外經驗"
+   },
+   {
+    "title": "台灣的作法",
+    "fromContent": "台灣的作法"
+   },
+   {
+    "title": "社區急症不只有 OHCA",
+    "fromContent": "社區急症不只有 OHCA"
+   },
+   {
+    "title": "國內公共安全事件的啟示",
+    "fromContent": "國內公共安全事件的啟示"
+   }
+  ],
+  "review": [
+   {
+    "topic": "社區醫療反應與第一反應員",
+    "points": "透過**社區層級的醫療反應**及**第一反應員的設立**，可以**增加時間急症病人的預後**。"
+   },
+   {
+    "topic": "OHCA 存活的關鍵",
+    "points": "**提升 OHCA 病人存活率及康復出院比率的成功關鍵，在消防救護人員到達前的應變作為**。"
+   },
+   {
+    "topic": "派遣員指導旁觀者 CPR",
+    "points": "**派遣員指導民眾實施旁觀者 CPR**，能**有效地且快速的增加旁觀者 CPR 的比率**，並進而**提高病人預後**。"
+   },
+   {
+    "topic": "第一反應員的身分",
+    "points": "**第一反應員可以是消防人員、警察、民間救護人員、警衛安全人員或社區志工**等，並**無法真正取代緊急醫療救護人員**。"
+   },
+   {
+    "topic": "第一反應員的訓練內容",
+    "points": "**第一反應員的訓練內容**主要包含有：**辨識病人疾病的嚴重程度或受傷的情形**；**評估病人是否需要緊急醫療照顧**；**能提供因呼吸道、通氣及循環等問題而導致危及生命的病人適當之緊急醫療照顧**"
+   },
+   {
+    "topic": "第一反應員的任務",
+    "points": "**第一反應員負責任務**為：**初步急救**；**確認現場安全狀況**；**評估事件規模**；**傳達資訊給後援人力**"
+   }
   ]
  }
 }

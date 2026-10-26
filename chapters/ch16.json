@@ -516,7 +516,7 @@
   },
   {
    "type": "mnemonic",
-   "text": "藥動學四步驟口訣：**ADME＝Absorption 吸收 → Distribution 分佈 → Metabolism（生物轉化）→ Excretion 排泄**。"
+   "text": "藥動學四步驟口訣：**「吸、分、轉、排」**——吸收 → 分佈 → 生物轉化（代謝）→ 排泄；英文 **ADME**＝Absorption、Distribution、Metabolism、Excretion。"
   },
   {
    "type": "blue",
@@ -866,6 +866,10 @@
      "**Isotretinoin**（A 酸）、**Thalidomide**（沙利竇邁，化療藥物）"
     ]
    ]
+  },
+  {
+   "type": "mnemonic",
+   "text": "懷孕分級口訣（FDA 1979）：**「A 無、B 安、C 慎、D 害、X 禁」**——A 級對胎兒無風險；B 級人體無風險、相對安全；C 級動物有負面影響、人體未明需謹慎；D 級確有危害但權衡後利大於弊；X 級對胎兒有顯著危害、絕對禁用。"
   },
   {
    "type": "text",
@@ -1391,7 +1395,7 @@
   },
   {
    "type": "mnemonic",
-   "text": "受體記法：**「α1 縮血管、α2 踩煞車、β1 顧心臟(1 顆心)、β2 開氣管(2 個肺)、β3 燒脂肪」**。"
+   "text": "受體記法：**「1 心 2 氣」**——β1 作用於心臟（加速心跳、增強收縮力）、β2 作用於氣管支氣管（平滑肌鬆弛擴張）；延伸記法：**「α1 縮血管、α2 踩煞車、β1 顧心臟(1 顆心)、β2 開氣管(2 個肺)、β3 燒脂肪」**。"
   },
   {
    "type": "clinical",
@@ -2410,6 +2414,10 @@
    ]
   },
   {
+   "type": "text",
+   "text": "⚠ 待核對：上表 Fentanyl「3 mg/kg」為課本原文數字；章節摘要 PDF 寫作 **3 μg/kg**，兩者相差 1,000 倍，請以教科書原文與當地預立醫囑為準。"
+  },
+  {
    "type": "blue",
    "text": "② 鎮靜劑／麻醉誘導藥物"
   },
@@ -2493,7 +2501,7 @@
   },
   {
    "type": "mnemonic",
-   "text": "DAI 三步驟口訣：**「前(置)、鎮(靜)、鬆(弛)」——Lidocaine/Fentanyl → Midazolam/Ketamine/Propofol/Etomidate → Succinylcholine/Rocuronium**。"
+   "text": "DAI 三大類藥物口訣（依給藥順序）：**「前、鎮、肌」**——前置給藥 Lidocaine／Fentanyl → 鎮靜誘導劑 Ketamine／Etomidate／Propofol／Midazolam → 肌肉鬆弛劑 Succinylcholine／Rocuronium。"
   },
   {
    "type": "box",
@@ -3623,6 +3631,325 @@
    "**大量點滴輸注首選乳酸林格氏液（優於 Normal saline），但因含鉀不應用於壓碎傷病人；NS 大量輸注會造成高血氯酸血症。**",
    "**過敏性休克首選腎上腺素 IM 0.3~0.5 毫克(1:1,000)，每 15~20 分鐘可重複**；皮下注射吸收慢，休克時更慢，故 IM 較佳。",
    "**藥品保存三不原則＝不要常規冰箱、不要放濕熱環境或窗邊、不要重新分裝**；避光藥物如 Lorazepam、NTG 舌下含片。"
+  ],
+  "glossary": [
+   {
+    "group": "基本藥理與 PK／PD 概念",
+    "items": [
+     {
+      "term": "藥物動力學",
+      "en": "Pharmacokinetics (PK)",
+      "plain": "人體如何處理藥物，如同食物進肚後的消化、吸收、配送與排空。",
+      "page": "383"
+     },
+     {
+      "term": "藥物效力學",
+      "en": "Pharmacodynamics (PD)",
+      "plain": "藥物如何影響人體，如同鑰匙打開細胞上的鎖，啟動各種生理反應。",
+      "page": "383"
+     },
+     {
+      "term": "首渡效應",
+      "en": "First-pass metabolism",
+      "plain": "像路過收費站被扣費：口服藥在進入全身循環前被肝臟搶先代謝降效。",
+      "page": "383"
+     },
+     {
+      "term": "生物半衰期",
+      "en": "Biological half-life",
+      "plain": "像沙漏漏掉一半的時間：身體清除體內一半藥物所花的時間，決定給藥頻率。",
+      "page": "382"
+     },
+     {
+      "term": "治療指標",
+      "en": "Therapeutic index (TI)",
+      "plain": "像開車的安全車距：致死劑量與有效劑量的比值，越大代表藥物越安全。",
+      "page": "383"
+     }
+    ]
+   },
+   {
+    "group": "受體作用與相互關係",
+    "items": [
+     {
+      "term": "激活劑",
+      "en": "Agonist",
+      "plain": "配對成功的伴侶，與受體結合後能啟動預期的生理反應與功效。",
+      "page": "382"
+     },
+     {
+      "term": "拮抗劑",
+      "en": "Antagonist",
+      "plain": "佔著車位不走的霸佔者，與受體結合卻不啟動反應，阻礙致效劑作用。",
+      "page": "382"
+     },
+     {
+      "term": "選擇性受體致效劑",
+      "en": "Selective receptor agonist",
+      "plain": "專一鎖定的狙擊手，只跟特定亞型受體結合，能減少不想要的副作用。",
+      "page": "401"
+     },
+     {
+      "term": "競爭性拮抗劑",
+      "en": "Competitive antagonist",
+      "plain": "搶奪同一個座位的對手，與激活劑競爭同受體位置，增加激活劑濃度可克服。",
+      "page": "396"
+     },
+     {
+      "term": "非競爭性拮抗劑",
+      "en": "Noncompetitive antagonist",
+      "plain": "直接鎖死座椅的鎖頭，與受體不同位置結合，增加激活劑濃度也無法克服。",
+      "page": "396"
+     }
+    ]
+   },
+   {
+    "group": "藥物效應與臨床毒理",
+    "items": [
+     {
+      "term": "累積效應",
+      "en": "Cumulative action",
+      "plain": "像水庫進水比排水快：給藥過頻或排泄太慢，使藥物在體內積聚中毒。",
+      "page": "382"
+     },
+     {
+      "term": "特異反應",
+      "en": "Idiosyncrasy",
+      "plain": "不可預測的特殊體質反應：因基因缺陷或特殊體質，對藥物產生異常反應。",
+      "page": "383"
+     },
+     {
+      "term": "耐受性",
+      "en": "Tolerance",
+      "plain": "像咖啡越喝越沒感覺：重複使用某藥後藥效減弱，需加大劑量才有效。",
+      "page": "383"
+     },
+     {
+      "term": "藥物相互作用",
+      "en": "Drug interaction",
+      "plain": "併用兩種藥物使藥效增加、減少或產生新毒性。",
+      "page": "382"
+     },
+     {
+      "term": "血清素症候群",
+      "en": "Serotonin syndrome",
+      "plain": "體內血清素過多：因藥物交互作用引起自律神經失調與高燒躁動。",
+      "page": "414"
+     },
+     {
+      "term": "血液透析",
+      "en": "Hemodialysis",
+      "plain": "人工洗腎機；對與蛋白或組織結合率高的藥物無效，無法靠它解毒。",
+      "page": "393"
+     }
+    ]
+   },
+   {
+    "group": "急救給藥途徑與插管肌肉鬆弛",
+    "items": [
+     {
+      "term": "骨內給藥",
+      "en": "Intraosseous (I.O.)",
+      "plain": "骨髓裡的備用靜脈，藥物經骨髓腔快速進入循環，速度與靜脈注射相當。",
+      "page": "389"
+     },
+     {
+      "term": "氣管內給藥",
+      "en": "Endotracheal (E.T.)",
+      "plain": "氣管內管給藥的應急法，劑量需為靜脈的 2 到 2.5 倍，吸收不穩定。",
+      "page": "389"
+     },
+     {
+      "term": "藥物輔助插管",
+      "en": "Drug-assisted intubation (DAI)",
+      "plain": "利用鎮靜與肌鬆藥，讓插管更順暢並降低刺激。",
+      "page": "414"
+     },
+     {
+      "term": "去極化肌肉鬆弛劑",
+      "en": "Depolarizing muscle relaxant",
+      "plain": "先讓肌肉跳動再癱瘓（Succinylcholine），插管時肌肉瞬間鬆弛，但高血鉀禁用。",
+      "page": "416"
+     },
+     {
+      "term": "非去極化肌肉鬆弛劑",
+      "en": "Nondepolarizing muscle relaxant",
+      "plain": "直接讓肌肉安靜的阻斷劑（Rocuronium），可用 Sugammadex 反轉。",
+      "page": "416"
+     }
+    ]
+   },
+   {
+    "group": "心血管與電解質／止血點滴",
+    "items": [
+     {
+      "term": "血管收縮素轉化酶抑制劑",
+      "en": "ACE Inhibitor (ACEI)",
+      "plain": "抑制血管收縮素 II 生成，能降血壓與保護心臟。",
+      "page": "412"
+     },
+     {
+      "term": "陽痿治療藥物",
+      "en": "PDE5 Inhibitor（如威而鋼）",
+      "plain": "不可與 NTG 同用的地雷，會使血管劇烈擴張，併用將導致致命低血壓。",
+      "page": "409"
+     },
+     {
+      "term": "乳酸林格氏液",
+      "en": "Lactate Ringer's Solution",
+      "plain": "最接近體液的平衡點滴，大量輸液的首選，但含鉀離子故壓碎傷禁用。",
+      "page": "421"
+     },
+     {
+      "term": "斷血炎",
+      "en": "Tranexamic Acid (TXA)",
+      "plain": "止住傷口漏水的塞子，抑制纖維蛋白溶解以達到早期外傷止血效果。",
+      "page": "420"
+     },
+     {
+      "term": "納洛酮",
+      "en": "Naloxone",
+      "plain": "鴉片類中毒的解毒鑰匙，能快速解除海洛因等引起的呼吸與神經抑制。",
+      "page": "417"
+     }
+    ]
+   }
+  ],
+  "mnemonics": [
+   {
+    "title": "藥物動力學四主要過程",
+    "mnemonic": "吸 分 轉 排",
+    "explain": "吸收 → 分佈 → 生物轉化／代謝 → 排泄（ADME）。"
+   },
+   {
+    "title": "懷孕安全分級（FDA 1979）",
+    "mnemonic": "A 無 B 安 C 慎 D 害 X 禁",
+    "explain": "A 級：無對胎兒風險；B 級：人體實驗無風險相對安全；C 級：動物有負面影響、人體未明需謹慎；D 級：確有對胎兒危害但權衡利大於弊；X 級：對胎兒有顯著危害絕對禁用。"
+   },
+   {
+    "title": "藥物輔助插管（DAI）三大類（依給予順序）",
+    "mnemonic": "前 鎮 肌",
+    "explain": "前置給藥 Lidocaine／Fentanyl → 鎮靜誘導劑 Ketamine／Etomidate／Propofol → 肌肉鬆弛劑 Succinylcholine／Rocuronium。"
+   },
+   {
+    "title": "腎上腺素受體與主控器官",
+    "mnemonic": "1 心 2 氣",
+    "explain": "β1 作用於心臟，加速心跳與收縮力；β2 作用於氣管支氣管，使平滑肌鬆弛擴張。"
+   },
+   {
+    "title": "抗心律不整藥物分類",
+    "mnemonic": "一鈉、二 β、三鉀、四鈣",
+    "explain": "Class I 鈉離子通道、II β 阻斷劑、III 鉀離子通道、IV 鈣離子通道。"
+   }
+  ],
+  "tables": [
+   {
+    "title": "自主神經受體生理作用比較",
+    "headers": [
+     "受體類型",
+     "主要分佈部位",
+     "活化後之主要生理效應"
+    ],
+    "rows": [
+     [
+      "α1 受體",
+      "周邊血管平滑肌、瞳孔睫狀肌",
+      "周邊小血管收縮、血壓上升、瞳孔散大"
+     ],
+     [
+      "α2 受體",
+      "突觸前膜、胰臟 β 細胞",
+      "負回饋抑制正腎上腺素釋放、抑制胰島素分泌"
+     ],
+     [
+      "β1 受體",
+      "心臟心肌細胞、腎臟 JG 細胞",
+      "心跳加速、心肌收縮力增強、增加心輸出量、促進腎素分泌"
+     ],
+     [
+      "β2 受體",
+      "支氣管平滑肌、骨骼肌血管平滑肌",
+      "支氣管平滑肌鬆弛（擴張）、血管舒張、促進肝糖分解升血糖"
+     ],
+     [
+      "M2 受體",
+      "心房、竇房結細胞",
+      "副交感興奮，心跳減緩、抑制心肌電氣傳導"
+     ]
+    ]
+   },
+   {
+    "title": "抗心律不整藥物 Vaughan Williams 分類",
+    "headers": [
+     "類別",
+     "主要作用電氣生理機制",
+     "代表藥物",
+     "臨床焦點"
+    ],
+    "rows": [
+     [
+      "Class I",
+      "阻斷快速鈉離子通道，抑制第 0 期去極化",
+      "Lidocaine (Xylocaine®)、Procainamide",
+      "Lidocaine 主要作用於心室，心肌梗塞後勿預防性使用"
+     ],
+     [
+      "Class II",
+      "β 受體阻斷劑，降低心肌自律性與傳導",
+      "Propranolol、Metoprolol",
+      "急性心肌梗塞後早期使用可減少死亡率，氣喘禁用非選擇性"
+     ],
+     [
+      "Class III",
+      "阻斷鉀通道，顯著延長第 3 期再極化",
+      "Amiodarone (Cordarone®)",
+      "VF/pVT 首選（300 mg → 150 mg），QT 延長與 Torsades 禁用"
+     ],
+     [
+      "Class IV",
+      "鈣離子通道阻斷劑 (non-DHP)，減緩房室傳導",
+      "Verapamil、Diltiazem",
+      "控制 A-fib 心室率，WPW 合併 A-fib 絕對禁用"
+     ]
+    ]
+   },
+   {
+    "title": "升壓藥物綜合比較",
+    "fromContent": "升壓藥物綜合比較（必考）"
+   },
+   {
+    "title": "藥物輔助插管（DAI）用藥流程",
+    "headers": [
+     "DAI 階段",
+     "主要藥物與劑量",
+     "臨床作用與注意事項"
+    ],
+    "rows": [
+     [
+      "① 前置藥物",
+      "Lidocaine 1.5 mg/kg IV；Fentanyl 3 μg/kg IV（課本原文作 3 mg/kg，⚠ 待核對）",
+      "Lidocaine 預防腦壓增高與支氣管痙攣；Fentanyl 止痛、預防插管引起的交感興奮，注意呼吸與血壓抑制"
+     ],
+     [
+      "② 鎮靜／誘導劑",
+      "Ketamine 1~2 mg/kg、Etomidate 0.3 mg/kg、Propofol 0.5~1.5 mg/kg、Midazolam 0.3 mg/kg IV",
+      "Ketamine 休克或氣喘首選（升血壓、擴張支氣管）；Etomidate 血流動力不穩首選（可能腎上腺機能不全）；Propofol 起效快但抑制呼吸與降血壓"
+     ],
+     [
+      "③ 肌肉鬆弛劑",
+      "Succinylcholine 1.5 mg/kg IV（去極化）；Rocuronium 1 mg/kg IV（非去極化）",
+      "Succinylcholine 禁忌：高血鉀、燒燙傷、壓碎傷、嚴重感染；Rocuronium 需冷藏，可用 Sugammadex 反轉"
+     ]
+    ]
+   },
+   {
+    "title": "管制藥品分級",
+    "fromContent": "管制藥品(controlled substance)"
+   },
+   {
+    "title": "各式輸液比較（表16-7）",
+    "fromContent": "表16-7　各式輸液成分介紹與臨床應注意事項"
+   }
   ]
  }
 }

@@ -1255,6 +1255,226 @@
    "侷限空間點滴需用**加壓袋（維持 200~100 mmHg）取代重力**，因正常點滴需掛在**病人頭部上方 1 公尺**。",
    "病人 PPE 至少含**眼睛保護、聽力保護、呼吸系統防護**，且**救援時應儘早給予**。",
    "**Box56-1**：2023/2/6 土敘大地震規模 **7.8**、震源深約 **17.9 公里**、死亡**逾 5 萬人**；台灣特搜隊案例因**腔室症候群**而就地截肢**左膝以下**。"
+  ],
+  "glossary": [
+   {
+    "group": "戰術緊急病人救護(TECC)",
+    "items": [
+     {
+      "term": "戰術緊急病人救護",
+      "en": "Tactical Emergency Casualty Care, TECC",
+      "plain": "高風險環境（如槍擊、恐攻）下的緊急救護課程，目標是減少傷亡並保障救援者安全。"
+     },
+     {
+      "term": "熱區",
+      "en": "Hot zone",
+      "plain": "威脅仍在、救護人員與傷者都在直接危險下的區域。"
+     },
+     {
+      "term": "暖區",
+      "en": "Warm zone",
+      "plain": "沒有直接火力或威脅，但危險尚未解除的區域。"
+     },
+     {
+      "term": "冷區",
+      "en": "Cold zone",
+      "plain": "威脅理論上已不存在、風險較低的區域。"
+     },
+     {
+      "term": "戰術戰鬥病人救護",
+      "en": "Tactical Combat Casualty Care, TCCC",
+      "plain": "美軍發展的戰場傷患救護指引，是 TECC 的源頭。"
+     },
+     {
+      "term": "MARCH 口訣",
+      "en": "MARCH",
+      "plain": "TECC 暖區照護口訣：大量出血、呼吸道、呼吸、循環、頭部外傷／低體溫。"
+     },
+     {
+      "term": "到院前外傷救命術",
+      "en": "Prehospital Trauma Life Support, PHTLS",
+      "plain": "到院前外傷救命術；病人進入冷區後即可依 PHTLS 做初級與次級評估，與 TECC 銜接。"
+     },
+     {
+      "term": "胸封貼片",
+      "en": "Chest seal",
+      "plain": "封住開放性氣胸傷口的敷料，屬於 MARCH 的 R（呼吸）處置。"
+     }
+    ]
+   },
+   {
+    "group": "城市搜救隊侷限空間醫療",
+    "items": [
+     {
+      "term": "城市搜救隊",
+      "en": "Urban Search And Rescue Team, USAR",
+      "plain": "城市搜救隊：分重、中、輕三級，由指揮、搜索、救援、醫療、後勤五組組成。"
+     },
+     {
+      "term": "緊急醫療隊",
+      "en": "Emergency Medical Teams, EMT",
+      "plain": "災區醫療量能不足時，攜帶裝備與藥物前往支援的外來醫療隊。"
+     },
+     {
+      "term": "侷限空間醫療",
+      "en": "Confined Space Medical, CSM",
+      "plain": "在狹小受限的空間評估、處置並轉運受困者，是搜救隊醫療組的重要任務。"
+     },
+     {
+      "term": "世界衛生組織",
+      "en": "World Health Organization, WHO",
+      "plain": "聯合國的公共衛生專責機構。"
+     }
+    ]
+   },
+   {
+    "group": "城市搜救隊(Urban Search And Rescue Team，USAR Team)",
+    "items": [
+     {
+      "term": "國際搜救諮詢組織",
+      "en": "International Search and Rescue Advisory Group, INSARAG",
+      "plain": "聯合國主導的國際搜救網絡，制定搜救標準並協調國際救援。"
+     },
+     {
+      "term": "現場操作協調中心",
+      "en": "On-Site Operations Coordination Centre, OSOCC",
+      "plain": "國際搜救的現場協調中心；要截肢或肢解等特殊醫療行為須向它或當地機構申請許可。"
+     },
+     {
+      "term": "國家認證機制",
+      "en": "National Accreditation Process, NAP",
+      "plain": "台灣依 INSARAG 指引建立的國家搜救隊認證機制。"
+     }
+    ]
+   },
+   {
+    "group": "侷限空間醫療",
+    "items": [
+     {
+      "term": "受災國當地緊急管理機構",
+      "en": "Local Emergency Management Authority, LEMA",
+      "plain": "受災國當地的緊急管理機構，也是特殊醫療行為許可的申請對象。"
+     },
+     {
+      "term": "壓砸傷症候群",
+      "en": "crush syndrome",
+      "plain": "長時間被重物壓住，移除後可能因高血鉀、酸中毒突然惡化；移除前要先給輸液等治療。"
+     }
+    ]
+   },
+   {
+    "group": "侷限空間病人處置",
+    "items": [
+     {
+      "term": "薛丁格技術",
+      "en": "Seldinger technique",
+      "plain": "用導引線穿刺的技術；侷限空間需做緊急環甲膜切開時建議採用。"
+     },
+     {
+      "term": "藥物輔助插管",
+      "en": "Drug-Assisted Intubation",
+      "plain": "用藥物輔助插管；在侷限空間要評估脫困時間與藥量是否足夠。"
+     },
+     {
+      "term": "災難醫療救護隊",
+      "en": "Disaster Medical Assistance Team, DMAT",
+      "plain": "災難醫療救護隊：可快速部署到現場，提供醫療救護、檢傷與後送。"
+     }
+    ]
+   }
+  ],
+  "mnemonics": [
+   {
+    "title": "記 TECC 的精神",
+    "mnemonic": "先看環境、再看病人",
+    "explain": "安全程度與救護迫切度要**天秤兩端取平衡**，環境不安全時，救命重點式處置優先，完整評估留到冷區。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "MARCH",
+    "explain": "＝**M**assive hemorrhage（大出血）→ **A**irway（呼吸道）→ **R**espiration（呼吸）→ **C**irculation（循環）→ **H**ead injury/**h**ypothermia（頭傷／低體溫）。注意**外傷現場先止血再顧呼吸道**，與一般 ABC 順序相反！"
+   },
+   {
+    "title": "EMT 分級",
+    "mnemonic": "50 / 100 / 手術室 / 跨科別",
+    "explain": "Type 1 機動＝**50 人次‧2 週**；Type 1 固定＝**100 人次‧2 週**；Type 2＝**1 間刀房‧20 床‧3 週**；Type 3＝**2 間刀房‧40 床＋4 ICU‧4 週**。**週數與刀房數都是「1、2、3、4」往上加**。"
+   },
+   {
+    "title": "記憶口訣",
+    "mnemonic": "20 / 42 / 63",
+    "explain": "USAR 三級記與「**3 天 12 時 → 7 天 24 時 → 10 天 24 時**」；**只有重型能同時應付 2 個災害現場**，**只有輕型是每日 12 小時且僅限淺層救援**。"
+   },
+   {
+    "title": "侷限空間點滴要用加壓袋",
+    "mnemonic": "掛在病人頭部上方 1 公尺",
+    "explain": "正常點滴需靠重力滴注，侷限空間**高度不足**，所以用**壓力袋（維持 200~100 mmHg）取代重力**。記得**充滿集液室避免空氣流入體內**、**搬運時管路要加強固定**。"
+   },
+   {
+    "title": "壓砸傷脫困前的",
+    "mnemonic": "先治療再移除",
+    "explain": "口訣：**兩條大口徑 IV → fluid bolus（必要時 NaHCO₃）→ 備好急救藥 → 確認脫困路線 → 與救援組約定時機 → 才移除重物**。移除後要防的三件事：**組織間水分增加、急性高鉀血症、代謝性酸中毒**。"
+   }
+  ],
+  "tables": [
+   {
+    "title": "TECC 的發展",
+    "fromContent": "TECC 的發展"
+   },
+   {
+    "title": "TECC 的架構與核心",
+    "fromContent": "TECC 的架構與核心"
+   },
+   {
+    "title": "TECC 的架構與核心（續）",
+    "fromContent": "TECC 的架構與核心",
+    "nth": 1
+   },
+   {
+    "title": "城市搜救隊侷限空間醫療",
+    "fromContent": "城市搜救隊侷限空間醫療"
+   },
+   {
+    "title": "緊急醫療隊的等級分類",
+    "fromContent": "緊急醫療隊的等級分類"
+   },
+   {
+    "title": "城市搜救隊等級分類",
+    "fromContent": "城市搜救隊等級分類"
+   },
+   {
+    "title": "循環治療注意事項——輸液管理",
+    "fromContent": "循環治療注意事項——輸液管理"
+   },
+   {
+    "title": "移除重物壓困",
+    "fromContent": "移除重物壓困"
+   }
+  ],
+  "review": [
+   {
+    "topic": "MARCH 口訣的價值",
+    "points": "TECC 所採用的**MARCH 口訣**，能引導救護人員在**面臨風險的緊急環境**下提供**系統性、組織性的外傷照護**。"
+   },
+   {
+    "topic": "MARCH 架構",
+    "points": "**MARCH 架構**即為**（控制）大量出血、管理呼吸道、呼吸處置、（建立與維持）循環、低體溫與頭部外傷**，緊急救護人員應了解**每一項目背後的知識背景**，並能**嫻熟與確實地執行各項技能**。"
+   },
+   {
+    "topic": "TECC 與現行流程的銜接",
+    "points": "**TECC 與現行的外傷緊急救護流程並不相互排斥**，彼此的關係更像是在**照護場域與安全程度上的連續過渡**。"
+   },
+   {
+    "topic": "侷限空間呼吸道處置",
+    "points": "**侷限空間呼吸道處置**，應注意選擇**最適合的呼吸道處理方式**，考慮使用**基本氣道處理器材**，但要**隨時做好因餘震而離開病人的準備**。"
+   },
+   {
+    "topic": "侷限空間輸液管理",
+    "points": "**侷限空間輸液管理**，應注意**是否有足夠的高低差**足以使輸液輸注；若**高低差不足，可考慮使用輸液加壓袋**。"
+   },
+   {
+    "topic": "脫困前預防壓砸傷症候群",
+    "points": "病人若**被重物壓住**，**脫困前應與救援組充分溝通**，擬定相關**救援及後送計畫**，並於**脫困前考慮病人是否有壓砸傷症候群之可能**，若有則**必須於移除重物前予以治療以預防病情惡化**。"
+   }
   ]
  }
 }

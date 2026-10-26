@@ -2939,6 +2939,356 @@
    "**下壁梗塞＋低血壓 → 避免NTG與嗎啡**；**血氧＞90％且無肺水腫 → 不需給氧**；**排除過敏與消化道出血後給aspirin 300mg嚼碎吞服**。",
    "**右心室梗塞合併休克且肺部無濕囉音 → 可謹慎給予靜脈輸液增加左心前負荷，但流速不宜太快，並持續監聽肺音**，出現肺底濕囉音即降速或停止。",
    "**心電圖無法確診心臟衰竭**：肢體導程QRS＜5mm可懷疑心肌數目減少，但須與心包膜／肋膜積液、COPD、肥胖的遮蔽效應鑑別；廣泛QS pattern可懷疑大範圍陳舊性梗塞或心肌病變。"
+  ],
+  "glossary": [
+   {
+    "group": "波形與基本判讀",
+    "items": [
+     {
+      "term": "P 波",
+      "en": "P wave",
+      "plain": "心房「通電」（去極化）的訊號，由左、右心房一起畫出。正常寬 ＜0.12 秒、高 ≤2.5 mm；變高想右心房擴大、變寬想左心房擴大。"
+     },
+     {
+      "term": "QRS 複合波",
+      "en": "QRS complex",
+      "plain": "心室通電的訊號。先往下叫 Q、先往上叫 R、R 後再往下叫 S、再往上加撇叫 R'；寬度反映心室傳導是否正常。"
+     },
+     {
+      "term": "T 波",
+      "en": "T wave",
+      "plain": "心室「充電回復」（再極化）的訊號。倒置可見於缺血，但心室肥厚、束支阻斷、中樞神經疾病也會出現。"
+     },
+     {
+      "term": "PR 區間",
+      "en": "PR interval",
+      "plain": "從心房開始通電到心室開始通電的時間，正常 0.12～0.20 秒；拉長代表房室傳導變慢，太短代表節律點不在竇房結。"
+     },
+     {
+      "term": "心軸",
+      "en": "axis",
+      "plain": "心臟電流整體往哪個方向走，正常朝左下。右心室肥厚會右偏（＞100°）、左心室肥厚會左偏（＜-30°）；高瘦偏右、矮胖偏左屬正常變異。"
+     },
+     {
+      "term": "R 波進展",
+      "en": "R wave progression",
+      "plain": "從 V1 一路貼到 V6，R 波越來越高、S 波越來越淺，像在爬樓梯。"
+     },
+     {
+      "term": "R-S 波交替",
+      "en": "R-S transition",
+      "plain": "R 波由「比 S 小」變成「比 S 大」的交界，正常落在 V3～V4；提早到 V1～V2 要想到右心室肥厚。"
+     },
+     {
+      "term": "心室肥厚的次發性再極化異常",
+      "en": "secondary repolarization abnormality",
+      "plain": "心室太厚，連充電回復也跟著亂：ST 下降與倒置 T 波黏在一起、方向和 QRS 相反。左心室看 Ⅰ、aVL、V5、V6，右心室看 V1～V2。"
+     }
+    ]
+   },
+   {
+    "group": "節律異常",
+    "items": [
+     {
+      "term": "心房期外收縮",
+      "en": "APC／PAC",
+      "plain": "心房某處「搶拍」提早放電：有 P 波但長相略不同、PR 較短，QRS 仍是窄的。"
+     },
+     {
+      "term": "心室期外收縮",
+      "en": "VPC／PVC",
+      "plain": "心室自己提早放電：QRS 寬、長相怪，前面沒有對應的 P 波。"
+     },
+     {
+      "term": "心房撲動",
+      "en": "atrial flutter",
+      "plain": "心房有規律地繞圈放電（250～350 下/分），P 波整齊；房室結固定比例下傳（2:1、4:1），所以 R-R 規則。"
+     },
+     {
+      "term": "心房顫動",
+      "en": "atrial fibrillation",
+      "plain": "心房亂成一團（＞350 下/分），看不到像樣的 P 波，心室被隨機帶動，R-R 極不規則是招牌特徵。"
+     },
+     {
+      "term": "陣發性上心室頻脈",
+      "en": "PSVT",
+      "plain": "房室結以上發出的快而規則窄 QRS 頻脈（常 ＞180 下/分），P 波常埋在 QRS 裡看不到。"
+     },
+     {
+      "term": "心室頻脈",
+      "en": "VT",
+      "plain": "心室自己繞圈快跳（約 200 下/分），QRS 寬；越寬代表心輸出越差、血壓越不穩。"
+     },
+     {
+      "term": "扭轉型心室頻脈",
+      "en": "torsade de pointes",
+      "plain": "特殊的多形性 VT：QRS 一下變大一下變小，尖端連線像正弦波；與低血鎂、QTc 延長有關。"
+     },
+     {
+      "term": "心室顫動",
+      "en": "VF",
+      "plain": "心室亂顫（＞300 下/分），沒有 P 波和 T 波，幾乎沒有心輸出——要立刻 CPR＋電擊去顫。"
+     }
+    ]
+   },
+   {
+    "group": "傳導障礙",
+    "items": [
+     {
+      "term": "房室傳導阻滯",
+      "en": "AV block",
+      "plain": "心房的訊號經過房室結時被卡住，分一、二、三度，越高度越危險。"
+     },
+     {
+      "term": "Wenckebach 現象",
+      "en": "Mobitz type I",
+      "plain": "二度第一型：PR 一拍比一拍長，終於漏掉一拍；阻斷在房室結附近，QRS 窄、預後較好。"
+     },
+     {
+      "term": "二度第二型",
+      "en": "Mobitz type II",
+      "plain": "PR 固定不變卻突然漏拍；阻斷在 His 束以下，QRS 常呈 BBB 寬型，可能惡化成完全阻斷。"
+     },
+     {
+      "term": "房室解離",
+      "en": "AV dissociation",
+      "plain": "三度（完全）阻斷的表現：心房、心室各跳各的，P-P 規則、R-R 規則，但兩者毫無關係。"
+     },
+     {
+      "term": "束支傳導阻斷",
+      "en": "bundle branch block, BBB",
+      "plain": "QRS ＞0.1 秒即是；0.1～0.12 秒不完全、＞0.12 秒完全。RBBB 看 V1 的「兔耳朵」rSR'，LBBB 看 Ⅰ、V5～V6 寬 R 且小 q 波消失。"
+     },
+     {
+      "term": "Sgarbossa criteria",
+      "plain": "LBBB 本身就會讓 V1～V3 ST 上升，懷疑心梗時改用這套標準判讀；原版總分 ≥3 分、Smith 修改版只要任一項成立就要懷疑。"
+     }
+    ]
+   },
+   {
+    "group": "缺血、梗塞與到院前應用",
+    "items": [
+     {
+      "term": "超急性 T 波",
+      "en": "hyperacute T wave",
+      "plain": "冠狀動脈阻塞後 10～30 分鐘出現的高聳 T 波（超過前面 QRS 的一半就要懷疑），可持續 1～2 小時；這時打通血管可完全回復。"
+     },
+     {
+      "term": "對應變化",
+      "en": "reciprocal change",
+      "plain": "梗塞區對面的導程出現「鏡像」ST 下降；ST 上升越大越容易看到，有它更能確定是急性心肌梗塞。"
+     },
+     {
+      "term": "病理性 Q 波",
+      "en": "pathological Q wave",
+      "plain": "心肌已經死掉的證據（不可逆），常終身存在，可當作曾經心肌梗塞的痕跡。"
+     },
+     {
+      "term": "ST 上升型心肌梗塞",
+      "en": "STEMI",
+      "plain": "全層心肌梗塞；ST 上升在阻塞後 20～40 分鐘出現、持續數小時到數天，是啟動緊急心導管的依據。"
+     },
+     {
+      "term": "阻塞型心肌梗塞",
+      "en": "OMI",
+      "plain": "不只看 ST 上升，凡與冠狀動脈阻塞有關的心電圖變化都算（含 STEMI）；用 10 步驟判讀，抓到完全阻塞的敏感度約為 STEMI 標準的兩倍。"
+     },
+     {
+      "term": "到院前心電圖",
+      "en": "PHECG",
+      "plain": "在第一現場做 12 導程並電傳，把 STEMI 病人直送有心導管的醫院，讓 door-to-balloon 升級成 call-to-balloon。"
+     }
+    ]
+   }
+  ],
+  "mnemonics": [
+   {
+    "title": "胸前導極黏貼位置",
+    "mnemonic": "V1 右四、V2 左四、V4 五肋鎖中、V3 夾中間、V5 前腋、V6 中腋",
+    "explain": "先貼 V1、V2、V4，再補 V3，最後 V5、V6 沿同一水平往外走，就不會錯位。"
+   },
+   {
+    "title": "QRS 各波命名",
+    "mnemonic": "先下為 Q、先上為 R、R 後再下為 S、再上加撇 R'",
+    "explain": "Q 一定是第一個向下且在 R 之前；沒有 R 而整個向下稱 QS 型。"
+   },
+   {
+    "title": "系統性判讀順序",
+    "mnemonic": "率、寬、規、P、關、ST-T、軸、QT、病理波",
+    "explain": "速率快慢 → QRS 寬窄 → 規則與否 → 有無 P 波 → P 與 QRS 的關係 → ST 段與 T 波 → 心軸 → QT 區間 → Q 波、U 波等異常波形。"
+   },
+   {
+    "title": "心房擴大",
+    "mnemonic": "右高左寬",
+    "explain": "右心房擴大 P 波變高（P pulmonale，看 Ⅱ、Ⅲ、aVF）；左心房擴大 P 波變寬呈 M 型（P mitrale，看 Ⅰ、Ⅱ）。"
+   },
+   {
+    "title": "左心室肥厚電壓標準",
+    "mnemonic": "35、26、18＋13、21、14、25",
+    "explain": "胸前：V5／V6 的 R＋V1 的 S ＞35、V5 的 R ＞26、V6 的 R ＞18；肢體：aVL ＞13、aVF ＞21、Ⅰ ＞14、Ⅰ 的 R＋Ⅲ 的 S ＞25（單位 mm）。"
+   },
+   {
+    "title": "心房撲動 vs 心房顫動",
+    "mnemonic": "撲動整齊排隊、顫動亂成一團",
+    "explain": "撲動 P 波一模一樣、R-R 規則（比例下傳）；顫動 P 波大小不一、R-R 亂（隨機下傳）；350 下/分是分水嶺。"
+   },
+   {
+    "title": "節律接班順序",
+    "mnemonic": "竇房結 60~100 → 房室結 40 → 心室更慢更寬",
+    "explain": "節律點位置愈低，速率愈慢、QRS 愈寬。"
+   },
+   {
+    "title": "VPC 連發的名稱",
+    "mnemonic": "一單、二 couplet、三 triplet、三個以上 short-run VT",
+    "explain": "bigeminy＝1 個正常＋1 個 VPC 交替；trigeminy＝2 個正常＋1 個 VPC。"
+   },
+   {
+    "title": "致命節律的速率",
+    "mnemonic": "撲動 250~350、顫動＞350、VT 約 200、VF＞300",
+    "explain": "心房很快且亂是 A-fib；心室大小寬窄不一又極快就是 VF。"
+   },
+   {
+    "title": "房室傳導阻斷",
+    "mnemonic": "一度慢、二度漏、三度斷；Ⅰ 型窄而善、Ⅱ 型寬而險",
+    "explain": "一度 PR 長但不漏拍；二度 Ⅰ 型 PR 漸長才漏、Ⅱ 型突然就漏；三度心房心室各跳各的。"
+   },
+   {
+    "title": "束支傳導阻斷",
+    "mnemonic": "右看 V1 兔耳朵、左看 V6 寬 R 沒有 q",
+    "explain": "QRS 0.12 秒以上＝完全阻斷、0.1～0.12 秒＝不完全阻斷。"
+   },
+   {
+    "title": "STEMI 定位",
+    "mnemonic": "二三 aVF 下壁 RCA、V1V2 中膈、V3V4 前壁（LAD）、V5V6 加Ⅰ aVL 側壁 Cx",
+    "explain": "後壁沒有導程，要反過來看 V1～V2 的鏡像（ST 下降＋T 倒置＋高 R 波）。"
+   },
+   {
+    "title": "STEMI 時序",
+    "mnemonic": "T 高 → ST 升 → Q 死 → T 倒 → ST 回",
+    "explain": "超急性 T 波 10～30 分 → ST 上升 20～40 分 → Q 波數小時～數天 → T 倒置數天～一週 → ST 一週內回基準線；Q 波一出現，心肌就回不來了。"
+   }
+  ],
+  "tables": [
+   {
+    "title": "肢體導程的觀察角度",
+    "fromContent": "肢體導程（額面 coronal plane）"
+   },
+   {
+    "title": "胸前導極黏貼位置",
+    "fromContent": "胸前導程（水平面 axial plane）"
+   },
+   {
+    "title": "心電圖各組成成分的意義",
+    "fromContent": "波形、區間與節段"
+   },
+   {
+    "title": "右心房 vs 左心房擴大",
+    "fromContent": "2. 左心房擴大"
+   },
+   {
+    "title": "左心室肥厚電壓標準（voltage criteria）",
+    "fromContent": "4. 左心室肥厚"
+   },
+   {
+    "title": "右心室 vs 左心室肥厚",
+    "fromContent": "4. 左心室肥厚",
+    "nth": 1
+   },
+   {
+    "title": "心房撲動 vs 心房顫動",
+    "fromContent": "房室結的生理性傳導延遲——為什麼心室不會跟著跳這麼快",
+    "nth": 1
+   },
+   {
+    "title": "各種心律不整判讀準則總表",
+    "fromContent": "各種心律不整判讀準則總表（速率、規律性、P 波、PR 區間、QRS）"
+   },
+   {
+    "title": "Mobitz 第一型 vs 第二型",
+    "fromContent": "2. 二級房室結傳導阻斷(second degree AV block)"
+   },
+   {
+    "title": "房室傳導阻斷總比較",
+    "fromContent": "3. 三級房室結傳導阻斷(third degree AV block)"
+   },
+   {
+    "title": "RBBB vs LBBB",
+    "fromContent": "2. 左心室傳導分支束傳導阻斷(LBBB)"
+   },
+   {
+    "title": "導程—心肌區域—冠狀動脈定位總表",
+    "fromContent": "導程—心肌區域—冠狀動脈定位總表（必背）"
+   },
+   {
+    "title": "STEMI 心電圖系列變化",
+    "fromContent": "急性全壁層心肌梗塞（STEMI）的心電圖系列變化階段"
+   },
+   {
+    "title": "梗塞位置與鏡像變化",
+    "fromContent": "左心室後壁梗塞——鏡像判讀"
+   },
+   {
+    "title": "常見 OMI 型態",
+    "fromContent": "堵塞型心肌梗塞(OMI)的概念與心電圖變化"
+   },
+   {
+    "title": "到院前心電圖時間指標",
+    "fromContent": "到院前心電圖(PHECG)"
+   }
+  ],
+  "review": [
+   {
+    "topic": "導極與導程",
+    "points": "10 個導極（6 胸前＋4 肢體）＝12 個導程；V1 胸骨右第四肋間、V2 胸骨左第四肋間、V4 第五肋間鎖骨中線。左右手貼反 → 導程 Ⅰ 顛倒、aVR 變正向。"
+   },
+   {
+    "topic": "波形意義",
+    "points": "P＝心房去極化；QRS＝心室去極化；T＝心室再極化；PR 0.12～0.20 秒；心房再極化被 QRS 掩蓋、竇房結去極化看不到；U 波想低血鉀。"
+   },
+   {
+    "topic": "判讀步驟",
+    "points": "心律 → 心軸 → 各組成成分 → 各節段與區間；心律永遠第一步，看 long lead Ⅱ。"
+   },
+   {
+    "topic": "心房／心室肥大",
+    "points": "右高（P pulmonale，Ⅱ、Ⅲ、aVF）左寬（P mitrale，Ⅰ、Ⅱ）；RVH 心軸 ＞100°、R-S 交替提前到 V1～V2；LVH 心軸 ＜-30°、V5／V6 的 R＋V1 的 S ＞35 mm。"
+   },
+   {
+    "topic": "上心室節律",
+    "points": "撲動 250～350（R-R 規則，2:1 時心室剛好 150）；顫動 ＞350（R-R 極不規則）；PSVT ＞180、窄而規則；junctional 約 40、QRS 前無 P 波。"
+   },
+   {
+    "topic": "心室節律",
+    "points": "VPC 寬且前無 P 波；VT 約 200、寬；torsade de pointes 與低血鎂、QTc 延長有關；VF ＞300、無 P 無 T，立即 CPR＋去顫。"
+   },
+   {
+    "topic": "房室傳導阻斷",
+    "points": "一度 PR ＞0.20 秒、不漏拍；Mobitz Ⅰ PR 漸長後漏（窄、預後好）；Mobitz Ⅱ PR 固定突然漏（寬、可能惡化）；三度房室解離、有立即危險。"
+   },
+   {
+    "topic": "竇房傳導阻斷",
+    "points": "體表看不到竇房結去極化，一度無法由心電圖診斷；二度 Ⅰ 型漏搏前後 P-P ＜兩倍、Ⅱ 型＝兩倍整。"
+   },
+   {
+    "topic": "束支阻斷",
+    "points": "QRS ＞0.12 秒完全、0.1～0.12 秒不完全；RBBB 看 V1 rSR'；LBBB 看 Ⅰ、V5～V6 寬 R 無 q，懷疑心梗改用 Sgarbossa criteria。"
+   },
+   {
+    "topic": "心肌缺血",
+    "points": "解剖相關的連續兩個以上導程、一小格以上的 ST 下降或 T 倒置才算有意義；須比較系列心電圖，ST-T 變化不是缺血特有。"
+   },
+   {
+    "topic": "STEMI 時序與定位",
+    "points": "超急性 T（10～30 分）→ ST 上升（20～40 分）→ Q 波 → T 倒置 → ST 一週內回；下壁 Ⅱ Ⅲ aVF（RCA）、前壁 V1～V4（LAD）、側壁 Ⅰ aVL V5 V6（Cx）、後壁看 V1～V2 鏡像；下壁梗塞要加做 V4R。"
+   },
+   {
+    "topic": "OMI",
+    "points": "左主幹阻塞：廣泛 ST 下降＋aVR ST 上升；下壁 OMI：兩個下壁導程任何程度 ST 上升＋aVL 任何程度 ST 下降。"
+   },
+   {
+    "topic": "到院前心電圖",
+    "points": "第一次醫療接觸就做並電傳；FMC-to-PCI ≤90 分鐘；心梗合併休克直送有 24 小時心導管的醫院，即使車程較遠。"
+   }
   ]
  }
 }

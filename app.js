@@ -200,6 +200,15 @@ async function loadAllQuizzes() {
       try { localStorage.setItem('m2_ai_chapter_quizzes', JSON.stringify(storedAiQuizzes)); } catch (err) {}
       localStorage.setItem('secidx_reset_mode3_v1', '1');
     }
+    // 2026-10-26：CH12/16/34/36/50 重點筆記插入了對齊摘要 PDF 的口訣與表格，段落序號後移，同樣清掉重算
+    if (!localStorage.getItem('secidx_reset_summary_v1')) {
+      const touched = new Set(['ch12', 'ch16', 'ch34', 'ch36', 'ch50']);
+      storedAiQuizzes.forEach(q => {
+        if (q && touched.has(q.chId)) { delete q.secIdx; delete q.secTitle; delete q.secGuess; delete q.page; delete q.pdfPage; }
+      });
+      try { localStorage.setItem('m2_ai_chapter_quizzes', JSON.stringify(storedAiQuizzes)); } catch (err) {}
+      localStorage.setItem('secidx_reset_summary_v1', '1');
+    }
     state.allQuizzes = [...fetched, ...storedAiQuizzes];
     console.log(`Loaded ${state.allQuizzes.length} quiz questions (includes ${storedAiQuizzes.length} AI saved questions).`);
   } catch (e) {
@@ -833,43 +842,195 @@ function renderSummary(cd, chId) {
   }
 
   const s = cd && cd.summary;
-  if (s) {
-    // Formulas
-    if (s.formulas && s.formulas.length) {
-      html += `
-        <div class="summary-card">
-          <h3>🧮 公式彙整</h3>
-          ${s.formulas.map(f => `
-            <div class="formula-box">
-              <span class="formula-name">${f.name}</span>
-              ${f.formula}
-              ${f.note ? `<div style="margin-top:6px;font-size:0.82rem;color:#94a3b8">${f.note}</div>` : ''}
-            </div>`).join('')}
-        </div>`;
-    }
-
-    // Key numbers
-    if (s.keyNumbers && s.keyNumbers.length) {
-      html += `
-        <div class="summary-card">
-          <h3>🔢 重要數字 / 數值</h3>
-          <table class="numbers-table">
-            <thead><tr><th>項目</th><th>數值</th><th>說明</th></tr></thead>
-            <tbody>
-              ${s.keyNumbers.map(n => `
-                <tr>
-                  <td>${mdInline(n.label)}</td>
-                  <td class="highlight-num">${mdInline(n.value)}</td>
-                  <td>${mdInline(n.note || '')}</td>
-                </tr>`).join('')}
-            </tbody>
-          </table>
-        </div>`;
-    }
+  const cards = s ? buildSummaryCards(cd, s) : [];
+  if (!cards.length) {
+    return html || '<p style="color:var(--text-muted);padding:20px">此章節重點一覽尚未生成。</p>';
   }
 
-  return html || '<p style="color:var(--text-muted);padding:20px">此章節重點一覽尚未生成。</p>';
+  const chTitle = escapeHtml(`${cd.num || ''} ${cd.title || ''}`.trim());
+  html = `
+    <div class="summary-print-bar">
+      <span>可直接列印，或在列印視窗選「另存為 PDF」</span>
+      <button class="summary-print-btn" onclick="printSummary()">🖨️ 列印／存成 PDF</button>
+    </div>
+    <div class="summary-print-title">
+      <h2>${chTitle} — 重點一覽</h2>
+      <div class="summary-print-sub">高級救護技術員教科書（大白第三版）章節摘要</div>
+    </div>` + html;
+
+  html += renderSummaryToc(cd, cards);
+  cards.forEach((c, i) => {
+    html += `
+      <div class="summary-card" id="sum-${c.key}">
+        <h3><span class="sum-num">${SUMMARY_NUMERALS[i] || i + 1}、</span>${c.icon} ${c.title}</h3>
+        ${c.body}
+      </div>`;
+  });
+  return html;
 }
+
+const SUMMARY_NUMERALS = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+const SUMMARY_TOC_SKIP = new Set(['情境', '情境解答', '問題交流', '重點整理', '參考資料']);
+
+/**
+ * 依 PDF 摘要的順序組出重點一覽的各區塊；沒有資料的區塊自動略過。
+ * @returns {{key: string, icon: string, title: string, body: string}[]}
+ */
+function buildSummaryCards(cd, s) {
+  const cards = [];
+  const add = (key, icon, title, body) => { if (body) cards.push({ key, icon, title, body }); };
+
+  add('glossary', '📖', '關鍵字白話表', renderSummaryGlossary(s.glossary));
+  add('mnemonics', '💡', '必記口訣／速記', renderSummaryMnemonics(s.mnemonics));
+  add('formulas', '🧮', '公式彙整', renderSummaryFormulas(s.formulas));
+  add('numbers', '🔢', '關鍵數字整理', renderSummaryNumbers(s.keyNumbers));
+  add('tables', '📊', '重點比較表格', renderSummaryTables(cd, s.tables));
+  add('review', '📋', '章末重點一覽', renderSummaryReview(s.review));
+  add('quick', '✅', '章末重點速記', renderSummaryQuick(s.quickReview));
+  return cards;
+}
+
+function renderSummaryToc(cd, cards) {
+  const secs = (cd.content || [])
+    .filter(b => b.type === 'orange' && !SUMMARY_TOC_SKIP.has((b.text || '').trim()))
+    .map(b => `<li>${mdInline(b.text)}${b.page ? `<span class="toc-page">p.${b.page}</span>` : ''}</li>`);
+  const parts = cards.map((c, i) =>
+    `<a href="#sum-${c.key}" onclick="event.preventDefault();document.getElementById('sum-${c.key}').scrollIntoView({behavior:'smooth'})">${SUMMARY_NUMERALS[i] || i + 1}、${c.title}</a>`);
+  return `
+    <div class="summary-card summary-toc">
+      <h3>📑 章節導覽</h3>
+      ${secs.length ? `<ol class="summary-toc-secs">${secs.join('')}</ol>` : ''}
+      <div class="summary-toc-parts">${parts.join('')}</div>
+    </div>`;
+}
+
+function renderSummaryGlossary(groups) {
+  if (!groups || !groups.length) return '';
+  return groups.map(g => {
+    const hasPage = (g.items || []).some(it => it.page);
+    return `
+      ${g.group ? `<div class="sum-subhead">${mdInline(g.group)}</div>` : ''}
+      <div class="comp-table-wrap">
+        <table class="comp-table sum-glossary">
+          <thead><tr><th>術語</th><th>白話解釋</th>${hasPage ? '<th>頁碼</th>' : ''}</tr></thead>
+          <tbody>
+            ${(g.items || []).map(it => `
+              <tr>
+                <td class="row-header">${mdInline(it.term)}${it.en ? `<div class="sum-en">${mdInline(it.en)}</div>` : ''}</td>
+                <td>${mdInline(it.plain)}</td>
+                ${hasPage ? `<td class="sum-page">${it.page ? 'p.' + it.page : ''}</td>` : ''}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>`;
+  }).join('');
+}
+
+function renderSummaryMnemonics(list) {
+  if (!list || !list.length) return '';
+  return list.map((m, i) => `
+    <div class="sum-mnemonic">
+      <div class="sum-mnemonic-title">口訣 ${i + 1}：${mdInline(m.title)}</div>
+      <div class="sum-mnemonic-text">${mdInline(m.mnemonic)}</div>
+      ${m.explain ? `<div class="sum-mnemonic-explain">${mdInline(m.explain)}</div>` : ''}
+    </div>`).join('');
+}
+
+function renderSummaryFormulas(list) {
+  if (!list || !list.length) return '';
+  return list.map(f => `
+    <div class="formula-box">
+      <span class="formula-name">${f.name}</span>
+      ${f.formula}
+      ${f.note ? `<div class="formula-note">${f.note}</div>` : ''}
+    </div>`).join('');
+}
+
+function renderSummaryNumbers(list) {
+  if (!list || !list.length) return '';
+  return `
+    <div class="comp-table-wrap">
+      <table class="numbers-table">
+        <thead><tr><th>項目</th><th>數值</th><th>說明／臨床連結</th></tr></thead>
+        <tbody>
+          ${list.map(n => `
+            <tr>
+              <td>${mdInline(n.label)}</td>
+              <td class="highlight-num">${mdInline(n.value)}</td>
+              <td>${mdInline(n.note || '')}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+/** 表格可直接寫 headers/rows，或用 fromContent 指向重點筆記中同名標題下的表格，避免兩份資料不同步 */
+function renderSummaryTables(cd, list) {
+  if (!list || !list.length) return '';
+  return list.map(t => {
+    const tbl = t.fromContent ? findContentTable(cd, t.fromContent, t.nth || 0) : t;
+    if (!tbl || !tbl.rows || !tbl.rows.length) return '';
+    return `
+      <div class="sum-subhead">${mdInline(t.title || t.fromContent)}</div>
+      ${renderCompTable(tbl)}
+      ${t.note ? `<div class="sum-table-note">${mdInline(t.note)}</div>` : ''}`;
+  }).join('');
+}
+
+function findContentTable(cd, heading, nth) {
+  let last = '';
+  let count = 0;
+  for (const b of cd.content || []) {
+    if (b.type === 'orange' || b.type === 'blue') last = (b.text || '').trim();
+    if (b.type === 'table' && last === heading) {
+      if (count === nth) return b;
+      count++;
+    }
+  }
+  return null;
+}
+
+function renderSummaryReview(list) {
+  if (!list || !list.length) return '';
+  return renderCompTable({ headers: ['主題', '必記重點'], rows: list.map(r => [r.topic, r.points]) });
+}
+
+function renderSummaryQuick(list) {
+  if (!list || !list.length) return '';
+  return `<ol class="sum-quick">${list.map(q => `<li>${mdInline(q)}</li>`).join('')}</ol>`;
+}
+
+// ── 列印／存成 PDF：只印重點一覽，深色模式暫時切回淺色 ─────────────
+let _printThemeRestore = null;
+
+function beginSummaryPrint() {
+  document.body.classList.add('print-summary');
+  const root = document.documentElement;
+  if (root.getAttribute('data-theme') === 'dark' && _printThemeRestore === null) {
+    _printThemeRestore = 'dark';
+    root.setAttribute('data-theme', 'light');
+  }
+}
+
+function endSummaryPrint() {
+  document.body.classList.remove('print-summary');
+  if (_printThemeRestore !== null) {
+    document.documentElement.setAttribute('data-theme', _printThemeRestore);
+    _printThemeRestore = null;
+  }
+}
+
+function printSummary() {
+  switchTab('summary');
+  beginSummaryPrint();
+  window.print();
+}
+
+window.addEventListener('beforeprint', () => {
+  const panel = document.getElementById('tab-summary');
+  if (panel && !panel.classList.contains('hidden') && document.querySelector('.summary-print-bar')) beginSummaryPrint();
+});
+window.addEventListener('afterprint', endSummaryPrint);
 
 // ── Tab Switch ────────────────────────────────────────
 function switchTab(tabName) {

@@ -4511,3 +4511,149 @@ body.mode-3 #m3-side-nav { display: block; }
   }
 }
 
+
+/* ── 重點一覽：PDF 摘要版面 ── */
+.summary-print-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px dashed var(--orange-border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.summary-print-btn {
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.summary-print-btn:hover { background: var(--orange-dark); }
+.summary-print-title { display: none; }
+.summary-card h3 .sum-num { color: var(--blue); }
+.summary-toc-secs {
+  columns: 2;
+  column-gap: 28px;
+  padding-left: 22px;
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+.summary-toc-secs li { break-inside: avoid; }
+.toc-page { color: var(--text-muted); font-size: 0.78rem; margin-left: 6px; }
+.summary-toc-parts { display: flex; flex-wrap: wrap; gap: 8px; }
+.summary-toc-parts a {
+  background: var(--orange-light);
+  color: var(--orange-dark);
+  border: 1px solid var(--orange-border);
+  border-radius: 14px;
+  padding: 3px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.sum-subhead {
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin: 16px 0 4px;
+  font-size: 0.92rem;
+}
+[data-theme="dark"] .sum-subhead { color: #7dd3fc; }
+.sum-subhead:first-child { margin-top: 0; }
+.sum-en { font-weight: 400; color: var(--text-muted); font-size: 0.78rem; white-space: normal; }
+.sum-glossary .row-header { white-space: normal; min-width: 120px; }
+.sum-page { white-space: nowrap; color: var(--text-muted); font-size: 0.8rem; }
+.sum-table-note { font-size: 0.8rem; color: var(--text-muted); margin: -12px 0 16px; }
+.sum-mnemonic {
+  background: var(--mnemonic-bg);
+  border: 1px solid var(--mnemonic-border);
+  border-left: 4px solid var(--mnemonic);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 10px 0;
+}
+.sum-mnemonic-title { font-weight: 800; color: var(--mnemonic); font-size: 0.85rem; }
+.sum-mnemonic-text { font-size: 1.12rem; font-weight: 800; margin: 4px 0; color: var(--text); }
+.sum-mnemonic-explain { font-size: 0.86rem; line-height: 1.7; color: var(--text); }
+.formula-note { margin-top: 6px; font-size: 0.82rem; color: #94a3b8; }
+.sum-quick { padding-left: 22px; line-height: 1.8; font-size: 0.9rem; }
+.sum-quick li { margin-bottom: 4px; }
+
+@media (max-width: 640px) {
+  .summary-toc-secs { columns: 1; }
+}
+
+/* ── 列印：只印重點一覽 ── */
+@media print {
+  @page { size: A4; margin: 14mm 12mm; }
+  html:has(body.print-summary),
+  body.print-summary { height: auto !important; overflow: visible !important; }
+  body.print-summary { display: block !important; }
+  body.print-summary #app-header,
+  body.print-summary #landscape-pull-tab,
+  body.print-summary #sidebar,
+  body.print-summary #sidebar-backdrop,
+  body.print-summary .content-tabs-bar,
+  body.print-summary #tab-notes,
+  body.print-summary #welcome-screen,
+  body.print-summary #search-view,
+  body.print-summary #mode2-container,
+  body.print-summary #mode3-container,
+  body.print-summary .modal-overlay,
+  body.print-summary .floating-btn,
+  body.print-summary .summary-print-bar,
+  body.print-summary .chapter-mindmap-card,
+  body.print-summary .summary-toc-parts { display: none !important; }
+  body.print-summary #app-body,
+  body.print-summary #main-content,
+  body.print-summary #chapter-view,
+  body.print-summary #tab-summary {
+    display: block !important;
+    overflow: visible !important;
+    height: auto !important;
+    position: static !important;
+  }
+  body.print-summary { background: #fff !important; font-size: 10.5pt; }
+  body.print-summary .chapter-area { padding: 0 !important; }
+  body.print-summary .summary-print-title {
+    display: block;
+    border-bottom: 3px solid #E87722;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+  }
+  body.print-summary .summary-print-title h2 { font-size: 17pt; margin: 0; color: #1e2530; }
+  body.print-summary .summary-print-sub { font-size: 9pt; color: #6b7280; }
+  body.print-summary .summary-card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 0 12px !important;
+    background: #fff !important;
+  }
+  body.print-summary .summary-card h3 { break-after: avoid; page-break-after: avoid; }
+  body.print-summary .sum-subhead { break-after: avoid; page-break-after: avoid; }
+  body.print-summary .comp-table-wrap { overflow: visible !important; box-shadow: none !important; margin: 6px 0 12px; }
+  body.print-summary .comp-table { min-width: 0 !important; font-size: 9pt; border: 1px solid #cbd5e1; }
+  body.print-summary .comp-table th { white-space: normal; padding: 5px 8px; }
+  body.print-summary .comp-table td { padding: 5px 8px; border-bottom: 1px solid #e2e8f0; }
+  body.print-summary .comp-table .row-header { white-space: normal; }
+  body.print-summary .numbers-table { font-size: 9pt; }
+  body.print-summary .numbers-table td, body.print-summary .numbers-table th { padding: 4px 8px; }
+  body.print-summary tr, body.print-summary .sum-mnemonic, body.print-summary .formula-box { break-inside: avoid; page-break-inside: avoid; }
+  body.print-summary thead { display: table-header-group; }
+  body.print-summary .formula-box { background: #f1f5f9 !important; color: #1e2530 !important; border: 1px solid #cbd5e1; }
+  body.print-summary .formula-box .formula-name { color: #c45e0a !important; }
+  body.print-summary .formula-note { color: #475569 !important; }
+  body.print-summary .summary-toc-secs { font-size: 9.5pt; line-height: 1.6; }
+  body.print-summary * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+

@@ -1766,6 +1766,299 @@
    "**AHA 2017 DA-CPR 六項計畫**：承諾、訓練與繼續教育（初訓 3~4 小時、每年 2~3 小時）、持續 QI、與 EMS 單位資料連結、指定醫療指導醫師、辨認優異表現者。",
    "**派遣員理論上不需 EMT-P 資格**（NAEMSP 主張與 EMT/EMT-P 養成獨立），但台灣尚未建立派遣員專業訓練與認證制度。",
    "**派遣的最高境界＝運用最少最適當的資源，達成最大的效益**；對**時間急症(time-sensitive emergencies)**優先派遣。"
+  ],
+  "glossary": [
+   {
+    "group": "緊急醫療救護派遣介紹",
+    "items": [
+     {
+      "term": "緊急醫療救護指揮中心",
+      "en": "Emergency Medical Dispatch Center",
+      "plain": "EMS 的神經中樞：整合通訊、網路、地理資訊與醫院資源，把對的病人用對的方式、在對的時間送到對的醫院。"
+     },
+     {
+      "term": "緊急救護派遣員",
+      "en": "Emergency Medical Dispatcher，EMD",
+      "plain": "民眾打 119 時的第一道窗口：問關鍵問題、派遣救護，並在救護車到前指導報案者。"
+     },
+     {
+      "term": "優先派遣",
+      "en": "priority dispatch",
+      "plain": "依主訴問關鍵問題，快速分出輕重緩急，派出適合層級的救護團隊。"
+     },
+     {
+      "term": "醫療優先派遣",
+      "en": "medical priority dispatch",
+      "plain": "派遣員用的標準化流程：詢問 → 派遣 → 指導三部曲，含派遣後與到達前指導。"
+     },
+     {
+      "term": "到達前指導",
+      "en": "pre-arrival instruction",
+      "plain": "救護車到之前，派遣員在電話中教報案者先做急救；常見於心跳停止、呼吸阻塞、生產、出血。"
+     },
+     {
+      "term": "情緒內容及配合度量表",
+      "en": "Emotional Content and Cooperation Score，ECCS",
+      "plain": "把報案者情緒量化成 1～5 分；OHCA 報案者平均 2.1 分，非 OHCA 約 1.4 分。"
+     }
+    ]
+   },
+   {
+    "group": "醫療優先派遣",
+    "items": [
+     {
+      "term": "雙軌高級救護服務",
+      "en": "two-tiered advanced life support service",
+      "plain": "一般案件只派初級隊；重症同時派初級與高級隊，先到的先救、高級隊接手進階處置。"
+     },
+     {
+      "term": "派遣後指導",
+      "en": "post-dispatch instruction",
+      "plain": "派出救護車後針對環境或報案者的提醒，例如開門引導、把車移到路旁。"
+     },
+     {
+      "term": "報案初始流程",
+      "en": "case entry protocol",
+      "plain": "每通電話一開頭的標準問話：先問地址與回撥電話，再問主訴、年齡、意識、呼吸「四大戒律」。"
+     },
+     {
+      "term": "智慧電腦派遣系統",
+      "en": "Computer-Aid Dispatch，CAD",
+      "plain": "自動顯示報案地址（ALI）與電話（ANI）的電腦派遣系統。"
+     },
+     {
+      "term": "醫療優先派遣系統",
+      "en": "Medical Priority Dispatch System，MPDS",
+      "plain": "美國的醫療優先派遣系統，有 35 個主訴流程模組；台北市派遣手冊則有 34 張派遣卡。"
+     }
+    ]
+   },
+   {
+    "group": "派遣員協助心肺復甦術(DA-CPR)",
+    "items": [
+     {
+      "term": "派遣員協助心肺復甦術",
+      "en": "Dispatcher Assisted CPR，DA-CPR",
+      "plain": "派遣員用「意識清醒嗎？」「呼吸正常嗎？」兩題辨識 OHCA，再用簡單指令電話指導民眾壓胸。"
+     },
+     {
+      "term": "修正詢問建議",
+      "en": "Modified Caller Queries，MCQ",
+      "plain": "COVID-19 期間 CDC 要求新增的問話（TOCC、疫苗、快篩、居家隔離），評估出勤的傳染病風險。"
+     },
+     {
+      "term": "瀕死式呼吸",
+      "plain": "OHCA 剛發生時的無效喘息，民眾常誤以為「還有呼吸」而延誤壓胸，是 DA-CPR 最大的障礙。"
+     }
+    ]
+   },
+   {
+    "group": "派遣員協助心肺復甦術延伸計畫",
+    "items": [
+     {
+      "term": "派遣員線上團隊合作救命術",
+      "en": "Tele-Teamwork Life Support，TTLS",
+      "plain": "雲林縣 2021 年首創：救護車到前由派遣員指導 CPR／AED，到場後由指揮中心護理師線上協助交接與 CPR 品質監控。"
+     },
+     {
+      "term": "在宅病故流程",
+      "plain": "台北市 2023 年推出：在宅死亡且家屬放棄急救，經八個關鍵問題確認後轉介行政相驗，減少不必要的 CPR 與派車。"
+     }
+    ]
+   },
+   {
+    "group": "派遣與後送模式",
+    "items": [
+     {
+      "term": "連結派遣模式",
+      "en": "Pumper-Ambulance，PA",
+      "plain": "OHCA 時轄區救護車在忙，就近派消防車帶 AED 先到場做 BLS，救護車到後再交接送醫。"
+     },
+     {
+      "term": "雙軌派遣＋接駁送醫模式",
+      "en": "BLS-ALS，BA",
+      "plain": "偏遠地區 EMT-P 不足時，BLS 車先到場處置，送醫途中與 ALS 車會合，EMT-P 上車接手。"
+     },
+     {
+      "term": "跳島模式",
+      "plain": "偏遠地區病人 45 分鐘內到不了外傷中心時，先到最近醫院穩定（呼吸道、止血），再轉外傷中心。"
+     },
+     {
+      "term": "繞道模式",
+      "plain": "最近的醫院無法提供需要的專科治療，就直接送到較遠的專科醫院或外傷中心。"
+     }
+    ]
+   },
+   {
+    "group": "其他",
+    "items": [
+     {
+      "term": "派遣員線上引導AED",
+      "en": "Dispatcher-assisted AED，DA-AED",
+      "plain": "2018 年起推行：辨識 OHCA 後，派遣員除了 DA-CPR，還協助民眾取得附近 AED 並電擊。"
+     },
+     {
+      "term": "公眾場所AED",
+      "en": "Public Access Defibrillator，PAD",
+      "plain": "設在公共場所的 AED；救護車到前由旁觀者電擊的比例不到 12％，AHA 目標 2030 年前提高到 20％。"
+     }
+    ]
+   }
+  ],
+  "mnemonics": [
+   {
+    "title": "記住本章的一句話",
+    "mnemonic": "雖然醫師不能隔空抓藥，但是緊急醫療救護指揮中心可以隔空救人。",
+    "explain": "指揮中心是緊急醫療救護的**神經中樞**。"
+   },
+   {
+    "title": "派遣員核心價值",
+    "mnemonic": "5 個 right",
+    "explain": "right **way**（正確的方法）、right **time**（對的時間）、right **thing/resource**（對的資源）、right **patient**（對的病人），加上救護員抵達前**透過報案者(through the caller)**為病人做對的事。"
+   },
+   {
+    "title": "醫療優先派遣三部曲記成 I-D-I",
+    "mnemonic": "I",
+    "explain": "nterrogation（詢問）→ **D**ispatch（派遣）→ **I**nstruction（指導）；而指導又分成**派遣後指導（顧環境／報案者）**與**到達前指導（顧病人）**。"
+   },
+   {
+    "title": "報案初始流程四大戒律背成一串",
+    "mnemonic": "主訴—年齡—意識—呼吸",
+    "explain": "就是派遣員版的**初步評估(primary survey)**；取不到就寫**「不詳(unknown)」**，但**地址永遠擺第一**。"
+   },
+   {
+    "title": "六級口訣 O-A-B-C-D-E",
+    "mnemonic": "急不急",
+    "explain": "**O 不必派（轉介）**；**A 慢慢派 BLS**、**B 快快派 BLS**；**C 慢慢派 ALS**、**D 快快派 ALS**；**E 全部一起上**。橫軸看，縱軸看「**嚴不嚴重**」。"
+   },
+   {
+    "title": "DA-CPR 三階段",
+    "mnemonic": "辨、導、監",
+    "explain": "**辨**識（問意識、問正常呼吸）→ **指**導（擴音、平躺、胸口中央、每秒兩下）→ **監**控（陪著數、不要停、直到 EMT 接手才掛電話）。"
+   },
+   {
+    "title": "四種在地化模式對照記",
+    "mnemonic": "PA＝泵浦車先上（車不夠用人力補）",
+    "explain": "；**BA＝半路接駁（EMT-P 跳上 BLS 車）**；**跳島＝先近後遠（45 分鐘到不了外傷中心就先穩定）**；**繞道＝直接跳過（近的醫院做不了就別停）**。"
+   }
+  ],
+  "tables": [
+   {
+    "title": "專業派遣員的實際角色",
+    "fromContent": "專業派遣員的實際角色"
+   },
+   {
+    "title": "步驟二：詢問關鍵問題(key questions)",
+    "fromContent": "步驟二：詢問關鍵問題(key questions)"
+   },
+   {
+    "title": "步驟三：決定派遣模式(dispatch protocol)",
+    "fromContent": "步驟三：決定派遣模式(dispatch protocol)"
+   },
+   {
+    "title": "國際緊急派遣協會的六級派遣模式",
+    "fromContent": "國際緊急派遣協會的六級派遣模式"
+   },
+   {
+    "title": "國際緊急派遣協會的六級派遣模式（續）",
+    "fromContent": "國際緊急派遣協會的六級派遣模式",
+    "nth": 1
+   },
+   {
+    "title": "步驟五：到達前指導(pre-arrival instruction)",
+    "fromContent": "步驟五：到達前指導(pre-arrival instruction)"
+   },
+   {
+    "title": "優先派遣流程範例：抽搐／癲癇指引",
+    "fromContent": "優先派遣流程範例：抽搐／癲癇指引"
+   },
+   {
+    "title": "優先派遣流程範例：抽搐／癲癇指引（續）",
+    "fromContent": "優先派遣流程範例：抽搐／癲癇指引",
+    "nth": 1
+   },
+   {
+    "title": "志願者召喚系統：「全民守護者」、「急救先鋒」和「聽見 AED」",
+    "fromContent": "志願者召喚系統：「全民守護者」、「急救先鋒」和「聽見 AED」"
+   },
+   {
+    "title": "特殊樣態辨識階段：COVID-19 與修正詢問建議(MCQ)",
+    "fromContent": "特殊樣態辨識階段：COVID-19 與修正詢問建議(MCQ)"
+   },
+   {
+    "title": "DA-CPR 的困難與障礙",
+    "fromContent": "DA-CPR 的困難與障礙"
+   },
+   {
+    "title": "派遣員線上引導 AED(Dispatcher-assisted AED，DA-AED)",
+    "fromContent": "派遣員線上引導 AED(Dispatcher-assisted AED，DA-AED)"
+   },
+   {
+    "title": "派遣員線上團隊合作救命術(Tele-Teamwork Life Support，TTLS)",
+    "fromContent": "派遣員線上團隊合作救命術(Tele-Teamwork Life Support，TTLS)"
+   }
+  ],
+  "review": [
+   {
+    "topic": "派遣員的影響力",
+    "points": "**派遣員的水準**可能對**病人的生命、到院前急救人員的救護品質、救護資源的分配、派遣員自身的專業及民眾對緊急醫療救護系統的印象**都有影響。"
+   },
+   {
+    "topic": "派遣員的角色",
+    "points": "除了派遣救護車，派遣員的角色還包括**電話詢問、檢傷、現場通訊、後勤協調、資源連結以及線上指導**。"
+   },
+   {
+    "topic": "派遣員的核心價值",
+    "points": "派遣員的核心價值是「**用正確的方法，在對的時間，派對的東西（資源），給對的病人；以及在救護員抵達之前針對病人做對的事情（指導）**」。"
+   },
+   {
+    "topic": "醫療優先派遣三部曲",
+    "points": "**醫療優先派遣**是目前有醫學實證的解決方案之一，它是一個提供派遣員使用的**標準化流程**，由**詢問(Interrogation)→派遣(Dispatch)→指導(Instruction)三部曲**組成。"
+   },
+   {
+    "topic": "報案初始流程（初始評估）",
+    "points": "**報案初始流程**指的是詢問**主訴、年齡、意識、呼吸這四大問題**，**視同於派遣員的初始評估**。"
+   },
+   {
+    "topic": "主訴關鍵問題（次級評估）",
+    "points": "以**主訴為導向的關鍵問題**則是派遣員的**「次級評估」**，可藉此更了解**現場狀況（尤其是環境安全等因素）及病人狀況**，進而決定**下一步要如何派遣？需不需要加派救護車？需不需要線上指導？需不需要加派其他支援？**"
+   },
+   {
+    "topic": "派遣層級與速度",
+    "points": "派遣員會考量**時效性以及嚴重性**，再來決定要派遣 **BLS 還是 ALS 救護車**，以及要**一般速度還是加速鳴笛**到達現場；另外也有的報案電話**必須啟動其他資源參與救災救護**。"
+   },
+   {
+    "topic": "派遣後指導",
+    "points": "**派遣後指導**的重點往往是**環境或報案者相關的事項**，有的是派遣員**掛電話前的提醒**。"
+   },
+   {
+    "topic": "到達前指導",
+    "points": "**到達前指導**則是**針對病人的施救措施**，**每個主訴有相對應的到達前指導重點**，派遣員會**視情況來啟動這一步驟**。"
+   },
+   {
+    "topic": "旁觀者 CPR 的效益",
+    "points": "如果在**緊急醫療人員接觸病人之前，旁觀者就先行開始 CPR**，則 **OHCA 病人的存活機率可提高 2~3 倍**。"
+   },
+   {
+    "topic": "DA-CPR 三階段",
+    "points": "**DA-CPR 是由辨識(recognition)→指導(instruction)→監控(monitor)三階段完成**。在**辨識階段**，派遣員必須詢問兩個關鍵問題「**意識是否清醒？**」以及「**呼吸是否正常？**」"
+   },
+   {
+    "topic": "DA-CPR 的實務技巧",
+    "points": "自從 **2016 年內政部消防署推動 DA-CPR 落實計畫**以後，我國派遣員會**儘量陪著施救者在電話一邊壓胸一邊數數**，必要時**校正壓胸速率**，故**一開始的打開擴音是蠻重要的一個步驟**。"
+   },
+   {
+    "topic": "交接後才掛電話",
+    "points": "**派遣員聽到救護技術員接手 CPR 的聲音才掛上電話**，可以**確保生存之鏈的緊密結合**。"
+   },
+   {
+    "topic": "DA-CPR 最大障礙：瀕死式呼吸",
+    "points": "**DA-CPR 最常面對的也是最困難的障礙是瀕死式呼吸。**"
+   },
+   {
+    "topic": "提升 OHCA 辨識率",
+    "points": "**派遣員的繼續教育訓練、DA-CPR 品管措施以及醫療指導醫師的案例回饋**，可**提升指揮中心的 OHCA 辨識率**。"
+   }
   ]
  }
 }
