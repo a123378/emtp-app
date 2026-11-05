@@ -68,6 +68,15 @@
 
 相關檔案：`sw.js`（Service Worker 快取策略）、`offline.js`（側欄按鈕與進度）、`offline-files.json`（檔案清單，由 `scripts/build-offline-list.js` 產生）。
 
+### 💻 電腦本機版（不需網路、不需部署）
+
+在專案資料夾雙擊 **`開啟離線版.bat`**，會在背景啟動本機伺服器（`scripts/serve_local.py`，只開放 127.0.0.1:8770），並用預設瀏覽器打開網頁。內容直接讀這個資料夾裡的檔案，所以永遠是資料夾裡的最新版。
+
+- 需要已安裝 Python（安裝時勾選 Add python.exe to PATH）。
+- 工作列會多一個最小化的「EMT-P 離線版伺服器」視窗，關掉它就停止；再雙擊 .bat 會沿用已在執行的伺服器。
+- 學習進度存在 `127.0.0.1:8770` 這個網址底下，和線上網站的進度分開；連網並登入跨裝置同步即可合併。
+- 想要桌面圖示：用 Edge／Chrome 開啟後，從網址列的「安裝」按鈕安裝成 App（之後仍需先執行 .bat 啟動伺服器）。
+
 **部署**：`deploy.bat` 會先執行 `node scripts/build-offline-list.js` 再上傳；若手動執行 `firebase deploy`，記得先跑這行，否則手機的離線包不會更新到新內容（線上瀏覽不受影響）。
 
 ---
