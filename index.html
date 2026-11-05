@@ -108,6 +108,12 @@
       <span>📲 <b>安裝到手機桌面</b></span>
       <span class="install-tag">推薦</span>
     </div>
+    <!-- Offline Pack Banner in Drawer（由 offline.js 控制） -->
+    <div class="sidebar-install-banner sidebar-offline-banner hidden" id="offline-banner" role="button" tabindex="0"
+         onclick="OfflineCache.onBannerClick()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();OfflineCache.onBannerClick()}">
+      <span><b id="offline-banner-title">📥 下載離線版</b></span>
+      <span class="install-tag" id="offline-banner-tag">全部內容</span>
+    </div>
     <!-- Progress Stats Banner in Drawer -->
     <div class="sidebar-install-banner sidebar-progress-banner" onclick="openProgressModal();closeMobileSidebar()">
       <span>📊 <b>研讀進度管理</b></span>
@@ -833,5 +839,6 @@
 
 <script src="app.js?v=20261026_2200"></script>
 <script src="sync.js?v=20261026_2200"></script>
+<script src="offline.js?v=20261105_1200"></script>
 </body>
 </html>

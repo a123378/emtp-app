@@ -2666,6 +2666,45 @@ body {
   border-color: var(--border-hover) !important;
 }
 
+/* ── 離線版（offline.js） ── */
+.sidebar-offline-banner {
+  margin-top: -6px;
+}
+.sidebar-offline-banner .install-tag {
+  font-variant-numeric: tabular-nums;
+}
+.sidebar-offline-banner.is-ready {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.45);
+}
+.sidebar-offline-banner.is-ready .install-tag {
+  background: #16a34a;
+}
+.sidebar-offline-banner:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+.offline-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 32px);
+  background: #1e293b;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 99999;
+  animation: offline-toast-in 0.25s ease-out;
+}
+@keyframes offline-toast-in {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
 /* ══════════════════════════════════════════════════════
    題目附圖 / 心電圖 (ECG) 樣式
    ══════════════════════════════════════════════════════ */
