@@ -973,9 +973,42 @@ function renderSummaryReview(list) {
   return renderCompTable({ headers: ['主題', '必記重點'], rows: list.map(r => [r.topic, r.points]) });
 }
 
+/**
+ * 章末重點速記。舊格式是字串陣列（逐條編號）；新格式是分組陣列，每組可含
+ * intro（引言）、mnemonic（口訣）、items（條列）、groups（分組表）、table（比較表）。
+ * @param {Array<string|{title: string, intro?: string, mnemonic?: string, items?: string[],
+ *   groups?: {label: string, items: string[]}[], groupHeaders?: string[],
+ *   table?: {headers: string[], rows: string[][]}}>} list
+ */
 function renderSummaryQuick(list) {
   if (!list || !list.length) return '';
-  return `<ol class="sum-quick">${list.map(q => `<li>${mdInline(q)}</li>`).join('')}</ol>`;
+  if (typeof list[0] === 'string') {
+    return `<ol class="sum-quick">${list.map(q => `<li>${mdInline(q)}</li>`).join('')}</ol>`;
+  }
+  return list.map(renderQuickSection).join('');
+}
+
+function renderQuickList(items) {
+  if (!items || !items.length) return '';
+  return `<ul class="sum-quick-list">${items.map(it => `<li>${mdInline(it)}</li>`).join('')}</ul>`;
+}
+
+function renderQuickSection(sec) {
+  const groupTable = sec.groups && sec.groups.length
+    ? renderCompTable({
+        headers: sec.groupHeaders || ['分組', '內容'],
+        rows: sec.groups.map(g => [g.label, renderQuickList(g.items)]),
+      })
+    : '';
+  return `
+    <div class="sum-quick-sec">
+      <div class="sum-subhead">${mdInline(sec.title)}</div>
+      ${sec.intro ? `<div class="sum-quick-intro">${mdInline(sec.intro)}</div>` : ''}
+      ${sec.mnemonic ? `<div class="sum-quick-mn">口訣：${mdInline(sec.mnemonic)}</div>` : ''}
+      ${renderQuickList(sec.items)}
+      ${groupTable}
+      ${sec.table ? renderCompTable(sec.table) : ''}
+    </div>`;
 }
 
 // ── 列印／存成 PDF：只印重點一覽，深色模式暫時切回淺色 ─────────────

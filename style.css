@@ -4626,6 +4626,25 @@ body.mode-3 #m3-side-nav { display: block; }
 .formula-note { margin-top: 6px; font-size: 0.82rem; color: #94a3b8; }
 .sum-quick { padding-left: 22px; line-height: 1.8; font-size: 0.9rem; }
 .sum-quick li { margin-bottom: 4px; }
+.sum-quick-sec { margin-bottom: 14px; }
+.sum-quick-intro { font-size: 0.88rem; color: var(--text-muted); margin: 2px 0 4px; }
+.sum-quick-mn {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--mnemonic);
+  background: var(--mnemonic-bg);
+  border-left: 4px solid var(--mnemonic);
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin: 4px 0 6px;
+}
+.sum-quick-list { padding-left: 20px; margin: 4px 0; line-height: 1.75; font-size: 0.9rem; }
+.sum-quick-list li { margin-bottom: 2px; }
+.comp-table .sum-quick-list { margin: 0; padding-left: 18px; }
+.sum-quick-sec .comp-table th:first-child { min-width: 0 !important; }
+.sum-quick-sec .comp-table th:first-child,
+.sum-quick-sec .comp-table .row-header { width: 1%; white-space: nowrap; }
 
 @media (max-width: 640px) {
   .summary-toc-secs { columns: 1; }
