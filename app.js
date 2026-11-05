@@ -340,7 +340,7 @@ async function loadChapterData(chId) {
   }
 
   // Render summary
-  els.summaryContent.innerHTML = renderSummary(cd, chId);
+  els.summaryContent.innerHTML = renderSummary(cd);
 }
 
 // ── Render: Chapter Not Ready ─────────────────────────
@@ -787,46 +787,15 @@ function renderMarkdown(text) {
 }
 
 // ── Render: Summary ───────────────────────────────────
-function renderSummary(cd, chId) {
-  chId = chId || (cd && cd.id) || state.currentChId;
-  let html = '';
-
-  // ① 本章全景核心架構圖譜卡片 (動態解析・完整知識節點・無截斷)
-  if (cd) {
-    const chFullTitle = `${cd.num || ''} ${cd.title || ''}`.trim();
-    const mmPills = renderMindmapCardPills(cd);
-    const mmCount = countChapterMindmapNodes(cd);
-
-    html += `
-    <div class="chapter-mindmap-card" onclick="openMindmapModal('${chId}', '${escapeHtml(chFullTitle)}')">
-      <div class="mindmap-card-header">
-        <div class="mindmap-card-badge">
-          <span class="mindmap-badge-icon">🧠</span>
-          <span class="mindmap-badge-text">本章全景核心架構圖譜</span>
-          <span class="mindmap-badge-sub">INTERACTIVE MIND MAP</span>
-        </div>
-        <div class="mindmap-zoom-tip">
-          <span class="zoom-icon">🔍</span> 展開完整架構樹
-        </div>
-      </div>
-      <div class="mindmap-dynamic-preview">
-        ${mmPills}
-      </div>
-      <div class="mindmap-card-footer">
-        <span class="mindmap-stat-badge">📊 共收錄 ${mmCount} 個知識架構分支與考點</span>
-        <span class="mindmap-cta-btn">🧠 展開完整互動心智圖（支援搜尋/展開/全文無截斷）→</span>
-      </div>
-    </div>`;
-  }
-
+function renderSummary(cd) {
   const s = cd && cd.summary;
   const cards = s ? buildSummaryCards(cd, s) : [];
   if (!cards.length) {
-    return html || '<p style="color:var(--text-muted);padding:20px">此章節重點一覽尚未生成。</p>';
+    return '<p style="color:var(--text-muted);padding:20px">此章節重點一覽尚未生成。</p>';
   }
 
   const chTitle = escapeHtml(`${cd.num || ''} ${cd.title || ''}`.trim());
-  html = `
+  let html = `
     <div class="summary-print-bar">
       <span>可直接列印，或在列印視窗選「另存為 PDF」</span>
       <button class="summary-print-btn" onclick="printSummary()">🖨️ 列印／存成 PDF</button>
@@ -834,9 +803,8 @@ function renderSummary(cd, chId) {
     <div class="summary-print-title">
       <h2>${chTitle} — 重點一覽</h2>
       <div class="summary-print-sub">高級救護技術員教科書（大白第三版）章節摘要</div>
-    </div>` + html;
+    </div>`;
 
-  html += renderSummaryToc(cd, cards);
   cards.forEach((c, i) => {
     html += `
       <div class="summary-card" id="sum-${c.key}">
@@ -848,70 +816,28 @@ function renderSummary(cd, chId) {
 }
 
 const SUMMARY_NUMERALS = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-const SUMMARY_TOC_SKIP = new Set(['情境', '情境解答', '問題交流', '重點整理', '參考資料']);
 
 /**
- * 依 PDF 摘要的順序組出重點一覽的各區塊；沒有資料的區塊自動略過。
+ * 重點一覽只顯示：公式（僅限 summary.showFormulas 指定的條目）、關鍵數字、比較表格、章末速記。
+ * 關鍵字白話表、口訣、章末重點一覽的資料仍保留在 JSON（口訣已併入分組速記）。
  * @returns {{key: string, icon: string, title: string, body: string}[]}
  */
 function buildSummaryCards(cd, s) {
   const cards = [];
   const add = (key, icon, title, body) => { if (body) cards.push({ key, icon, title, body }); };
 
-  add('glossary', '📖', '關鍵字白話表', renderSummaryGlossary(s.glossary));
-  add('mnemonics', '💡', '必記口訣／速記', renderSummaryMnemonics(s.mnemonics));
-  add('formulas', '🧮', '公式彙整', renderSummaryFormulas(s.formulas));
+  add('formulas', '🧮', '公式彙整', renderSummaryFormulas(pickShownFormulas(s)));
   add('numbers', '🔢', '關鍵數字整理', renderSummaryNumbers(s.keyNumbers));
   add('tables', '📊', '重點比較表格', renderSummaryTables(cd, s.tables));
-  add('review', '📋', '章末重點一覽', renderSummaryReview(s.review));
   add('quick', '✅', '章末重點速記', renderSummaryQuick(s.quickReview));
   return cards;
 }
 
-function renderSummaryToc(cd, cards) {
-  const secs = (cd.content || [])
-    .filter(b => b.type === 'orange' && !SUMMARY_TOC_SKIP.has((b.text || '').trim()))
-    .map(b => `<li>${mdInline(b.text)}${b.page ? `<span class="toc-page">p.${b.page}</span>` : ''}</li>`);
-  const parts = cards.map((c, i) =>
-    `<a href="#sum-${c.key}" onclick="event.preventDefault();document.getElementById('sum-${c.key}').scrollIntoView({behavior:'smooth'})">${SUMMARY_NUMERALS[i] || i + 1}、${c.title}</a>`);
-  return `
-    <div class="summary-card summary-toc">
-      <h3>📑 章節導覽</h3>
-      ${secs.length ? `<ol class="summary-toc-secs">${secs.join('')}</ol>` : ''}
-      <div class="summary-toc-parts">${parts.join('')}</div>
-    </div>`;
-}
-
-function renderSummaryGlossary(groups) {
-  if (!groups || !groups.length) return '';
-  return groups.map(g => {
-    const hasPage = (g.items || []).some(it => it.page);
-    return `
-      ${g.group ? `<div class="sum-subhead">${mdInline(g.group)}</div>` : ''}
-      <div class="comp-table-wrap">
-        <table class="comp-table sum-glossary">
-          <thead><tr><th>術語</th><th>白話解釋</th>${hasPage ? '<th>頁碼</th>' : ''}</tr></thead>
-          <tbody>
-            ${(g.items || []).map(it => `
-              <tr>
-                <td class="row-header">${mdInline(it.term)}${it.en ? `<div class="sum-en">${mdInline(it.en)}</div>` : ''}</td>
-                <td>${mdInline(it.plain)}</td>
-                ${hasPage ? `<td class="sum-page">${it.page ? 'p.' + it.page : ''}</td>` : ''}
-              </tr>`).join('')}
-          </tbody>
-        </table>
-      </div>`;
-  }).join('');
-}
-
-function renderSummaryMnemonics(list) {
-  if (!list || !list.length) return '';
-  return list.map((m, i) => `
-    <div class="sum-mnemonic">
-      <div class="sum-mnemonic-title">口訣 ${i + 1}：${mdInline(m.title)}</div>
-      <div class="sum-mnemonic-text">${mdInline(m.mnemonic)}</div>
-      ${m.explain ? `<div class="sum-mnemonic-explain">${mdInline(m.explain)}</div>` : ''}
-    </div>`).join('');
+/** summary.showFormulas 是要顯示的公式索引；沒有這個欄位的章節不顯示公式。 */
+function pickShownFormulas(s) {
+  const keep = s.showFormulas;
+  if (!Array.isArray(keep) || !Array.isArray(s.formulas)) return [];
+  return keep.map(i => s.formulas[i]).filter(Boolean);
 }
 
 function renderSummaryFormulas(list) {
@@ -966,11 +892,6 @@ function findContentTable(cd, heading, nth) {
     }
   }
   return null;
-}
-
-function renderSummaryReview(list) {
-  if (!list || !list.length) return '';
-  return renderCompTable({ headers: ['主題', '必記重點'], rows: list.map(r => [r.topic, r.points]) });
 }
 
 /**
@@ -3763,51 +3684,6 @@ function cleanMarkdownForSpeech(text) {
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-}
-
-// ── Helper: 統計章節心智圖節點總數 ─────────────────────────
-function countChapterMindmapNodes(cd) {
-  if (!cd) return 0;
-  let count = 1; // 根節點
-  if (cd.content) {
-    cd.content.forEach(b => {
-      if (b.type === 'orange') count += 1;
-      else if (b.type === 'blue') count += 1;
-      else if (b.type === 'list' && b.items) count += b.items.length;
-      else if (b.type === 'clinical' && b.points) count += b.points.length;
-      else if (b.type === 'mnemonic') count += 1;
-      else if (b.type === 'table') count += 1;
-    });
-  }
-  return count;
-}
-
-// ── Helper: 渲染模式一卡片上的架構膠囊 (Pills Preview) ──────
-function renderMindmapCardPills(cd) {
-  if (!cd) return '';
-  const pills = [];
-
-  if (cd.content && cd.content.length) {
-    const orangeSections = cd.content.filter(b => b.type === 'orange' && !['情境', '解答', '複習思考題'].includes(b.text));
-    orangeSections.slice(0, 6).forEach(sec => {
-      pills.push(`<span class="mm-preview-pill"><span class="pill-icon">📖</span>${escapeHtml(sec.text)}</span>`);
-    });
-    if (orangeSections.length > 6) {
-      pills.push(`<span class="mm-preview-pill">+${orangeSections.length - 6} 個主主題</span>`);
-    }
-
-    const clinicalCount = cd.content.filter(b => b.type === 'clinical').length;
-    if (clinicalCount > 0) {
-      pills.push(`<span class="mm-preview-pill" style="border-color:rgba(239,68,68,0.4);color:#dc2626"><span class="pill-icon">🚨</span>臨床重點 (${clinicalCount})</span>`);
-    }
-
-    const mnemonicCount = cd.content.filter(b => b.type === 'mnemonic').length;
-    if (mnemonicCount > 0) {
-      pills.push(`<span class="mm-preview-pill" style="border-color:rgba(234,179,8,0.4);color:#b45309"><span class="pill-icon">💡</span>記憶口訣 (${mnemonicCount})</span>`);
-    }
-  }
-
-  return pills.join('');
 }
 
 // ── AI 臨床講師系統：將章節內文深度轉譯為教官授課逐字教案 ──
