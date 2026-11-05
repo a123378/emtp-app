@@ -255,6 +255,27 @@
     } catch (e) { /* 斷網時更新不了，照舊 */ }
   }
 
+  // ── 電腦本機版（開啟離線版.bat）：讓伺服器知道網頁還開著，全部關掉後它會自動停止 ──
+
+  const LOCAL_HOSTS = ['127.0.0.1', 'localhost'];
+  const LOCAL_HEARTBEAT_MS = 20000;
+
+  function startLocalPresence() {
+    if (!LOCAL_HOSTS.includes(location.hostname)) return;
+    const id = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    const url = kind => `/__/local-${kind}?id=${id}`;
+    let timer = null;
+    const ping = () => fetch(url('heartbeat'), { cache: 'no-store' })
+      .then(res => { if (res.status === 404) clearInterval(timer); }) // 不是本機版伺服器（例如一般測試伺服器）
+      .catch(() => {});
+    ping();
+    timer = setInterval(ping, LOCAL_HEARTBEAT_MS);
+    window.addEventListener('pagehide', () => {
+      if (navigator.sendBeacon) navigator.sendBeacon(url('bye'));
+    });
+    window.addEventListener('pageshow', e => { if (e.persisted) ping(); });
+  }
+
   // ── 啟動 ───────────────────────────────────────────
 
   function bindEnvironmentEvents() {
@@ -273,6 +294,7 @@
 
   async function init() {
     render();
+    startLocalPresence();
     if (!view.supported) return;
     bindEnvironmentEvents();
 
