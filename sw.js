@@ -131,6 +131,24 @@ async function networkFirst(event, key) {
   }
 }
 
+/**
+ * 章節資料（chapters/*.json?v=）：快取版號與這次請求相同就直接用快取，背景再向網路更新；
+ * 版號不同（資料有改版）或沒有快取時，照網路優先處理。
+ * 這樣開過的章節不必每次等網路，網路慢時也不會卡在 NETWORK_TIMEOUT_MS。
+ */
+async function versionedCacheFirst(event, key) {
+  const reqVersion = new URL(event.request.url).searchParams.get('v') || '';
+  if (!reqVersion) return networkFirst(event, key);
+  const cache = await caches.open(CACHE);
+  const cached = await cache.match(key);
+  if (!cached || cached.headers.get(VERSION_HEADER) !== reqVersion) return networkFirst(event, key);
+
+  event.waitUntil(fetch(event.request, { cache: 'no-cache' }).then(res => {
+    if (isCacheable(res)) return cache.put(key, withHeaders(res, { [VERSION_HEADER]: reqVersion }));
+  }).catch(() => {}));
+  return cached;
+}
+
 /** 先回快取，同時在背景更新；沒有快取就等網路。 */
 async function staleWhileRevalidate(event, cacheName, key) {
   const cache = await caches.open(cacheName);
@@ -169,6 +187,8 @@ self.addEventListener('fetch', event => {
   const key = cacheKey(req.url);
   if (rel.startsWith('images/') || rel.startsWith('icons/')) {
     event.respondWith(staleWhileRevalidate(event, CACHE, key));
+  } else if (rel.startsWith('chapters/')) {
+    event.respondWith(versionedCacheFirst(event, key));
   } else {
     event.respondWith(networkFirst(event, key));
   }

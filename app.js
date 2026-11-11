@@ -237,19 +237,34 @@ function closeMobileSidebar() {
 }
 
 // ── Load chapter JSON data ────────────────────────────
-async function loadChapterData(chId) {
-  // Show loading
-  els.notesLoading.style.display = 'flex';
-  els.notesContent.classList.add('hidden');
+// 這次開啟網頁期間讀過的章節留在記憶體，回頭再看不必重新下載
+const CHAPTER_MEMORY_LIMIT = 20;
+const _chapterMemory = new Map();
 
-  let chData = null;
+async function fetchChapterJson(chId) {
+  if (_chapterMemory.has(chId)) return _chapterMemory.get(chId);
   try {
     const r = await fetch(dataUrl(`chapters/${chId}.json`));
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    chData = await r.json();
+    const data = await r.json();
+    _chapterMemory.set(chId, data);
+    if (_chapterMemory.size > CHAPTER_MEMORY_LIMIT) {
+      _chapterMemory.delete(_chapterMemory.keys().next().value); // 丟掉最早讀的
+    }
+    return data;
   } catch (e) {
-    chData = null;
+    return null;
   }
+}
+
+async function loadChapterData(chId) {
+  // 已在記憶體的章節直接顯示，不閃載入動畫
+  if (!_chapterMemory.has(chId)) {
+    els.notesLoading.style.display = 'flex';
+    els.notesContent.classList.add('hidden');
+  }
+
+  const chData = await fetchChapterJson(chId);
   // 筆記裡要嵌入歷屆試題，渲染前確定題庫已載入（通常早就好了；失敗時 loadAllQuizzes 會給空陣列）
   await state.quizzesReady;
   // 等待期間使用者已換到別章：丟掉這份資料，交給新的那次載入
