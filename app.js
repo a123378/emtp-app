@@ -1472,10 +1472,7 @@ function closeImageModal() {
 window.openImageModal = openImageModal;
 window.closeImageModal = closeImageModal;
 
-// ── 章節開頭心智圖卡片 ─────────────────────────────────
-const MINDMAP_INTRO_SECTIONS = ['情境', '解答', '複習思考題'];
-const MINDMAP_PREVIEW_LIMIT = 6;
-
+// ── 章節開頭心智圖卡片（原始 SVG 圖譜縮圖，點擊放大檢視） ──
 function renderChapterMindmapCard(cd, chId) {
   const fullTitle = `${cd.num || ''} ${cd.title || ''}`.trim();
   return `
@@ -1485,52 +1482,20 @@ function renderChapterMindmapCard(cd, chId) {
         <div class="mindmap-card-badge">
           <span class="mindmap-badge-icon">🧠</span>
           <span class="mindmap-badge-text">本章核心架構心智圖</span>
-          <span class="mindmap-badge-sub">MIND MAP</span>
         </div>
-        <div class="mindmap-zoom-tip"><span class="zoom-icon">🔍</span> 展開完整架構樹</div>
+        <div class="mindmap-zoom-tip"><span class="zoom-icon">🔍</span> 點擊放大</div>
       </div>
-      <div class="mindmap-dynamic-preview">${renderMindmapCardPills(cd)}</div>
-      <div class="mindmap-card-footer">
-        <span class="mindmap-stat-badge">📊 共 ${countChapterMindmapNodes(cd)} 個知識節點</span>
-        <span class="mindmap-cta-btn">開啟互動心智圖（可搜尋／展開／收合）→</span>
+      <div class="mindmap-card-preview">
+        <img src="${dataUrl(`images/mindmaps/${chId}.svg`)}" alt="${escapeHtml(fullTitle)} 心智圖" loading="lazy" draggable="false"
+             onerror="this.closest('.chapter-mindmap-card').remove()">
       </div>
     </div>`;
 }
 
-/** 統計心智圖節點數：根節點＋主題＋子題＋各條列要點 */
-function countChapterMindmapNodes(cd) {
-  if (!cd || !cd.content) return 1;
-  return cd.content.reduce((count, b) => {
-    if (b.type === 'list' && b.items) return count + b.items.length;
-    if (b.type === 'clinical' && b.points) return count + b.points.length;
-    if (['orange', 'blue', 'mnemonic', 'table'].includes(b.type)) return count + 1;
-    return count;
-  }, 1);
-}
-
-/** 卡片預覽：前幾個主題分支，加上臨床重點與口訣數量 */
-function renderMindmapCardPills(cd) {
-  if (!cd || !cd.content || !cd.content.length) return '';
-  const topics = cd.content.filter(b => b.type === 'orange' && !MINDMAP_INTRO_SECTIONS.includes(b.text));
-  const pills = topics.slice(0, MINDMAP_PREVIEW_LIMIT).map(sec =>
-    `<span class="mm-preview-pill"><span class="pill-icon">📖</span>${escapeHtml(sec.text)}</span>`);
-  if (topics.length > MINDMAP_PREVIEW_LIMIT) {
-    pills.push(`<span class="mm-preview-pill">+${topics.length - MINDMAP_PREVIEW_LIMIT} 個主題</span>`);
-  }
-  const clinicalCount = cd.content.filter(b => b.type === 'clinical').length;
-  if (clinicalCount) {
-    pills.push(`<span class="mm-preview-pill pill-clinical"><span class="pill-icon">🚨</span>臨床重點 (${clinicalCount})</span>`);
-  }
-  const mnemonicCount = cd.content.filter(b => b.type === 'mnemonic').length;
-  if (mnemonicCount) {
-    pills.push(`<span class="mm-preview-pill pill-mnemonic"><span class="pill-icon">💡</span>記憶口訣 (${mnemonicCount})</span>`);
-  }
-  return pills.join('');
-}
-
-// ── Chapter Mindmap Controller (Interactive Dynamic Tree & SVG Lightbox) ──
+// ── 心智圖放大檢視器（縮放、拖曳） ──
+const MINDMAP_MIN_SCALE = 0.4;
+const MINDMAP_MAX_SCALE = 4.0;
 const mindmapViewer = {
-  viewMode: 'interactive', // 'interactive' (動態樹狀架構) | 'svg' (靜態圖譜縮放)
   scale: 1,
   translateX: 0,
   translateY: 0,
@@ -1541,216 +1506,8 @@ const mindmapViewer = {
   initialPinchScale: 1
 };
 
-// ── 渲染完整動態互動心智圖樹 ──
-function renderInteractiveMindmap(cd) {
-  const container = document.getElementById('mindmap-interactive-view');
-  if (!container || !cd) return;
-
-  let html = `
-    <div class="mm-tree-root">
-      <div class="mm-root-card">
-        <span class="mm-root-badge">🧠 EMT-P 全景架構圖譜</span>
-        <h2 class="mm-root-title">${escapeHtml(cd.num)} ${escapeHtml(cd.title)}</h2>
-      </div>
-      <div class="mm-branches-container">
-  `;
-
-  // 內文各大核心主題分支 (orange blocks)
-  if (cd.content && cd.content.length) {
-    const sections = [];
-    let curSec = null;
-
-    cd.content.forEach((block) => {
-      if (block.type === 'orange') {
-        if (curSec) sections.push(curSec);
-        curSec = {
-          title: block.text,
-          page: block.page,
-          subgroups: []
-        };
-      } else if (curSec) {
-        if (block.type === 'blue') {
-          curSec.subgroups.push({
-            title: block.text,
-            items: []
-          });
-        } else {
-          // 若尚未有 blue subgroup，建立預設 sub
-          if (!curSec.subgroups.length) {
-            curSec.subgroups.push({ title: '', items: [] });
-          }
-          const activeSub = curSec.subgroups[curSec.subgroups.length - 1];
-          activeSub.items.push(block);
-        }
-      }
-    });
-    if (curSec) sections.push(curSec);
-
-    sections.forEach((sec, sIdx) => {
-      const isIntro = ['情境', '解答', '複習思考題'].includes(sec.title);
-      let itemsTotal = 0;
-      sec.subgroups.forEach(g => {
-        g.items.forEach(it => {
-          if (it.type === 'list' && it.items) itemsTotal += it.items.length;
-          else if (it.type === 'clinical' && it.points) itemsTotal += it.points.length;
-          else itemsTotal++;
-        });
-      });
-
-      html += `
-        <div class="mm-branch-card mm-branch-section" data-sec-idx="${sIdx}">
-          <div class="mm-branch-head" onclick="toggleBranchNode(this)">
-            <span class="mm-toggle-icon">▼</span>
-            <span class="mm-branch-icon">${isIntro ? '💡' : '📖'}</span>
-            <span class="mm-branch-title">${escapeHtml(sec.title)}</span>
-            ${sec.page ? `<span class="mm-page-tag">p.${sec.page}</span>` : ''}
-            <span class="mm-count-badge">${itemsTotal} 個要點</span>
-          </div>
-          <div class="mm-branch-body">
-            ${sec.subgroups.map(sub => `
-              <div class="mm-subgroup">
-                ${sub.title ? `<div class="mm-subgroup-title">🔹 ${mdInline(sub.title)}</div>` : ''}
-                ${sub.items.map(it => {
-                  if (it.type === 'list' && it.items) {
-                    return `
-                      <ul class="mm-leaf-list">
-                        ${it.items.map(li => `<li>${mdInline(li)}</li>`).join('')}
-                      </ul>
-                    `;
-                  } else if (it.type === 'clinical') {
-                    return `
-                      <div class="mm-clinical-box">
-                        <div class="mm-box-tag red">🚨 臨床實務重點：${escapeHtml(it.label || '核心考點')}</div>
-                        <ul class="mm-leaf-list" style="padding-left:16px">
-                          ${(it.points || []).map(p => `<li>${mdInline(p)}</li>`).join('')}
-                        </ul>
-                      </div>
-                    `;
-                  } else if (it.type === 'mnemonic') {
-                    return `
-                      <div class="mm-mnemonic-box">
-                        <div class="mm-box-tag yellow">💡 記憶口訣</div>
-                        <div style="font-weight:700">${mdInline(it.text)}</div>
-                      </div>
-                    `;
-                  } else if (it.type === 'table') {
-                    return `
-                      <div class="mm-table-summary-box">
-                        <div class="mm-box-tag green">📊 核心對照表</div>
-                        ${renderCompTable(it)}
-                      </div>
-                    `;
-                  } else if (it.type === 'text') {
-                    return `<p style="margin:6px 0;font-size:0.88rem;line-height:1.6">${mdInline(it.text)}</p>`;
-                  }
-                  return '';
-                }).join('')}
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    });
-  }
-
-  html += `
-      </div>
-    </div>
-  `;
-
-  container.innerHTML = html;
-}
-
-function toggleBranchNode(headEl) {
-  const card = headEl.closest('.mm-branch-card');
-  if (card) {
-    card.classList.toggle('collapsed');
-  }
-}
-
-function mindmapExpandAll() {
-  const cards = document.querySelectorAll('.mm-branch-card');
-  cards.forEach(c => c.classList.remove('collapsed'));
-}
-
-function mindmapCollapseAll() {
-  const cards = document.querySelectorAll('.mm-branch-card');
-  cards.forEach(c => c.classList.add('collapsed'));
-}
-
-function filterMindmapTree(query) {
-  const q = (query || '').trim().toLowerCase();
-  const cards = document.querySelectorAll('.mm-branch-card');
-  const countEl = document.getElementById('mindmap-search-count');
-  let matchCount = 0;
-
-  cards.forEach(card => {
-    if (!q) {
-      card.style.display = '';
-      card.querySelectorAll('.mm-mark').forEach(m => {
-        const parent = m.parentNode;
-        parent.replaceChild(document.createTextNode(m.textContent), m);
-        parent.normalize();
-      });
-      return;
-    }
-
-    const text = card.textContent.toLowerCase();
-    if (text.includes(q)) {
-      card.style.display = '';
-      card.classList.remove('collapsed');
-      matchCount++;
-    } else {
-      card.style.display = 'none';
-    }
-  });
-
-  if (countEl) {
-    countEl.textContent = q ? `${matchCount} 個分支` : '';
-  }
-}
-
-function toggleMindmapViewMode() {
-  const interView = document.getElementById('mindmap-interactive-view');
-  const svgWrapper = document.getElementById('mindmap-transform-wrapper');
-  const toggleBtn = document.getElementById('mm-view-toggle-btn');
-  const expandBtn = document.getElementById('mm-expand-btn');
-  const collapseBtn = document.getElementById('mm-collapse-btn');
-  const searchBox = document.querySelector('.mindmap-search-box');
-  const zoomBtns = document.querySelectorAll('.mindmap-tool-btn.zoom-btn');
-  const zoomLbl = document.getElementById('mindmap-zoom-label');
-  const hintEl = document.getElementById('mindmap-footer-hint');
-
-  if (mindmapViewer.viewMode === 'interactive') {
-    // 切換為靜態 SVG 模式
-    mindmapViewer.viewMode = 'svg';
-    if (interView) interView.classList.add('hidden');
-    if (svgWrapper) svgWrapper.classList.remove('hidden');
-    if (toggleBtn) toggleBtn.textContent = '🌳 互動樹狀';
-    if (expandBtn) expandBtn.classList.add('hidden');
-    if (collapseBtn) collapseBtn.classList.add('hidden');
-    if (searchBox) searchBox.classList.add('hidden');
-    zoomBtns.forEach(b => b.classList.remove('hidden'));
-    if (zoomLbl) zoomLbl.classList.remove('hidden');
-    if (hintEl) hintEl.textContent = '💡 原始 SVG 模式：支援滑鼠滾輪 / 雙指捏合縮放，按住可任意平移檢視細節';
-
-    mindmapViewer.scale = 1;
-    mindmapViewer.translateX = 0;
-    mindmapViewer.translateY = 0;
-    updateMindmapTransform();
-  } else {
-    // 切換回動態互動架構模式
-    mindmapViewer.viewMode = 'interactive';
-    if (interView) interView.classList.remove('hidden');
-    if (svgWrapper) svgWrapper.classList.add('hidden');
-    if (toggleBtn) toggleBtn.textContent = '🖼️ 原始圖譜';
-    if (expandBtn) expandBtn.classList.remove('hidden');
-    if (collapseBtn) collapseBtn.classList.remove('hidden');
-    if (searchBox) searchBox.classList.remove('hidden');
-    zoomBtns.forEach(b => b.classList.add('hidden'));
-    if (zoomLbl) zoomLbl.classList.add('hidden');
-    if (hintEl) hintEl.textContent = '💡 互動模式：點擊分支標題可展開/收合，上方可直接搜尋知識點；文字完整無截斷';
-  }
+function clampMindmapScale(scale) {
+  return Number(Math.min(MINDMAP_MAX_SCALE, Math.max(MINDMAP_MIN_SCALE, scale)).toFixed(2));
 }
 
 function updateMindmapTransform() {
@@ -1769,43 +1526,14 @@ function openMindmapModal(chId, title) {
   const modal = document.getElementById('mindmap-modal');
   const img = document.getElementById('mindmap-modal-img');
   const titleText = document.getElementById('mindmap-modal-title-text');
-  const searchInput = document.getElementById('mindmap-search-input');
-  const searchCount = document.getElementById('mindmap-search-count');
   if (!modal) return;
 
   if (titleText) titleText.textContent = `${title || chId} 核心架構圖譜`;
   if (img) img.src = dataUrl(`images/mindmaps/${chId}.svg`);
-  if (searchInput) searchInput.value = '';
-  if (searchCount) searchCount.textContent = '';
-
-  // 渲染動態互動架構樹
-  renderInteractiveMindmap(state.currentChData);
-
-  // 預設為動態互動樹狀模式
-  mindmapViewer.viewMode = 'interactive';
-  const interView = document.getElementById('mindmap-interactive-view');
-  const svgWrapper = document.getElementById('mindmap-transform-wrapper');
-  const toggleBtn = document.getElementById('mm-view-toggle-btn');
-  const expandBtn = document.getElementById('mm-expand-btn');
-  const collapseBtn = document.getElementById('mm-collapse-btn');
-  const searchBox = document.querySelector('.mindmap-search-box');
-  const zoomBtns = document.querySelectorAll('.mindmap-tool-btn.zoom-btn');
-  const zoomLbl = document.getElementById('mindmap-zoom-label');
-  const hintEl = document.getElementById('mindmap-footer-hint');
-
-  if (interView) interView.classList.remove('hidden');
-  if (svgWrapper) svgWrapper.classList.add('hidden');
-  if (toggleBtn) toggleBtn.textContent = '🖼️ 原始圖譜';
-  if (expandBtn) expandBtn.classList.remove('hidden');
-  if (collapseBtn) collapseBtn.classList.remove('hidden');
-  if (searchBox) searchBox.classList.remove('hidden');
-  zoomBtns.forEach(b => b.classList.add('hidden'));
-  if (zoomLbl) zoomLbl.classList.add('hidden');
-  if (hintEl) hintEl.textContent = '💡 互動模式：點擊分支標題可展開/收合，上方可直接搜尋知識點；文字完整無截斷';
+  mindmapResetZoom();
 
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
-
   initMindmapInteractions();
 }
 
@@ -1821,12 +1549,12 @@ function closeMindmapModal() {
 }
 
 function mindmapZoomIn() {
-  mindmapViewer.scale = Math.min(4.0, Number((mindmapViewer.scale * 1.25).toFixed(2)));
+  mindmapViewer.scale = clampMindmapScale(mindmapViewer.scale * 1.25);
   updateMindmapTransform();
 }
 
 function mindmapZoomOut() {
-  mindmapViewer.scale = Math.max(0.4, Number((mindmapViewer.scale / 1.25).toFixed(2)));
+  mindmapViewer.scale = clampMindmapScale(mindmapViewer.scale / 1.25);
   updateMindmapTransform();
 }
 
@@ -1855,9 +1583,8 @@ function initMindmapInteractions() {
 
   mindmapEventsBound = true;
 
-  // 1. 滑鼠拖曳平移 (僅在 SVG 模式時啟用)
+  // 1. 滑鼠拖曳平移
   container.addEventListener('mousedown', (e) => {
-    if (mindmapViewer.viewMode !== 'svg') return;
     if (e.button !== 0) return;
     mindmapViewer.isDragging = true;
     mindmapViewer.dragStartX = e.clientX - mindmapViewer.translateX;
@@ -1880,17 +1607,15 @@ function initMindmapInteractions() {
     }
   });
 
-  // 2. 滑鼠滾輪縮放 (僅在 SVG 模式時啟用)
+  // 2. 滑鼠滾輪縮放
   container.addEventListener('wheel', (e) => {
-    if (mindmapViewer.viewMode !== 'svg') return;
     e.preventDefault();
     const factor = e.deltaY < 0 ? 1.15 : 0.88;
-    const newScale = Math.min(4.0, Math.max(0.4, mindmapViewer.scale * factor));
-    mindmapViewer.scale = Number(newScale.toFixed(2));
+    mindmapViewer.scale = clampMindmapScale(mindmapViewer.scale * factor);
     updateMindmapTransform();
   }, { passive: false });
 
-  // 3. 手機觸控操作 (SVG 模式下的縮放平移)
+  // 3. 手機觸控縮放平移
   let lastTouchX = 0;
   let lastTouchY = 0;
 
@@ -1901,7 +1626,6 @@ function initMindmapInteractions() {
   }
 
   container.addEventListener('touchstart', (e) => {
-    if (mindmapViewer.viewMode !== 'svg') return;
     if (e.touches.length === 1) {
       mindmapViewer.isDragging = true;
       lastTouchX = e.touches[0].clientX;
@@ -1914,7 +1638,6 @@ function initMindmapInteractions() {
   }, { passive: true });
 
   container.addEventListener('touchmove', (e) => {
-    if (mindmapViewer.viewMode !== 'svg') return;
     if (e.touches.length === 1 && mindmapViewer.isDragging) {
       const dx = e.touches[0].clientX - lastTouchX;
       const dy = e.touches[0].clientY - lastTouchY;
@@ -1926,7 +1649,7 @@ function initMindmapInteractions() {
     } else if (e.touches.length === 2 && mindmapViewer.initialPinchDist > 0) {
       const dist = getTouchDistance(e);
       const ratio = dist / mindmapViewer.initialPinchDist;
-      mindmapViewer.scale = Math.min(4.0, Math.max(0.4, Number((mindmapViewer.initialPinchScale * ratio).toFixed(2))));
+      mindmapViewer.scale = clampMindmapScale(mindmapViewer.initialPinchScale * ratio);
       updateMindmapTransform();
     }
   }, { passive: true });
@@ -1950,11 +1673,6 @@ window.mindmapZoomIn = mindmapZoomIn;
 window.mindmapZoomOut = mindmapZoomOut;
 window.mindmapResetZoom = mindmapResetZoom;
 window.mindmapToggleFullscreen = mindmapToggleFullscreen;
-window.mindmapExpandAll = mindmapExpandAll;
-window.mindmapCollapseAll = mindmapCollapseAll;
-window.toggleMindmapViewMode = toggleMindmapViewMode;
-window.filterMindmapTree = filterMindmapTree;
-window.toggleBranchNode = toggleBranchNode;
 
 // ── 行動端橫向全螢幕沉浸閱讀控制器 ──
 //   手機橫向（高度 ≤ 500px）時，模式一、口試重點的頂欄與側欄一律收起，
