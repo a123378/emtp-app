@@ -1263,51 +1263,6 @@
     "**所有意識不清病人均需檢測血糖。**",
     "相較於成人，**腦部尚未發育完全的新生兒較無法忍受低血糖所帶來的不良影響**，因此可建議由**靜脈注射每公斤體重 2~5 毫升的 D10W**。**但此舉需要經由線上醫療指導醫師同意。**"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**判斷新生兒是否需要急救的三點**：① 是否為足月產？② 是否會哭跟呼吸？③ 肌肉張力是否良好？",
-    {
-     "text": "**新生兒急救的四大措施**：",
-     "sub": [
-      "**初步的穩定措施**：擦乾、保暖、擺位、刺激、必要時抽吸。",
-      "**盡量在黃金 1 分鐘內給予有效正壓通氣 30 秒**——前 15 秒若有效再繼續給 15 秒；前 15 秒若無效，通氣校正步驟後重新給 30 秒。",
-      "**3:1 胸部按壓 30 循環，共 1 分鐘。**",
-      "**給予腎上腺素(epinephrine)或輸液。**"
-     ]
-    },
-    "**在決定是否跳到下一個步驟前，根據心跳數來做決定；完成每個步驟後再重新評估心跳數。**",
-    "**兒童評估六大步驟**：出發前的準備 → 評估現場 → 一般評估(PAT) → 初級評估(ABCDE) 並決定是否立即轉送 → 次級評估（重要病史和身體診察）→ 持續評估。",
-    "特殊病態生理的評估與處置需熟悉**心搏緩慢處置流程圖**與**心搏過快處置流程圖**。",
-    "**兒童遭受的外傷機制以鈍傷居多，且鈍傷所產生的傷害通常是多重系統傷害。**",
-    "處理兒童外傷急救的評估順序和成人原則類似，但**須因應兒童生理及解剖結構的特點調整**。",
-    "面對 CSHCN 發生緊急狀況，可用 **DOPE** 口訣排除原因：Displacement（移位）、Obstruction（阻塞）、各種 P 開頭的併發症、Equipment failure（機械故障）。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "Gary M. Weiner et al: Textbook of Neonatal Resuscitation, 8th edition, 2021.",
-    "American Academy of Pediatrics / American College of Emergency Physicians: APLS: The Pediatric Emergency Medicine Resource, 5th edition, 2011.",
-    "Part 4: Pediatric Basic and Advanced Life Support: 2020 American Heart Association Guidelines for CPR and ECC. Topjian AA, et al. Circulation. 2020.",
-    "Part 5: Neonatal Resuscitation: 2020 American Heart Association Guidelines for CPR and ECC. Aziz K, et al. Circulation. 2020.",
-    "Kliegman R.M. et al: Nelson Textbook of Pediatrics, 21st edition, 2020.",
-    "Angus W. Management of convulsive status epilepticus in children. In: UpToDate. (Accessed on July 14, 2024.)",
-    "Diva D.D.L. et al. Approach to hypoglycemia in infants and children. In: UpToDate. (Accessed on July 14, 2024.)",
-    "Judith E. Tintinalli et al: Tintinalli's Emergency Medicine: A Comprehensive Study Guide, 9th edition, 2020.",
-    "衛生福利部（委託臺灣兒科醫學會編製）：兒少虐待及疏忽—醫事人員工作手冊，第二版，2016 年。",
-    "AHA 準則重點提要專案小組：AMERICAN HEART ASSOCIATION 2020 年 CPR 與 ECC 準則摘要，2020 年。",
-    "Joshua N. Technique of emergency endotracheal intubation in children. In: UpToDate. (Accessed on July 14, 2024.)"
-   ]
   }
  ],
  "summary": {

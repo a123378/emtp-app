@@ -2731,32 +2731,6 @@
     "Q： 右心梗塞的病人，若血壓仍大於 100，NTG 治療有無害處？（EMT-P 鄭睿旭）　A： **右心梗塞的病人因急性右心室功能障礙，以致肺部血流不足，由肺靜脈回到左心房的血量降低，亦即左心室前負荷降低；因此維持左心室前負荷為治療首要目標**。使用血管擴張劑如 NTG 等將適得其反——**右心梗塞的病人即使血壓仍大於 100，使用 NTG 將大幅降低血壓，應予避免**。另**右心梗塞通常合併於左心室下壁心肌梗塞，而左心室下壁因鄰近於迷走神經豐富的橫隔膜，因此易引發迷走神經興奮性增高，所以右心梗塞可能因此而血壓降低，使用 NTG 亦成為禁忌**。",
     "Q： 為什麼 AMI 的死亡都發生在前幾小時，不是應隨著心肌壞死的量增加死亡嗎？（EMT-P 鄭睿旭）　A： **AMI 初期高死亡率，除了大量心肌壞死以致心因性休克外，主要與 VT/VF 有關**。**1996 年版 ACLS 所採資料顯示 90％ VF 在 AMI 發作的第一個小時發生；2000 年版 ACLS 所採資料則顯示超過一半 VF 在 AMI 發作的第一個小時發生**。雖然心肌缺血或壞死範圍愈大，的確與發生 VT/VF 的或然率有關；但與 AMI 急性期 VT/VF 相關的因素甚多，**未必與心肌缺血或壞死範圍成正比，而是與冠狀動脈急性阻塞所產生的許多病生理反應，如 catecholamine 的釋放等有關**。**倘若未能及時去顫，則可能造成死亡**。"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "急性胸痛時，可能危及生命的有**「急性冠狀動脈症候群」、「主動脈剝離」、「肺動脈栓塞」、「張力性氣胸」、「心包膜填塞」或「食道破裂」**。**現行胸痛到院前通用流程，主要是針對「急性冠狀動脈症候群」設計**；但若用於**「主動脈剝離」或「肺動脈栓塞」情形，只要注意禁忌，通常仍可適用**。對於**「張力性氣胸」，迅速減壓仍為首要工作**！",
-    "**對於穩定性上心室頻脈，寧可使用 Modified valsalva maneuver**；**筆者建議勿常規使用頸動脈竇按摩**。",
-    "**對於昏厥的病人，要釐清是否有發作後期混亂來跟癲癇發作鑑別**。也要**想辦法透過病史及理學檢查排除危險診斷，如心肌梗塞、致命性心律不整、主動脈剝離、肺栓塞等**。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "Mick J. Sanders, MSA, EMT-P. Mosby's Paramedic Textbook, Revised 4th Edition. Mosby Jems, Elsevier. 2012.",
-    "Field JM, Hazinski MF, Gilmore D. Handbook of Emergency Cardiovascular Care for Healthcare Providers. American Heart Association. 2000.",
-    "臺北市政府消防局醫療顧問委員會：臺北市政府消防局高級救護技術員到院前緊急救護標準作業程序手冊。",
-    "Diagnostic accuracy of electrocardiogram for acute coronary OCClUsion resuLTing in myocardial infarction (DIFOCCULT Study). Int J Cardiol Heart Vasc. 2020 Jul 30:30:100603.",
-    "Chest pain in the emergency room: value of the HEART score. Neth Heart J. 2008 Jun;16(6):191-6."
-   ]
   }
  ],
  "summary": {

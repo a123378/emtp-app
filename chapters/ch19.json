@@ -1820,33 +1820,6 @@
   {
    "type": "mnemonic",
    "text": "**內科 vs. 外傷的病史詢問口訣：「內科問 OPQRST，外傷問機轉」**<br>**內科**：病生理變化**發生在症狀之前** → 用 **OPQRST** 追出症狀演化的順序。<br>**外傷**：病生理變化**發生在事件之後** → 改問**外傷機轉**（車禍／墜樓、時速、有無煞車痕、有無安全帶／安全帽、鈍挫傷或穿刺傷）＋**影響處置的因子（最後用餐時間）**＋**影響預後的因子（年齡、過去重要疾病）**。<br>外傷的身體診察目標＝找**立即致命傷（張力性氣胸）**與**影響預後的傷（頸椎骨折）**。"
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**瞭解病人病史，可以讓後續的病人評估更有效率且精準**，同時也可以**協助決定現場病人處置的優先順序**。",
-    "**病史詢問的內容包括事件時間地點、病人基本資料、可信度評估、主訴、現病史、主訴導向式系統檢閱、過去病史與現有健康狀態。**",
-    "**現病史是針對主訴症狀，釐清發生當時狀況、性質、嚴重度、位置以及有無轉移、持續時間與頻率、有無加劇或緩解此一症狀的因素**，同時**依照可能的鑑別診斷來詢問有無出現其他相關症狀**，最後**就所有症狀的發生做時序性的整理**。",
-    "高級救護技術員**除了必須判斷病情給予醫療上的處置之外，同時也要隨時關心病人的感受與尊重病人的隱私**。",
-    "由於現場救護往往會遭遇**特殊的病人或狀況**影響病人的溝通與評估，高級救護技術員**除了必須熟悉各種特殊狀況的溝通技巧外，也要避免因為過度承諾而導致病人或家屬的過度期待**。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "Lynn S. Bickley and Peter G. Szilagyi. Bates' Guide to Physical Examination and History Taking, 10th Edition. Lippincott Williams & Wilkins. 2008.",
-    "Mick J. Sanders, MSA, EMT-P. Mosby's Paramedic Textbook, Revised 4th Edition. Mosby Jems, Elsevier. 2012.",
-    "Nicholas Talley and Simon O'connor. Clinical Examination, 2nd Edition. APAC. 2005.",
-    "Jerome P. Kassirer, John B. Wong and Richard Kopelman. Learning Clinical Reasoning, 2nd Edition. Lippincott Williams & Wilkins. 2009."
-   ]
   }
  ],
  "summary": {

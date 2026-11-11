@@ -2077,40 +2077,6 @@
     "Q： 如何診斷及處置兩種以上型態休克的病人？（EMT-P 黃煒翔）　A： 例如**高處墜落、下半身癱瘓無力又見雙腿開放性骨折、血壓量不到只摸得到頸動脈搏動**的病人，**究竟是低血容性休克還是神經性休克？諸如此類的複因型態休克在臨床上並不少見**。臨床醫師會**在鑑別診斷上列出種種可能原因並一併處理，不會僅限定一個診斷**。到院後急診會**繼續積極控制出血、給予輸液治療及血管收縮劑、安排影像學檢查（電腦斷層或核磁共振）並會診神經外科**，**一方面處置出血性休克，也同時處理神經性休克**；而**在到院前有效控制明顯的外出血，則是一切處理的重要基石**。",
     "Q： 對於重大外傷的病人，現場處理的速度越快越好，在執行必要的止血處置時應注意哪些事情才能更有效率呢？（EMT-P 陳冠佑）　A： ① **避免止血包紮時隔著病人身上的衣物以及任何飾品**，這些東西**很可能在搬運過程中滑動，造成原本血止住的地方又開始流血**。② **選用止血工具的判斷應快速正確**——**一般穿刺傷口應直接使用直接加壓止血；無法成功或病人需立即離開危險現場時可考慮使用止血帶；但若穿刺傷靠近軀幹部位（如鼠蹊或腋下），止血帶非常容易滑脫，此時應考慮使用紗布深入填塞**。③ **過量輸液也可能妨礙止血**——**大量輸液可能造成稀釋性的凝血功能障礙，過高的血壓也可能造成原本已經止血的位置再度出血**；因此**到院前的輸液應較以往保守，只要病人的神智能夠稍微改進，就不需要持續大量給予輸液**。"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**休克的定義**：休克是指**組織因血液灌流不足引起細胞缺氧，進而阻礙細胞的新陳代謝，最後導致細胞死亡**。",
-    "**出血性休克為低血容性休克最常見的休克型態**。可分為**四級**，**第二級通常心跳速率會增快，但血壓維持不變**；**血壓開始下降時代表休克可能已進展至第三級**。",
-    "**休克處理**：目的在於**透過回復組織灌流的方式，來改善細胞缺氧的情形**。步驟包括：**維持呼吸道與供氧、有效控制出血、在不延遲病人的後送前提下考慮建立靜脈輸液路徑**。",
-    "**止血處置**：院前控制外出血有**直接加壓、止血帶及傷口填塞**等方式。**直接加壓適用在各種出血傷口，止血帶適用在肢體，而傷口填塞以交界處為主**。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "NAEMT, PHTLS Prehospital Trauma Life Support (PHTLS: Basic & Advanced Prehospital Trauma Life Support), 10th edition.",
-    "The American College of Surgeons, ATLS: Advanced Trauma Life Support, 10th edition, 2018.",
-    "Tactical Combat Casualty Care Handbook. Version 5",
-    "Use of chitosan bandage to prevent fatal infections developing from highly contaminated wounds in mice. Biomaterials. 2006 Aug;27(22):4157-64.",
-    "Application of a zeolite hemostatic agent achieves 100％ survival in a lethal model of complex groin injury in swine. J Trauma. 2004 May;56(5):974-83.",
-    "Comparative efficacy of granular and bagged formulations of the hemostatic agent QuikClot. J Trauma. 2007 Oct;63(4):775-82.",
-    "The Hartford Consensus III. Implementation of bleeding control. J Spec Oper Med. 2015 Winter;15(4):136-41.",
-    "台灣血液基金會。精實輸血手冊第二版。2022年。",
-    "Faster refill in an urban emergency medical services system saves lives: A prospective preliminary evaluation of a prehospital advanced resuscitative care bundle. J Trauma Acute Care Surg. 2024 May 1;96(5):702-707.",
-    "PATCH-Trauma Investigators and the ANZICS Clinical Trials Group, et al. Prehospital Tranexamic Acid for Severe Trauma. N Engl J Med. 2023 Jul 13;389(2):127-136.",
-    "內政部消防署。TECC戰術緊急傷患救護訓練手冊。",
-    "新北市政府消防局快搜部隊醫療組現場作業指引"
-   ]
   }
  ],
  "summary": {

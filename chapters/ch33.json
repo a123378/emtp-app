@@ -2621,41 +2621,6 @@
     "Q： 房室阻斷(atrio-ventricular block)的形成是否有階段性呢？從一度演變成二度，再進階成三度？（EMT-P 蘇士雄）　A： **房室阻斷的形成與其阻斷的位置與造成原因有關，不見得一定會先一度阻斷後才逐步進展至二度或三度**。**如果造成 AV block 的原因係藥物過量引起的，例如乙型交感阻斷劑(beta blocker)、鈣離子阻斷劑(calcium channel blocker)、毛地黃(digitalis)等，的確有可能隨著過量藥物濃度的逐漸升高而由一度進展至二度乃至三度**；**但是如果係其他原因所引起，例如老化(aging)、缺血或梗塞、或是主動脈環鈣化影響到 AV node 等原因所導致者，就不見得會循著一度、二度進展至三度的進程逐漸惡化**。",
     "Q： 請問心電圖是否能判斷病人心臟衰竭呢？（EMT-P 蘇士雄）　A： **用心電圖本身來判斷心臟衰竭，雖可以由某些跡象去懷疑，但並非絕對準確，往往需要配合臨床評估或其他檢查來確定**。例如**心電圖上呈現 QRS 波均很小（例如肢體導程的 QRS＜5mm），或許可以懷疑係心肌數目減少所導致，但仍必須要跟心包膜積液、肋膜積液、慢性阻塞性肺病或肥胖等因素所造成的遮蔽效應做鑑別**；**又如廣泛範圍的 QS pattern 可以合理懷疑其有大範圍的陳舊性心肌梗塞或是心肌病變，因此心臟功能或許不佳，但也還是需要從其他臨床的評估去尋找心臟衰竭的證據方能確定**。"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**心電圖為在體表記錄所得的心臟電氣生理活動**，在許多疾病的病理狀態下，心電圖會有特殊的變化。**學習系統性的心電圖判讀，以及各個成分、節段的異常及所代表的意義，並時而熟悉之，將有助於疾病之診斷**。",
-    "**心律的判定為心電圖判讀的第一步**。**對於有立即危險性的心律務必非常熟悉並在第一時間正確判讀**，以作必要的急救與處置，如**心室顫動(VF)、心室頻脈(VT)、完全房室傳導阻斷(complete AV block)** 等。其他的心律雖不一定有立即危險，但若能配合內科學的知識及病人的臨床表現，**在到院前救護現場作初步判定，將有助於你對病人病況的掌握**。",
-    "**心肌梗塞及缺血為到院前心電圖判讀的重點**。**在嚴重胸痛病人應考慮在現場迅速地為病人實施十二導程心電圖檢查並判讀之，可能的話並電傳至責任醫院以提早啟動必要的機制**。心肌梗塞的正確判讀對於**到院前救護的內容**（如**生命徵象及心律監測之必要性、病人藥物使用之建議**）以及**運送醫院的選擇**（如**心肌梗塞的治療黃金時間內送至可施行心導管介入治療的醫院**）等有著關鍵的影響，因此救護員應熟悉各項心電圖變化、其代表的臨床意義，以及**可能合併出現的其他心電圖異常（如心律不整、傳導障礙等）**。",
-    {
-     "text": "**心房擴大與心室擴大或肥厚為許多心臟疾病或肺部疾病所導致的表現**：",
-     "sub": [
-      "**右心房擴大的心電圖表現為高、尖的 P 波(P pulmonale)**；相對地，**左心房擴大為變寬、M 型的 P 波(P mitrale)**。",
-      "**右心室擴大或肥厚時將造成心軸右偏、胸前導程 V1-V2 的 R 波變高、R-S 波交替提前至 V1-V2，甚至在 V2 出現所謂的右心室肥厚的次發性再極化異常(RV Secondary repolarization abnormalities of ventricular hypertrophy)**。",
-      "**左心室擴大或肥厚的變化則有許多，除心軸左偏之外，應熟悉所謂的 voltage criteria 以及左心室肥厚的次發性再極化異常(LV Secondary repolarization abnormalities of ventricular hypertrophy)**。"
-     ]
-    }
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "Nora Goldschlager and Mervin J Goldman. Principles of clinical electrocardiography. 13th edition. Appleton & Lange. 1989.",
-    "Ary L Goldberger and Emanuel Goldberger. Clinical electrocardiography: a simplified approach. 5th edition. Elsevier Mosby. 1994.",
-    "Samuel Sclarovsky. Electrocardiography of acute myocardial ischemic syndrome. Martin Dunitz Ltd. 1999.",
-    "Marek Malik and A John Camm. Dynamic electrocardiography. 1st edition. Futura. 2004.",
-    "Theodore C Chan, William J Brady, Richard A Harrigan, Joseph P Ornato, Peter Rosen. ECG in emergency medicine and acute care. Elsevier Mosby. 2005.",
-    "Marc Gertsch. The ECG manual: an evidence-based approach. Springer. 2009."
-   ]
   }
  ],
  "summary": {

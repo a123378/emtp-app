@@ -679,13 +679,6 @@
    ]
   },
   {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**氣管偏移與頸靜脈怒張都是張力性氣胸的「晚期」徵候**，等它們出現才處置往往太慢；**早期要靠不對稱起伏、患側呼吸音變小、給氧後仍呼吸困難、皮下氣腫變明顯、插管後通氣阻力上升**來判斷。"
-   ]
-  },
-  {
    "type": "blue",
    "text": "張力性氣胸—救護處置：針刺減壓"
   },
@@ -1438,34 +1431,6 @@
     "Q： 45 歲男性於工地從高處墜落（約 4 公尺），自訴胸痛及呼吸困難。初評：呼吸道正常通暢、**呼吸淺快、左側無呼吸音**、外觀無大出血、**頸動脈微弱、橈動脈摸不到**、意識清楚。您會懷疑何種致命性胸部外傷？處置優先順序為何？　A： **需懷疑張力性氣胸**。**優先針刺減壓**，**盡快後送**，**於開車前或運送中完成給予靜脈輸液**。",
     "Q： 60 歲女性自用小客車駕駛人高速追撞前車，現場**方向盤變形、病人沒有使用安全帶**。初評：呼吸道通暢、**兩側呼吸聲對稱**、呼吸速率正常、外觀無大出血、意識清楚，但檢查橈動脈脈搏時發現**心跳不規則**。您會懷疑何種胸部外傷？到院前該如何處置？　A： **需懷疑心包膜填塞或心臟（心肌）挫傷**。應**立即給予氧氣支持、監測生命徵象**，並**快速送至外傷中心或重度級急救責任醫院**。",
     "Q： 35 歲機車騎士車禍後呼吸困難。初評：呼吸道通暢、**右胸呼氣時胸壁凸出、吸氣時胸壁凹陷**、呼吸速率 35/min、外觀無大出血、心率 120/min、GCS 14 分。您會懷疑為何胸部外傷？如何處置？　A： **需懷疑連枷胸**。**盡可能給予止痛、給予氧氣支持，並快速送醫**（呼吸費力時適時給予正壓通氣）。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**胸腔內主要器官有肺臟、氣管、食道、心臟、主動脈等，以橫膈膜與腹腔分隔**。**體表的假想參考線可以用來輔助定位進行治療，如針刺減壓**。",
-    "**呼吸中樞位於延腦**，受許多刺激調控呼吸速率及深淺（**血液二氧化碳濃度、血氧濃度、血液酸鹼值**）。",
-    "**胸部外傷病人初步評估如同其他外傷病人以 XABCDE 進行，辨識危急問題並快速處置**。",
-    "**外傷超音波能夠輔助診斷氣血胸，仍需注意操作不應影響重大外傷個案送醫時間**。",
-    "**以下外傷（張力性氣胸、開放性氣胸、大量血胸、心包膜填塞、呼吸道阻塞、氣管支氣管損傷）會造成病人在短時間死亡**，要**提高警覺辨識相關症狀**；如果有疑似診斷的病人**需儘快送醫**，必要時給予**針刺減壓、開放傷口封閉**等處置。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "The American College of Surgeons, ATLS: Advanced Trauma Life Support, 10th edition, 2018.",
-    "Mick J. Sanders, MSA, EMT-P. Mosby's Paramedic Textbook, Revised 4th Edition. Mosby Jems, Elsevier. 2012.",
-    "NAEMT, PHTLS Prehospital Trauma Life Support (PHTLS: Basic & Advanced Prehospital Trauma Life Support), 10th edition.",
-    "John E. Campbell, International Trauma Life Support for Emergency Care Providers, 8th edition, 2015.",
-    "American Heart Association, Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care, Part 10: Special circumstances, Chap 2: Cardiac arrest associated with pregnancy, 2015."
    ]
   }
  ],

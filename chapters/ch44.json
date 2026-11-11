@@ -221,14 +221,6 @@
    ]
   },
   {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "表44-1 考點：**減少熱散失＝周邊血管收縮／減少散熱表面積／豎立汗毛**；**增加熱產生＝發抖／增加自主性活動／增加荷爾蒙分泌／增加食慾**。",
-    "數字考點：**發抖可增加約400％的熱產生**，是抗寒最好的防禦武器；產熱最多的組織是**骨骼肌**。"
-   ]
-  },
-  {
    "type": "blue",
    "text": "調節熱散失(thermolysis)"
   },
@@ -488,14 +480,6 @@
    ]
   },
   {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "考點：**戰壕足＝0℃以上、低溫且潮濕環境長時間曝露**（不是結冰！），與凍瘡（組織結冰）機轉不同，且**在風寒效應表任何一點都可能發生**。",
-    "考點：**濕度＞75％蒸發散熱降低；濕度90％蒸發散熱幾乎停止**——這是悶熱天氣容易中暑的原理。"
-   ]
-  },
-  {
    "type": "blue",
    "text": "外部環境因素"
   },
@@ -740,14 +724,6 @@
    ]
   },
   {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**最重要的到院前決策考點**：原因不明的**高體溫（＞40℃）＋意識不清**，一律**優先當中暑處理**（先降溫救命，不要先當發燒處理）。",
-    "大腦傷害嚴重度＝**高體溫的嚴重度 × 持續時間**，所以「降溫的速度」就是預後。"
-   ]
-  },
-  {
    "type": "blue",
    "text": "中暑的心臟血管系統臨床表現"
   },
@@ -832,15 +808,6 @@
   {
    "type": "text",
    "text": "上述藥物**根據預立醫囑給予**。"
-  },
-  {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "降溫數字考點：**每5分鐘量一次中心體溫**；**中心體溫＜39℃就停止降溫**（避免反彈性低體溫）；延遲轉送可泡**16℃自來水**，**絕不可泡冰水**。",
-    "輸液考點：低血容者**快速給500 mL**；老年人小心**液體過量→肺水腫**。",
-    "**冰水浸泡為什麼不好**：會引起**發抖、周邊血管收縮及抽筋**，反而讓中心體溫上升。"
-   ]
   },
   {
    "type": "blue",
@@ -971,15 +938,6 @@
   {
    "type": "mnemonic",
    "text": "低體溫四級體溫界線就是「**35－32－28－24**」：**35~32輕、32~28中、28~24重、＜24極重**。（口訣：**三五、三二、二八、二四**）"
-  },
-  {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**必考**：瑞士分級**HTⅠ~HTⅣ**的體溫界線與臨床表徵——**HTⅠ意識清醒且會發抖；HTⅡ意識不清且不發抖；HTⅢ失去意識但仍有生命徵象；HTⅣ無生命徵象**。",
-    "**HTⅢ/HTⅣ的關鍵處置**：優先考慮送往有**葉克膜(ECMO)或體外循環(CPB)**的中心；HTⅣ的CPR中**epinephrine與電擊各最多3次**，無效則**待回溫後再給**，且**勿對頭部加溫**。",
-    "**HTⅠ的陷阱**：即使只是輕度，若合併**顯著外傷、罹病或疑似次發性低體溫，就要升級照HTⅡ處理**。"
-   ]
   },
   {
    "type": "blue",
@@ -1133,16 +1091,6 @@
       "**竇性心搏過慢對嚴重低體溫病人有保護作用**，可維持低體溫病人足夠的氧氣供應，**一般不建議使用心臟節律器**。"
      ]
     }
-   ]
-  },
-  {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**低體溫關鍵數字總表**：中心體溫**＜35℃**＝低體溫；**＜30℃（86℉）發抖停止**；**＜28℃通常喪失意識**；**＜24℃通常測不到生命徵象**；**20℃（68℉）幾乎都呼吸心跳停止**。",
-    "**藥物界線在30℃**：30℃以下＝epinephrine與電擊各**最多3次**、無效待回溫至**30℃以上**再給；30℃以上＝可給藥但**間隔加倍**。",
-    "**低體溫的心率緩慢對atropine無反應**，且**竇性心搏過慢有保護作用，不建議上節律器**。",
-    "**評估脈搏要30~45秒**；心臟停止仍要插管；**動作務必輕柔**（可誘發VF）。"
    ]
   },
   {
@@ -1320,15 +1268,6 @@
     "在轉送途中應**將所有限制性的或溼的衣物移除，並換上乾的溫暖的衣物及給予毛毯保溫**。",
     "**高級救護技術員不應允許病人喝酒或吸煙。**",
     "對於凍瘡的治療，**目前仍以泡溫水37~39℃快速回溫，是保存活的組織的最有效治療方法**；但**如途中如有可能會發生肢體再冰凍的狀況時，則不建議在到院前使用**。"
-   ]
-  },
-  {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**凍瘡數字考點**：**泡溫水37~39℃快速回溫**是保存組織最有效的方法；但**若可能再冰凍就不要在到院前回溫**。",
-    "**三個「不可以」**：不可**劇烈摩擦或按摩**、不可讓下肢凍瘡病人**自行走路**、不可讓病人**喝酒或吸煙**。",
-    "凍瘡的**主要傷害是血管受損造成組織缺血**；**部分回溫或緩慢回溫（溫毯）反而有害**。"
    ]
   },
   {
@@ -1537,16 +1476,6 @@
    ]
   },
   {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**溺水必考數字**：**乾溺15％／濕溺85％**；**水中散熱速度是空氣中的32倍**；**溺水＞30分鐘（溫水）通常不存活，但冷水＞60分鐘仍有完整存活報告**；**冷水5℃溺水66分鐘的最長完全恢復記錄**；**ARDS可延遲到24小時後才發生**。",
-    "**溺水兩大禁忌**：不做**哈姆立克（橫膈下推擠）**除非懷疑異物阻塞；不因病人「看起來沒事」就不送醫——**所有溺水病人都要送醫並給氧**。",
-    "**溺水一律懷疑頸椎損傷**，尤其**跳水、明顯外傷、喝酒**者。",
-    "現場首要原則永遠是**施救者自身安全**，水中救援**只有受過特別訓練者**才能執行。"
-   ]
-  },
-  {
    "type": "orange",
    "text": "潛水急症",
    "page": 1159,
@@ -1701,15 +1630,6 @@
    ]
   },
   {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**最危險的深度是離水面最後6公尺**（體積膨脹比率最大）——這是必考點。",
-    "**安全暫停數字**：每上升**4.5~6公尺暫停3~5分鐘**；深度**18公尺以下每9公尺額外暫停3~5分鐘**。",
-    "**下降＝擠壓（squeeze），最常受影響的是耳朵與鼻竇**；**上升＝反擠壓，最嚴重的是空氣栓塞**。"
-   ]
-  },
-  {
    "type": "blue",
    "text": "表44-5 潛水相關病況之徵候"
   },
@@ -1858,16 +1778,6 @@
      "高氮分壓通過血腦屏障→類酒精鎮靜",
      "**支持性治療**、上升後改善；深潛可用**氦氧混合氣**預防"
     ]
-   ]
-  },
-  {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**時間軸鑑別**：**接近水面／剛上岸就突然失去意識或中風樣症狀→空氣栓塞**；**潛水後12~36小時才出現關節痛、皮膚癢、麻痺→減壓病**；**在深水中判斷力變差、像喝醉→氮醉**。",
-    "**空氣栓塞與減壓病都要送有高壓氧艙（加壓治療）的醫院**；空中轉送**飛行高度不可超過300公尺**（除非機艙可加壓到海平面壓力）。",
-    "**插管充氣囊要打生理食鹽水**，避免加壓治療時管子滑出。",
-    "**氮醉深度數字**：**22~30公尺開始出現**，**90公尺失去意識**；**減壓病最常影響關節及脊髓**。"
    ]
   },
   {
@@ -2283,15 +2193,6 @@
    ]
   },
   {
-   "type": "clinical",
-   "label": "考點提醒",
-   "points": [
-    "**高山症唯一的根本治療是「下降高度」**；**給氧、用藥只是下降高度時的輔助療法**。",
-    "**高度數字**：高海拔疾病主要發生於**2,500公尺以上**；AMS診斷用**2,500公尺、6小時**；HACE與HAPE診斷用**3,000公尺**。",
-    "**時間數字**：AMS——**6小時後發生、24~48小時最嚴重、第3~4天緩解**；HAPE——**24~72小時**；AMS→HACE——**12小時內**可產生；HACE未治療**24小時內可昏迷或死亡**；HAPE/HACE未立即下降高度，**可能6~12小時內死亡**。"
-   ]
-  },
-  {
    "type": "blue",
    "text": "高山症個人加壓艙（攜帶型加壓袋，PAC）"
   },
@@ -2431,85 +2332,6 @@
     "Q： 哪一些人比較容易發生低體溫，分別以其所在環境、疾病及社會狀況來考量？　A： **老年人、嬰幼兒、無家可歸者、酗酒者、患有甲狀腺功能低下或糖尿病等疾病者**，在寒冷環境中更易發生低體溫；**經濟困難等因素也會增加風險**。",
     "Q： 被派遣去處理溺水案件對搜救人員有哪些風險？　A： 搜救人員在處理溺水事件時，可能面臨**自身溺水、感染、體溫過低**等風險，因此應**接受專業訓練、使用適當裝備，確保自身安全**。",
     "Q： 在您工作區域裡，最近高壓氧艙治療位置在何處？　A： 可進行高壓氧治療的醫院**可能有所變動**，可至「**中華民國高壓暨海底醫學會網頁**」查詢；**各縣市亦可能有建立送醫清單**。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**體溫由下視丘的體溫調節中樞控制**。體溫升高或下降由兩種方式調節：**調節熱產生(thermogenesis)或熱散失(thermolysis)**。",
-    "**熱疾病導源於兩個基本原因**：⑴**環境的因素超過正常的體溫調節功能**，這包括熱刺激、及在中等或極端熱環境下做過多的運動；⑵**身體熱調節機能衰竭**，這常發生於**老人、有病的人、或失能的人**。",
-    "**熱痙攣**多因**劇烈運動或做吃重的工作，產生肌肉疲憊**所致，通常為**短暫的、間歇性的，但也可以很嚴重**。",
-    "**熱衰竭的特質**是有**輕度的神智失常、頭暈、噁心、頭痛**等症狀，及**輕度至中度的中心體溫升高（可高至39℃或103℉）**。",
-    "**中暑者體溫調節功能幾乎完全瓦解，體溫可高達41℃（或105.8℉）以上**，這樣的高溫將造成**所有的組織受到傷害，並產生衰竭**。",
-    "**低體溫（中心體溫低於35℃）**可因**產熱減少、散熱增加、或合併以上兩者**而產生。低體溫根據中心體溫的高低與臨床症狀及徵候的表現，**可分為四級**：**第一級（輕度）35~32℃、第二級（中度）32~28℃、第三級（重度）28~24℃、第四級（極重度）低於24℃**。",
-    "**重度及極重度低體溫病人可能沒有生命徵候，包括可能測不到呼吸、脈搏及血壓。**",
-    "**凍瘡是一種局部性冷傷害**，它是因**環境因素造成身體組織結凍**而產生；**組織結冰將導致血管受到傷害，大多數凍瘡所產生的傷害是因血管受傷害，造成組織缺血所導致**。**深層的凍瘡病人，一些沒有活性的皮膚及深部組織會形成乾縮及腐痂。**",
-    "**溺斃(drowning)被定義為「死亡」的事件**，為溺水病人**在現場死亡，或送到急診在24小時內發生死亡**的事件；**如死亡發生在24小時後，被稱做溺水相關死亡(drowning-related death)**。",
-    "**與壓力相關的潛水急症牽涉到三個重要的氣體基本定律**：**波以耳定律**——在固定溫度下，定量氣體的**壓力與體積成反比**；**道耳頓定律**——混合氣體的**總壓力等於其中所有氣體分壓和**；**亨利定律**——當**壓力增加時氣體在液體中的溶解度增加**。",
-    "**壓力外傷**是一種因壓力所造成的組織傷害，它是因**周圍壓力與身體壓力不同時，體內氣體腔室產生壓縮或膨脹**所導致；**潛水者上升或下降，將產生不同的壓力外傷**。**空氣栓塞是最嚴重的肺部壓力外傷，是造成潛水者死亡或殘疾的主要原因。**",
-    "**高海拔疾病導因於暴露低大氣壓力缺氧的狀況**，包括**急性高山病、高海拔肺水腫及高海拔腦水腫**等；**可用路易斯湖急性高山病評分系統對高山病分級**。",
-    "**唯一能夠治療嚴重高海拔疾病（持續加重的急性高山病、高海拔肺水腫及高海拔腦水腫）方式是儘速下降高度**，**給氧、用藥都是下降高度時的輔助療法**。**加壓艙只能使用在受到地形或氣候的阻隔，且用盡一切方法仍然無法使用空中或地面救援來下降高度的病人，供病人暫時緩解症狀；當病人一旦可以使用地面或空中救援下撤時，就毋需再用加壓艙。**"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "1. Arterial blood gases and oxygen content in climbers on Mount Everest. N Engl J Med. 2009 Jan 8;360(2):140-9.",
-    "2. Effect of altitude on the heart and the lungs. Circulation. 2007 Nov 6;116(19):2191-202.",
-    "3. The heart and pulmonary circulation at high altitudes: healthy highlanders and chronic mountain sickness. Circulation. 2007 Mar 6;115(9):1132-46.",
-    "4. Hackett PH, Roach RC. Wilderness medicine. In: Auerbach PS, editor. Wilderness medicine 5th ed. Philadelphia: Mosby Elsevier. 2007.",
-    "5. Peter H. Hackett, David R. Shlim. Altitude illness. Centers for Disease Control and Prevention, USA at https://wwwnc.cdc.gov/travel/page/yellowbook-home. 2018.",
-    "6. Judith E. Tintinalli et al: Tintinalli's Emergency Medicine: A Comprehensive Study Guide, 9th edition, 2020.",
-    "7. Both tadalafil and dexamethasone may reduce the incidence of high-altitude pulmonary edema: a randomized trial. Ann Intern Med. 2006 Oct 3;145(7):497-506.",
-    "8. High-altitude-related disorders--Part I: Pathophysiology, differential diagnosis, and treatment. Heart Lung. 2003 Nov-Dec;32(6):353-9.",
-    "9. High-altitude-related disorders--Part II: prevention, special populations, and chronic medical conditions. Heart Lung. 2004 Jan-Feb;33(1):3-12.",
-    "10. Evidence of brain damage after high-altitude climbing by means of magnetic resonance imaging. Am J Med. 2006 Feb;119(2):168.e1-6.",
-    "11. Acute mountain sickness in Jade Mountain climbers of Taiwan. Aviat Space Environ Med. 2002 Apr;73(4):359-62.",
-    "12. Judith E. Tintinalli et al: Tintinalli's Emergency Medicine: A Comprehensive Study Guide, 9th edition, 2020.",
-    "13. Heat stroke. N Engl J Med. 2002 Jun 20;346(25):1978-88.",
-    "14. Short- and long-term outcomes of heatstroke following the 2003 heat wave in Lyon, France. Arch Intern Med. 2007 Nov 12;167(20):2177-83.",
-    "15. Mortality of patients with heatstroke admitted to intensive care units during the 2003 heat wave in France: a national multiple-center risk-factor study. Crit Care Med. 2006 Apr;34(4):1087-92.",
-    "16. Guidelines 2005 for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Part 8: advanced challenges in resuscitation: section 3: special challenges in ECC. The American Heart Association in collaboration with the International Liaison Committee on Resuscitation. Circulation. 112:I229. 2005.",
-    "17. Systematic review of definitions for drowning incidents. Resuscitation. 2005 Jun;65(3):255-64.",
-    "18. Auerbach PS: Submersion incidents, white-water medicine and rescue. In: Auerbach PS, Geehr EC (eds): Wilderness medicine: Management of wilderness and environmental emergency, 5rd ed. St. Louis, Mosby. pp. 1209-1250. 2007.",
-    "19. Diving emergencies. Resuscitation. 2003 Nov;59(2):171-80.",
-    "20. British Thoracic Society guidelines on respiratory aspects of fitness for diving. Thorax. 58:3. 2003.",
-    "21. Responding to medical events during commercial airline flights. N Engl J Med. 2002 Apr 4;346(14):1067-73.",
-    "22. Decompression illness in divers: a review of the literature. Neurologist. 2002 May;8(3):186-202.",
-    "23. The relative risk of decompression sickness during and after air travel following diving. Aviat Space Environ Med. 2002 Oct;73(10):980-4.",
-    "24. Medical Problems Requiring Mountain Rescues from 1985 to 2007 in Yu-Shan National Park, Taiwan. High Alt Med Biol. 2009 Spring;10(1):77-82.",
-    "25. Epidemiology of Acute Mountain Sickness on Jade Mountain, Taiwan: An Annual Prospective Observational Study. High Alt Med Biol. 2010 Spring;11(1):43-9.",
-    "26. Change in Oxygen Saturation Does Not Predict Acute Mountain Sickness on Jade Mountain. Wilderness Environ Med. 2012 Jun;23(2):122-7.",
-    "27. Different duration of high-altitude pre-exposure associated with the incidence of acute mountain sickness on Jade Mountain. Am J Emerg Med. 2013 Jul;31(7):1113-7.",
-    "28. Medical service for the children high-altitude group trekking activity. Am J Emerg Med. 2013 Jul;31(7):1142-4.",
-    "29. Rhodiola crenulata extract for prevention of acute mountain sickness: a randomized, double-blind, placebo-controlled, crossover trial. BMC Complement Altern Med. 2013 Oct 31:13:298.",
-    "30. Rate of Ascent and Acute Mountain Sickness at High Altitude. Clin J Sport Med. 2015 Mar;25(2):95-104.",
-    "31. The impact of physical fitness and body mass index in children on the development of acute mountain sickness: A prospective observational study. BMC Pediatr. 2015 May 8:15:55.",
-    "32. Incidence and Risk Factors Associated with Acute Mountain Sickness in Children Trekking on Jade Mountain, Taiwan. J Travel Med. 2016 Jan 18;23(1).",
-    "33. Response to Letter by Gaurav Sikri and Srinivasa AB. J Travel Med. 2016 May 13;23(4).",
-    "34. Incidence and severity of acute mountain sickness and associated symptoms in children trekking on Xue Mountain, Taiwan. PLoS One. 2017 Aug 23;12(8):e0183207.",
-    "35. The 2018 Lake Louise Acute Mountain Sickness Score. High Alt Med Biol. 2018 Mar;19(1):4-6.",
-    "36. Backer HD, Shlim DR. Problems with Heat & Cold. CDC Health Information for International Travel. 2018; http://wwwnc.cdc.gov/travel/page/yellowbook-home-2018. Accessed 01,06, 2018. Frank LoVecchio. Chapter 210 Heat emergencies.",
-    "37. Judith E. Tintinalli et al: Tintinalli's Emergency Medicine: A Comprehensive Study Guide, 9th edition, 2020.",
-    "38. Wilderness Medical Society practice guidelines for the prevention and treatment of heat-related illness: 2014 update. Wilderness Environ Med. 2014 Dec;25(4 Suppl):S55-65.",
-    "39. 2018 Yellow book online: Chapter 2 The Pre-Travel Consultation Counseling & Advice for Travelers: Scuba Diving. Centers for Diseases Control & Prevention (2018). Website: https://wwwnc.cdc.gov/travel/yellowbook/2018/the-pre-travel-consultation/scuba-diving",
-    "40. Medical Problems Requiring Mountain Rescues from 1985 to 2007 in Yu-Shan National Park, Taiwan. High Alt Med Biol. 2009 Spring;10(1):77-82.",
-    "41. Epidemiology of Acute Mountain Sickness on Jade Mountain, Taiwan: An Annual Prospective Observational Study. High Alt Med Biol. 2010 Spring;11(1):43-9.",
-    "42. Rhodiola crenulata extract for prevention of acute mountain sickness: a randomized, double-blind, placebo-controlled, crossover trial. BMC Complement Altern Med. 2013 Oct 31:13:298.",
-    "43. Incidence and Risk Factors Associated with Acute Mountain Sickness in Children Trekking on Jade Mountain, Taiwan. J Travel Med. 2016 Jan 18;23(1).",
-    "44. The impact of physical fitness and body mass index in children on the development of acute mountain sickness: A prospective observational study. BMC Pediatr. 2015 May 8:15:55.",
-    "45. Incidence and severity of acute mountain sickness and associated symptoms in children trekking on Xue Mountain, Taiwan. PLoS One. 2017 Aug 23;12(8):e0183207.",
-    "46. The 2018 Lake Louise Acute Mountain Sickness Score. High Alt Med Biol. 2018 Mar;19(1):4-6.",
-    "47. 社團法人台灣野外地區緊急救護協會攜帶型加壓袋(PAC)設置地點。",
-    "48. 王士豪，瘋高山：登山狂醫師私房安全攻略&高山紀行大公開，讓大人小孩都能放心入山。2009第一版，天下生活。2019年。"
    ]
   }
  ],

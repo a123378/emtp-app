@@ -1481,54 +1481,6 @@
     "Q： 若是在現場或是在車上執行超音波評估，如**有胸腹腔出血**，而**現場距離重度急救責任醫院相較遙遠（車程 15 分鐘以上）**，是否建議**直接前往**？還是依照作業流程**先就近後送鄰近急救責任醫院初步處置**？（EMT-P 邱閔昌）　A： **操作超音波並決定後送的醫療院所，為此技術非常關鍵的核心價值**。雖然**外傷中心路程較遠（15 分鐘）**，但**扣除會診專科、解釋病情、家屬共識、同意轉院、聯繫民間救護車、行政轉院流程及等候時間加車程，常常需要多花費數十分鐘至數小時不等**；**在生命徵象允許的前提下，應該優先考慮送往外傷中心**。",
     "Q： 病人**體型高、矮、胖、瘦皆有，體格、體脂分布也有所不同**，這樣的情況下對於超音波的執行上是否有影響？是否會影響到超音波評估的結果？另外**對於器官的缺少（如腎臟、脾臟）**是否會影響定位及判讀？（EMT-P 許軒誠）　A： **高矮胖瘦確實對於超音波掃描會有影響，尤其是肥胖病人及年長者的皮膚狀況會影響超音波穿透度**；**器官缺損及相對位置也時常因人而異，但熟能生巧，經過訓練還是能夠快速地完成超音波的檢查**。"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**醫用超音波的基本原理**是**利用高頻率的聲波來產生人體內部結構影像**的技術，它的工作原理來自於**聲波的反射和回波**。",
-    "**聲波的傳播**是探頭將聲波傳送到人體內；聲波會穿透人體組織，在**不同組織（例如肌肉、脂肪、骨骼、液體等）會以不同的速度和方式傳遞**。其中**水及血液等液體為最好的傳導媒介**，讓影像清晰。",
-    "**聲波遇到不同密度的組織或結構，會將部分聲波反射返回探頭側**，再將回波**轉換成電信號**，根據**聲波反射的情形形成影像**；**不同的反射強度可分為低回音（暗色）、等回音（等色）、高回音（亮色）**。",
-    "**超音波探頭移動術語**：可分為**傾斜(Tilting)、掃動(Sweeping)、搖擺(Rocking)、滑動(Sliding)以及旋轉(Rotate)、下壓(Compression)**。",
-    "**執行超音波掃描時須將超音波探頭標記朝向病人「右側或頭側」**，並**依掃描位置調整深度、增益值（明亮度）和聚焦**，並**將目標置於螢幕中間**。",
-    "**亮度模式(B-mode)**：**最常使用的模式**，運用**回波轉換成電信號生成的影像明亮**；觀察目標為**高回音（亮色）的組織**或**低回音（暗色）的液體**。",
-    "**運動模式(M-mode)**：**觀察超音波隨著時間的變化**時使用，如觀察**肺臟肋膜的滑動**或**心臟的收縮力**。",
-    "**外傷病人超音波檢查時機**，依**各縣市操作指引與預立醫囑**訂定執行，並依**各縣市急救責任醫院醫療量能及計畫**選定適當的後送醫院。",
-    "**延伸重點式創傷超音波(E-FAST)** 利用**水往低處流、氣體往上飄**的特性，來檢視**腹腔、胸腔、心包膜有無積液及氣胸的有無**。",
-    "**E-FAST 檢查重點**：**肝腎交界處(Morrison's pouch)、脾腎交界處(Splenorenal Fossa)、心包膜腔、恥骨上緣（骨盆腔）、肋膜下角**等處**有無出血**，及**評估兩側胸腔有無氣胸**。",
-    "**到院前非外傷病人超音波應用重點**應須**著重於「立即性的院前治療」以及「是否改變院前檢傷或送醫選擇」的項目，而非著墨於精準的診斷**。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "Prehospital ultrasound. Ugeskr Laeger 2009, 171(36):2545–2547.",
-    "Prehospital ultrasound imaging improves management of abdominal trauma. Br J Surg 2006, 93(2):238–242.",
-    "Prehospital ultrasound in emergency medicine: Incidence, feasibility, indications and diagnoses. Eur J Emerg Med 2010, 17(5):254–259.",
-    "Prehospital FAST reduces time to admission and operative treatment: a prospective, randomized, multicenter trial. Eur J Trauma Emerg Surg. 2022 Aug;48(4):2701-2708.",
-    "Optimized management of polytraumatized patients by prehospital ultrasound. Unfallchirurg 2002, 105(11):986–994.",
-    "Does prehospital ultrasound improve treatment of the trauma patient? A systematic review. Eur J Emerg Med 2010, 17(5):249–253.",
-    "Paramedic application of ultrasound in the management of patients in the prehospital setting: a review of the literature. Emerg Med J 2010, 27(9):702–707.",
-    "Use of ultrasound by emergency medical services: a review. Int J Emerg Med 2008, 1(4):253–259.",
-    "Use of prehospital ultrasound in North America: a survey of emergency medical services medical directors. BMC Emerg Med. 2014 Mar 1;14:6.",
-    "The lifesaving potential of specialized on-scene medical support for urban tactical operations. Prehosp Emerg Care 13:528–531, 2009.",
-    "Ultrasound assessment of severe dehydration in children with diarrhea and vomiting. Acad Emerg Med 17(10):1035–1041, 2010.",
-    "Simple, almost anywhere, with almost anyone: Remote low-cost telementored resuscitative lung ultrasound. J Trauma. 2011 Dec;71(6):1528-35.",
-    "Effect of prehospital ultrasound on clinical outcomes of non-trauma patients--a systematic review. Resuscitation. 2014 Jan;85(1):21-30.",
-    "Point-of-care ultrasound use in patients with cardiac arrest is associated prolonged cardiopulmonary resuscitation pauses: A prospective cohort study. Resuscitation. 2018 Jan;122:65-68.",
-    "Advanced Life Support Task Force of the International Liaison Committee on Resuscitation. Prognostication with point-of-care echocardiography during cardiac arrest: A systematic review. Resuscitation. 2020 Jul;152:56-68.",
-    "Change in differential diagnosis and patient management with the use of portable ultrasound in a remote setting. Wilderness Environ Med 2005;16:38–41. 61.",
-    "Focused echocardiographic evaluation in life support and peri-resuscitation of emergency patients: a prospective trial. Resuscitation 2010;81:1527–33.",
-    "Prehospital ultrasound thoracic examination to improve decision making, triage, and care in blunt trauma. Am J Emerg Med 2014;32:817.e1-2.",
-    "Effect of ultrasound training of physicians working in the prehospital setting. Scand J Trauma Resusc Emerg Med 2016;24:99."
-   ]
   }
  ],
  "summary": {

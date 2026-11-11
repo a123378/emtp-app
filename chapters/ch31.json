@@ -1385,60 +1385,6 @@
     "Q：**為什麼環狀灼傷會對身體造成類似止血帶的效應？**　A：**環狀灼傷引起組織水腫與壓力升高而壓迫血管**，造成**局部缺血和壞死**，類似**止血帶效應**。",
     "Q：**化學粉末，此時要如何幫病人除汙？是否逕把病人帶到除汙區沖洗？**　A：**首先將粉末輕拍或刷除**，**避免粉末溶解後造成更深的化學灼傷**，**再進行沖洗**；**切勿直接移至沖洗區，以免擴散污染**。"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "灼傷原因以**燙傷(43.2％)及火焰燒傷(32.5％)為主**，其中**燙傷更是小於 18 歲族群最主要的灼傷原因，約占 76.8％**。",
-    "灼傷的發生是因為身體和**具較高溫度的物品、腐蝕性化學物品、高壓電流或暴露於高能放射線物質**接觸所致。其種類可分為：**⑴熱灼傷；⑵化學灼傷；⑶電灼傷**。",
-    {
-     "text": "根據**傑可森灼傷理論(Jackson's thermal wound theory)**，灼傷導致局部組織的損害可依**同心圓分佈型態劃分為三區**：",
-     "sub": [
-      "**⒈ 凝固區**：**傷口的中心區域**，也是**最密切接觸熱源及損傷最嚴重的地方**。",
-      "**⒉ 靜滯區**：**鄰次於凝固區外圍**，這一區域的細胞因**血塊凝結及血管收縮而呈現缺氧狀況**，**若無法在 24~48 小時內給予適當的醫療支持，細胞也將死去**。",
-      "**⒊ 充血區**：在**最外圍**的區域，組織因**正常的發炎反應而充滿血流**；**若無併發感染或休克，這區塊的充血反應將在 7~10 天內恢復**。"
-     ]
-    },
-    {
-     "text": "**灼傷的嚴重度可依下列方式評估**：",
-     "sub": [
-      "**⒈ 病人年齡。**",
-      "**⒉ 灼傷深度**：表淺性灼傷、淺層灼傷及全層灼傷。",
-      "**⒊ 所占體表面積**：皮膚灼傷範圍評估法有**「九的法則」及「隆德–布勞德圖表」**。",
-      "**⒋ 是否波及重要部位**：包括**臉、眼、耳、頸、手、足、會陰部**等部位的灼傷。",
-      "**⒌ 是否併有吸入性灼傷。**"
-     ]
-    },
-    {
-     "text": "**灼傷病人之到院前處置**包括：",
-     "sub": [
-      "**⒈ 移除熱源。**",
-      "**⒉ 減少組織遭受更進一步的灼傷。**",
-      "**⒊ 維持呼吸道通暢並給予氧氣。**",
-      "**⒋ 防止休克**，視狀況（**如遵循修正後布魯克公式或十的法則**）或依**地方醫療指導預立醫囑**下，給予靜脈輸液治療。",
-      "**⒌ 傷口處理、防止感染、給予保暖。**",
-      "**⒍ 儘快將病人送達有適當灼傷處理能力的急救責任醫院。**"
-     ]
-    }
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "Mick J. Sanders, MSA, EMT-P. Mosby's Paramedic Textbook, Revised 4th Edition. Mosby Jems, Elsevier. 2012.",
-    "A seven-year epidemiology study of 12,381 admitted burn patients in Taiwan－using the Internet registration system of the Childhood Burn Foundation. Burns. 2005 Jan:31 Suppl 1:S12-7.",
-    "Andrew N. Pollak: Intermediate Emergency Care and Transportation of the Sick and Injured, Jones and Bartlett. 2005.",
-    "The American College of Surgeons, ATLS: Advanced Trauma Life Support, 10th edition, 2018.",
-    "Emergency care of moderate and severe thermal burns in adults (https://www.uptodate.com/contents/emergency-care-of-moderate-and-severe-thermal-burns-in-adults)"
-   ]
   }
  ],
  "summary": {

@@ -3234,58 +3234,6 @@
     "Q： 若遇到疑似缺血性胸痛之病人，告知平時有依照醫師處方規律服 Aspirin，EMT 在依流程給予 Aspirin 300 毫克時，是否需考慮增減劑量？（EMT-P 曾達韋）　A： **在到院前的情形下，不需考慮 Aspirin 劑量增減。**平日使用的 Aspirin 劑量為**每日 100 毫克**；**就算是當日已經服用過 Aspirin，再加上 300 毫克總共也才 400 毫克，僅約略是到達 Aspirin 止痛的劑量**。**單次口服每公斤體重 150 毫克以上才會有中毒症狀**——以 **50 公斤**體重的成人來說**大約是 75 顆 100 毫克的 Aspirin 錠劑**。",
     "Q： 若於心肺功能停止之病人，使用同一支空針筒抽取 Epinephrine 與 Amiodarone，是否會有重大不良影響？（EMT-P 曾達韋）　A： **不會有重大不良影響。Epinephrine 和 Amiodarone 即使抽在同一支針筒裡 24 小時內也不會有看得見的沈澱物，效果也不會相互影響。**"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**藥物**是**經口攝入或注射到肌肉、血管、體腔或塗抹在體表上，用以治療或預防疾病狀況的物質**。**藥理學**則是**研究藥物在生物體內所發生作用的一門科學**，學好藥理學是**到院前救護安全給藥的根本**。",
-    "臨床上使用之藥物雖然有**上千種**，但藥物可依各種方法分類，緊急救護技術員應**特別熟悉 ACLS 使用之藥物**。",
-    "藥物的名稱一般而言可以分為四類：**化學名、俗名、商品名和學名**。緊急救護技術員應**熟記藥物的俗名和商品名**以方便臨床上應用。",
-    "**藥物投予的途徑會影響到藥物吸收的速率，同時也會影響藥物治療的效果**。其途徑可以分為四類：**腸內、腸外、肺部和局部給藥**。",
-    "**藥物動力學**就是**研究身體在一定時間內如何處理藥物**的科學，包括四個主要過程：**吸收、分佈、生物轉化和排泄**。**這四個過程決定了病人對藥物的反應。**",
-    "影響藥物治療的因素包括：**年齡、身體質量、性別、疾病狀態、基因的影響、心理因素、環境因素及藥物給予的時間**。",
-    "**藥物效力學**主要是研究藥物如何在生物體內作用。**藥物並沒辦法讓身體的組織或器官出現新的功能，它們只能修飾現有的功能。**大部分的藥物透過**受體、離子通道和酵素**相互作用產生藥效，而**最常見也是最主要的作用方式是藥物–受體相互作用**。",
-    "**藥物反應可以很簡單地以觀察病人的生命徵象是否已達到預期效果來評估**；**部份藥物可以測量血清中濃度是否達到治療濃度**來評估藥物的反應。",
-    "**治療指標(therapeutic index)代表一個藥物的安全性，它的值越大，代表藥物也越安全。**",
-    "即使是**同一種藥物，也可能因為目的、用途不同而有不同的劑型**；**每一種劑型都有其特殊的適應症、優點和缺點**。",
-    "**常見的急救藥物和自主神經系統及心臟血管系統有關**。在熟習這些藥物之前，**先掌握相關的生理學和藥理學，在藥物的應用上才能融會貫通**。",
-    "**了解藥物有哪些作用、副作用，才能更安全有效地使用它們**；了解**如何評估給予藥物之療效**才能正確並安全地給予病人急救藥物，才能達到救護技術員到院前給藥之最終目標——**改善病人就醫之預後**。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "蔡秋帆、湯念湖、王耀宏，藥理學第四版。新文京開發出版股份有限公司。2021年。",
-    "台灣急診醫學會，急性中毒救命術：AILS（第三版）。金名圖書有限公司。2017年。",
-    "臺北市政府消防局醫顧問委員會：臺北市政府消防局中級救護技術員到院前緊急救護標準作業程暨各項基本技術操作標準步驟手冊。",
-    "臺北市政府消防局醫顧問委員會：臺北市政府消防局高級救護技術員到院前緊急救護標準作業程手冊。",
-    "新北市政府消防局：新北市預立醫療流程。2022年4月1日。",
-    "高雄市政府消防局：高雄市政府消防局高級救護員預立醫療流程。2024年5月6日。",
-    "台灣腦中風醫學會：急性缺血中風靜脈血栓溶解治療指引。2019年。",
-    "Tintinalli's Emergency Medicine: A Comprehensive Study Guide, 9e. McGraw-Hill Education; 2020. Accessed July 23, 2024.",
-    "Part 3: Adult Basic and Advanced Life Support: 2020 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2020;142(suppl 2):S366–S468",
-    "Part 7: Adult Advanced Cardiovascular Life Support: 2015 American Heart Association Guidelines Update for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2015;132: S444-S464",
-    "Part 8: Adult Advanced Cardiovascular Life Support: 2010 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2010 Nov 2;122(18 Suppl 3):S729-67",
-    "Mick J. Sanders, MSA, EMT-P. Mosby's Paramedic Textbook, Revised 4th Edition. Mosby Jems, Elsevier. 2012.",
-    "Wilderness Medical Society Clinical Practice Guidelines for the Prevention, Diagnosis, and Treatment of Acute Altitude Illness: 2024 Update. Wilderness Environ Med. 2024;35(1_suppl):2S-19S.",
-    "The importance of early treatment with tranexamic acid in bleeding trauma patients: an exploratory analysis of the CRASH-2 randomised controlled trial. Lancet. 2011;377(9771):1096-1101.e11012.",
-    "Effect of early tranexamic acid administration on mortality, hysterectomy, and other morbidities in women with post-partum haemorrhage (WOMAN): an international, randomised, double-blind, placebo-controlled trial. 2017 May 27;389(10084):2104.",
-    "CRASH-3 trial collaborators. Effects of tranexamic acid on death, disability, vascular occlusive events and other morbidities in patients with acute traumatic brain injury (CRASH-3): a randomised, placebo-controlled trial [published correction appears in Lancet. 2019 Nov.9;394(10210):1712. doi: 10.1016/S0140-6736(19)32641-8]. Lancet. 2019;394(10210):1713-1723.",
-    "American Society of Health-System Pharmacists: Handbook on Injectable Drugs, 19th Edition. October 3rd, 2016",
-    "The effects of intravenous calcium in patients with digoxin toxicity. J Emerg Med. 2011;40(1):41-46.",
-    "Balanced Crystalloids versus Saline in Noncritically Ill Adults. N Engl J Med. 2018;378(9):819-828.",
-    "Balanced Crystalloids versus Saline in Critically Ill Adults. N Engl J Med. 2018;378(9):829-839.",
-    "Lerner BH. A case that shook medicine. Washington Post. November 28, 2006.",
-    "U.S. Food and Drug Administration.(2014, December 3). Pregnancy and Lactation Labeling (Drugs) Final Rule. FDA. https://www.fda.gov/drugs/labeling-information-drug-products/pregnancy-and-lactation-labeling-drugs-final-rule"
-   ]
   }
  ],
  "summary": {

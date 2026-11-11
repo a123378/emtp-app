@@ -1045,39 +1045,6 @@
     "Q： 將心電圖上傳到特定平台上供醫生判讀，是否有資安疑慮？（EMT-P 黃朝群）　A： 依照**個人資料保護法**，**病歷、醫療、基因、性生活、健康檢查及犯罪前科屬敏感性之個人資料**，公務機關執行法定職務或非公務機關履行法定義務必要範圍內，且**事前或事後有適當安全維護措施方可使用**。因此**院前心電圖在基於急救上的需求，取得當事者知情同意、達到去識別化，並且特定平台有相對應資安措施**（例如僅特定判讀人員在群組內等），應屬符合個資法的範疇；**如無法達到去識別化時，則應採取點對點遠距協助（減少非案情相關人士）**等措施。",
     "Q： 新興科技的導入不是應該變得更便利嗎？可是感覺操作流程似乎也會被改變，看起來會越學越多東西，這樣是不是反而變得更不便？（EMT-P 黃朝群）　A： **新興科技的導入可以做到改善現有流程或者優化現有結果**。有時新興科技導入會讓使用者感受變得更便利，**有時確實是需要學習新技術，但卻有更優質的成果**。就像電話一般，**從家用電話發展到手機、從只有通話功能的手機發展到智慧型手機**，我們的使用習慣已經被大幅改變，反而帶來**更便利、優質、高效的生活**。因此**新興科技的導入初期確實會有轉換、磨合期，但最終仍會達到改善現有流程或優化現有結果**，讓緊急救護的發展更為高效。"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "緊急救護中的科技應用可以依據 **「緊急救護的照護連續性」分成六個階段**：**⑴ 偵測**：識別出可能的緊急事件或病人狀況；**⑵ 通報**：將事件或病人資訊迅速傳達至相關單位；**⑶ 派遣及協調**：根據事件需求進行資源的派遣和跨單位協調；**⑷ 現場照護**：在緊急現場對病人進行初步評估和處置；**⑸ 轉送中途照護**：在送醫途中提供持續的醫療支持；**⑹ 轉送至確切治療**：將病人轉移至適合的醫療機構進行進一步治療。",
-    "**救急救難一站通計畫的核心目標**為：**⑴ 電子化救護紀錄；⑵ 系統合作架構；⑶ 自動化資料傳遞**。其**主要功能**有：**⑴ 醫療指導醫師資訊整合系統；⑵ 輔助五級檢傷系統；⑶ 視訊指導功能；⑷ 大量外傷病人管理系統；⑸ DA-CPR 品管系統；⑹ 到院前預警系統；⑺ 標準化電子病歷**。",
-    "**緊急救護人員在使用科技輔助工具時，應注意以下主要的倫理考量**：**⑴ 個人資料隱私與保密；⑵ 資料正確性與技術可靠性；⑶ 自主權與知情同意；⑷ 公平性與可及性；⑸ 人性化與技術化的平衡**。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "Schooley B and Horan TA. Emerging Digital Technologies in Emergency Medical Services: Considerations and Strategies to Strengthen the Continuum of Care. DOT HS 811 999c. Washington, DC: National Highway Traffic Safety Administration, 2015. Available at: www.ems.gov.",
-    "EMS Agenda 2050 Technical Expert Panel. (2019, January). EMS Agenda 2050: A People-Centered Vision for the Future of Emergency Medical Services (Report No. DOT HS 812 664). Washington, DC: National Highway Traffic Safety Administration.",
-    "https://www.jems.com/exclusives/personal-protective-technology-center-of-excellence/",
-    "衛生福利部：通訊診察治療辦法，2008年",
-    "https://www.ems.gov/assets/Emerging_Digital_Tech_In_EMS.pdf",
-    "https://www.ems.gov/assets/EMS-Agenda-2050.pdf",
-    "World Health Organization. Ethics and governance of artificial intelligence for health. Geneva: WHO, 2017.",
-    "International Committee of the Red Cross. The use of new technologies in emergency medical services, 2019.",
-    "European Parliament. General Data Protection Regulation (GDPR), 2018.",
-    "Health Insurance Portability and Accountability Act (HIPAA) of 1996.",
-    "International Association of Emergency Managers. Guidelines for Ethical Conduct in Emergency Medical Services, 2021.",
-    "https://www.nstc.gov.tw/folksonomy/detail/87e76bcd-a19f-4aa3-9707-ca8927dcb663?l=ch"
-   ]
   }
  ],
  "summary": {

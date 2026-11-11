@@ -2093,65 +2093,6 @@
     "Q：若病人被槍擊，胸部及腹部多處槍傷，您在暴露患處時應注意哪些事項？若需將衣物去除，這些衣物又將如何保存？　A：暴露時應注意**保護隱私、避免低溫並迅速檢視傷口**。衣物去除時**避免撕裂彈孔，保持相關證物完整性**，並**妥善保存作為法律證據，多數書籍建議以紙袋為佳**。",
     "Q：有關重大外傷病人，假設最近的急救責任醫院需時 6 分鐘；而最近之重度級急救責任醫院需 15 分鐘車程，那麼 EMT 應該將現場判斷為重大外傷病人送至哪一家醫院？（EMT-P 林昱佑）　A：重大外傷病人救治確實對急救責任醫院是一大考驗，**醫院的能力很大一部分決定了病人的預後**。在面臨 EMT 無法處置的傷情時，**遠送重度級急救責任醫院確實對 EMT 來說是壓力也是風險**。是否直接轉送往相對遠的重度級急救責任醫院，**仍需考量 EMT 處置能力、傷患傷情**，確實是個兩難抉擇。**台南市的跳島後送計畫是這類難題的解決方法之一**——**先至最近之急救責任醫院穩定病情後再轉送至醫學中心，把病人安全最大化**，但**實際狀況仍須依照各縣市規範及各醫院的量能做衡量**。"
    ]
-  },
-  {
-   "type": "orange",
-   "text": "重點整理"
-  },
-  {
-   "type": "list",
-   "items": [
-    "**台灣的外傷流行病學**：按十大死因分析，**事故傷害為 2022 年國人第八大死因，且為 29 歲以下死亡原因之首**。",
-    "**外傷照護體系四部分**：**「損傷預防」、「到院前照護」、「急性照護」與「住院後照護」**。",
-    "**外傷照護體系兩大支柱**：**「現場檢傷分類指引」、「建立外傷中心」**。**外傷中心 3R 目標：急救(Resuscitation)、重建(Reconstruction)、復健(Rehabilitation)**。",
-    "**現場管理安全分析從接獲派遣資訊即開始**，**以自身安全第一優先，再來是同伴安全，最後是病人安全**。",
-    "**外傷機轉之釐清**，有助於高級救護技術員對該外傷可能造成的**傷害與嚴重程度進行更精確的判斷**，進而給予正確及快速之處置。",
-    "**外傷初步評估及處置 XABCDE**：**X＝控制致命性外出血；A＝評估呼吸道並保護頸椎；B＝評估呼吸並維持血氧；C＝評估循環控制出血及處置休克；D＝評估失能；E＝暴露病人並保暖及環境控制**。需注意**勿因處置延誤送醫，重大外傷病人現場處置時間＜10 分鐘為佳**。",
-    "**目前台灣現場依生命徵象、外傷部位、外傷機轉及特殊情況將病人區分為「危急」與「非危急」個案**，亦可以**外傷分數**來評估嚴重度。",
-    "**針對重大外傷病人，必須謹慎考慮在現場進行的救護處置，應根據現有證據作出決策**。唯有**持續學習、不斷精進專業能力**，才能給予病人最好的照護。"
-   ]
-  },
-  {
-   "type": "orange",
-   "text": "參考資料"
-  },
-  {
-   "type": "list",
-   "items": [
-    "NAEMT, PHTLS Prehospital Trauma Life Support (PHTLS: Basic & Advanced Prehospital Trauma Life Support), 10th edition.",
-    "內政部消防署全球資訊網：緊急救護統計。https://www.nfa.gov.tw/cht/index.php?code=list&ids=221",
-    "Trunkey DD. Trauma. Sci Am. February 249:28, 1983.",
-    "Epidemiology of Trauma Deaths: A Reassessment. J Trauma 38:185-193, 1995.",
-    "Fluid Resuscitation. State of the Science for Treating Combat Casualties and Civilian Injuries. Washington, DC: National Academy Press, 1999.",
-    "Impact of haemorrhage on trauma outcome: an overview of epidemiology, clinical presentations, and therapeutic considerations. J Trauma 2006;60:S3-11.",
-    "Time to laparotomy for intra-abdominal bleeding from trauma does affect survival for delays up to 90 min. J Trauma 2002;52:420-5.",
-    "The American College of Surgeons, ATLS: Advanced Trauma Life Support, 10th edition, 2018.",
-    "Thompson L, Hill M, Shaw G. Defining major trauma: a literature review. Br Paramed J. 2019 Jun 1;4(1):22-30",
-    "Changing epidemiology of trauma deaths leads to a bimodal distribution. Proc (Bayl Univ Med Cent). 2010 Oct;23(4):349-54.",
-    "Timing and causes of death after injuries. Proc (Bayl Univ Med Cent). 2013 Apr;26(2):120-3.",
-    "Epidemiology of traumatic deaths: comprehensive population-based assessment. World J Surg. 2010 Jan;34(1):158-63.",
-    "Trendelenburg position: \"put to bed\" or angled toward use in your unit? Am J Crit Care. 2012 Nov;21(6):449-52.",
-    "Impact of Head-of-Bed Posture on Brain Oxygenation in Patients with Acute Brain Injury: A Prospective Cohort Study. Neurocrit Care. 2021 Dec;35(3):662-668.",
-    "Prehospital interventions for penetrating trauma victims: a prospective comparison between Advanced Life Support and Basic Life Support. Injury. 2013;44(5):634-8.",
-    "Association of Prehospital Mode of Transport With Mortality in Penetrating Trauma: A Trauma System-Level Assessment of Private Vehicle Transportation vs Ground Emergency Medical Services. JAMA Surg. 2018;153(2):107-13.",
-    "Increased mortality associated with EMS transport of gunshot wound victims when compared to private vehicle transport. Injury. 2014;45(9):1320-6.",
-    "Tension pneumothorax prevalence grossly exaggerated. Emerg Med J. 2007;24(12):865; author reply.",
-    "Prospective trial of supranormal values of survivors as therapeutic goals in high-risk surgical patients. Chest. 1988;94(6):1176-86.",
-    "Supranormal trauma resuscitation causes more cases of abdominal compartment syndrome. Arch Surg. 2003;138(6):637-42; discussion 42-3.",
-    "Application of the Berlin definition in PROMMTT patients: the impact of resuscitation on the incidence of hypoxemia. J Trauma Acute Care Surg. 2013;75(1 Suppl 1):S61-7.",
-    "Immediate versus delayed fluid resuscitation for hypotensive patients with penetrating torso injuries. N Engl J Med. 1994;331(17):1105-9.",
-    "Goal-directed resuscitation in the prehospital setting: a propensity-adjusted analysis. J Trauma Acute Care Surg. 2013;74(5):1207-12; discussion 12-4.",
-    "A controlled resuscitation strategy is feasible and safe in hypotensive trauma patients: results of a prospective randomized pilot trial. J Trauma Acute Care Surg. 2015;78(4):687-95; discussion 95-7.",
-    "The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition. Crit Care. 2023;27(1):80.",
-    "Balanced Crystalloids versus Saline in Critically Ill Adults. N Engl J Med. 2018;378(9):829-39.",
-    "Effect of Intravenous Fluid Treatment With a Balanced Solution vs 0.9% Saline Solution on Mortality in Critically Ill Patients: The BaSICS Randomized Clinical Trial. Jama. 2021;326(9):1-12.",
-    "Balanced Multielectrolyte Solution versus Saline in Critically Ill Adults. N Engl J Med. 2022;386(9):815-26.",
-    "Effects of tranexamic acid on death, vascular occlusive events, and blood transfusion in trauma patients with significant haemorrhage (CRASH-2): a randomised, placebo-controlled trial. Lancet. 2010;376(9734):23-32.",
-    "Effects of tranexamic acid on death, disability, vascular occlusive events and other morbidities in patients with acute traumatic brain injury (CRASH-3): a randomised, placebo-controlled trial. Lancet. 2019;394(10210):1713-23.",
-    "Tranexamic Acid During Prehospital Transport in Patients at Risk for Hemorrhage After Injury: A Double-blind, Placebo-Controlled, Randomized Clinical Trial. JAMA Surg. 2020;156(1):11-20.",
-    "Prehospital Tranexamic Acid for Severe Trauma. N Engl J Med. 2023;389(2):127-36.",
-    "National guideline for the field triage of injured patients: Recommendations of the National Expert Panel on Field Triage, 2021. Journal of Trauma and Acute Care Surgery 93(2):p e49-e60, August 2022."
-   ]
   }
  ],
  "summary": {
