@@ -30,6 +30,9 @@ const state = {
   chapterProgress: JSON.parse(localStorage.getItem('chProgress') || '{}'),
   theme: localStorage.getItem('theme') || 'light',
   searchQuery: '',
+  searchBrowseChId: null,   // 從搜尋結果跳入的章節：瀏覽期間不計入研讀進度
+  scrollBeforeSearch: null, // 開啟搜尋前，目前章節的捲動位置（清掉搜尋時還原）
+  browseReturnTop: null,    // 搜尋瀏覽結束時要跳回的位置（同章節跳轉才有）
   inlineAnswers: {},   // qId -> 選項索引（模式一段落內嵌考題）
   isLoadingChapter: false,
 
@@ -168,14 +171,20 @@ function buildSidebar() {
 }
 
 // ── Select chapter ────────────────────────────────────
-async function selectChapter(chId) {
+async function selectChapter(chId, opts = {}) {
+  const fromSearch = !!opts.fromSearch;
   if (state.currentChId === chId) {
     closeMobileSidebar();
+    // 從側欄點回正在「搜尋瀏覽」的章節 → 視為回到上次進度
+    if (!fromSearch && state.searchBrowseChId === chId) exitSearchBrowse();
     return;
   }
   saveChapterProgressToStorage();
   state.isLoadingChapter = true;
   state.currentChId = chId;
+  state.searchBrowseChId = fromSearch ? chId : null;
+  state.scrollBeforeSearch = null;
+  state.browseReturnTop = null;
   hideProgressRestoreToast();
 
   // Auto close mobile sidebar on select
@@ -203,8 +212,8 @@ async function selectChapter(chId) {
   // Load content
   await loadChapterData(chId);
 
-  // 1A + 2A + 3A: 自動跳轉至上次進度 (1% ~ 99%)
-  restoreChapterReadingProgress(chId);
+  // 1A + 2A + 3A: 自動跳轉至上次進度 (1% ~ 99%)；從搜尋跳入則改跳到命中段落
+  if (!fromSearch) restoreChapterReadingProgress(chId);
 
   // 渲染完成後解除載入鎖（唯有讀者親自滾動至底部才計 100%）
   setTimeout(() => {
@@ -711,18 +720,37 @@ async function ensureSearchIndex() {
   return _searchIndexPromise;
 }
 
+function isSearchViewOpen() {
+  return !!els.searchView && !els.searchView.classList.contains('hidden');
+}
+
 function showSearchView() {
+  const wasOpen = isSearchViewOpen();
+  // 第一次打開搜尋結果時，記住目前章節讀到哪裡，關閉搜尋時還原
+  if (!wasOpen && state.currentChId && els.mainContent
+      && els.chapterView && !els.chapterView.classList.contains('hidden')) {
+    state.scrollBeforeSearch = els.mainContent.scrollTop;
+  }
   if (els.welcomeScreen) els.welcomeScreen.classList.add('hidden');
   if (els.chapterView) els.chapterView.classList.add('hidden');
   if (els.searchView) els.searchView.classList.remove('hidden');
+  if (!wasOpen && els.mainContent) els.mainContent.scrollTop = 0;
 }
-function hideSearchView() {
+
+/** @param {{ restoreScroll?: boolean }} [opts] 關閉搜尋時是否回到搜尋前的捲動位置 */
+function hideSearchView(opts = {}) {
+  const restoreScroll = opts.restoreScroll !== false;
+  const wasOpen = isSearchViewOpen();
   if (els.searchView) els.searchView.classList.add('hidden');
   if (state.currentChId) {
     if (els.chapterView) els.chapterView.classList.remove('hidden');
+    if (wasOpen && restoreScroll && state.scrollBeforeSearch !== null && els.mainContent) {
+      els.mainContent.scrollTop = state.scrollBeforeSearch;
+    }
   } else if (els.welcomeScreen) {
     els.welcomeScreen.classList.remove('hidden');
   }
+  if (wasOpen && restoreScroll) state.scrollBeforeSearch = null;
 }
 
 async function runFullTextSearch(q) {
@@ -787,8 +815,17 @@ function renderSearchResults(idx, hits, q) {
 
 async function openSearchHit(chId, secIdx) {
   if (!chId) return;
-  hideSearchView();
-  await selectChapter(chId);
+  const sameChapter = state.currentChId === chId;
+  // 同章節：記住搜尋前讀到的位置（已在瀏覽中就沿用最初那個），供「回到上次進度」使用
+  const returnTop = !sameChapter ? null
+    : (state.searchBrowseChId === chId ? state.browseReturnTop : state.scrollBeforeSearch);
+  // 跳到命中段落，不還原搜尋前位置
+  hideSearchView({ restoreScroll: false });
+  state.scrollBeforeSearch = null;
+  state.browseReturnTop = returnTop;
+  state.searchBrowseChId = chId;
+  await selectChapter(chId, { fromSearch: true });
+  showSearchBrowseToast();
   setTimeout(() => {
     const el = document.getElementById('sec-' + secIdx);
     if (!el) return;
@@ -831,6 +868,9 @@ function queueSaveChapterProgress() {
 function checkChapterReadingProgress() {
   if (state.currentMode !== 1 || !state.currentChId) return;
   if (state.isLoadingChapter || !state.currentChData) return;
+  // 搜尋結果畫面開著（捲的是搜尋清單），或正從搜尋跳入瀏覽 → 不計入研讀進度
+  if (isSearchViewOpen() || state.searchBrowseChId === state.currentChId) return;
+  if (els.chapterView && els.chapterView.classList.contains('hidden')) return;
   const sc = els.mainContent;
   if (!sc) return;
 
@@ -958,14 +998,8 @@ function restoreChapterReadingProgress(chId) {
   // 等候 DOM 渲染與高度解析完成後平滑滾動
   setTimeout(() => {
     if (state.currentChId !== chId) return;
-    const scrollHeight = sc.scrollHeight;
-    const clientHeight = sc.clientHeight;
-    const maxScroll = scrollHeight - clientHeight;
-    if (maxScroll <= 25) return;
-
-    // 1A: 依視線位置反算目標捲動位置
-    const visibleBottom = (scrollHeight * savedPct) / 100;
-    const targetTop = Math.max(0, Math.min(maxScroll, Math.round(visibleBottom - clientHeight * 0.85)));
+    const targetTop = scrollTopForProgress(sc, savedPct);
+    if (targetTop === null) return;
     sc.scrollTo({ top: targetTop, behavior: 'smooth' });
 
     // 3A: 顯示輕量提示標籤
@@ -973,7 +1007,17 @@ function restoreChapterReadingProgress(chId) {
   }, 120);
 }
 
-function showProgressRestoreToast(pct) {
+/** 1A: 依視線位置（視窗下緣 85%）反算某 % 數對應的捲動位置；內容太短回傳 null */
+function scrollTopForProgress(sc, pct) {
+  const scrollHeight = sc.scrollHeight;
+  const clientHeight = sc.clientHeight;
+  const maxScroll = scrollHeight - clientHeight;
+  if (maxScroll <= 25) return null;
+  const visibleBottom = (scrollHeight * pct) / 100;
+  return Math.max(0, Math.min(maxScroll, Math.round(visibleBottom - clientHeight * 0.85)));
+}
+
+function getProgressToastEl() {
   let toast = document.getElementById('progress-restore-toast');
   if (!toast) {
     toast = document.createElement('div');
@@ -981,6 +1025,45 @@ function showProgressRestoreToast(pct) {
     toast.className = 'progress-restore-toast';
     document.body.appendChild(toast);
   }
+  return toast;
+}
+
+// ── 搜尋瀏覽模式：從搜尋結果跳進章節時，不動研讀進度 ─────────
+function showSearchBrowseToast() {
+  const toast = getProgressToastEl();
+  toast.innerHTML = `
+    <span class="toast-icon">🔍</span>
+    <span>搜尋瀏覽中，<b>不計入</b>研讀進度</span>
+    <button class="toast-btn-top" onclick="exitSearchBrowse()">回到上次進度</button>
+    <button class="toast-close" onclick="hideProgressRestoreToast()" title="關閉（仍不計進度，點側欄本章可回到進度）">✕</button>
+  `;
+  requestAnimationFrame(() => toast.classList.add('show'));
+  // 不自動消失：讓使用者隨時能回到原本的進度位置
+  clearTimeout(_restoreToastTimer);
+}
+
+function exitSearchBrowse() {
+  const chId = state.currentChId;
+  state.searchBrowseChId = null;
+  hideProgressRestoreToast();
+  const sc = els.mainContent;
+  if (!sc || !chId) return;
+
+  // 同章節：回到搜尋前的位置；換了章節：回到記錄的 % 數位置（0% 或 100% 則回頂部）
+  let targetTop = state.browseReturnTop;
+  state.browseReturnTop = null;
+  if (targetTop === null) {
+    const pct = state.chapterProgress[chId] || 0;
+    targetTop = (pct >= 1 && pct < 100) ? scrollTopForProgress(sc, pct) : 0;
+  }
+  // 直接跳回（不用平滑捲動），避免捲動途中經過的位置被誤記成進度
+  sc.scrollTo({ top: targetTop || 0, behavior: 'auto' });
+}
+
+window.exitSearchBrowse = exitSearchBrowse;
+
+function showProgressRestoreToast(pct) {
+  const toast = getProgressToastEl();
 
   toast.innerHTML = `
     <span class="toast-icon">📍</span>
