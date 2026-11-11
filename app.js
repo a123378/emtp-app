@@ -1965,9 +1965,9 @@ function m3Text(s) {
 /**
  * 記憶口訣框：text 是口訣本身；口訣下方可再接
  *   table（{headers, rows}）→ 對照表，timeline（[{t: 時間點, d: 發生什麼}]）→ 時間軸，
- * 取代一長串「A→B→C」或「X 是…、Y 是…」的文字。
+ * 取代一長串「A→B→C」或「X 是…、Y 是…」的文字；note 是放在最後的一行補充（※）。
  * @param {{text?: string, table?: {headers?: string[], rows: string[][]},
- *          timeline?: Array<{t: string, d: string}>}} b
+ *          timeline?: Array<{t: string, d: string}>, note?: string}} b
  * @param {(s: string) => string} fmt 行內格式化函式（各模式各自的 mdInline 包裝）
  */
 function mnemonicHtml(b, fmt) {
@@ -1977,8 +1977,9 @@ function mnemonicHtml(b, fmt) {
     ? `<ol class="mn-timeline">${steps.map(s =>
         `<li><span class="mn-tl-time">${fmt(s.t)}</span><span class="mn-tl-desc">${fmt(s.d)}</span></li>`).join('')}</ol>`
     : '';
+  const note = b.note ? `<div class="mn-note">※ ${fmt(b.note)}</div>` : '';
   return `<div class="mnemonic-block"><div class="mnemonic-label">💡 記憶口訣</div>` +
-    `<div class="mnemonic-text">${fmt(b.text || '')}</div>${table}${timeline}</div>`;
+    `<div class="mnemonic-text">${fmt(b.text || '')}</div>${table}${timeline}${note}</div>`;
 }
 
 function renderM3Table(b) {

@@ -718,6 +718,13 @@ body {
 .mnemonic-block .comp-table th { white-space: normal; padding: 7px 10px; }
 .mnemonic-block .comp-table td { padding: 7px 10px; }
 
+.mnemonic-block .mn-note {
+  margin-top: 8px;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
 /* 口訣時間軸：寬螢幕橫排、手機直排；圓點串在一條線上 */
 .mn-timeline {
   --mn-dot: 12px;

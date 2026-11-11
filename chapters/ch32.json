@@ -444,7 +444,31 @@
   },
   {
    "type": "mnemonic",
-   "text": "插管後突然變壞先想 **DOPE**：**D**islodgement 滑脫、**O**bstruction 阻塞、**P**neumothorax 氣胸、**E**quipment 設備失效。"
+   "text": "插管後突然變壞先想 **DOPE**",
+   "table": {
+    "headers": [
+     "字母",
+     "原因"
+    ],
+    "rows": [
+     [
+      "**D**",
+      "Dislodgement 滑脫"
+     ],
+     [
+      "**O**",
+      "Obstruction 阻塞"
+     ],
+     [
+      "**P**",
+      "Pneumothorax 氣胸"
+     ],
+     [
+      "**E**",
+      "Equipment 設備失效"
+     ]
+    ]
+   }
   },
   {
    "type": "list",

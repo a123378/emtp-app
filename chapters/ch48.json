@@ -1195,7 +1195,32 @@
   },
   {
    "type": "mnemonic",
-   "text": "**CSHCN 身上常有許多管路，緊急狀況時用「DOPE」口訣排除可能原因**<br>**D**＝**移位 (Displacement)**，如管路滑動移位<br>**O**＝**堵住或阻塞 (Obstruction)**<br>**P**＝**各種併發症**：氣胸 (Pneumothorax)、心包膜填塞 (Pericardial tamponade)、肺栓塞 (Pulmonary embolism)、腹膜炎 (Peritonitis)、器官破裂或穿孔 (Perforation)、假性囊腫 (Pseudocyst)<br>**E**＝**機械故障 (Equipment failure)**<br>※ 此外，感染、藥物副作用等惡化原因也要注意。"
+   "text": "**CSHCN 身上常有許多管路，緊急狀況時用「DOPE」口訣排除可能原因**",
+   "table": {
+    "headers": [
+     "字母",
+     "原因"
+    ],
+    "rows": [
+     [
+      "**D**",
+      "**移位 (Displacement)**，如管路滑動移位"
+     ],
+     [
+      "**O**",
+      "**堵住或阻塞 (Obstruction)**"
+     ],
+     [
+      "**P**",
+      "**各種併發症**：氣胸 (Pneumothorax)、心包膜填塞 (Pericardial tamponade)、肺栓塞 (Pulmonary embolism)、腹膜炎 (Peritonitis)、器官破裂或穿孔 (Perforation)、假性囊腫 (Pseudocyst)"
+     ],
+     [
+      "**E**",
+      "**機械故障 (Equipment failure)**"
+     ]
+    ]
+   },
+   "note": "此外，感染、藥物副作用等惡化原因也要注意。"
   }
  ],
  "summary": {
