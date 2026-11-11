@@ -103,11 +103,6 @@
       <button class="side-mode-btn" id="side-mode3-btn" onclick="pickMode(3)">🎤 模式三：口試重點</button>
     </div>
 
-    <!-- PWA Install Banner in Drawer -->
-    <div class="sidebar-install-banner" onclick="openPwaInstallModal()">
-      <span>📲 <b>安裝到手機桌面</b></span>
-      <span class="install-tag">推薦</span>
-    </div>
     <!-- Offline Pack Banner in Drawer（由 offline.js 控制） -->
     <div class="sidebar-install-banner sidebar-offline-banner hidden" id="offline-banner" role="button" tabindex="0"
          onclick="OfflineCache.onBannerClick()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();OfflineCache.onBannerClick()}">
@@ -118,11 +113,6 @@
     <div class="sidebar-install-banner sidebar-progress-banner" onclick="openProgressModal();closeMobileSidebar()">
       <span>📊 <b>研讀進度管理</b></span>
       <span class="install-tag" style="background:var(--surface);color:var(--text-muted);border:1px solid var(--border)">統計/重設</span>
-    </div>
-    <!-- Force Update Banner in Drawer -->
-    <div class="sidebar-install-banner sidebar-update-banner" onclick="forceAppUpdate()" style="cursor:pointer">
-      <span>🔄 <b>檢查並強制更新</b></span>
-      <span class="install-tag" style="background:var(--accent-dim);color:var(--accent);font-weight:700">更新快取</span>
     </div>
     <div class="sidebar-search">
       <div class="search-wrap">
