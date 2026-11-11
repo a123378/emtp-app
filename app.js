@@ -1510,11 +1510,31 @@ function clampMindmapScale(scale) {
   return Number(Math.min(MINDMAP_MAX_SCALE, Math.max(MINDMAP_MIN_SCALE, scale)).toFixed(2));
 }
 
+const MINDMAP_FIT_RATIO = 0.94;
+
+/**
+ * 以實際寬高縮放圖片（而非 CSS scale），讓瀏覽器依新尺寸重新繪製 SVG，放大後文字才清晰。
+ */
+function sizeMindmapImage() {
+  const img = document.getElementById('mindmap-modal-img');
+  const container = document.getElementById('mindmap-canvas-container');
+  if (!img || !container || !img.naturalWidth || !img.naturalHeight) return;
+  const aspect = img.naturalWidth / img.naturalHeight;
+  const fitWidth = Math.min(
+    container.clientWidth * MINDMAP_FIT_RATIO,
+    container.clientHeight * MINDMAP_FIT_RATIO * aspect
+  );
+  const width = fitWidth * mindmapViewer.scale;
+  img.style.width = `${Math.round(width)}px`;
+  img.style.height = `${Math.round(width / aspect)}px`;
+}
+
 function updateMindmapTransform() {
   const wrapper = document.getElementById('mindmap-transform-wrapper');
   const label = document.getElementById('mindmap-zoom-label');
+  sizeMindmapImage();
   if (wrapper) {
-    wrapper.style.transform = `translate(${mindmapViewer.translateX}px, ${mindmapViewer.translateY}px) scale(${mindmapViewer.scale})`;
+    wrapper.style.transform = `translate(${mindmapViewer.translateX}px, ${mindmapViewer.translateY}px)`;
   }
   if (label) {
     label.textContent = `${Math.round(mindmapViewer.scale * 100)}%`;
@@ -1529,11 +1549,14 @@ function openMindmapModal(chId, title) {
   if (!modal) return;
 
   if (titleText) titleText.textContent = `${title || chId} 核心架構圖譜`;
-  if (img) img.src = dataUrl(`images/mindmaps/${chId}.svg`);
-  mindmapResetZoom();
+  if (img) {
+    img.onload = updateMindmapTransform;
+    img.src = dataUrl(`images/mindmaps/${chId}.svg`);
+  }
 
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
+  mindmapResetZoom();
   initMindmapInteractions();
 }
 
@@ -1582,6 +1605,12 @@ function initMindmapInteractions() {
   if (!container) return;
 
   mindmapEventsBound = true;
+
+  // 視窗大小或全螢幕切換時，重新計算圖片尺寸
+  window.addEventListener('resize', () => {
+    const modal = document.getElementById('mindmap-modal');
+    if (modal && !modal.classList.contains('hidden')) updateMindmapTransform();
+  });
 
   // 1. 滑鼠拖曳平移
   container.addEventListener('mousedown', (e) => {

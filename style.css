@@ -2187,20 +2187,18 @@ body {
 
 /* SVG 縮放畫布 */
 .mindmap-transform-wrapper {
-  will-change: transform;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  transform-origin: center center;
-  transition: transform 0.05s ease-out;
 }
 
+/* 尺寸由 app.js 依縮放比例設定，不用 CSS scale，放大後 SVG 才會重新繪製保持清晰 */
 #mindmap-modal-img {
-  max-width: 94%;
-  max-height: 94%;
-  object-fit: contain;
+  flex-shrink: 0;
+  max-width: none;
+  max-height: none;
   pointer-events: none;
   filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.08));
 }
