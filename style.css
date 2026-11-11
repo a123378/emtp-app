@@ -712,6 +712,85 @@ body {
   color: var(--text);
 }
 
+/* 口訣框內的對照表：欄位少，不需最小寬度，手機上不必左右滑 */
+.mnemonic-block .comp-table-wrap { margin: 10px 0 4px; box-shadow: none; border: 1px solid var(--mnemonic-border); }
+.mnemonic-block .comp-table { min-width: 0; }
+.mnemonic-block .comp-table th { white-space: normal; padding: 7px 10px; }
+.mnemonic-block .comp-table td { padding: 7px 10px; }
+
+/* 口訣時間軸：寬螢幕橫排、手機直排；圓點串在一條線上 */
+.mn-timeline {
+  --mn-dot: 12px;
+  list-style: none;
+  margin: 12px 0 2px;
+  padding: 0;
+  display: flex;
+  position: relative;
+}
+.mn-timeline::before {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: calc(var(--mn-dot) / 2 - 1px);
+  height: 2px;
+  background: var(--mnemonic-border);
+}
+.mn-timeline li {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  padding-top: calc(var(--mn-dot) + 8px);
+  text-align: center;
+}
+.mn-timeline li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--mn-dot);
+  height: var(--mn-dot);
+  margin-left: calc(var(--mn-dot) / -2);
+  border-radius: 50%;
+  background: var(--mnemonic);
+  box-shadow: 0 0 0 3px var(--surface);
+}
+.mn-tl-time {
+  display: block;
+  font-weight: 800;
+  color: var(--mnemonic);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+.mn-tl-desc {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text);
+  padding: 2px 4px 0;
+}
+@media (max-width: 560px) {
+  .mn-timeline { flex-direction: column; gap: 10px; padding-left: 4px; }
+  .mn-timeline::before {
+    left: calc(4px + var(--mn-dot) / 2 - 1px);
+    right: auto;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    height: auto;
+  }
+  .mn-timeline li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 0 0 0 calc(var(--mn-dot) + 12px);
+    text-align: left;
+  }
+  .mn-timeline li::before { top: 5px; left: 0; margin-left: 0; }
+  .mn-tl-time { flex: 0 0 6.5em; white-space: normal; line-height: 1.4; }
+  .mn-tl-desc { padding: 0; }
+}
+
 /* ── 重點一覽 (五) ── */
 .summary-card {
   background: var(--surface);

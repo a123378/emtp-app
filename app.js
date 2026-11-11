@@ -394,11 +394,7 @@ function renderContentBlocks(blocks, chId) {
           </details>`;
         break;
       case 'mnemonic':
-        html += `
-          <div class="mnemonic-block">
-            <div class="mnemonic-label">💡 記憶口訣</div>
-            <div class="mnemonic-text">${mdInline(block.text)}</div>
-          </div>`;
+        html += mnemonicHtml(block, mdInline);
         break;
       case 'clinical':
         html += `
@@ -1966,6 +1962,25 @@ function m3Text(s) {
   return mdInline(escapeHtml(String(s == null ? '' : s)).replace(/&ast;/g, '*'));
 }
 
+/**
+ * 記憶口訣框：text 是口訣本身；口訣下方可再接
+ *   table（{headers, rows}）→ 對照表，timeline（[{t: 時間點, d: 發生什麼}]）→ 時間軸，
+ * 取代一長串「A→B→C」或「X 是…、Y 是…」的文字。
+ * @param {{text?: string, table?: {headers?: string[], rows: string[][]},
+ *          timeline?: Array<{t: string, d: string}>}} b
+ * @param {(s: string) => string} fmt 行內格式化函式（各模式各自的 mdInline 包裝）
+ */
+function mnemonicHtml(b, fmt) {
+  const steps = Array.isArray(b.timeline) ? b.timeline : [];
+  const table = b.table && Array.isArray(b.table.rows) ? renderM3Table(b.table) : '';
+  const timeline = steps.length
+    ? `<ol class="mn-timeline">${steps.map(s =>
+        `<li><span class="mn-tl-time">${fmt(s.t)}</span><span class="mn-tl-desc">${fmt(s.d)}</span></li>`).join('')}</ol>`
+    : '';
+  return `<div class="mnemonic-block"><div class="mnemonic-label">💡 記憶口訣</div>` +
+    `<div class="mnemonic-text">${fmt(b.text || '')}</div>${table}${timeline}</div>`;
+}
+
 function renderM3Table(b) {
   const headers = (b.headers || []);
   const hasHead = headers.some(h => String(h || '').trim());
@@ -2007,7 +2022,7 @@ function m3BlockHtml(b) {
     case 'blue':
       return `<div class="blue-heading">${m3Text(b.text)}</div>`;
     case 'mnemonic':
-      return `<div class="mnemonic-block"><div class="mnemonic-label">💡 記憶口訣</div><div class="mnemonic-text">${m3Text(b.text)}</div></div>`;
+      return mnemonicHtml(b, m3Text);
     case 'clinical':
       return `<div class="clinical-block"><div class="clinical-label">${m3Text(b.label || '核心觀念 ‧ 臨床實務')}</div>` +
         `<ul>${(b.points || []).map(p => `<li>${m3Text(p)}</li>`).join('')}</ul></div>`;
