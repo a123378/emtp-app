@@ -2408,14 +2408,14 @@
     ],
     [
      "**Fentanyl**",
-     "**3 mg/kg IV**（原文載）",
+     "**3 μg/kg IV**",
      "**達成止痛效果，避免因疼痛刺激引起的不良反應**；**Fentanyl 為嗎啡類藥物，應注意其血壓降低、呼吸抑制等副作用**"
     ]
    ]
   },
   {
    "type": "text",
-   "text": "⚠ 待核對：上表 Fentanyl「3 mg/kg」為課本原文數字；章節摘要 PDF 寫作 **3 μg/kg**，兩者相差 1,000 倍，請以教科書原文與當地預立醫囑為準。"
+   "text": "註：課本原文表格將 Fentanyl 印作「3 mg/kg」，為單位誤植；章節摘要 PDF 與臨床常規皆為 **3 μg/kg**（前置給藥常用 1~3 μg/kg）。若照 mg/kg 計算，70 公斤成人需 210 毫克，約為正確劑量的 1,000 倍，足以致命。"
   },
   {
    "type": "blue",
@@ -3417,8 +3417,8 @@
    },
    {
     "label": "DAI 前置藥物劑量",
-    "value": "Lidocaine 1.5 mg/kg IV；Fentanyl 3 mg/kg IV",
-    "note": "Lidocaine 避免腦壓升高與支氣管痙攣；Fentanyl 止痛（原文載劑量）"
+    "value": "Lidocaine 1.5 mg/kg IV；Fentanyl 3 μg/kg IV",
+    "note": "Lidocaine 避免腦壓升高與支氣管痙攣；Fentanyl 止痛（課本原文誤植為 3 mg/kg，正確為 3 μg/kg）"
    },
    {
     "label": "DAI 鎮靜劑劑量",
@@ -3660,7 +3660,7 @@
      "rows": [
       [
        "① 前置",
-       "**Lidocaine 1.5 mg/kg IV**；Fentanyl 3 μg/kg IV（課本原文作 3 mg/kg，待核對）",
+       "**Lidocaine 1.5 mg/kg IV**；Fentanyl 3 μg/kg IV（課本原文誤植為 3 mg/kg）",
        "Lidocaine 避免腦壓升高與支氣管痙攣；Fentanyl 止痛"
       ],
       [
@@ -4036,7 +4036,7 @@
     "rows": [
      [
       "① 前置藥物",
-      "Lidocaine 1.5 mg/kg IV；Fentanyl 3 μg/kg IV（課本原文作 3 mg/kg，⚠ 待核對）",
+      "Lidocaine 1.5 mg/kg IV；Fentanyl 3 μg/kg IV（課本原文誤植為 3 mg/kg）",
       "Lidocaine 預防腦壓增高與支氣管痙攣；Fentanyl 止痛、預防插管引起的交感興奮，注意呼吸與血壓抑制"
      ],
      [
