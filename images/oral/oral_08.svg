@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" width="1400" height="600" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs></defs>
+<rect width="1400" height="600" fill="#ffffff"/>
+<rect x="20" y="20" width="260" height="560" rx="16" fill="#f7f9fa" stroke="#cfd8dc" stroke-width="2" />
+<rect x="20" y="20" width="260" height="96" rx="16" fill="#1f5fbf" stroke="none" stroke-width="2" />
+<rect x="20" y="80" width="260" height="36" rx="0" fill="#1f5fbf" stroke="none" stroke-width="2" />
+<text font-size="36" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="150.0" y="81.0">第 1 級</tspan></text>
+<text font-size="32" font-weight="800" fill="#1f5fbf" text-anchor="middle" ><tspan x="150.0" y="167.5">復甦急救</tspan></text>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="150.0" y="212.5">可能等候時間</tspan></text>
+<text font-size="34" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="150.0" y="256.2">立即處置</tspan></text>
+<line x1="44" y1="280" x2="256" y2="280" stroke="#cfd8dc" stroke-width="2"/>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="150.0" y="310.5">定義</tspan></text>
+<text font-size="23" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="150.0" y="344.0">病況危急，生命或肢</tspan><tspan x="150.0" y="378.5">體需要立即處置</tspan></text>
+<rect x="294" y="20" width="260" height="560" rx="16" fill="#f7f9fa" stroke="#cfd8dc" stroke-width="2" />
+<rect x="294" y="20" width="260" height="96" rx="16" fill="#d7263d" stroke="none" stroke-width="2" />
+<rect x="294" y="80" width="260" height="36" rx="0" fill="#d7263d" stroke="none" stroke-width="2" />
+<text font-size="36" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="424.0" y="81.0">第 2 級</tspan></text>
+<text font-size="32" font-weight="800" fill="#d7263d" text-anchor="middle" ><tspan x="424.0" y="167.5">危急</tspan></text>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="424.0" y="212.5">可能等候時間</tspan></text>
+<text font-size="34" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="424.0" y="256.2">10 分鐘</tspan></text>
+<line x1="318" y1="280" x2="530" y2="280" stroke="#cfd8dc" stroke-width="2"/>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="424.0" y="310.5">定義</tspan></text>
+<text font-size="23" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="424.0" y="343.8">潛在性危及生命、器</tspan><tspan x="424.0" y="378.3">官或肢體功能的狀況，</tspan><tspan x="424.0" y="412.8">需要快速控制與處置</tspan></text>
+<rect x="568" y="20" width="260" height="560" rx="16" fill="#f7f9fa" stroke="#cfd8dc" stroke-width="2" />
+<rect x="568" y="20" width="260" height="96" rx="16" fill="#f2c200" stroke="none" stroke-width="2" />
+<rect x="568" y="80" width="260" height="36" rx="0" fill="#f2c200" stroke="none" stroke-width="2" />
+<text font-size="36" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="698.0" y="81.0">第 3 級</tspan></text>
+<text font-size="32" font-weight="800" fill="#b28b00" text-anchor="middle" ><tspan x="698.0" y="167.5">緊急</tspan></text>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="698.0" y="212.5">可能等候時間</tspan></text>
+<text font-size="34" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="698.0" y="256.2">30 分鐘</tspan></text>
+<line x1="592" y1="280" x2="804" y2="280" stroke="#cfd8dc" stroke-width="2"/>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="698.0" y="310.5">定義</tspan></text>
+<text font-size="23" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="698.0" y="343.5">病況可能持續惡化，</tspan><tspan x="698.0" y="378.0">需要急診處置，病人</tspan><tspan x="698.0" y="412.5">可能伴隨明顯不適的</tspan><tspan x="698.0" y="447.0">症狀，影響日常活動</tspan></text>
+<rect x="842" y="20" width="260" height="560" rx="16" fill="#f7f9fa" stroke="#cfd8dc" stroke-width="2" />
+<rect x="842" y="20" width="260" height="96" rx="16" fill="#2e9d4b" stroke="none" stroke-width="2" />
+<rect x="842" y="80" width="260" height="36" rx="0" fill="#2e9d4b" stroke="none" stroke-width="2" />
+<text font-size="36" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="972.0" y="81.0">第 4 級</tspan></text>
+<text font-size="32" font-weight="800" fill="#2e9d4b" text-anchor="middle" ><tspan x="972.0" y="167.5">次緊急</tspan></text>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="972.0" y="212.5">可能等候時間</tspan></text>
+<text font-size="34" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="972.0" y="256.2">60 分鐘</tspan></text>
+<line x1="866" y1="280" x2="1078" y2="280" stroke="#cfd8dc" stroke-width="2"/>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="972.0" y="310.5">定義</tspan></text>
+<text font-size="23" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="972.0" y="343.0">病況可能是慢性疾病</tspan><tspan x="972.0" y="377.5">的急性發作，或某些</tspan><tspan x="972.0" y="412.0">疾病之合併症相關，</tspan><tspan x="972.0" y="446.5">需要在1~2小時內</tspan><tspan x="972.0" y="481.0">處置，以求恢復，避</tspan><tspan x="972.0" y="515.5">免惡化</tspan></text>
+<rect x="1116" y="20" width="260" height="560" rx="16" fill="#f7f9fa" stroke="#cfd8dc" stroke-width="2" />
+<rect x="1116" y="20" width="260" height="96" rx="16" fill="#ffffff" stroke="#90a4ae" stroke-width="2" />
+<rect x="1116" y="80" width="260" height="36" rx="0" fill="#ffffff" stroke="none" stroke-width="2" />
+<line x1="1117" y1="116" x2="1375" y2="116" stroke="#90a4ae" stroke-width="2"/>
+<text font-size="36" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="1246.0" y="81.0">第 5 級</tspan></text>
+<text font-size="32" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="1246.0" y="167.5">非緊急</tspan></text>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="1246.0" y="212.5">可能等候時間</tspan></text>
+<text font-size="34" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="1246.0" y="256.2">120 分鐘</tspan></text>
+<line x1="1140" y1="280" x2="1352" y2="280" stroke="#cfd8dc" stroke-width="2"/>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="1246.0" y="310.5">定義</tspan></text>
+<text font-size="23" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="1246.0" y="343.5">病況為非緊急狀況，</tspan><tspan x="1246.0" y="378.0">需要一般基礎性的診</tspan><tspan x="1246.0" y="412.5">查或轉介門診，以避</tspan><tspan x="1246.0" y="447.0">免後續之惡化</tspan></text>
+</svg>

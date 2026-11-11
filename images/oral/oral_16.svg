@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 450" width="1300" height="450" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5e35b1"/></marker></defs>
+<rect width="1300" height="450" fill="#ffffff"/>
+<rect x="20" y="30" width="210" height="64" rx="32" fill="#f7d046" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="125" y="69.9">編碼（UN No.）</tspan></text>
+<rect x="20" y="150" width="210" height="64" rx="32" fill="#5dade2" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="125" y="189.9">英文名稱</tspan></text>
+<rect x="20" y="270" width="210" height="64" rx="32" fill="#a569bd" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="125" y="309.9">中文名稱</tspan></text>
+<text font-size="28" font-weight="800" fill="#5e35b1" text-anchor="middle" ><tspan x="125" y="130.1">＋</tspan></text>
+<text font-size="28" font-weight="800" fill="#5e35b1" text-anchor="middle" ><tspan x="125" y="250.1">＋</tspan></text>
+<text font-size="18" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="125" y="368.5">任一項皆可查索引</tspan></text>
+<line x1="244" y1="182" x2="284" y2="182" stroke="#5e35b1" stroke-width="5" marker-end="url(#a)"/>
+<circle cx="400" cy="182" r="108" fill="#e74c3c"/>
+<text font-size="32" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="400" y="179.5">原則號碼</tspan></text>
+<text font-size="20" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="400" y="215.2">（指南號碼）</tspan></text>
+<line x1="520" y1="182" x2="560" y2="182" stroke="#5e35b1" stroke-width="5" marker-end="url(#a)"/>
+<rect x="574" y="100" width="706" height="164" rx="14" fill="#e8f5e9" stroke="#43a047" stroke-width="3" />
+<text font-size="23" font-weight="800" fill="#1b5e20" text-anchor="middle" ><tspan x="926" y="154.3">有網底 → 翻閱後方「初期隔離與保護行動距離表」</tspan></text>
+<text font-size="23" font-weight="800" fill="#1b5e20" text-anchor="middle" ><tspan x="926" y="226.3">洩漏量不確定 → 一律以「大量洩漏」計算</tspan></text>
+<rect x="20" y="384" width="1260" height="52" rx="8" fill="#fffde7" stroke="#8d6e63" stroke-width="2.5" stroke-dasharray="10 6"/>
+<text font-size="22" font-weight="700" fill="#5d4037" text-anchor="middle" ><tspan x="650" y="417.9">備註 P：表示此類物質受熱或受汙染時，會產生劇烈的聚合反應</tspan></text>
+</svg>

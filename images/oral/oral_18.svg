@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 540" width="1240" height="540" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs><marker id="g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e88e5"/></marker><marker id="r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<rect width="1240" height="540" fill="#ffffff"/>
+<path d="M450,520 C450,380 520,330 620,330 C720,330 790,380 790,520 Z" stroke="none" stroke-width="0" fill="#b0bec5" />
+<rect x="588" y="236" width="64" height="100" rx="20" fill="#f5cba7" stroke="none" stroke-width="2" />
+<circle cx="620" cy="170" r="88" fill="#f5cba7"/>
+<path d="M528,180 C520,50 720,50 712,180 C700,130 660,112 620,112 C580,112 540,130 528,180 Z" stroke="none" stroke-width="0" fill="#5d4037" />
+<ellipse cx="604" cy="300" rx="20" ry="30" fill="#c0392b" transform="rotate(-18 604 300)"/>
+<ellipse cx="636" cy="300" rx="20" ry="30" fill="#c0392b" transform="rotate(18 636 300)"/>
+<rect x="604" y="300" width="32" height="12" rx="6" fill="#c0392b" stroke="none" stroke-width="2" />
+<text font-size="24" font-weight="800" fill="#c0392b" text-anchor="start" ><tspan x="890" y="308.6">甲狀腺</tspan></text>
+<line x1="880" y1="300" x2="664" y2="300" stroke="#c0392b" stroke-width="2.5" marker-end="url(#r)"/>
+<circle cx="190" cy="150" r="90" fill="#1e88e5"/>
+<text font-size="30" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="190" y="142.8">穩定碘</tspan></text>
+<text font-size="20" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="190" y="179.2">（碘片 KI）</tspan></text>
+<path d="M282,170 C420,190 520,250 584,290" stroke="#1e88e5" stroke-width="5" fill="none" marker-end="url(#g)" />
+<text font-size="21" font-weight="700" fill="#1565c0" text-anchor="middle" ><tspan x="420" y="125.6">先服用，讓甲狀腺「吃飽」</tspan></text>
+<circle cx="190" cy="400" r="90" fill="#e53935"/>
+<text font-size="28" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="190" y="392.1">放射性碘</tspan></text>
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="190" y="429.9">I-131</tspan></text>
+<path d="M282,388 C380,370 460,340 520,322" stroke="#e53935" stroke-width="5" fill="none" stroke-dasharray="12 8" />
+<circle cx="540" cy="316" r="20" fill="#fff" stroke="#e53935" stroke-width="4"/>
+<line x1="527" y1="303" x2="553" y2="329" stroke="#e53935" stroke-width="4"/>
+<line x1="553" y1="303" x2="527" y2="329" stroke="#e53935" stroke-width="4"/>
+<text font-size="21" font-weight="700" fill="#c62828" text-anchor="middle" ><tspan x="400" y="477.6">無法再被吸收 → 隨尿液排出</tspan></text>
+<rect x="880" y="360" width="340" height="160" rx="14" fill="#fff8e1" stroke="#f9a825" stroke-width="3" />
+<text font-size="26" font-weight="800" fill="#e65100" text-anchor="middle" ><tspan x="1050" y="401.4">保護甲狀腺</tspan></text>
+<text font-size="19" font-weight="600" fill="#5d4037" text-anchor="middle" ><tspan x="1050" y="437.8">服用時機：放射性碘外釋前</tspan><tspan x="1050" y="462.8">～外釋後 6 小時內</tspan><tspan x="1050" y="487.9">（超過 6 小時效果遞減）</tspan></text>
+</svg>

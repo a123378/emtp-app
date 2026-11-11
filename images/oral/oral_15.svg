@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" width="1400" height="640" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#263238"/></marker><marker id="w" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e88e5"/></marker><marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7e57c2"/></marker><marker id="k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7b1010"/></marker></defs>
+<rect width="1400" height="640" fill="#ffffff"/>
+<text font-size="24" font-weight="700" fill="#1e88e5" text-anchor="middle" ><tspan x="500" y="72.6">上風處</tspan></text>
+<line x1="560" y1="64" x2="1000" y2="64" stroke="#1e88e5" stroke-width="5" marker-end="url(#w)"/>
+<text font-size="22" font-weight="700" fill="#1e88e5" text-anchor="middle" ><tspan x="780" y="43.9">風向</tspan></text>
+<text font-size="24" font-weight="700" fill="#1e88e5" text-anchor="middle" ><tspan x="1062" y="72.6">下風處</tspan></text>
+<rect x="640" y="140" width="400" height="400" rx="0" fill="none" stroke="#90a4ae" stroke-width="2.5" />
+<path d="M640,232 L1000,146 Q1056,340 1000,534 L640,448 Z" stroke="#e67e22" stroke-width="3" fill="#fde3b0" stroke-dasharray="12 8" />
+<text font-size="24" font-weight="800" fill="#b35900" text-anchor="middle" ><tspan x="880" y="244.6">保護行動區域</tspan></text>
+<line x1="640" y1="340" x2="1040" y2="340" stroke="#263238" stroke-width="2.5"/>
+<text font-size="22" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="880" y="327.9">下風距離</tspan></text>
+<circle cx="640" cy="340" r="108" fill="#f5b7b1" stroke="#c0392b" stroke-width="3"/>
+<circle cx="640" cy="340" r="15" fill="#7b1010"/>
+<line x1="1085" y1="144" x2="1085" y2="336" stroke="#263238" stroke-width="2" marker-end="url(#a)"/>
+<line x1="1085" y1="336" x2="1085" y2="144" stroke="#263238" stroke-width="2" marker-end="url(#a)"/>
+<text font-size="22" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="1180" y="247.9">1/2 下風距離</tspan></text>
+<line x1="1085" y1="344" x2="1085" y2="536" stroke="#263238" stroke-width="2" marker-end="url(#a)"/>
+<line x1="1085" y1="536" x2="1085" y2="344" stroke="#263238" stroke-width="2" marker-end="url(#a)"/>
+<text font-size="22" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="1180" y="447.9">1/2 下風距離</tspan></text>
+<line x1="1320" y1="124" x2="1320" y2="556" stroke="#7e57c2" stroke-width="3" marker-end="url(#p)"/>
+<line x1="1320" y1="556" x2="1320" y2="124" stroke="#7e57c2" stroke-width="3" marker-end="url(#p)"/>
+<text font-size="24" font-weight="800" fill="#7e57c2" text-anchor="middle" ><tspan x="1356" y="307.2">側</tspan><tspan x="1356" y="334.8">風</tspan><tspan x="1356" y="362.4">方</tspan><tspan x="1356" y="390.0">向</tspan></text>
+<text font-size="22" font-weight="700" fill="#c0392b" text-anchor="middle" ><tspan x="420" y="497.9">初期隔離區域</tspan></text>
+<line x1="500" y1="478" x2="570" y2="420" stroke="#c0392b" stroke-width="2" marker-end="url(#k)"/>
+<text font-size="22" font-weight="700" fill="#7b1010" text-anchor="middle" ><tspan x="560" y="597.9">洩漏處</tspan></text>
+<line x1="580" y1="572" x2="632" y2="358" stroke="#7b1010" stroke-width="2" marker-end="url(#d)"/>
+<rect x="60" y="250" width="200" height="52" rx="8" fill="#e3f2fd" stroke="#1e88e5" stroke-width="2" />
+<text font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle" ><tspan x="160" y="282.8">指揮中心 Command</tspan></text>
+<rect x="80" y="312" width="160" height="96" rx="8" fill="#455a64" stroke="none" stroke-width="2" />
+<text font-size="24" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="160" y="368.6">COMMAND</tspan></text>
+<rect x="266" y="325" width="270" height="30" rx="4" fill="#e74c3c" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="800" fill="#c0392b" text-anchor="middle" ><tspan x="400" y="313.9">除汙走道</tspan></text>
+<text font-size="21" font-weight="700" fill="#1565c0" text-anchor="middle" ><tspan x="160" y="447.6">冷區（Cold Zone）</tspan></text>
+<rect x="60" y="466" width="200" height="46" rx="6" fill="#ffffff" stroke="#263238" stroke-width="2" />
+<text font-size="18" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="160" y="495.5">支援區 Support Area</tspan></text>
+</svg>

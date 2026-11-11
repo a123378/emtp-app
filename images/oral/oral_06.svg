@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 640" width="760" height="640" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs><marker id="m0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e9d6b"/></marker><marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e88e5"/></marker><marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e53935"/></marker><marker id="m3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb8c00"/></marker></defs>
+<rect width="760" height="640" fill="#ffffff"/>
+<path d="M477.6,128.4 A215,215 0 0 1 571.6,222.4" stroke="#1e88e5" stroke-width="7" fill="none" marker-end="url(#m1)" />
+<path d="M571.6,417.6 A215,215 0 0 1 477.6,511.6" stroke="#e53935" stroke-width="7" fill="none" marker-end="url(#m2)" />
+<path d="M282.4,511.6 A215,215 0 0 1 188.4,417.6" stroke="#fb8c00" stroke-width="7" fill="none" marker-end="url(#m3)" />
+<path d="M188.4,222.4 A215,215 0 0 1 282.4,128.4" stroke="#2e9d6b" stroke-width="7" fill="none" marker-end="url(#m0)" />
+<rect x="280.0" y="55.0" width="200" height="100" rx="20" fill="#2e9d6b" stroke="none" stroke-width="2" />
+<text font-size="38" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="380.0" y="106.7">減災</tspan></text>
+<text font-size="18" font-weight="600" fill="#ffffffdd" text-anchor="middle" ><tspan x="380.0" y="139.5">Mitigation</tspan></text>
+<rect x="495.0" y="270.0" width="200" height="100" rx="20" fill="#1e88e5" stroke="none" stroke-width="2" />
+<text font-size="38" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="595.0" y="321.7">整備</tspan></text>
+<text font-size="18" font-weight="600" fill="#ffffffdd" text-anchor="middle" ><tspan x="595.0" y="354.5">Preparedness</tspan></text>
+<rect x="280.0" y="485.0" width="200" height="100" rx="20" fill="#e53935" stroke="none" stroke-width="2" />
+<text font-size="38" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="380.0" y="536.7">應變</tspan></text>
+<text font-size="18" font-weight="600" fill="#ffffffdd" text-anchor="middle" ><tspan x="380.0" y="569.5">Response</tspan></text>
+<rect x="65.0" y="270.0" width="200" height="100" rx="20" fill="#fb8c00" stroke="none" stroke-width="2" />
+<text font-size="38" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="165.0" y="321.7">復原</tspan></text>
+<text font-size="18" font-weight="600" fill="#ffffffdd" text-anchor="middle" ><tspan x="165.0" y="354.5">Recovery</tspan></text>
+<text font-size="30" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="380" y="316.8">災難管理</tspan></text>
+<text font-size="30" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="380" y="354.8">循環</tspan></text>
+</svg>

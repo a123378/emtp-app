@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="1200" height="650" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs><linearGradient id="cost" x1="0" x2="1"><stop offset="0" stop-color="#2e9d6b"/><stop offset="0.5" stop-color="#e39b12"/><stop offset="1" stop-color="#d9534f"/></linearGradient></defs>
+<rect width="1200" height="650" fill="#ffffff"/>
+<text font-size="36" font-weight="800" fill="#2e9d6b" text-anchor="middle" ><tspan x="220.0" y="61.0">第一段</tspan></text>
+<text font-size="20" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="318.0" y="59.2">初段預防</tspan></text>
+<rect x="20" y="82" width="480" height="56" rx="10" fill="#2e9d6b" stroke="none" stroke-width="2" />
+<text font-size="24" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="260.0" y="118.6">高 CP 值、生活品質佳</tspan></text>
+<rect x="20" y="146" width="480" height="410" rx="12" fill="#e6f5ee" stroke="none" stroke-width="2" />
+<rect x="88.0" y="168" width="104" height="36" rx="18" fill="#2e9d6b" stroke="none" stroke-width="2" />
+<text font-size="20" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="140.0" y="193.2">第一級</tspan></text>
+<text font-size="32" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="140.0" y="263.5">促進健康</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="140.0" y="329.9">衛生教育</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="140.0" y="369.9">定期健檢</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="140.0" y="409.9">均衡營養</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="140.0" y="449.9">適性發展</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="140.0" y="489.9">遺傳諮詢</tspan></text>
+<line x1="260.0" y1="166" x2="260.0" y2="536" stroke="#ffffff" stroke-width="4"/>
+<rect x="328.0" y="168" width="104" height="36" rx="18" fill="#2e9d6b" stroke="none" stroke-width="2" />
+<text font-size="20" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="380.0" y="193.2">第二級</tspan></text>
+<text font-size="32" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="380.0" y="263.5">特殊保護</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="380.0" y="329.9">預防注射</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="380.0" y="369.9">衛生習慣</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="380.0" y="409.9">環境安全</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="380.0" y="449.9">避免過敏原</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="380.0" y="489.9">避免致癌物</tspan></text>
+<text font-size="36" font-weight="800" fill="#e39b12" text-anchor="middle" ><tspan x="595.0" y="61.0">第二段</tspan></text>
+<text font-size="20" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="693.0" y="59.2">次段預防</tspan></text>
+<rect x="515" y="82" width="240" height="56" rx="10" fill="#e39b12" stroke="none" stroke-width="2" />
+<text font-size="24" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="635.0" y="118.6">及早發現疾病</tspan></text>
+<rect x="515" y="146" width="240" height="410" rx="12" fill="#fdf3dd" stroke="none" stroke-width="2" />
+<rect x="583.0" y="168" width="104" height="36" rx="18" fill="#e39b12" stroke="none" stroke-width="2" />
+<text font-size="20" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="635.0" y="193.2">第三級</tspan></text>
+<text font-size="32" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="635.0" y="248.4">早期診斷</tspan><tspan x="635.0" y="290.6">早期治療</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="635.0" y="347.9">健檢、篩檢</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="635.0" y="387.9">預防或治療</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="635.0" y="427.9">防止疾病惡化</tspan></text>
+<text font-size="36" font-weight="800" fill="#d9534f" text-anchor="middle" ><tspan x="935.0" y="61.0">第三段</tspan></text>
+<text font-size="20" font-weight="600" fill="#607d8b" text-anchor="middle" ><tspan x="1033.0" y="59.2">末段預防</tspan></text>
+<rect x="770" y="82" width="410" height="56" rx="10" fill="#d9534f" stroke="none" stroke-width="2" />
+<text font-size="24" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="975.0" y="118.6">醫療成本高、負擔大</tspan></text>
+<rect x="770" y="146" width="410" height="410" rx="12" fill="#fbe8e7" stroke="none" stroke-width="2" />
+<rect x="820.5" y="168" width="104" height="36" rx="18" fill="#d9534f" stroke="none" stroke-width="2" />
+<text font-size="20" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="872.5" y="193.2">第四級</tspan></text>
+<text font-size="32" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="872.5" y="263.5">限制殘障</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="872.5" y="329.9">適當治療</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="872.5" y="369.9">延緩病程</tspan></text>
+<line x1="975.0" y1="166" x2="975.0" y2="536" stroke="#ffffff" stroke-width="4"/>
+<rect x="1025.5" y="168" width="104" height="36" rx="18" fill="#d9534f" stroke="none" stroke-width="2" />
+<text font-size="20" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="1077.5" y="193.2">第五級</tspan></text>
+<text font-size="32" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="1077.5" y="263.5">復健</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="1077.5" y="329.9">身心復健</tspan></text>
+<text font-size="22" font-weight="500" fill="#37474f" text-anchor="middle" ><tspan x="1077.5" y="369.9">長期照護</tspan></text>
+<path d="M20,578 H1150 L1180,603 L1150,628 H20 Z" stroke="none" stroke-width="0" fill="url(#cost)" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="600" y="610.9">醫療成本：低 ───────────▶ 高　（越早介入，花費越少、生活品質越好）</tspan></text>
+</svg>

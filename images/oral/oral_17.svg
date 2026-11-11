@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 660" width="720" height="660" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs></defs>
+<rect width="720" height="660" fill="#ffffff"/>
+<polygon points="360,40 620,300 360,560 100,300" fill="#ffffff" stroke="#111" stroke-width="3"/>
+<polygon points="360,44 616,300 104,300" fill="#f7d117"/>
+<polygon points="360,56 604,300 360,544 116,300" fill="none" stroke="#111" stroke-width="3"/>
+<line x1="116" y1="300" x2="604" y2="300" stroke="#111" stroke-width="3"/>
+<circle cx="360" cy="190" r="17" fill="#111"/><path d="M334.0,190.0 L276.0,190.0 A84,84 0 0 1 318.0,117.3 L347.0,167.5 A26,26 0 0 0 334.0,190.0 Z" fill="#111"/><path d="M373.0,167.5 L402.0,117.3 A84,84 0 0 1 444.0,190.0 L386.0,190.0 A26,26 0 0 0 373.0,167.5 Z" fill="#111"/><path d="M373.0,212.5 L402.0,262.7 A84,84 0 0 1 318.0,262.7 L347.0,212.5 A26,26 0 0 0 373.0,212.5 Z" fill="#111"/>
+<text font-size="40" font-weight="800" fill="#111" text-anchor="middle" ><tspan x="360" y="376.4">RADIOACTIVE</tspan></text>
+<text font-size="60" font-weight="800" fill="#111" text-anchor="middle" ><tspan x="360" y="511.6">7</tspan></text>
+<text font-size="22" font-weight="700" fill="#607d8b" text-anchor="middle" ><tspan x="360" y="617.9">第 7 類 放射性物質（標誌最小尺寸 250 mm）</tspan></text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 500" width="1320" height="500" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs></defs>
+<rect width="1320" height="500" fill="#ffffff"/>
+<line x1="660" y1="60" x2="660" y2="168" stroke="#90a4ae" stroke-width="3"/>
+<line x1="420" y1="118" x2="1180" y2="118" stroke="#90a4ae" stroke-width="3" stroke-dasharray="8 6"/>
+<line x1="170" y1="168" x2="1150" y2="168" stroke="#90a4ae" stroke-width="3"/>
+<line x1="170" y1="168" x2="170" y2="198" stroke="#90a4ae" stroke-width="3"/>
+<line x1="500" y1="168" x2="500" y2="198" stroke="#90a4ae" stroke-width="3"/>
+<line x1="830" y1="168" x2="830" y2="198" stroke="#90a4ae" stroke-width="3"/>
+<line x1="1150" y1="168" x2="1150" y2="198" stroke="#90a4ae" stroke-width="3"/>
+<line x1="170" y1="252" x2="170" y2="286" stroke="#90a4ae" stroke-width="3"/>
+<line x1="110" y1="286" x2="760" y2="286" stroke="#90a4ae" stroke-width="3"/>
+<line x1="110" y1="286" x2="110" y2="314" stroke="#90a4ae" stroke-width="3"/>
+<line x1="400" y1="286" x2="400" y2="314" stroke="#90a4ae" stroke-width="3"/>
+<line x1="760" y1="286" x2="760" y2="314" stroke="#90a4ae" stroke-width="3"/>
+<line x1="400" y1="368" x2="400" y2="400" stroke="#90a4ae" stroke-width="3"/>
+<line x1="330" y1="400" x2="470" y2="400" stroke="#90a4ae" stroke-width="3"/>
+<line x1="330" y1="400" x2="330" y2="428" stroke="#90a4ae" stroke-width="3"/>
+<line x1="470" y1="400" x2="470" y2="428" stroke="#90a4ae" stroke-width="3"/>
+<line x1="760" y1="368" x2="760" y2="400" stroke="#90a4ae" stroke-width="3"/>
+<line x1="640" y1="400" x2="890" y2="400" stroke="#90a4ae" stroke-width="3"/>
+<line x1="640" y1="400" x2="640" y2="428" stroke="#90a4ae" stroke-width="3"/>
+<line x1="890" y1="400" x2="890" y2="428" stroke="#90a4ae" stroke-width="3"/>
+<rect x="560.0" y="11.0" width="200" height="58" rx="10" fill="#37474f" stroke="none" stroke-width="2" />
+<text font-size="26" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="660" y="49.4">指揮官</tspan></text>
+<rect x="335.0" y="93.0" width="170" height="50" rx="10" fill="#7e57c2" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="420" y="125.9">新聞官</tspan></text>
+<rect x="815.0" y="93.0" width="170" height="50" rx="10" fill="#7e57c2" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="900" y="125.9">安全官</tspan></text>
+<rect x="1095.0" y="93.0" width="170" height="50" rx="10" fill="#7e57c2" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="1180" y="125.9">聯絡官</tspan></text>
+<text font-size="20" font-weight="800" fill="#7e57c2" text-anchor="end" ><tspan x="318" y="125.2">幕僚</tspan></text>
+<rect x="60.0" y="198.0" width="220" height="54" rx="10" fill="#1e88e5" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="170" y="232.9">執行部門</tspan></text>
+<rect x="390.0" y="198.0" width="220" height="54" rx="10" fill="#1e88e5" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="500" y="232.9">計畫部門</tspan></text>
+<rect x="720.0" y="198.0" width="220" height="54" rx="10" fill="#1e88e5" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="830" y="232.9">後勤部門</tspan></text>
+<rect x="1025.0" y="198.0" width="250" height="54" rx="10" fill="#1e88e5" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="1150" y="232.9">財務行政部門</tspan></text>
+<rect x="10.0" y="314.0" width="200" height="54" rx="10" fill="#f39c12" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="110" y="348.9">搜救脫困組</tspan></text>
+<rect x="300.0" y="314.0" width="200" height="54" rx="10" fill="#f39c12" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="400" y="348.9">病患醫療組</tspan></text>
+<rect x="660.0" y="314.0" width="200" height="54" rx="10" fill="#f39c12" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="760" y="348.9">病患後送組</tspan></text>
+<rect x="270.0" y="428.0" width="120" height="54" rx="10" fill="#43a047" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="330" y="462.9">檢傷</tspan></text>
+<rect x="410.0" y="428.0" width="120" height="54" rx="10" fill="#43a047" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="470" y="462.9">治療</tspan></text>
+<rect x="540.0" y="428.0" width="200" height="54" rx="10" fill="#43a047" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="640" y="462.9">救護車後送</tspan></text>
+<rect x="775.0" y="428.0" width="230" height="54" rx="10" fill="#43a047" stroke="none" stroke-width="2" />
+<text font-size="22" font-weight="700" fill="#fff" text-anchor="middle" ><tspan x="890" y="462.9">救護直升機後送</tspan></text>
+</svg>
