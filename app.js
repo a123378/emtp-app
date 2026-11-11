@@ -37,6 +37,7 @@ const state = {
   isLoadingChapter: false,
 
   allQuizzes: [],      // 歷屆試題（模式一段落內嵌考題）
+  quizzesReady: Promise.resolve(), // 歷屆試題載入完成的 Promise（init 時換成實際下載）
   currentMode: 1
 };
 
@@ -101,8 +102,9 @@ async function init() {
   }
   document.body.classList.add('mode-1');
   applyTheme(state.theme);
+  // 歷屆試題（2 MB）只有章節內嵌考題用得到：與章節目錄同時下載，不擋側欄顯示
+  state.quizzesReady = loadAllQuizzes();
   await loadChapterIndex();
-  await loadAllQuizzes();
   // 同步已讀與各章 % 數進度（以各章實質百分比為準，唯有 >= 100% 才標為已讀）
   state.readChapters = new Set();
   Object.entries(state.chapterProgress).forEach(([id, pct]) => {
@@ -240,13 +242,19 @@ async function loadChapterData(chId) {
   els.notesLoading.style.display = 'flex';
   els.notesContent.classList.add('hidden');
 
+  let chData = null;
   try {
     const r = await fetch(dataUrl(`chapters/${chId}.json`));
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    state.currentChData = await r.json();
+    chData = await r.json();
   } catch (e) {
-    state.currentChData = null;
+    chData = null;
   }
+  // 筆記裡要嵌入歷屆試題，渲染前確定題庫已載入（通常早就好了；失敗時 loadAllQuizzes 會給空陣列）
+  await state.quizzesReady;
+  // 等待期間使用者已換到別章：丟掉這份資料，交給新的那次載入
+  if (state.currentChId !== chId) return;
+  state.currentChData = chData;
 
   els.notesLoading.style.display = 'none';
   els.notesContent.classList.remove('hidden');
