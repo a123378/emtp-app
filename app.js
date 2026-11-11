@@ -1827,9 +1827,14 @@ async function initMode3(target) {
   if (target) m3.pendingTarget = target;
   if (!m3.data) {
     if (!m3.loading) {
-      m3.loading = fetch(dataUrl('chapters/oral_ch07.json'))
-        .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-        .then(d => { m3.data = d; })
+      const getJson = url => fetch(dataUrl(url)).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+      // 情境題載入失敗不影響口試重點本身
+      const scenarios = getJson('chapters/oral_scenarios.json').catch(e => {
+        console.warn('[口試練習] 情境題載入失敗', e);
+        return null;
+      });
+      m3.loading = Promise.all([getJson('chapters/oral_ch07.json'), scenarios])
+        .then(([d, sc]) => { m3.data = d; m3.scenarios = sc; })
         .catch(e => { m3.loading = null; throw e; });
     }
     try { await m3.loading; }
@@ -1893,6 +1898,13 @@ function m3BlockHtml(b) {
       return `<ul class="content-list">${(b.items || []).map(i => `<li>${renderM3ListItem(i)}</li>`).join('')}</ul>`;
     case 'table':
       return renderM3Table(b);
+    case 'blue':
+      return `<div class="blue-heading">${m3Text(b.text)}</div>`;
+    case 'mnemonic':
+      return `<div class="mnemonic-block"><div class="mnemonic-label">💡 記憶口訣</div><div class="mnemonic-text">${m3Text(b.text)}</div></div>`;
+    case 'clinical':
+      return `<div class="clinical-block"><div class="clinical-label">${m3Text(b.label || '核心觀念 ‧ 臨床實務')}</div>` +
+        `<ul>${(b.points || []).map(p => `<li>${m3Text(p)}</li>`).join('')}</ul></div>`;
     case 'image':
       return `
           <figure class="m3-figure">
@@ -1993,9 +2005,30 @@ function buildM3Sections() {
       secs.push(cur);
     } else if (cur) cur.blocks.push(b);
   });
+  secs.push(...buildScenarioSections(m3.scenarios));
   m3.sections = secs;
   m3.secById = Object.fromEntries(secs.map(x => [x.id, x]));
   m3.marks = m3LoadMarks();
+}
+
+// 教科書各章「情境」→ 題目、「情境解答」→ 答案（chapters/oral_scenarios.json）
+const M3_SCENARIO_TOPIC = 'sc';
+
+function buildScenarioSections(sc) {
+  return ((sc && sc.items) || []).map(it => ({
+    id: `sc-${it.chId}`,
+    topicId: M3_SCENARIO_TOPIC,
+    topicTitle: '情境題',
+    title: `${it.num} ${it.title}`,
+    chId: it.chId,
+    qBlocks: it.question || [],
+    blocks: it.answer || [],
+  }));
+}
+
+function m3OpenChapterNotes(chId) {
+  switchMode(1);
+  selectChapter(chId);
 }
 
 function setM3View(view, scroll = true) {
@@ -2117,13 +2150,15 @@ function renderM3Practice() {
   const topics = (m3.data.topics || []);
   const f = m3.p.filter;
   const chip = (key, label) => `<button class="m3p-chip${f === key ? ' active' : ''}" onclick="m3SetFilter('${key}')">${label}</button>`;
-  const shortTopic = { t1: 'EMS 系統', t2: '大傷／災難', t3: '毒核生化' };
+  const shortTopic = { t1: 'EMS 系統', t2: '大傷／災難', t3: '毒核生化', [M3_SCENARIO_TOPIC]: '📋 情境題' };
+  const scenarioN = m3.sections.filter(x => x.topicId === M3_SCENARIO_TOPIC).length;
 
   let html = `
     <div class="m3p-toolbar">
       <div class="m3p-chips">
         ${chip('all', `全部 ${total}`)}
         ${topics.map(t => chip(t.id, `${shortTopic[t.id] || t.title} ${m3.sections.filter(x => x.topicId === t.id).length}`)).join('')}
+        ${scenarioN ? chip(M3_SCENARIO_TOPIC, `${shortTopic[M3_SCENARIO_TOPIC]} ${scenarioN}`) : ''}
         ${chip('unsure', `😵 不熟 ${unN}`)}
         ${chip('new', `⬜ 未練 ${newN}`)}
       </div>
@@ -2159,15 +2194,19 @@ function renderM3Practice() {
         <div class="m3p-meta">
           <span>第 <b>${m3.p.idx + 1}</b> / ${n} 題</span>
           <span class="m3p-topic">${m3Text(shortTopic[sec.topicId] || sec.topicTitle)}</span>
-          <span class="m3p-page">${escapeHtml(m3PageLabel(sec))}</span>
+          <span class="m3p-page">${escapeHtml(sec.chId ? sec.title : m3PageLabel(sec))}</span>
           ${badge}
         </div>
-        <div class="m3p-q"><span class="m3p-q-mark">Q</span>${m3Text(sec.q)}</div>
+        ${sec.qBlocks
+          ? `<div class="m3p-q m3p-q-scenario"><span class="m3p-q-mark">Q</span><div>${sec.qBlocks.map(m3BlockHtml).join('')}</div></div>`
+          : `<div class="m3p-q"><span class="m3p-q-mark">Q</span>${m3Text(sec.q)}</div>`}
         ${m3.p.revealed ? `
           <div class="m3p-answer">
-            <div class="m3p-ans-title">📌 ${m3Text(sec.title)}</div>
+            <div class="m3p-ans-title">📌 ${sec.chId ? '情境解答' : m3Text(sec.title)}</div>
             ${sec.blocks.map(m3BlockHtml).join('') || ''}
-            <button class="m3p-link" onclick="m3SeeInNotes('${sec.id}')">📖 在重點整理中查看 →</button>
+            ${sec.chId
+              ? `<button class="m3p-link" onclick="m3OpenChapterNotes('${sec.chId}')">📖 到 ${escapeHtml(sec.title)} 筆記 →</button>`
+              : `<button class="m3p-link" onclick="m3SeeInNotes('${sec.id}')">📖 在重點整理中查看 →</button>`}
           </div>
           <div class="m3p-judge">
             <button class="m3p-btn m3p-btn-unsure" onclick="m3Mark('unsure')">😵 不熟</button>
@@ -2200,6 +2239,7 @@ window.m3Mark = m3Mark;
 window.m3ResetMarks = m3ResetMarks;
 window.m3RestartUnsure = m3RestartUnsure;
 window.m3SeeInNotes = m3SeeInNotes;
+window.m3OpenChapterNotes = m3OpenChapterNotes;
 window.m3Goto = m3Goto;
 window.m3BuildOrder = m3BuildOrder;
 window.renderM3Practice = renderM3Practice;

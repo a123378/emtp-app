@@ -2448,6 +2448,11 @@ body.mode-3 #m3-side-nav { display: block; }
 .m3p-badge.ok { color: #16a34a; }
 .m3p-badge.unsure { color: #dc2626; }
 .m3p-q { display: flex; gap: 10px; font-size: 1.12rem; font-weight: 800; line-height: 1.55; }
+/* 情境題：題目是多段案例敘述，用一般字重 */
+.m3p-q-scenario { font-size: 0.95rem; font-weight: 400; }
+.m3p-q-scenario > div { min-width: 0; }
+.m3p-q-scenario .m3-text { margin: 0 0 10px; padding-left: 0; }
+.m3p-q-scenario .m3-text:last-child { margin-bottom: 0; font-weight: 700; }
 .m3p-q-mark {
   flex: none; width: 28px; height: 28px; border-radius: 8px; background: var(--orange); color: #fff;
   display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; margin-top: 1px;
