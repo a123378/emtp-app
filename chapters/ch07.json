@@ -667,88 +667,71 @@
    "type": "table",
    "headers": [
     "代碼",
-    "到達前指導流程（Pre-arrival Instruction Protocol）",
-    "中文翻譯"
+    "到達前指導流程"
    ],
    "rows": [
     [
      "**A**",
-     "Airway/Arrest/Choking (Unconscious) – Infant < 1 yr",
      "氣道／中止／噎到（無意識）－**嬰兒＜1 歲**"
     ],
     [
      "**B**",
-     "Airway/Arrest/Choking (Unconscious) – Child 1~7 yrs",
      "氣道／中止／噎到（無意識）－**兒童 1~7 歲**"
     ],
     [
      "**C**",
-     "Airway/Arrest/Choking (Unconscious) – Adult ≥ 8 yrs",
      "氣道／中止／噎到（無意識）－**成人 ≥8 歲**"
     ],
     [
      "**D**",
-     "Choking (Conscious) – Adult/Child/Infant/Neonate",
      "噎到（**有意識**）－成人／兒童／嬰兒／新生兒"
     ],
     [
      "**F**",
-     "Childbirth – Delivery",
      "**生產**"
     ],
     [
      "**G**",
-     "Miscarriage",
      "**流產**"
     ],
     [
      "**K**",
-     "Person in Water",
      "**人在水裡（溺水）**"
     ],
     [
      "**L**",
-     "Vehicle in Water",
      "**交通工具在水裡**"
     ],
     [
      "**N**",
-     "Airway/Arrest/Choking (Unconscious) – Newborn/Neonate ＜30 days",
      "氣道／中止／噎到（無意識）－**新生兒＜30 天**"
     ],
     [
      "**P**",
-     "Epinephrine Auto-injector Instruction",
      "**Epinephrine 自動注射器**指引"
     ],
     [
      "**Q**",
-     "Narcan/Naloxone Nasal Instruction",
      "**Naloxone 鼻腔吸劑**指引"
     ],
     [
      "**R**",
-     "Naloxone Auto-injector Instruction",
      "**Naloxone 自動注射器**指引"
     ],
     [
      "**YA**",
-     "Tracheostomy (Stoma) Airway/Arrest/Choking (Unconscious) – Infant ＜1 yr",
      "**氣切**－氣道／中止／噎到（無意識）－嬰兒＜1 歲"
     ],
     [
      "**YB**",
-     "Tracheostomy (Stoma) Airway/Arrest/Choking (Unconscious) – Child 1~7 yrs",
      "**氣切**－氣道／中止／噎到（無意識）－兒童 1~7 歲"
     ],
     [
      "**YC**",
-     "Tracheostomy (Stoma) Airway/Arrest/Choking (Unconscious) – Adult ≥ 8 yrs",
      "**氣切**－氣道／中止／噎到（無意識）－成人 ≥8 歲"
     ],
     [
      "**Z**",
-     "AED Support",
      "**自動去顫電擊器支援**"
     ]
    ]
