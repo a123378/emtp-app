@@ -337,7 +337,7 @@ function renderNotes(cd, chId) {
     <div class="summary-entry-card" onclick="switchTab('summary')">
       <div class="summary-entry-icon">⚡</div>
       <div class="summary-entry-text">
-        <strong>查看本章公式、關鍵數字與比較表格</strong>
+        <strong>查看本章圖解、公式、關鍵數字與比較表格</strong>
         <span>點擊快速切換至濃縮精華整理表</span>
       </div>
       <div class="summary-entry-arrow">→</div>
@@ -414,6 +414,9 @@ function renderContentBlocks(blocks, chId) {
         break;
       case 'm3ref':
         html += renderM3Ref(block);
+        break;
+      case 'diagram':
+        html += diagramHtml(block);
         break;
     }
   });
@@ -580,9 +583,10 @@ function buildSummaryCards(cd, s) {
   const cards = [];
   const add = (key, icon, title, body) => { if (body) cards.push({ key, icon, title, body }); };
 
+  add('diagrams', '🖼️', '圖解速覽', renderSummaryDiagrams(cd));
   add('formulas', '🧮', '公式彙整', renderSummaryFormulas(pickShownFormulas(s)));
   add('numbers', '🔢', '關鍵數字整理', renderSummaryNumbers(s.keyNumbers));
-  add('tables', '📊', '重點比較表格', renderSummaryTables(cd, s.tables));
+  add('tables', '📊', '重點比較圖表', renderSummaryTables(cd, s.tables));
   add('quick', '✅', '章末重點速記', renderSummaryQuick(s.quickReview));
   return cards;
 }
@@ -622,10 +626,14 @@ function renderSummaryNumbers(list) {
     </div>`;
 }
 
-/** 表格可直接寫 headers/rows，或用 fromContent 指向重點筆記中同名標題下的表格，避免兩份資料不同步 */
+/**
+ * 表格可直接寫 headers/rows，或用 fromContent 指向重點筆記中同名標題下的表格，避免兩份資料不同步；
+ * 原表已改畫成圖解時用 diagram 指向該圖的 id。
+ */
 function renderSummaryTables(cd, list) {
   if (!list || !list.length) return '';
   return list.map(t => {
+    if (t.diagram) return diagramHtml(findContentDiagram(cd, t.diagram) || {});
     const tbl = t.fromContent ? findContentTable(cd, t.fromContent, t.nth || 0) : t;
     if (!tbl || !tbl.rows || !tbl.rows.length) return '';
     return `
@@ -633,6 +641,10 @@ function renderSummaryTables(cd, list) {
       ${renderCompTable(tbl)}
       ${t.note ? `<div class="sum-table-note">${mdInline(t.note)}</div>` : ''}`;
   }).join('');
+}
+
+function findContentDiagram(cd, id) {
+  return (cd.content || []).find(b => b.type === 'diagram' && b.id === id) || null;
 }
 
 function findContentTable(cd, heading, nth) {

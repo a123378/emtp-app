@@ -815,6 +815,269 @@ body {
   .mn-tl-desc { padding: 0; }
 }
 
+/* ── 圖解區塊（diagram.js）──
+   每個色調一組：--c 主色、--bg 淺底、--bd 邊框；深色模式另設一組 */
+.diagram-block {
+  --dg-red: #dc2626; --dg-red-bg: #fdecec; --dg-red-bd: #f6c4c4;
+  --dg-orange: #ea6c0a; --dg-orange-bg: #fff1e6; --dg-orange-bd: #f8cfa9;
+  --dg-amber: #b7791f; --dg-amber-bg: #fdf6e3; --dg-amber-bd: #f1dca4;
+  --dg-green: #15803d; --dg-green-bg: #e8f6ee; --dg-green-bd: #b5e0c5;
+  --dg-teal: #0f766e; --dg-teal-bg: #e4f5f3; --dg-teal-bd: #aadcd6;
+  --dg-blue: #1a5fa8; --dg-blue-bg: #e8f1fb; --dg-blue-bd: #b3d4f5;
+  --dg-purple: #7c3aed; --dg-purple-bg: #f2ecff; --dg-purple-bd: #d6c6fb;
+  --dg-gray: #52606d; --dg-gray-bg: #eef1f5; --dg-gray-bd: #cfd6df;
+  --dg-line: #9aa6b5;
+  margin: 14px 0 20px;
+  padding: 14px 16px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 0.88rem;
+}
+[data-theme="dark"] .diagram-block {
+  --dg-red: #f87171; --dg-red-bg: #2a1215; --dg-red-bd: #5c2328;
+  --dg-orange: #fb923c; --dg-orange-bg: #2a170b; --dg-orange-bd: #5a3215;
+  --dg-amber: #fbbf24; --dg-amber-bg: #261d09; --dg-amber-bd: #554214;
+  --dg-green: #4ade80; --dg-green-bg: #0e2416; --dg-green-bd: #1f5232;
+  --dg-teal: #2dd4bf; --dg-teal-bg: #0b2321; --dg-teal-bd: #1b4f4a;
+  --dg-blue: #60a5fa; --dg-blue-bg: #0d2238; --dg-blue-bd: #1a4268;
+  --dg-purple: #c4b5fd; --dg-purple-bg: #1d1731; --dg-purple-bd: #3b2d63;
+  --dg-gray: #a7b2c0; --dg-gray-bg: #1d2230; --dg-gray-bd: #343b4f;
+  --dg-line: #56627a;
+}
+.dg-t-red    { --c: var(--dg-red);    --bg: var(--dg-red-bg);    --bd: var(--dg-red-bd); }
+.dg-t-orange { --c: var(--dg-orange); --bg: var(--dg-orange-bg); --bd: var(--dg-orange-bd); }
+.dg-t-amber  { --c: var(--dg-amber);  --bg: var(--dg-amber-bg);  --bd: var(--dg-amber-bd); }
+.dg-t-green  { --c: var(--dg-green);  --bg: var(--dg-green-bg);  --bd: var(--dg-green-bd); }
+.dg-t-teal   { --c: var(--dg-teal);   --bg: var(--dg-teal-bg);   --bd: var(--dg-teal-bd); }
+.dg-t-blue   { --c: var(--dg-blue);   --bg: var(--dg-blue-bg);   --bd: var(--dg-blue-bd); }
+.dg-t-purple { --c: var(--dg-purple); --bg: var(--dg-purple-bg); --bd: var(--dg-purple-bd); }
+.dg-t-gray   { --c: var(--dg-gray);   --bg: var(--dg-gray-bg);   --bd: var(--dg-gray-bd); }
+
+.dg-title {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 12px;
+  padding-left: 10px;
+  border-left: 4px solid var(--orange);
+  line-height: 1.4;
+}
+.dg-note {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.dg-label { display: block; font-weight: 800; line-height: 1.4; color: var(--text); }
+.dg-sub { display: block; margin-top: 3px; font-size: 0.8rem; line-height: 1.5; color: var(--text-muted); }
+.dg-sub strong { color: var(--text); }
+.dg-points { list-style: none; margin: 0; padding: 8px 10px 4px; }
+.dg-points li { position: relative; padding-left: 14px; margin: 0 0 6px; line-height: 1.5; font-size: 0.83rem; }
+.dg-points li::before {
+  content: ''; position: absolute; left: 2px; top: 0.6em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--c, var(--dg-line));
+}
+
+/* 流程：寬螢幕橫排（步驟之間有箭頭），手機或 dir=col 直排 */
+.dg-flow { list-style: none; margin: 0; padding: 0; display: flex; align-items: stretch; }
+.dg-step {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px 8px 9px;
+  background: var(--bg);
+  border: 1.5px solid var(--bd);
+  border-top: 4px solid var(--c);
+  border-radius: 8px;
+  text-align: center;
+}
+.dg-step .dg-label { color: var(--c); }
+.dg-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; margin-bottom: 4px;
+  border-radius: 50%; background: var(--c); color: var(--surface);
+  font-size: 0.72rem; font-weight: 800;
+}
+.dg-arrow {
+  flex: 0 0 20px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.dg-arrow::after {
+  content: '';
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 10px solid var(--dg-line);
+}
+.dg-via {
+  position: absolute; bottom: calc(50% + 10px); left: 50%; transform: translateX(-50%);
+  font-size: 0.7rem; line-height: 1.25; color: var(--text-muted); text-align: center; width: 100%; min-width: 48px;
+}
+.dg-row.dg-flow:has(.dg-via) .dg-arrow { flex-basis: 56px; }
+
+/* 直排（dir=col，或手機寬度下的橫排） */
+.dg-col.dg-flow { flex-direction: column; max-width: 600px; margin: 0 auto; }
+.dg-col .dg-step {
+  text-align: left; display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: center;
+  border-top-width: 1.5px; border-left: 5px solid var(--c);
+}
+.dg-col .dg-step .dg-num { margin: 0; grid-row: span 2; }
+.dg-col .dg-step .dg-sub { grid-column: 2; }
+.dg-col .dg-arrow { flex-basis: auto; min-height: 22px; padding: 3px 0; gap: 8px; }
+.dg-col .dg-arrow::after {
+  border-left: 7px solid transparent; border-right: 7px solid transparent;
+  border-top: 10px solid var(--dg-line); border-bottom: 0;
+}
+.dg-col .dg-via { position: static; transform: none; width: auto; font-size: 0.76rem; order: 2; text-align: left; }
+
+/* 循環：流程下方一條虛線拉回第一步 */
+.dg-cycle-center {
+  text-align: center; font-weight: 800; color: var(--text-muted);
+  font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 8px;
+}
+.dg-loop {
+  height: 16px; margin: 6px 8% 14px; position: relative;
+  border: 2px dashed var(--dg-line); border-top: 0; border-radius: 0 0 12px 12px;
+}
+.dg-loop span {
+  position: absolute; left: 50%; top: 6px; transform: translateX(-50%);
+  background: var(--surface); padding: 0 8px; font-size: 0.74rem; color: var(--text-muted); white-space: nowrap;
+}
+
+/* 分級：一列一級，左側色塊徽章；axis 在左邊標示方向 */
+.dg-levels-wrap { display: flex; gap: 8px; }
+.dg-levels { list-style: none; margin: 0; padding: 0; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.dg-level {
+  display: flex; align-items: stretch;
+  background: var(--bg); border: 1.5px solid var(--bd); border-radius: 8px; overflow: hidden;
+}
+.dg-badge {
+  flex: 0 0 auto; width: 92px; max-width: 34%;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 6px 8px; background: var(--c); color: var(--surface);
+  font-weight: 800; font-size: 0.82rem; line-height: 1.3;
+}
+.dg-level-body { padding: 7px 10px; min-width: 0; }
+.dg-level .dg-label { color: var(--c); }
+.dg-axis {
+  flex: 0 0 20px; display: flex; flex-direction: column; align-items: center;
+  font-size: 0.72rem; font-weight: 700; color: var(--text-muted);
+}
+.dg-axis span { writing-mode: vertical-rl; letter-spacing: 0.08em; line-height: 1; }
+.dg-axis i {
+  flex: 1; width: 2px; min-height: 24px; margin: 6px 0 10px; position: relative;
+  background: var(--dg-line);
+}
+.dg-axis i::after {
+  content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+  border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid var(--dg-line);
+}
+
+/* 比較：並排欄位；VS 夾在中間 */
+.dg-compare { display: grid; grid-template-columns: repeat(var(--dg-n), minmax(0, 1fr)); gap: 10px; }
+.dg-compare.dg-has-vs { display: flex; align-items: stretch; }
+.dg-compare.dg-has-vs .dg-card { flex: 1 1 0; min-width: 0; }
+.dg-card {
+  background: var(--bg); border: 1.5px solid var(--bd); border-top: 4px solid var(--c);
+  border-radius: 8px;
+}
+.dg-card-head { padding: 8px 10px 7px; border-bottom: 1px solid var(--bd); }
+.dg-card-head .dg-label { color: var(--c); font-size: 0.92rem; }
+.dg-vs {
+  flex: 0 0 auto; align-self: center; font-weight: 900; font-size: 0.74rem;
+  color: var(--surface); background: var(--dg-line); border-radius: 999px; padding: 5px 7px;
+}
+
+/* 分類樹：根 → 連接線 → 分支卡片 */
+.dg-root {
+  max-width: 440px; margin: 0 auto; text-align: center; padding: 9px 14px;
+  border-radius: 10px; background: var(--orange); color: #fff;
+}
+.dg-root .dg-label { color: #fff; font-size: 0.95rem; }
+.dg-root .dg-sub { color: rgba(255,255,255,0.9); }
+[data-theme="dark"] .dg-root { background: var(--orange-light); border: 1.5px solid var(--orange); }
+[data-theme="dark"] .dg-root .dg-label { color: var(--orange); }
+[data-theme="dark"] .dg-root .dg-sub { color: var(--text-muted); }
+.dg-branches {
+  list-style: none; margin: 0; padding: 20px 0 0; position: relative;
+  display: grid; grid-template-columns: repeat(var(--dg-n), minmax(0, 1fr)); gap: 10px;
+}
+.dg-branches::before {
+  content: ''; position: absolute; top: 0; left: calc(50% - 1px); width: 2px; height: 10px; background: var(--dg-line);
+}
+.dg-branches::after {
+  content: ''; position: absolute; top: 10px; height: 2px; background: var(--dg-line);
+  left: calc((100% - (var(--dg-n) - 1) * 10px) / var(--dg-n) / 2);
+  right: calc((100% - (var(--dg-n) - 1) * 10px) / var(--dg-n) / 2);
+}
+.dg-branches > .dg-card { position: relative; }
+.dg-branches > .dg-card::before {
+  content: ''; position: absolute; top: -14px; left: calc(50% - 1px); width: 2px; height: 10px; background: var(--dg-line);
+}
+
+/* 分支太多分兩列：外框圈起分支，根部直線接到外框 */
+.dg-branches.dg-wrap {
+  margin-top: 12px; padding: 12px; border: 2px solid var(--dg-line); border-radius: 12px;
+}
+.dg-branches.dg-wrap::before { top: -14px; height: 12px; }
+.dg-branches.dg-wrap::after, .dg-branches.dg-wrap > .dg-card::before { display: none; }
+
+/* 圖片（解剖位置等）：深色模式下襯白底，維持原圖對比 */
+.dg-img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px; cursor: zoom-in; }
+[data-theme="dark"] .dg-img { background: #fff; padding: 6px; }
+
+/* 依圖實際可用的寬度切換版面（側欄展開與否都適用）：.dg-body 是查詢容器 */
+.dg-body { container-type: inline-size; }
+
+/* 中等寬度：步驟多的流程改直排；分支／比較卡改成自動換列 */
+@container (max-width: 760px) {
+  .dg-row.dg-many { flex-direction: column; }
+  .dg-row.dg-many .dg-step {
+    text-align: left; display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: center;
+    border-top-width: 1.5px; border-left: 5px solid var(--c);
+  }
+  .dg-row.dg-many .dg-step .dg-num { margin: 0; grid-row: span 2; }
+  .dg-row.dg-many .dg-step .dg-sub { grid-column: 2; }
+  .dg-row.dg-many .dg-arrow, .dg-row.dg-many:has(.dg-via) .dg-arrow { flex-basis: auto; min-height: 20px; padding: 3px 0; gap: 8px; }
+  .dg-row.dg-many .dg-arrow::after {
+    border-left: 7px solid transparent; border-right: 7px solid transparent;
+    border-top: 10px solid var(--dg-line); border-bottom: 0;
+  }
+  .dg-row.dg-many .dg-via { position: static; transform: none; width: auto; min-width: 0; font-size: 0.76rem; order: 2; text-align: left; }
+  .dg-branches, .dg-compare:not(.dg-has-vs) { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .dg-branches::after, .dg-branches > .dg-card::before { display: none; }
+  .dg-branches:not(.dg-wrap) { padding-top: 12px; }
+  .dg-branches:not(.dg-wrap)::before { height: 12px; }
+}
+
+/* 窄寬度：所有流程直排，比較與分支單欄 */
+@container (max-width: 560px) {
+  .dg-row.dg-flow { flex-direction: column; }
+  .dg-row.dg-flow .dg-step {
+    text-align: left; display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: center;
+    border-top-width: 1.5px; border-left: 5px solid var(--c);
+  }
+  .dg-row.dg-flow .dg-step .dg-num { margin: 0; grid-row: span 2; }
+  .dg-row.dg-flow .dg-step .dg-sub { grid-column: 2; }
+  .dg-row.dg-flow .dg-arrow, .dg-row.dg-flow:has(.dg-via) .dg-arrow { flex-basis: auto; min-height: 20px; padding: 3px 0; gap: 8px; }
+  .dg-row.dg-flow .dg-arrow::after {
+    border-left: 7px solid transparent; border-right: 7px solid transparent;
+    border-top: 10px solid var(--dg-line); border-bottom: 0;
+  }
+  .dg-row.dg-flow .dg-via { position: static; transform: none; width: auto; min-width: 0; font-size: 0.76rem; order: 2; text-align: left; }
+  .dg-compare, .dg-branches { grid-template-columns: minmax(0, 1fr); }
+  .dg-compare.dg-has-vs { flex-direction: column; }
+  .dg-loop { margin-left: 0; margin-right: 0; }
+  .dg-badge { width: 76px; }
+}
+@media (max-width: 640px) {
+  .diagram-block { padding: 12px 12px 10px; }
+}
+
+/* 重點一覽裡的圖解不需要再一層外框 */
+.summary-card .diagram-block { box-shadow: none; margin: 10px 0 14px; }
+
 /* ── 重點一覽 (五) ── */
 .summary-card {
   background: var(--surface);
@@ -2823,7 +3086,7 @@ body.mode-3 #m3-side-nav { display: block; }
   body.print-summary .comp-table .row-header { white-space: normal; }
   body.print-summary .numbers-table { font-size: 9pt; }
   body.print-summary .numbers-table td, body.print-summary .numbers-table th { padding: 4px 8px; }
-  body.print-summary tr, body.print-summary .sum-mnemonic, body.print-summary .formula-box { break-inside: avoid; page-break-inside: avoid; }
+  body.print-summary tr, body.print-summary .sum-mnemonic, body.print-summary .formula-box, body.print-summary .diagram-block { break-inside: avoid; page-break-inside: avoid; }
   body.print-summary thead { display: table-header-group; }
   body.print-summary .formula-box { background: #f1f5f9 !important; color: #1e2530 !important; border: 1px solid #cbd5e1; }
   body.print-summary .formula-box .formula-name { color: #c45e0a !important; }

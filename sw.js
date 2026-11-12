@@ -24,7 +24,7 @@ const SCOPE = new URL(self.registration.scope);
 const META_KEY = new URL('__offline-manifest__', SCOPE).href;
 
 // 安裝時先存網頁本體，確保至少能離線打開首頁
-const SHELL = ['index.html', 'app.js', 'style.css', 'sync.js', 'offline.js', 'manifest.json',
+const SHELL = ['index.html', 'app.js', 'diagram.js', 'style.css', 'sync.js', 'offline.js', 'manifest.json',
   'icons/favicon.png', 'icons/icon-192.png'];
 
 // 不經過快取、直接走網路的路徑
