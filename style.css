@@ -2815,3 +2815,95 @@ body.mode-3 #m3-side-nav { display: block; }
   body.print-summary * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
+
+/* ── 浮動研讀進度條：側欄收起時顯示在左下角，點擊展開側欄 ── */
+.reading-progress-pill {
+  position: fixed;
+  left: 20px;
+  bottom: 24px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+.reading-progress-pill.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.reading-progress-pill.show:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.reading-progress-pill:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+.reading-progress-pill .rp-ch {
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+.reading-progress-pill .rp-track {
+  position: relative;
+  width: 84px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.reading-progress-pill .rp-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--orange-border), var(--orange));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reading-progress-pill .rp-pct {
+  min-width: 2.6em;
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--orange-dark);
+  text-align: right;
+}
+.reading-progress-pill.is-read .rp-ch { background: var(--success); }
+.reading-progress-pill.is-read .rp-fill { background: var(--success); }
+.reading-progress-pill.is-read .rp-pct { color: var(--success); }
+
+/* 「回到上次進度」提示出現時讓位，避免手機上重疊 */
+body:has(.progress-restore-toast.show) .reading-progress-pill.show {
+  opacity: 0;
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .reading-progress-pill { left: 12px; bottom: 18px; gap: 8px; }
+  .reading-progress-pill .rp-track { width: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress-pill,
+  .reading-progress-pill .rp-fill { transition: none; }
+}
+@media print {
+  .reading-progress-pill { display: none !important; }
+}

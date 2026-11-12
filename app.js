@@ -115,6 +115,7 @@ async function init() {
 
   buildSidebar();
   bindEvents();
+  initReadingProgressPill();
   initPwaInstallPrompt();
   initLandscapeController();
 }
@@ -184,6 +185,7 @@ async function selectChapter(chId, opts = {}) {
   saveChapterProgressToStorage();
   state.isLoadingChapter = true;
   state.currentChId = chId;
+  updateReadingProgressPill();
   state.searchBrowseChId = fromSearch ? chId : null;
   state.scrollBeforeSearch = null;
   state.browseReturnTop = null;
@@ -999,9 +1001,58 @@ function updateChapterReadUi(chId) {
       ? '<span class="ch-read-dot" title="🟢 100% 已研讀（點擊重設為未讀）"></span>'
       : `<span class="ch-pct-tag" title="📖 研讀進度 ${pct}%（需達 100% 才能標為已讀）">${pct}%</span>`;
   }
+  if (chId === state.currentChId) updateReadingProgressPill();
 }
 
 window.updateChapterReadUi = updateChapterReadUi;
+
+// ── 浮動研讀進度條：側欄收起時，仍看得到本章進度 ──────────
+const MOBILE_BREAKPOINT = 768;
+
+function isSidebarHidden() {
+  const sb = els.sidebar;
+  if (!sb) return true;
+  if (window.innerWidth <= MOBILE_BREAKPOINT) return !sb.classList.contains('mobile-open');
+  return sb.classList.contains('collapsed') || sb.classList.contains('hidden-desktop');
+}
+
+function updateReadingProgressPill() {
+  const pill = document.getElementById('reading-progress-pill');
+  if (!pill) return;
+  const chId = state.currentChId;
+  const ch = chId && (state.chapters || []).find(c => c.id === chId);
+  const visible = Boolean(ch) && state.currentMode === 1 && isSidebarHidden();
+  pill.classList.toggle('show', visible);
+  if (!ch) return;
+
+  const pct = state.chapterProgress[chId] || 0;
+  const isRead = pct >= 100 || state.readChapters.has(chId);
+  const shown = isRead ? 100 : pct;
+  pill.classList.toggle('is-read', isRead);
+  pill.querySelector('.rp-ch').textContent = ch.num;
+  pill.querySelector('.rp-pct').textContent = isRead ? '✓ 完讀' : `${shown}%`;
+  pill.querySelector('.rp-fill').style.transform = `scaleX(${shown / 100})`;
+  pill.setAttribute('aria-label', `${ch.num} ${ch.title} 研讀進度 ${shown}%`);
+}
+
+function initReadingProgressPill() {
+  const pill = document.getElementById('reading-progress-pill');
+  if (!pill) return;
+  pill.addEventListener('click', () => {
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      openMobileSidebar();
+    } else {
+      els.sidebar.classList.remove('collapsed');
+    }
+  });
+  // 側欄開合、模式切換都會改 class，用 observer 統一同步，不必在每個入口各自呼叫
+  const observer = new MutationObserver(updateReadingProgressPill);
+  [els.sidebar, document.body].filter(Boolean).forEach(el => {
+    observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+  });
+  window.addEventListener('resize', updateReadingProgressPill, { passive: true });
+  updateReadingProgressPill();
+}
 
 // ── 自動還原上次觀看進度 (1A + 2A + 3A) ─────────────────
 let _restoreToastTimer = null;
