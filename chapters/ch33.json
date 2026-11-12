@@ -1152,7 +1152,7 @@
   {
    "type": "list",
    "items": [
-    "**房室結附近或心房內不正常傳導路徑所參與、形成迴繞機制所引起**的 **AV Nodal Reentry Tachycardia(AVNRT)** 或 **AV Reentry Tachycardia(AVRT)**。",
+    "**房室結附近或心房內不正常傳導路徑所參與、形成迴繞機制所引起**的 **房室結再進入頻脈 AV Nodal Reentry Tachycardia(AVNRT)** 或 **房室迴旋再進入頻脈 AV Reentry Tachycardia(AVRT)**。",
     "**因自發性節律(automaticity)增快所引起**的**心房性頻脈(atrial tachycardia)** 或 **junctional tachycardia** 等節律。"
    ]
   },
@@ -1235,7 +1235,7 @@
   },
   {
    "type": "text",
-   "text": "**Junction 節律時 P 波是否存在，主要決定於其有無由房室結反向向上傳回心房的能力**，即 **ventriculo-atrial conduction（VA conduction）**。若此傳導可以成立，則**有可能看到一個倒立的 P 波**："
+   "text": "**Junction 節律時 P 波是否存在，主要決定於其有無由房室結反向向上傳回心房的能力**，即 **室房逆向傳導 ventriculo-atrial conduction（VA conduction）**。若此傳導可以成立，則**有可能看到一個倒立的 P 波**："
   },
   {
    "type": "table",
