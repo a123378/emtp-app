@@ -1403,26 +1403,6 @@
   "formulas": [],
   "keyNumbers": [
    {
-    "label": "聯合航空 173 號班機事故日期",
-    "value": "1978 年 12 月 28 日",
-    "note": "CRM 概念誕生的直接催化劑；於波特蘭國際機場降落前因起落架故障盤旋，忽略燃料耗盡"
-   },
-   {
-    "label": "UA173 事故傷亡",
-    "value": "10 人死亡、23 人重傷",
-    "note": "四具發動機全部熄火後於住宅區附近迫降"
-   },
-   {
-    "label": "NASA 召開 CRM 研討會年份",
-    "value": "1979 年",
-    "note": "召集航空、心理、人因工程學專家；名稱由 Cockpit 改為 Crew Resource Management"
-   },
-   {
-    "label": "認知負荷理論提出者與年份",
-    "value": "John Sweller，1988 年",
-    "note": "包含內在、外在、增生三種認知負荷"
-   },
-   {
     "label": "認知負荷種類數",
     "value": "3 種",
     "note": "內在（任務本身）、外在（環境干擾）、增生（輔助工具）"
@@ -1473,11 +1453,6 @@
     "note": "必要時加上 Teach Back 請接收者說明示教"
    },
    {
-    "label": "Call Out 使用時機",
-    "value": "6 類",
-    "note": "緊急情況、重要資訊更新、流程變更、設備需求、時間提醒、狀態更新"
-   },
-   {
     "label": "ISAR 步驟數",
     "value": "4 步",
     "note": "Introduction/Invitation/Initiation、Situation、Assessment、Re-evaluation；由 ISBAR 5 步調整而來"
@@ -1516,26 +1491,6 @@
     "label": "CUS 層次數",
     "value": "3 層",
     "note": "Concerned（擔憂）→ Uncomfortable（不安）→ Safety（病人安全）"
-   },
-   {
-    "label": "環境因素項目數",
-    "value": "6 項",
-    "note": "光線條件、噪音控制、局限空間、動線規劃、通訊中斷、設備可靠性"
-   },
-   {
-    "label": "EMT-P＋第一階段成立隊數與人數",
-    "value": "板橋區、三重區各 1 隊，每隊 6 名成員",
-    "note": "其它區域視實際需求評估成立"
-   },
-   {
-    "label": "EMT-P＋未來機動派遣類別",
-    "value": "5 大類",
-    "note": "缺血性胸痛、抽搐、嚴重創傷、特殊重大急症、大量傷病患處置"
-   },
-   {
-    "label": "為病人倡議實例",
-    "value": "現場完成 12 導程心電圖",
-    "note": "疑似心因性胸痛病人，縱使領導者未分派也應提出建議"
    }
   ],
   "quickReview": [
