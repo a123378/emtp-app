@@ -124,7 +124,7 @@ function dgTree(b) {
 function dgFigure(b) {
   const src = typeof dataUrl === 'function' ? dataUrl(b.src) : b.src;
   return `<img class="dg-img" src="${dgEscape(src || '')}" alt="${dgEscape(b.alt || b.title || '')}" loading="lazy"` +
-    ` onclick="openImageModal(this.src)">`;
+    ` onclick="openImageModal(this.src)"><div class="dg-zoom-tip">🔍 點圖放大</div>`;
 }
 
 const DIAGRAM_KINDS = {

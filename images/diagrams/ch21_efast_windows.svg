@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" width="900" height="760" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="900" height="760" fill="#ffffff"/>
+<path d="M80,740 C68,358 62,158 115,96 C160,54 240,46 290,40 L370,40 C420,46 500,54 545,96 C598,158 592,358 580,740 Z" fill="#fbe3cf" stroke="#c9a184" stroke-width="3"/>
+<path d="M304,130 C220,134 140,148 105,174" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M356,130 C440,134 520,148 555,174" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M304,182 C220,186 140,200 105,226" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M356,182 C440,186 520,200 555,226" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M304,234 C220,238 140,252 105,278" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M356,234 C440,238 520,252 555,278" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M304,286 C220,290 140,304 105,330" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M356,286 C440,290 520,304 555,330" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M304,338 C220,342 140,356 105,382" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M356,338 C440,342 520,356 555,382" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M304,390 C220,394 140,408 105,434" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M356,390 C440,394 520,408 555,434" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M304,442 C220,446 140,460 105,486" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M356,442 C440,446 520,460 555,486" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M302,78 C240,60 180,68 130,78" fill="none" stroke="#a1887f" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+<path d="M358,78 C420,60 480,68 530,78" fill="none" stroke="#a1887f" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+<rect x="306" y="78" width="48" height="350" rx="16" fill="#f4efe6" stroke="#a1887f" stroke-width="2.5"/>
+<path d="M316,444 C240,470 150,510 90,560" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M344,444 C420,470 510,510 570,560" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M316,426 L330,450 L344,426 Z" fill="#f4efe6" stroke="#a1887f" stroke-width="2"/>
+<path d="M120,700 Q330,770 540,700" fill="none" stroke="#a1887f" stroke-width="8" opacity="0.4"/>
+<circle cx="330" cy="610" r="7" fill="#e0a98a"/><text x="344" y="616" font-size="13" font-weight="700" fill="#455a64" text-anchor="start" ><tspan x="344" dy="0">肚臍</tspan></text>
+<text x="180" y="48" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="180" dy="0">病人右側</tspan></text>
+<text x="480" y="48" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="480" dy="0">病人左側</tspan></text>
+<rect x="314" y="454" width="32" height="52" rx="12" fill="#d9534f" stroke="#fff" stroke-width="3"/><text x="330" y="487" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="330" dy="0">1</tspan></text>
+<rect x="78" y="484" width="32" height="52" rx="12" fill="#1e88e5" stroke="#fff" stroke-width="3"/><text x="94" y="517" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="94" dy="0">2</tspan></text>
+<rect x="560" y="454" width="32" height="52" rx="12" fill="#1e88e5" stroke="#fff" stroke-width="3"/><text x="576" y="487" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="576" dy="0">3</tspan></text>
+<rect x="314" y="674" width="32" height="52" rx="12" fill="#00897b" stroke="#fff" stroke-width="3"/><text x="330" y="707" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="330" dy="0">4</tspan></text>
+<rect x="186" y="244.8159288888889" width="32" height="52" rx="12" fill="#e39b12" stroke="#fff" stroke-width="3"/><text x="202" y="277.8159288888889" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="202" dy="0">5</tspan></text>
+<rect x="442" y="244.8159288888889" width="32" height="52" rx="12" fill="#e39b12" stroke="#fff" stroke-width="3"/><text x="458" y="277.8159288888889" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="458" dy="0">6</tspan></text>
+<rect x="630" y="40" width="250" height="34" rx="17.0" fill="#1e88e5"/>
+<text x="755.0" y="63.12" font-size="17" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="755.0" dy="0">1~4 找水（低處）</tspan></text>
+<rect x="630" y="440" width="250" height="34" rx="17.0" fill="#e39b12"/>
+<text x="755.0" y="463.12" font-size="17" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="755.0" dy="0">5~6 找氣（高處）</tspan></text>
+<rect x="630" y="96" width="32" height="48" rx="11" fill="#d9534f"/><text x="646" y="127" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="646" dy="0">1</tspan></text>
+<text x="672" y="118" font-size="16" font-weight="800" fill="#263238" text-anchor="start" ><tspan x="672" dy="0">劍突下 Subxiphoid</tspan></text>
+<text x="672" y="141" font-size="14" font-weight="700" fill="#455a64" text-anchor="start" ><tspan x="672" dy="0">心包膜積液</tspan></text>
+<rect x="630" y="176" width="32" height="48" rx="11" fill="#1e88e5"/><text x="646" y="207" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="646" dy="0">2</tspan></text>
+<text x="672" y="198" font-size="16" font-weight="800" fill="#263238" text-anchor="start" ><tspan x="672" dy="0">右腋中線 8~10 肋間</tspan></text>
+<text x="672" y="221" font-size="14" font-weight="700" fill="#455a64" text-anchor="start" ><tspan x="672" dy="0">肝腎交界 Morrison's pouch</tspan></text>
+<rect x="630" y="256" width="32" height="48" rx="11" fill="#1e88e5"/><text x="646" y="287" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="646" dy="0">3</tspan></text>
+<text x="672" y="278" font-size="16" font-weight="800" fill="#263238" text-anchor="start" ><tspan x="672" dy="0">左腋後線 8~10 肋間</tspan></text>
+<text x="672" y="301" font-size="14" font-weight="700" fill="#455a64" text-anchor="start" ><tspan x="672" dy="0">脾腎交界 Splenorenal fossa</tspan></text>
+<rect x="630" y="336" width="32" height="48" rx="11" fill="#00897b"/><text x="646" y="367" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="646" dy="0">4</tspan></text>
+<text x="672" y="358" font-size="16" font-weight="800" fill="#263238" text-anchor="start" ><tspan x="672" dy="0">恥骨聯合上 Suprapubic</tspan></text>
+<text x="672" y="381" font-size="14" font-weight="700" fill="#455a64" text-anchor="start" ><tspan x="672" dy="0">膀胱／子宮周圍積液</tspan></text>
+<rect x="630" y="476" width="32" height="48" rx="11" fill="#e39b12"/><text x="646" y="507" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="646" dy="0">5</tspan></text>
+<text x="672" y="498" font-size="16" font-weight="800" fill="#263238" text-anchor="start" ><tspan x="672" dy="0">右鎖骨中線 2~4 肋間</tspan></text>
+<text x="672" y="521" font-size="14" font-weight="700" fill="#455a64" text-anchor="start" ><tspan x="672" dy="0">肋膜滑動消失 → 氣胸</tspan></text>
+<rect x="630" y="556" width="32" height="48" rx="11" fill="#e39b12"/><text x="646" y="587" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="646" dy="0">6</tspan></text>
+<text x="672" y="578" font-size="16" font-weight="800" fill="#263238" text-anchor="start" ><tspan x="672" dy="0">左鎖骨中線 2~4 肋間</tspan></text>
+<text x="672" y="601" font-size="14" font-weight="700" fill="#455a64" text-anchor="start" ><tspan x="672" dy="0">肋膜滑動消失 → 氣胸</tspan></text>
+</svg>

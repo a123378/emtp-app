@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="900" height="560" fill="#ffffff"/>
+<text x="330" y="40" font-size="18" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="330" dy="0">左心室短軸切面（像切開的甜甜圈）</tspan></text>
+<path d="M180,140 C30,170 30,410 180,440 C125,360 125,220 180,140 Z" fill="#e3f0fc" stroke="#1e88e5" stroke-width="3"/>
+<text x="118" y="286" font-size="17" font-weight="900" fill="#1e88e5" text-anchor="middle" ><tspan x="118" dy="0">右心室</tspan></text>
+<text x="118" y="310" font-size="16" font-weight="900" fill="#1e88e5" text-anchor="middle" ><tspan x="118" dy="0">V4R</tspan></text>
+<path d="M209.8,169.8 A170,170 0 0 1 450.2,169.8 L397.2,222.8 A95,95 0 0 0 262.8,222.8 Z" fill="#d9534f" opacity="0.9" stroke="#fff" stroke-width="4"/>
+<text x="330" y="154" font-size="19" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="330" dy="0">前壁</tspan></text>
+<text x="330" y="178" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="330" dy="0">V3、V4</tspan></text>
+<path d="M450.2,169.8 A170,170 0 0 1 450.2,410.2 L397.2,357.2 A95,95 0 0 0 397.2,222.8 Z" fill="#ef7d22" opacity="0.9" stroke="#fff" stroke-width="4"/>
+<text x="462" y="286" font-size="19" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="462" dy="0">側壁</tspan></text>
+<text x="462" y="310" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="462" dy="0">V5、V6</tspan></text>
+<path d="M450.2,410.2 A170,170 0 0 1 209.8,410.2 L262.8,357.2 A95,95 0 0 0 397.2,357.2 Z" fill="#1e88e5" opacity="0.9" stroke="#fff" stroke-width="4"/>
+<text x="330" y="418" font-size="19" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="330" dy="0">下壁</tspan></text>
+<text x="330" y="442" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="330" dy="0">Ⅱ、Ⅲ、aVF</tspan></text>
+<path d="M209.8,410.2 A170,170 0 0 1 209.8,169.8 L262.8,222.8 A95,95 0 0 0 262.8,357.2 Z" fill="#ef8a80" opacity="0.9" stroke="#fff" stroke-width="4"/>
+<text x="198" y="286" font-size="19" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="198" dy="0">中隔</tspan></text>
+<text x="198" y="310" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="198" dy="0">V1、V2</tspan></text>
+<circle cx="330" cy="290" r="95" fill="#fff"/><text x="330" y="296" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="330" dy="0">左心室腔</tspan></text>
+<text x="480" y="122" font-size="15" font-weight="900" fill="#ef7d22" text-anchor="start" ><tspan x="480" dy="0">高位側壁：Ⅰ、aVL</tspan></text>
+<rect x="640" y="120" width="240" height="96" rx="12" fill="#fff" stroke="#d9534f" stroke-width="3"/><rect x="640" y="120" width="240" height="38" rx="12" fill="#d9534f"/><rect x="640" y="144" width="240" height="14" fill="#d9534f"/><text x="760" y="146" font-size="17" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="760" dy="0">LAD 左前降支</tspan></text>
+<text x="760" y="190" font-size="13" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="760" dy="0">中隔 V1、V2＋前壁 V3、V4</tspan></text>
+<rect x="640" y="240" width="240" height="96" rx="12" fill="#fff" stroke="#ef7d22" stroke-width="3"/><rect x="640" y="240" width="240" height="38" rx="12" fill="#ef7d22"/><rect x="640" y="264" width="240" height="14" fill="#ef7d22"/><text x="760" y="266" font-size="17" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="760" dy="0">Cx 左迴旋支</tspan></text>
+<text x="760" y="310" font-size="13" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="760" dy="0">側壁 V5、V6／高位側壁 Ⅰ、aVL</tspan></text>
+<rect x="640" y="360" width="240" height="96" rx="12" fill="#fff" stroke="#1e88e5" stroke-width="3"/><rect x="640" y="360" width="240" height="38" rx="12" fill="#1e88e5"/><rect x="640" y="384" width="240" height="14" fill="#1e88e5"/><text x="760" y="386" font-size="17" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="760" dy="0">RCA 右冠狀動脈</tspan></text>
+<text x="760" y="430" font-size="13" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="760" dy="0">下壁 Ⅱ、Ⅲ、aVF＋右心室 V4R</tspan></text>
+<rect x="640" y="480" width="240" height="70" rx="12" fill="#eceff1"/><text x="760" y="508" font-size="15" font-weight="900" fill="#455a64" text-anchor="middle" ><tspan x="760" dy="0">後壁：無直接導程</tspan></text>
+<text x="760" y="534" font-size="15" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="760" dy="0">看 V1~V2 鏡像變化</tspan></text>
+</svg>

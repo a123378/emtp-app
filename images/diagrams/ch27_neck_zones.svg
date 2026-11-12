@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 530" width="720" height="530" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<defs><clipPath id="neck"><path d="M262,268 L404,268 L420,330 L484,362 C476,380 470,404 468,430 C466,456 470,476 486,498 L300,498 C306,440 290,370 268,330 Z"/></clipPath></defs>
+<rect width="720" height="530" fill="#ffffff"/>
+<g transform="translate(0,-70)"><path d="M250,300 C232,214 262,110 360,92 C442,78 506,118 520,186 L522,214 L552,262 L528,272 L534,296 L522,302 L528,322 C526,350 510,362 484,362 C476,380 470,404 468,430 C466,456 470,476 486,498 L560,548 L560,600 L150,600 L150,560 C220,530 290,512 300,490 C306,440 290,370 268,330 C256,318 252,310 250,300 Z" fill="#fbe3cf" stroke="#c9a184" stroke-width="3"/>
+<g clip-path="url(#neck)"><rect x="240" y="268" width="300" height="62" fill="#607d8b" opacity="0.30"/><rect x="240" y="330" width="300" height="78" fill="#e39b12" opacity="0.30"/><rect x="240" y="408" width="300" height="92" fill="#d9534f" opacity="0.30"/></g>
+<line x1="250" y1="330" x2="500" y2="330" stroke="#455a64" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="250" y1="408" x2="500" y2="408" stroke="#455a64" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M484,356 C450,350 420,340 410,330 L398,250" fill="none" stroke="#a1887f" stroke-width="9" stroke-linecap="round" opacity="0.8"/>
+<ellipse cx="372" cy="236" rx="18" ry="30" fill="#fbe3cf" stroke="#c9a184" stroke-width="3"/>
+<rect x="452" y="399" width="22" height="16" rx="5" fill="#f4efe6" stroke="#a1887f" stroke-width="2.5"/>
+<path d="M470,360 q14,12 2,30" fill="#f4efe6" stroke="#a1887f" stroke-width="2.5"/>
+<path d="M470,496 C420,504 360,508 300,500" fill="none" stroke="#a1887f" stroke-width="11" stroke-linecap="round" opacity="0.7"/>
+<line x1="250" y1="268" x2="410" y2="268" stroke="#455a64" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="234" y="274" font-size="18" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="234" dy="0">顱底（枕骨）</tspan></text>
+<line x1="238" y1="268" x2="256" y2="268" stroke="#455a64" stroke-width="2"/>
+<text x="234" y="336" font-size="18" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="234" dy="0">下顎骨角</tspan></text>
+<line x1="238" y1="330" x2="256" y2="330" stroke="#455a64" stroke-width="2"/>
+<text x="234" y="414" font-size="18" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="234" dy="0">環狀軟骨</tspan></text>
+<line x1="238" y1="408" x2="256" y2="408" stroke="#455a64" stroke-width="2"/>
+<text x="234" y="498" font-size="18" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="234" dy="0">鎖骨／胸骨切跡</tspan></text>
+<line x1="238" y1="492" x2="256" y2="492" stroke="#455a64" stroke-width="2"/>
+<circle cx="372" cy="299.0" r="20" fill="#607d8b"/><text x="372" y="306.0" font-size="19" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="372" dy="0">Ⅲ</tspan></text>
+<circle cx="372" cy="369.0" r="20" fill="#e39b12"/><text x="372" y="376.0" font-size="19" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="372" dy="0">Ⅱ</tspan></text>
+<circle cx="372" cy="450.0" r="20" fill="#d9534f"/><text x="372" y="457.0" font-size="19" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="372" dy="0">Ⅰ</tspan></text>
+<line x1="400" y1="305.0" x2="574" y2="223" stroke="#607d8b" stroke-width="2"/><circle cx="400" cy="305.0" r="4" fill="#607d8b"/>
+<rect x="574" y="200" width="136" height="46" rx="10" fill="#607d8b"/><text x="642" y="229" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="642" dy="0">Zone Ⅲ</tspan></text>
+<text x="642" y="270" font-size="18" font-weight="900" fill="#607d8b" text-anchor="middle" ><tspan x="642" dy="0">位置最高</tspan></text>
+<line x1="462" y1="369.0" x2="574" y2="345" stroke="#e39b12" stroke-width="2"/><circle cx="462" cy="369.0" r="4" fill="#e39b12"/>
+<rect x="574" y="322" width="136" height="46" rx="10" fill="#e39b12"/><text x="642" y="351" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="642" dy="0">Zone Ⅱ</tspan></text>
+<text x="642" y="392" font-size="18" font-weight="900" fill="#e39b12" text-anchor="middle" ><tspan x="642" dy="0">最常受傷</tspan></text>
+<line x1="452" y1="450.0" x2="574" y2="443" stroke="#d9534f" stroke-width="2"/><circle cx="452" cy="450.0" r="4" fill="#d9534f"/>
+<rect x="574" y="420" width="136" height="46" rx="10" fill="#d9534f"/><text x="642" y="449" font-size="18" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="642" dy="0">Zone Ⅰ</tspan></text>
+<text x="642" y="490" font-size="18" font-weight="900" fill="#d9534f" text-anchor="middle" ><tspan x="642" dy="0">死亡率最高</tspan></text>
+</g></svg>

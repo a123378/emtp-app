@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 560" width="660" height="560" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="660" height="560" fill="#ffffff"/>
+<g transform="translate(0,-60)"><path d="M90,610 C78,430 72,230 125,168 C170,126 250,118 300,112 L380,112 C430,118 510,126 555,168 C608,230 602,430 590,610 Z" fill="#fbe3cf" stroke="#c9a184" stroke-width="3"/>
+<path d="M314,202 C230,206 150,220 115,246" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M366,202 C450,206 530,220 565,246" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M314,254 C230,258 150,272 115,298" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M366,254 C450,258 530,272 565,298" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M314,306 C230,310 150,324 115,350" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M366,306 C450,310 530,324 565,350" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M314,358 C230,362 150,376 115,402" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M366,358 C450,362 530,376 565,402" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M314,410 C230,414 150,428 115,454" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M366,410 C450,414 530,428 565,454" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M314,462 C230,466 150,480 115,506" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M366,462 C450,466 530,480 565,506" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M314,514 C230,518 150,532 115,558" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M366,514 C450,518 530,532 565,558" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+<path d="M312,150 C250,132 190,140 140,150" fill="none" stroke="#a1887f" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+<path d="M368,150 C430,132 490,140 540,150" fill="none" stroke="#a1887f" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+<rect x="316" y="150" width="48" height="350" rx="16" fill="#f4efe6" stroke="#a1887f" stroke-width="2.5"/>
+<text x="340" y="330" font-size="18" font-weight="700" fill="#a1887f" text-anchor="middle" ><tspan x="340" dy="0">胸</tspan><tspan x="340" dy="22.5">骨</tspan></text>
+<text x="88" y="374.0" font-size="18" font-weight="800" fill="#455a64" text-anchor="start" ><tspan x="88" dy="0">第 4 肋間</tspan></text>
+<line x1="88" y1="382.0" x2="310" y2="382.0" stroke="#455a64" stroke-width="1.5" stroke-dasharray="5 5"/>
+<text x="88" y="426.0" font-size="18" font-weight="800" fill="#455a64" text-anchor="start" ><tspan x="88" dy="0">第 5 肋間</tspan></text>
+<line x1="88" y1="434.0" x2="310" y2="434.0" stroke="#455a64" stroke-width="1.5" stroke-dasharray="5 5"/>
+<line x1="468" y1="118" x2="468" y2="575" stroke="#1e88e5" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="536" y1="118" x2="536" y2="575" stroke="#1e88e5" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="588" y1="118" x2="588" y2="575" stroke="#1e88e5" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="464" y="588" font-size="16" font-weight="800" fill="#1e88e5" text-anchor="end" ><tspan x="464" dy="0">鎖骨</tspan><tspan x="464" dy="20.0">中線</tspan></text>
+<text x="536" y="600" font-size="16" font-weight="800" fill="#1e88e5" text-anchor="middle" ><tspan x="536" dy="0">前腋線</tspan></text>
+<text x="594" y="580" font-size="16" font-weight="800" fill="#1e88e5" text-anchor="start" ><tspan x="594" dy="0">中</tspan><tspan x="594" dy="20.0">腋</tspan><tspan x="594" dy="20.0">線</tspan></text>
+<line x1="468" y1="448.0" x2="588" y2="448.0" stroke="#2e9d6b" stroke-width="3"/>
+<line x1="384" y1="382.0" x2="468" y2="448.0" stroke="#00897b" stroke-width="2" stroke-dasharray="4 4"/>
+<circle cx="296" cy="382.0" r="19" fill="#d9534f" stroke="#fff" stroke-width="3"/>
+<text x="296" y="388.0" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="296" dy="0">V1</tspan></text>
+<circle cx="384" cy="382.0" r="19" fill="#e39b12" stroke="#fff" stroke-width="3"/>
+<text x="384" y="388.0" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="384" dy="0">V2</tspan></text>
+<circle cx="468" cy="448.0" r="19" fill="#2e9d6b" stroke="#fff" stroke-width="3"/>
+<text x="468" y="454.0" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="468" dy="0">V4</tspan></text>
+<circle cx="536" cy="448.0" r="19" fill="#1e88e5" stroke="#fff" stroke-width="3"/>
+<text x="536" y="454.0" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="536" dy="0">V5</tspan></text>
+<circle cx="588" cy="448.0" r="19" fill="#7e57c2" stroke="#fff" stroke-width="3"/>
+<text x="588" y="454.0" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="588" dy="0">V6</tspan></text>
+<circle cx="426.0" cy="415.0" r="19" fill="#00897b" stroke="#fff" stroke-width="3"/>
+<text x="426.0" y="421.0" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="426.0" dy="0">V3</tspan></text>
+<text x="536" y="500.0" font-size="17" font-weight="800" fill="#2e9d6b" text-anchor="middle" ><tspan x="536" dy="0">同一水平線</tspan></text>
+<text x="190" y="96" font-size="19" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="190" dy="0">病人右側</tspan></text>
+<text x="490" y="96" font-size="19" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="490" dy="0">病人左側</tspan></text>
+</g></svg>

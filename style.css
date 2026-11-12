@@ -1026,6 +1026,8 @@ body {
 /* 圖片（解剖位置等）：深色模式下襯白底，維持原圖對比 */
 .dg-img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px; cursor: zoom-in; }
 [data-theme="dark"] .dg-img { background: #fff; padding: 6px; }
+.dg-k-figure .dg-img { max-height: 560px; width: auto; }
+.dg-zoom-tip { text-align: center; font-size: 0.74rem; color: var(--text-muted); margin-top: 4px; }
 
 /* 依圖實際可用的寬度切換版面（側欄展開與否都適用）：.dg-body 是查詢容器 */
 .dg-body { container-type: inline-size; }

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="900" height="480" fill="#ffffff"/>
+<text x="450" y="34" font-size="18" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="450" dy="0">骨折範圍：一型 ＜ 二型 ＜ 三型</tspan></text>
+<ellipse cx="150" cy="210" rx="110" ry="148" fill="#f4efe6" stroke="#a1887f" stroke-width="3"/>
+<ellipse cx="106" cy="180" rx="30" ry="24" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<ellipse cx="194" cy="180" rx="30" ry="24" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<path d="M150,200 L134,244 L166,244 Z" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<rect x="98" y="276" width="104" height="22" rx="6" fill="#fff" stroke="#a1887f" stroke-width="2.5"/>
+<line x1="115.3" y1="276" x2="115.3" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="132.6" y1="276" x2="132.6" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="149.9" y1="276" x2="149.9" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="167.2" y1="276" x2="167.2" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="184.5" y1="276" x2="184.5" y2="298" stroke="#a1887f" stroke-width="1.5"/><path d="M72,306 Q150,360 228,306" fill="none" stroke="#a1887f" stroke-width="3"/>
+<path d="M50,262 Q150,250 250,262" fill="none" stroke="#2e9d6b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="88" y="378" width="124" height="36" rx="18.0" fill="#2e9d6b"/>
+<text x="150.0" y="402.12" font-size="17" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="150.0" dy="0">Le Fort 一型</tspan></text>
+<text x="150" y="440" font-size="19" font-weight="900" fill="#2e9d6b" text-anchor="middle" ><tspan x="150" dy="0">一橫切</tspan></text>
+<text x="150" y="466" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="150" dy="0">上頷骨到鼻窩</tspan></text>
+<ellipse cx="450" cy="210" rx="110" ry="148" fill="#f4efe6" stroke="#a1887f" stroke-width="3"/>
+<ellipse cx="406" cy="180" rx="30" ry="24" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<ellipse cx="494" cy="180" rx="30" ry="24" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<path d="M450,200 L434,244 L466,244 Z" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<rect x="398" y="276" width="104" height="22" rx="6" fill="#fff" stroke="#a1887f" stroke-width="2.5"/>
+<line x1="415.3" y1="276" x2="415.3" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="432.6" y1="276" x2="432.6" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="449.9" y1="276" x2="449.9" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="467.2" y1="276" x2="467.2" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="484.5" y1="276" x2="484.5" y2="298" stroke="#a1887f" stroke-width="1.5"/><path d="M372,306 Q450,360 528,306" fill="none" stroke="#a1887f" stroke-width="3"/>
+<path d="M354,270 L388,220 L428,174 L450,164 L472,174 L512,220 L546,270" fill="none" stroke="#e39b12" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="388" y="378" width="124" height="36" rx="18.0" fill="#e39b12"/>
+<text x="450.0" y="402.12" font-size="17" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="450.0" dy="0">Le Fort 二型</tspan></text>
+<text x="450" y="440" font-size="19" font-weight="900" fill="#e39b12" text-anchor="middle" ><tspan x="450" dy="0">金字塔狀</tspan></text>
+<text x="450" y="466" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="450" dy="0">含鼻骨與眼眶內緣</tspan></text>
+<ellipse cx="750" cy="210" rx="110" ry="148" fill="#f4efe6" stroke="#a1887f" stroke-width="3"/>
+<ellipse cx="706" cy="180" rx="30" ry="24" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<ellipse cx="794" cy="180" rx="30" ry="24" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<path d="M750,200 L734,244 L766,244 Z" fill="#fff" stroke="#a1887f" stroke-width="3"/>
+<rect x="698" y="276" width="104" height="22" rx="6" fill="#fff" stroke="#a1887f" stroke-width="2.5"/>
+<line x1="715.3" y1="276" x2="715.3" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="732.6" y1="276" x2="732.6" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="749.9" y1="276" x2="749.9" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="767.2" y1="276" x2="767.2" y2="298" stroke="#a1887f" stroke-width="1.5"/><line x1="784.5" y1="276" x2="784.5" y2="298" stroke="#a1887f" stroke-width="1.5"/><path d="M672,306 Q750,360 828,306" fill="none" stroke="#a1887f" stroke-width="3"/>
+<path d="M640,196 L676,180 L730,168 L750,162 L770,168 L824,180 L860,196" fill="none" stroke="#d9534f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="688" y="378" width="124" height="36" rx="18.0" fill="#d9534f"/>
+<text x="750.0" y="402.12" font-size="17" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="750.0" dy="0">Le Fort 三型</tspan></text>
+<text x="750" y="440" font-size="19" font-weight="900" fill="#d9534f" text-anchor="middle" ><tspan x="750" dy="0">整張臉分離</tspan></text>
+<text x="750" y="466" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="750" dy="0">影響所有臉部骨頭</tspan></text>
+</svg>

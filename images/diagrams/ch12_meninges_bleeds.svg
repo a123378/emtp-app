@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" width="900" height="580" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="900" height="580" fill="#ffffff"/>
+<rect x="230" y="40" width="650" height="30" fill="#f6d7c3"/>
+<rect x="230" y="70" width="650" height="62" fill="#f4efe6"/>
+<rect x="230" y="132" width="650" height="32" fill="#ffffff"/>
+<rect x="230" y="164" width="650" height="18" fill="#b0bec5"/>
+<rect x="230" y="182" width="650" height="22" fill="#ffffff"/>
+<rect x="230" y="204" width="650" height="10" fill="#d1c4e9"/>
+<rect x="230" y="214" width="650" height="38" fill="#dff1fb"/>
+<line x1="230" y1="132" x2="880" y2="132" stroke="#cfd8dc" stroke-width="1"/><line x1="230" y1="164" x2="880" y2="164" stroke="#cfd8dc" stroke-width="1"/><line x1="230" y1="182" x2="880" y2="182" stroke="#cfd8dc" stroke-width="1"/><line x1="230" y1="204" x2="880" y2="204" stroke="#cfd8dc" stroke-width="1"/><line x1="230" y1="214" x2="880" y2="214" stroke="#cfd8dc" stroke-width="1"/><line x1="230" y1="252" x2="880" y2="252" stroke="#cfd8dc" stroke-width="1"/><path d="M230,256 L316,256 L330,336 L344,256 L476,256 L490,336 L504,256 L636,256 L650,336 L664,256 L796,256 L810,336 L824,256 L880,256 L880,560 L230,560 Z" fill="#f8c9cf" stroke="#e57373" stroke-width="3"/>
+<path d="M316,252 L330,332 L344,252 Z" fill="#dff1fb"/><path d="M476,252 L490,332 L504,252 Z" fill="#dff1fb"/><path d="M636,252 L650,332 L664,252 Z" fill="#dff1fb"/><path d="M796,252 L810,332 L824,252 Z" fill="#dff1fb"/><path d="M560,132 Q640,190 720,132 Z" fill="#d9534f"/>
+<circle cx="640" cy="139" r="6" fill="#7f0000"/><path d="M260,182 L460,182 Q360,212 260,182 Z" fill="#e39b12"/>
+<rect x="780" y="214" width="60" height="38" fill="#7e57c2" opacity="0.8"/><path d="M796,252 L810,330 L824,252 Z" fill="#7e57c2" opacity="0.8"/>
+<text x="220" y="61.0" font-size="14" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="220" dy="0">頭皮</tspan></text>
+<text x="220" y="107.0" font-size="14" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="220" dy="0">顱骨</tspan></text>
+<text x="220" y="154.0" font-size="14" font-weight="800" fill="#d9534f" text-anchor="end" ><tspan x="220" dy="0">硬膜上腔（潛在空間）</tspan></text>
+<text x="220" y="179.0" font-size="14" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="220" dy="0">硬膜 dura mater</tspan></text>
+<text x="220" y="199.0" font-size="14" font-weight="800" fill="#b26a00" text-anchor="end" ><tspan x="220" dy="0">硬膜下腔（潛在空間）</tspan></text>
+<text x="220" y="215.0" font-size="14" font-weight="800" fill="#7e57c2" text-anchor="end" ><tspan x="220" dy="0">蛛網膜 arachnoid</tspan></text>
+<text x="220" y="239.0" font-size="14" font-weight="800" fill="#1e88e5" text-anchor="end" ><tspan x="220" dy="0">蛛網膜下腔（腦脊液）</tspan></text>
+<text x="220" y="410" font-size="15" font-weight="800" fill="#c62828" text-anchor="end" ><tspan x="220" dy="0">腦組織（軟膜貼覆）</tspan></text>
+<line x1="360" y1="196" x2="340" y2="380" stroke="#e39b12" stroke-width="2"/><circle cx="360" cy="196" r="4" fill="#e39b12"/>
+<rect x="250" y="380" width="180" height="112" rx="12" fill="#fff" stroke="#e39b12" stroke-width="3"/>
+<path d="M250,392 Q250,380 262,380 H418 Q430,380 430,392 V416 H250 Z" fill="#e39b12"/>
+<text x="340.0" y="405" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="340.0" dy="0">SDH 硬腦膜下出血</tspan></text>
+<text x="340.0" y="436.25" font-size="14" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="340.0" dy="0">硬膜與蛛網膜之間</tspan><tspan x="340.0" dy="17.5">皮質血管破裂</tspan></text>
+<line x1="640" y1="158" x2="560" y2="380" stroke="#d9534f" stroke-width="2"/><circle cx="640" cy="158" r="4" fill="#d9534f"/>
+<rect x="470" y="380" width="180" height="112" rx="12" fill="#fff" stroke="#d9534f" stroke-width="3"/>
+<path d="M470,392 Q470,380 482,380 H638 Q650,380 650,392 V416 H470 Z" fill="#d9534f"/>
+<text x="560.0" y="405" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="560.0" dy="0">EDH 硬腦膜上出血</tspan></text>
+<text x="560.0" y="436.25" font-size="14" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="560.0" dy="0">顱骨與硬膜之間</tspan><tspan x="560.0" dy="17.5">中硬腦膜動脈破裂</tspan></text>
+<line x1="810" y1="290" x2="780" y2="380" stroke="#7e57c2" stroke-width="2"/><circle cx="810" cy="290" r="4" fill="#7e57c2"/>
+<rect x="690" y="380" width="180" height="112" rx="12" fill="#fff" stroke="#7e57c2" stroke-width="3"/>
+<path d="M690,392 Q690,380 702,380 H858 Q870,380 870,392 V416 H690 Z" fill="#7e57c2"/>
+<text x="780.0" y="405" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="780.0" dy="0">SAH 蛛網膜下腔出血</tspan></text>
+<text x="780.0" y="436.25" font-size="14" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="780.0" dy="0">血流入腦脊液</tspan><tspan x="780.0" dy="17.5">積在腦溝、腦池</tspan></text>
+</svg>

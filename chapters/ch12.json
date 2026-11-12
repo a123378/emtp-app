@@ -556,44 +556,12 @@
   },
   {
    "type": "diagram",
-   "kind": "flow",
-   "title": "腦脊髓膜三層與四個腔隙（由外而內）",
+   "kind": "figure",
    "summary": true,
-   "dir": "col",
-   "numbered": false,
-   "steps": [
-    {
-     "label": "硬膜 dura mater",
-     "sub": "最外層，與頭骨或脊椎骨膜相連",
-     "tone": "gray"
-    },
-    {
-     "label": "硬膜上腔 epidural space",
-     "sub": "骨膜與硬膜之間，**中硬腦膜動脈**走行 → **EDH**",
-     "tone": "red"
-    },
-    {
-     "label": "硬膜下腔 subdural space",
-     "sub": "硬膜與蛛網膜之間，有**大腦皮質小血管 cortical vessels** → **SDH**",
-     "tone": "red"
-    },
-    {
-     "label": "蛛網膜 arachnoid",
-     "sub": "位於硬膜與軟膜之間",
-     "tone": "gray"
-    },
-    {
-     "label": "蛛網膜下腔 subarachnoid space",
-     "sub": "內含**腦脊液(CSF)**，震盪吸收器 → **SAH**",
-     "tone": "red"
-    },
-    {
-     "label": "軟膜 pia mater",
-     "sub": "最內層，直接貼覆大腦表面",
-     "tone": "gray"
-    }
-   ],
-   "note": "紅色三個腔隙＝頭部外傷出血的位置（EDH／SDH／SAH，詳見下表）。"
+   "src": "images/diagrams/ch12_meninges_bleeds.svg",
+   "title": "腦脊髓膜的層次與三種出血位置",
+   "alt": "由外而內：頭皮、顱骨、硬膜上腔、硬膜、硬膜下腔、蛛網膜、蛛網膜下腔（腦脊液）、軟膜、腦組織；EDH 在顱骨與硬膜之間，SDH 在硬膜與蛛網膜之間，SAH 在蛛網膜下腔",
+   "note": "由外而內：**硬膜 dura mater**（與頭骨或脊椎骨膜相連）→ **蛛網膜 arachnoid** → **軟膜 pia mater**（直接貼覆大腦）。**硬膜上腔**有**中硬腦膜動脈**走行 → **EDH**；**硬膜下腔**有**大腦皮質小血管 cortical vessels** → **SDH**；**蛛網膜下腔**內含**腦脊液(CSF)**（震盪吸收器）→ **SAH**。"
   },
   {
    "type": "table",

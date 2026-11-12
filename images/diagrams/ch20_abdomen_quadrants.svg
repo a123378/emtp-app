@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 640" width="820" height="640" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="820" height="640" fill="#ffffff"/>
+<path d="M90,60 Q410,20 730,60 L750,560 Q410,640 70,560 Z" fill="#fbe3cf" stroke="#c9a184" stroke-width="3"/>
+<line x1="410" y1="50" x2="410" y2="600" stroke="#455a64" stroke-width="3" stroke-dasharray="10 7"/><line x1="70" y1="340" x2="750" y2="340" stroke="#455a64" stroke-width="3" stroke-dasharray="10 7"/><circle cx="410" cy="340" r="11" fill="#e0a98a" stroke="#fff" stroke-width="3"/><text x="428" y="328" font-size="14" font-weight="800" fill="#455a64" text-anchor="start" ><tspan x="428" dy="0">肚臍</tspan></text>
+<rect x="160" y="92" width="170" height="36" rx="18.0" fill="#ef7d22"/>
+<text x="245.0" y="116.48" font-size="18" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="245.0" dy="0">右上 RUQ</tspan></text>
+<text x="245" y="160" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">肝、膽、十二指腸</tspan></text>
+<text x="245" y="188" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">胰臟頭部</tspan></text>
+<text x="245" y="216" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">部分昇結腸及橫結腸</tspan></text>
+<text x="245" y="244" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">右腎、右腎上腺</tspan></text>
+<rect x="490" y="92" width="170" height="36" rx="18.0" fill="#1e88e5"/>
+<text x="575.0" y="116.48" font-size="18" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="575.0" dy="0">左上 LUQ</tspan></text>
+<text x="575" y="160" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">胃本體、脾</tspan></text>
+<text x="575" y="188" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">肝臟左葉、胰臟體部</tspan></text>
+<text x="575" y="216" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">部分橫結腸及降結腸</tspan></text>
+<text x="575" y="244" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">左腎、左腎上腺</tspan></text>
+<rect x="160" y="392" width="170" height="36" rx="18.0" fill="#d9534f"/>
+<text x="245.0" y="416.48" font-size="18" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="245.0" dy="0">右下 RLQ</tspan></text>
+<text x="245" y="460" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">盲腸及闌尾、昇結腸</tspan></text>
+<text x="245" y="488" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">右側輸尿管</tspan></text>
+<text x="245" y="516" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">右側精索（男）</tspan></text>
+<text x="245" y="544" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="245" dy="0">右側卵巢輸卵管（女）</tspan></text>
+<rect x="490" y="392" width="170" height="36" rx="18.0" fill="#00897b"/>
+<text x="575.0" y="416.48" font-size="18" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="575.0" dy="0">左下 LLQ</tspan></text>
+<text x="575" y="460" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">降結腸、乙狀結腸</tspan></text>
+<text x="575" y="488" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">左側輸尿管</tspan></text>
+<text x="575" y="516" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">左側精索（男）</tspan></text>
+<text x="575" y="544" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="575" dy="0">左側卵巢輸卵管（女）</tspan></text>
+<text x="210" y="40" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="210" dy="0">病人右側</tspan></text>
+<text x="610" y="40" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="610" dy="0">病人左側</tspan></text>
+</svg>

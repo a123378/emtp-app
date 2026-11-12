@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 650" width="860" height="650" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="860" height="650" fill="#ffffff"/>
+<text x="450" y="40" font-size="18" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="450" dy="0">患側（病人）</tspan></text>
+<path d="M50,558 C38,378 32,178 85,116 C130,74 210,66 260,60 L340,60 C390,66 470,74 515,116 C568,178 562,378 550,558 Z" fill="#fbe3cf" stroke="#c9a184" stroke-width="3"/>
+<path d="M274,150 C190,154 110,168 75,194" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M326,150 C410,154 490,168 525,194" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M274,202 C190,206 110,220 75,246" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M326,202 C410,206 490,220 525,246" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M274,254 C190,258 110,272 75,298" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M326,254 C410,258 490,272 525,298" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M274,306 C190,310 110,324 75,350" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M326,306 C410,310 490,324 525,350" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M274,358 C190,362 110,376 75,402" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M326,358 C410,362 490,376 525,402" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M274,410 C190,414 110,428 75,454" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M326,410 C410,414 490,428 525,454" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M274,462 C190,466 110,480 75,506" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M326,462 C410,466 490,480 525,506" fill="none" stroke="#a1887f" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+<path d="M272,98 C210,80 150,88 100,98" fill="none" stroke="#a1887f" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+<path d="M328,98 C390,80 450,88 500,98" fill="none" stroke="#a1887f" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+<rect x="276" y="98" width="48" height="350" rx="16" fill="#f4efe6" stroke="#a1887f" stroke-width="2.5"/>
+<line x1="428" y1="70" x2="428" y2="580" stroke="#1e88e5" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="428" y="608" font-size="16" font-weight="800" fill="#1e88e5" text-anchor="middle" ><tspan x="428" dy="0">鎖骨中線</tspan></text>
+<line x1="548" y1="70" x2="548" y2="580" stroke="#1e88e5" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="548" y="608" font-size="16" font-weight="800" fill="#1e88e5" text-anchor="middle" ><tspan x="548" dy="0">腋中線</tspan></text>
+<text x="402" y="216.8159288888889" font-size="15" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="402" dy="0">第2肋間</tspan></text>
+<text x="506" y="457.6" font-size="15" font-weight="800" fill="#455a64" text-anchor="end" ><tspan x="506" dy="0">第5肋間</tspan></text>
+<circle cx="428" cy="238.8159288888889" r="20" fill="#607d8b" stroke="#fff" stroke-width="3"/>
+<text x="428" y="244.73592888888888" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="428" dy="0">傳</tspan></text>
+<circle cx="532" cy="421.6" r="20" fill="#2e9d6b" stroke="#fff" stroke-width="3"/>
+<text x="532" y="427.52000000000004" font-size="16" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="532" dy="0">首</tspan></text>
+<rect x="600" y="60" width="240" height="100" rx="12" fill="#fff" stroke="#2e9d6b" stroke-width="3"/>
+<path d="M600,72 Q600,60 612,60 H828 Q840,60 840,72 V96 H600 Z" fill="#2e9d6b"/>
+<text x="720.0" y="85" font-size="17" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="720.0" dy="0">成人：現行首選</tspan></text>
+<text x="720.0" y="118.95" font-size="16" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="720.0" dy="0">第五肋間 × 腋中線</tspan><tspan x="720.0" dy="20.0">交匯處「前側」</tspan></text>
+<rect x="600" y="180" width="240" height="128" rx="12" fill="#fff" stroke="#607d8b" stroke-width="3"/>
+<path d="M600,192 Q600,180 612,180 H828 Q840,180 840,192 V216 H600 Z" fill="#607d8b"/>
+<text x="720.0" y="205" font-size="17" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="720.0" dy="0">成人：傳統位置</tspan></text>
+<text x="720.0" y="238.95" font-size="16" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="720.0" dy="0">第二肋間 × 鎖骨中線</tspan><tspan x="720.0" dy="20.0">胸壁較厚、易打折</tspan><tspan x="720.0" dy="20.0">可能傷鎖骨下血管</tspan></text>
+<rect x="600" y="328" width="240" height="92" rx="12" fill="#fff" stroke="#1e88e5" stroke-width="3"/>
+<path d="M600,340 Q600,328 612,328 H828 Q840,328 840,340 V364 H600 Z" fill="#1e88e5"/>
+<text x="720.0" y="353" font-size="17" font-weight="900" fill="#fff" text-anchor="middle" ><tspan x="720.0" dy="0">兒童</tspan></text>
+<text x="720.0" y="386.95" font-size="16" font-weight="700" fill="#263238" text-anchor="middle" ><tspan x="720.0" dy="0">前胸第二肋間</tspan><tspan x="720.0" dy="20.0">× 鎖骨中線</tspan></text>
+<line x1="552" y1="421.6" x2="600" y2="110" stroke="#2e9d6b" stroke-width="2"/><circle cx="552" cy="421.6" r="4" fill="#2e9d6b"/>
+<line x1="448" y1="238.8159288888889" x2="600" y2="244" stroke="#607d8b" stroke-width="2"/><circle cx="448" cy="238.8159288888889" r="4" fill="#607d8b"/>
+<rect x="600" y="440" width="240" height="130" rx="12" fill="#f4efe6"/>
+<text x="720" y="466" font-size="16" font-weight="900" fill="#2e9d6b" text-anchor="middle" ><tspan x="720" dy="0">從肋骨「上緣」進針</tspan></text>
+<rect x="620" y="482" width="110" height="20" rx="9" fill="#d7ccc8" stroke="#a1887f" stroke-width="2"/>
+<rect x="620" y="538" width="110" height="20" rx="9" fill="#d7ccc8" stroke="#a1887f" stroke-width="2"/>
+<circle cx="650" cy="512" r="6" fill="#e39b12"/>
+<circle cx="672" cy="512" r="6" fill="#d9534f"/>
+<circle cx="694" cy="512" r="6" fill="#1e88e5"/>
+<line x1="750" y1="530" x2="662" y2="530" stroke="#2e9d6b" stroke-width="4"/><path d="M662,524 l-12,6 l12,6 z" fill="#2e9d6b"/>
+<text x="788" y="504" font-size="13" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="788" dy="0">神經血管</tspan><tspan x="788" dy="16.25">在肋骨下緣</tspan></text>
+<text x="788" y="544" font-size="13" font-weight="800" fill="#2e9d6b" text-anchor="middle" ><tspan x="788" dy="0">針放第六</tspan><tspan x="788" dy="16.25">肋骨上沿</tspan></text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 560" width="820" height="560" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="820" height="560" fill="#ffffff"/>
+<rect x="140" y="60" width="180" height="18" rx="9" fill="#f4efe6" stroke="#a1887f" stroke-width="2.5"/>
+<path d="M120,110 L216,110 L230,136 L244,110 L340,110 L322,210 Q230,262 138,210 Z" fill="#cfe3f3" stroke="#1e88e5" stroke-width="3"/>
+<path d="M172,258 Q230,272 288,258 L292,292 Q230,304 168,292 Z" fill="#d9534f" opacity="0.85"/>
+<path d="M156,296 Q230,310 304,296 L308,332 Q230,348 152,332 Z" fill="#d1c4e9" stroke="#7e57c2" stroke-width="3"/>
+<path d="M164,352 Q230,364 296,352 L296,370 Q230,382 164,370 Z" fill="#f4efe6" stroke="#a1887f" stroke-width="2"/>
+<path d="M164,382 Q230,394 296,382 L296,400 Q230,412 164,400 Z" fill="#f4efe6" stroke="#a1887f" stroke-width="2"/>
+<path d="M164,412 Q230,424 296,412 L296,430 Q230,442 164,430 Z" fill="#f4efe6" stroke="#a1887f" stroke-width="2"/>
+<path d="M164,442 Q230,454 296,442 L296,460 Q230,472 164,460 Z" fill="#f4efe6" stroke="#a1887f" stroke-width="2"/>
+<path d="M164,472 Q230,484 296,472 L296,490 Q230,502 164,490 Z" fill="#f4efe6" stroke="#a1887f" stroke-width="2"/>
+<line x1="348" y1="69" x2="380" y2="69" stroke="#a1887f" stroke-width="2"/><text x="388" y="75" font-size="18" font-weight="900" fill="#a1887f" text-anchor="start" ><tspan x="388" dy="0">舌骨</tspan></text>
+<line x1="348" y1="170" x2="380" y2="170" stroke="#1e88e5" stroke-width="2"/><text x="388" y="176" font-size="18" font-weight="900" fill="#1e88e5" text-anchor="start" ><tspan x="388" dy="0">甲狀軟骨（喉結）</tspan></text>
+<line x1="348" y1="277" x2="380" y2="277" stroke="#d9534f" stroke-width="2"/><text x="388" y="283" font-size="18" font-weight="900" fill="#d9534f" text-anchor="start" ><tspan x="388" dy="0">環甲膜（穿刺處）</tspan></text>
+<line x1="348" y1="318" x2="380" y2="318" stroke="#7e57c2" stroke-width="2"/><text x="388" y="324" font-size="18" font-weight="900" fill="#7e57c2" text-anchor="start" ><tspan x="388" dy="0">環狀軟骨</tspan></text>
+<line x1="348" y1="420" x2="380" y2="420" stroke="#a1887f" stroke-width="2"/><text x="388" y="426" font-size="18" font-weight="900" fill="#a1887f" text-anchor="start" ><tspan x="388" dy="0">氣管</tspan></text>
+<text x="270" y="530" font-size="17" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="270" dy="0">食指從喉結往下滑，找出環甲膜</tspan></text>
+<rect x="570" y="70" width="230" height="400" rx="16" fill="#eceff1"/>
+<text x="685" y="102" font-size="17" font-weight="900" fill="#455a64" text-anchor="middle" ><tspan x="685" dy="0">側面：進針方向</tspan></text>
+<path d="M720,130 C702,210 694,330 720,440" fill="none" stroke="#c9a184" stroke-width="4"/>
+<line x1="791.9" y1="202.9" x2="696" y2="284" stroke="#263238" stroke-width="5" stroke-linecap="round"/>
+<circle cx="700" cy="280" r="8" fill="#d9534f"/>
+<text x="752" y="320" font-size="20" font-weight="900" fill="#e39b12" text-anchor="middle" ><tspan x="752" dy="0">45~60°</tspan></text>
+<text x="766" y="140" font-size="14" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="766" dy="0">前（皮膚外）</tspan></text>
+<text x="685" y="456" font-size="16" font-weight="800" fill="#263238" text-anchor="middle" ><tspan x="685" dy="0">朝胸骨方向向下</tspan></text>
+<text x="598" y="142" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="598" dy="0">頭</tspan></text>
+<text x="598" y="430" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="598" dy="0">胸</tspan></text>
+<line x1="598" y1="156" x2="598" y2="406" stroke="#455a64" stroke-width="2"/><path d="M598,412 l-6,-12 l12,0 z" fill="#455a64"/>
+</svg>

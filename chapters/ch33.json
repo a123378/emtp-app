@@ -243,37 +243,14 @@
    "text": "另外 6 個胸前導程則係由**人體橫於胸前的水平面(axial plane)**來記錄心臟的電氣生理活動。**每個胸前電極均被設定為正極，整個身體則被設定為共同接地極（負極）**，因此形成 6 個胸前導程 V1 至 V6。"
   },
   {
-   "type": "table",
-   "headers": [
-    "胸前導極",
-    "黏貼位置"
-   ],
-   "rows": [
-    [
-     "**V1**",
-     "**胸骨右側的第四肋間**"
-    ],
-    [
-     "**V2**",
-     "**胸骨左側的第四肋間**"
-    ],
-    [
-     "**V3**",
-     "**V2 及 V4 之間的中點**"
-    ],
-    [
-     "**V4**",
-     "**左胸第五肋間的鎖骨中線**處"
-    ],
-    [
-     "**V5**",
-     "**左胸第五肋間的前腋線(anterior axillary line)**"
-    ],
-    [
-     "**V6**",
-     "**左胸第五肋間的中腋線(middle axillary line)**"
-    ]
-   ]
+   "type": "diagram",
+   "kind": "figure",
+   "summary": true,
+   "src": "images/diagrams/ch33_chest_leads.svg",
+   "title": "胸前導極 V1～V6 黏貼位置",
+   "alt": "V1 胸骨右側第四肋間；V2 胸骨左側第四肋間；V3 在 V2 與 V4 中點；V4 左胸第五肋間鎖骨中線；V5 與 V4 同高的前腋線(anterior axillary line)；V6 與 V4 同高的中腋線(middle axillary line)",
+   "note": "**V1** 胸骨右側第四肋間、**V2** 胸骨左側第四肋間、**V3** 在 V2 與 V4 中點、**V4** 左胸第五肋間鎖骨中線、**V5** 第五肋間前腋線(anterior axillary line)、**V6** 第五肋間中腋線(middle axillary line)。",
+   "id": "dg11"
   },
   {
    "type": "mnemonic",
@@ -2060,39 +2037,13 @@
   },
   {
    "type": "diagram",
-   "kind": "tree",
+   "kind": "figure",
+   "id": "dg190",
    "summary": true,
+   "src": "images/diagrams/ch33_heart_regions.svg",
    "title": "導程—心肌區域—冠狀動脈定位（必背）",
-   "root": "ST 變化導程 → 梗塞血管",
-   "branches": [
-    {
-     "label": "LAD 左前降支",
-     "sub": "V1~V4：中膈、前壁、心尖",
-     "tone": "red",
-     "items": [
-      "**V1、V2**：中隔區(anteroseptal／septal)",
-      "**V3、V4**：前壁(anterior)"
-     ]
-    },
-    {
-     "label": "Cx 左迴旋支",
-     "tone": "orange",
-     "items": [
-      "**V5、V6**：側壁(lateral)",
-      "**Ⅰ、aVL**：高位側壁(high lateral)"
-     ]
-    },
-    {
-     "label": "RCA 右冠狀動脈",
-     "tone": "blue",
-     "items": [
-      "**Ⅱ、Ⅲ、aVF**：下壁(inferior)",
-      "**後壁**（無直接導程）：RCA 後降分支，由 **V1-V2 鏡像變化**推斷",
-      "**V4R**：右心室（近端右冠狀動脈 proximal RCA 的右心室分支 RV branch）"
-     ]
-    }
-   ],
-   "id": "dg190"
+   "alt": "左心室短軸：前壁 V3 V4、中隔 V1 V2（LAD）；側壁 V5 V6、高位側壁 I aVL（Cx）；下壁 II III aVF、右心室 V4R（RCA）",
+   "note": "**LAD 左前降支**：**V1、V2** 中隔區(anteroseptal／septal)、**V3、V4** 前壁(anterior)。**Cx 左迴旋支**：**V5、V6** 側壁(lateral)、**Ⅰ、aVL** 高位側壁(high lateral)。**RCA 右冠狀動脈**：**Ⅱ、Ⅲ、aVF** 下壁(inferior)；**後壁**無直接導程，由 RCA 後降分支、**V1-V2 鏡像變化**推斷；**V4R** 看右心室（近端右冠狀動脈 proximal RCA 的右心室分支 RV branch）。"
   },
   {
    "type": "mnemonic",
@@ -3125,7 +3076,7 @@
    },
    {
     "title": "胸前導極黏貼位置",
-    "fromContent": "胸前導程（水平面 axial plane）"
+    "diagram": "dg11"
    },
    {
     "title": "心電圖各組成成分的意義",

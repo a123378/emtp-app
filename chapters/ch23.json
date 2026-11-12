@@ -908,31 +908,14 @@
    ]
   },
   {
-   "type": "text",
-   "text": "常見的**電擊片擺放位置**有以下兩種（圖23-7）："
-  },
-  {
-   "type": "table",
-   "headers": [
-    "擺放位置",
-    "前／上電擊片",
-    "後／側電擊片",
-    "備註"
-   ],
-   "rows": [
-    [
-     "**前-側位(anterior-lateral position)**，又稱**胸骨-心尖位(sternal-apical position)**",
-     "**前胸電擊片（胸骨）**：放在**右胸的前上方的鎖骨下**",
-     "**側胸電擊片（心尖）**：放在**心尖附近**，也就是**左乳頭外下方的前腋線上**",
-     "**指引建議的標準位置**"
-    ],
-    [
-     "**前-後位(anterior-posterior position)**，又稱**轉向去顫(vector-change defibrillation，VC defibrillation)**",
-     "**前胸電擊片**：同前-側位的**側胸電擊片位置**，放在**心尖附近（左乳頭外下方的前腋線上）**；**體型較小的兒童可直接置於胸口正中央**",
-     "**後胸電擊片**：放在**右胸的背面**；**體型較小的兒童可直接置於胸腔正背面**",
-     "用於**轉向去顫**"
-    ]
-   ]
+   "type": "diagram",
+   "kind": "figure",
+   "summary": true,
+   "src": "images/diagrams/ch23_defib_pads.svg",
+   "title": "電擊片擺放位置（圖23-7）",
+   "alt": "前-側位：右胸前上方鎖骨下＋心尖（左乳頭外下方前腋線）；前-後位：前胸心尖＋右胸背面",
+   "note": "**前-側位(anterior-lateral position)**，又稱**胸骨-心尖位(sternal-apical position)**，是**指引建議的標準位置**：前胸片放**右胸前上方的鎖骨下**，側胸片放**心尖附近（左乳頭外下方的前腋線上）**。**前-後位(anterior-posterior position)**，又稱**轉向去顫(vector-change defibrillation，VC defibrillation)**：前胸片同心尖位置（體型較小的兒童可置於胸口正中央），後胸片放**右胸的背面**（小兒可置於胸腔正背面）。",
+   "id": "dg76"
   },
   {
    "type": "text",
@@ -3171,12 +3154,11 @@
    },
    {
     "title": "電擊去顫",
-    "fromContent": "電擊去顫"
+    "diagram": "dg76"
    },
    {
     "title": "電擊去顫（續）",
-    "fromContent": "電擊去顫",
-    "nth": 1
+    "fromContent": "電擊去顫"
    },
    {
     "title": "ACLS 通用流程的關鍵數值（圖23-9 側欄）",

@@ -847,28 +847,13 @@
    "text": "六個掃描視窗（檢查窗口）總覽"
   },
   {
-   "type": "text",
-   "text": "**藉由水往低處流的特性**，可以透過胸腹部針對下列部位發現**是否有出血可能**："
-  },
-  {
-   "type": "list",
-   "items": [
-    "**⑴ 劍突下：心包膜腔(Subxiphoid Fossa)**。",
-    "**⑵ 右胸腹腔相對低處：右側肋膜腔、肝腎交界(Morrison Pouch／Hepatorenal Fossa)**。",
-    "**⑶ 左胸腹腔相對低處：左側肋膜腔、脾腎交界(Splenorenal fossa)**。",
-    "**⑷ 骨盆腔相對低處：恥骨聯合上(Suprapubic)**。"
-   ]
-  },
-  {
-   "type": "text",
-   "text": "**藉由氣體往上聚集在高處的特性**，可以透過胸腔掃描發現**是否有氣胸可能**，胸腔會進行以下幾個位置掃描："
-  },
-  {
-   "type": "list",
-   "items": [
-    "**⑸ 右胸廓相對高處：約介於右側鎖骨中線、第二肋間至第四肋間之間**。",
-    "**⑹ 左胸廓相對高處：約介於左側鎖骨中線、第二肋間至第四肋間之間**。"
-   ]
+   "type": "diagram",
+   "kind": "figure",
+   "summary": true,
+   "src": "images/diagrams/ch21_efast_windows.svg",
+   "title": "E-FAST 六個掃描視窗",
+   "alt": "1 劍突下心包膜腔；2 右側肝腎交界 Morrison pouch；3 左側脾腎交界 Splenorenal fossa；4 恥骨聯合上；5、6 左右鎖骨中線第二至第四肋間",
+   "note": "**水往低處流（找出血）**：⑴ **劍突下**心包膜腔(Subxiphoid Fossa)、⑵ 右側肋膜腔＋**肝腎交界**(Morrison Pouch／Hepatorenal Fossa)、⑶ 左側肋膜腔＋**脾腎交界**(Splenorenal fossa)、⑷ **恥骨聯合上**(Suprapubic)。**氣體往上聚集（找氣胸）**：⑸⑹ 左右**鎖骨中線、第二至第四肋間**。"
   },
   {
    "type": "table",

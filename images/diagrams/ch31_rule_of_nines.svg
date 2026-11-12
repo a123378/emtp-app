@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 690" width="680" height="690" font-family="'Microsoft JhengHei','PingFang TC','Noto Sans TC','Heiti TC',sans-serif">
+<rect width="680" height="690" fill="#ffffff"/>
+<rect x="115" y="24" width="110" height="36" rx="18.0" fill="#455a64"/>
+<text x="170.0" y="49.2" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="170.0" dy="0">正面</tspan></text>
+<rect x="455" y="24" width="110" height="36" rx="18.0" fill="#455a64"/>
+<text x="510.0" y="49.2" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="510.0" dy="0">背面</tspan></text>
+<rect x="56" y="194" width="34" height="222" rx="17" fill="#efe9fa" stroke="#7e57c2" stroke-width="2.5"/>
+<rect x="250" y="194" width="34" height="222" rx="17" fill="#efe9fa" stroke="#7e57c2" stroke-width="2.5"/>
+<text x="73" y="312" font-size="17" font-weight="800" fill="#7e57c2" text-anchor="middle" ><tspan x="73" dy="0">9%</tspan></text>
+<text x="267" y="312" font-size="17" font-weight="800" fill="#7e57c2" text-anchor="middle" ><tspan x="267" dy="0">9%</tspan></text>
+<rect x="102" y="408" width="60" height="232" rx="24" fill="#e6f5ee" stroke="#2e9d6b" stroke-width="2.5"/>
+<rect x="178" y="408" width="60" height="232" rx="24" fill="#e6f5ee" stroke="#2e9d6b" stroke-width="2.5"/>
+<text x="132" y="534" font-size="18" font-weight="800" fill="#2e9d6b" text-anchor="middle" ><tspan x="132" dy="0">前</tspan><tspan x="132" dy="22.5">9%</tspan></text>
+<text x="208" y="534" font-size="18" font-weight="800" fill="#2e9d6b" text-anchor="middle" ><tspan x="208" dy="0">前</tspan><tspan x="208" dy="22.5">9%</tspan></text>
+<path d="M98,296 V214 Q98,188 124,188 H216 Q242,188 242,214 V296 Z" fill="#fdf3dd" stroke="#e39b12" stroke-width="2.5"/>
+<path d="M98,296 V390 Q98,416 124,416 H216 Q242,416 242,390 V296 Z" fill="#fdf3dd" stroke="#e39b12" stroke-width="2.5"/>
+<text x="170" y="250" font-size="21" font-weight="800" fill="#b26a00" text-anchor="middle" ><tspan x="170" dy="0">胸 9%</tspan></text>
+<text x="170" y="362" font-size="21" font-weight="800" fill="#b26a00" text-anchor="middle" ><tspan x="170" dy="0">腹 9%</tspan></text>
+<rect x="155" y="170" width="30" height="22" fill="#e3f0fc" stroke="#1e88e5" stroke-width="2.5"/>
+<circle cx="170" cy="134" r="40" fill="#e3f0fc" stroke="#1e88e5" stroke-width="2.5"/>
+<text x="170" y="142" font-size="21" font-weight="800" fill="#1e88e5" text-anchor="middle" ><tspan x="170" dy="0">9%</tspan></text>
+<rect x="153" y="394" width="34" height="30" rx="7" fill="#d9534f" stroke="#d9534f" stroke-width="2.5"/>
+<text x="170" y="415" font-size="15" font-weight="800" fill="#fff" text-anchor="middle" ><tspan x="170" dy="0">1%</tspan></text>
+<rect x="396" y="194" width="34" height="222" rx="17" fill="#eceff1" stroke="#b0bec5" stroke-width="2.5"/>
+<rect x="590" y="194" width="34" height="222" rx="17" fill="#eceff1" stroke="#b0bec5" stroke-width="2.5"/>
+<rect x="442" y="408" width="60" height="232" rx="24" fill="#e6f5ee" stroke="#2e9d6b" stroke-width="2.5"/>
+<rect x="518" y="408" width="60" height="232" rx="24" fill="#e6f5ee" stroke="#2e9d6b" stroke-width="2.5"/>
+<text x="472" y="534" font-size="18" font-weight="800" fill="#2e9d6b" text-anchor="middle" ><tspan x="472" dy="0">後</tspan><tspan x="472" dy="22.5">9%</tspan></text>
+<text x="548" y="534" font-size="18" font-weight="800" fill="#2e9d6b" text-anchor="middle" ><tspan x="548" dy="0">後</tspan><tspan x="548" dy="22.5">9%</tspan></text>
+<path d="M438,296 V214 Q438,188 464,188 H556 Q582,188 582,214 V296 Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<path d="M438,296 V390 Q438,416 464,416 H556 Q582,416 582,390 V296 Z" fill="#e0f2f1" stroke="#00897b" stroke-width="2.5"/>
+<text x="510" y="250" font-size="21" font-weight="800" fill="#00897b" text-anchor="middle" ><tspan x="510" dy="0">上背 9%</tspan></text>
+<text x="510" y="362" font-size="21" font-weight="800" fill="#00897b" text-anchor="middle" ><tspan x="510" dy="0">下背 9%</tspan></text>
+<rect x="495" y="170" width="30" height="22" fill="#eceff1" stroke="#b0bec5" stroke-width="2.5"/>
+<circle cx="510" cy="134" r="40" fill="#eceff1" stroke="#b0bec5" stroke-width="2.5"/>
+<text x="510" y="676" font-size="18" font-weight="800" fill="#455a64" text-anchor="middle" ><tspan x="510" dy="0">灰色：頭頸、上肢的 9% 已含前後</tspan></text>
+<line x1="188" y1="409" x2="300" y2="384" stroke="#d9534f" stroke-width="2"/><circle cx="188" cy="409" r="4" fill="#d9534f"/>
+<text x="306" y="390" font-size="20" font-weight="800" fill="#d9534f" text-anchor="start" ><tspan x="306" dy="0">會陰 1%</tspan></text>
+</svg>
