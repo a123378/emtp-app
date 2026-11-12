@@ -185,6 +185,7 @@ async function selectChapter(chId, opts = {}) {
   saveChapterProgressToStorage();
   state.isLoadingChapter = true;
   state.currentChId = chId;
+  state.liveReadPct = null;
   updateReadingProgressPill();
   state.searchBrowseChId = fromSearch ? chId : null;
   state.scrollBeforeSearch = null;
@@ -886,6 +887,18 @@ function queueSaveChapterProgress() {
   _saveProgressDebounceTimer = setTimeout(saveChapterProgressToStorage, 300);
 }
 
+/** 目前捲動位置換算成的閱讀百分比；內容高度還沒長出來時回傳 null */
+function computeScrollPct(sc) {
+  const { scrollHeight, clientHeight, scrollTop } = sc;
+  if (scrollHeight - clientHeight <= 50) return null;
+  // 距底部小於等於 35px 視為 100% 完讀
+  if (scrollTop + clientHeight >= scrollHeight - 35) return 100;
+  if (scrollTop <= 10) return 0;
+  // 1A: 以讀者眼睛實際看到的視線位置（視窗下緣 85%）計算閱讀進度
+  const visibleBottom = scrollTop + (clientHeight * 0.85);
+  return Math.min(99, Math.max(1, Math.round((visibleBottom / scrollHeight) * 100)));
+}
+
 function checkChapterReadingProgress() {
   if (state.currentMode !== 1 || !state.currentChId) return;
   if (state.isLoadingChapter || !state.currentChData) return;
@@ -902,25 +915,13 @@ function checkChapterReadingProgress() {
   if (els.notesLoading && els.notesLoading.style.display !== 'none') return;
 
   const chId = state.currentChId;
-  const scrollHeight = sc.scrollHeight;
-  const clientHeight = sc.clientHeight;
-  const scrollTop = sc.scrollTop;
-  const maxScroll = scrollHeight - clientHeight;
-
+  const pct = computeScrollPct(sc);
   // 內容尚未載入完整或高度尚未長出，嚴禁計算
-  if (maxScroll <= 50) return;
+  if (pct === null) return;
 
-  let pct = 0;
-  if (scrollTop + clientHeight >= scrollHeight - 35) {
-    // 距底部小於等於 35px 視為 100% 完讀
-    pct = 100;
-  } else if (scrollTop <= 10) {
-    pct = 0;
-  } else {
-    // 1A: 以讀者眼睛實際看到的視線位置（視窗下緣 85%）計算閱讀進度
-    const visibleBottom = scrollTop + (clientHeight * 0.85);
-    pct = Math.min(99, Math.max(1, Math.round((visibleBottom / scrollHeight) * 100)));
-  }
+  // 浮動進度條跟著目前位置走（往回捲會減少），側欄仍只記最高進度
+  state.liveReadPct = { chId, pct };
+  updateReadingProgressPill();
 
   const currentRecorded = state.chapterProgress[chId] || 0;
   if (pct > currentRecorded) {
@@ -1025,14 +1026,17 @@ function updateReadingProgressPill() {
   pill.classList.toggle('show', visible);
   if (!ch) return;
 
-  const pct = state.chapterProgress[chId] || 0;
-  const isRead = pct >= 100 || state.readChapters.has(chId);
-  const shown = isRead ? 100 : pct;
+  const recorded = state.chapterProgress[chId] || 0;
+  const isRead = recorded >= 100 || state.readChapters.has(chId);
+  const best = isRead ? 100 : recorded;
+  const live = state.liveReadPct && state.liveReadPct.chId === chId ? state.liveReadPct.pct : best;
   pill.classList.toggle('is-read', isRead);
   pill.querySelector('.rp-ch').textContent = ch.num;
-  pill.querySelector('.rp-pct').textContent = isRead ? '✓ 完讀' : `${shown}%`;
-  pill.querySelector('.rp-fill').style.transform = `scaleX(${shown / 100})`;
-  pill.setAttribute('aria-label', `${ch.num} ${ch.title} 研讀進度 ${shown}%`);
+  pill.querySelector('.rp-pct').textContent = isRead ? `✓ ${live}%` : `${live}%`;
+  pill.querySelector('.rp-fill').style.transform = `scaleX(${live / 100})`;
+  pill.querySelector('.rp-best').style.transform = `scaleX(${best / 100})`;
+  pill.title = `目前位置 ${live}%｜最高研讀進度 ${best}%（點擊展開章節選單）`;
+  pill.setAttribute('aria-label', `${ch.num} ${ch.title} 目前位置 ${live}%，最高研讀進度 ${best}%`);
 }
 
 function initReadingProgressPill() {

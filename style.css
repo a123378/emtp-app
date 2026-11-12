@@ -2870,14 +2870,22 @@ body.mode-3 #m3-side-nav { display: block; }
   background: var(--surface-3);
   overflow: hidden;
 }
-.reading-progress-pill .rp-fill {
+.reading-progress-pill .rp-fill,
+.reading-progress-pill .rp-best {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--orange-border), var(--orange));
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.15s ease-out;
+}
+.reading-progress-pill .rp-fill {
+  background: linear-gradient(90deg, var(--orange-border), var(--orange));
+}
+/* 淡色底：本章最高研讀進度（往回捲時看得出讀到哪裡過） */
+.reading-progress-pill .rp-best {
+  background: var(--orange);
+  opacity: 0.22;
 }
 .reading-progress-pill .rp-pct {
   min-width: 2.6em;
@@ -2888,7 +2896,8 @@ body.mode-3 #m3-side-nav { display: block; }
   text-align: right;
 }
 .reading-progress-pill.is-read .rp-ch { background: var(--success); }
-.reading-progress-pill.is-read .rp-fill { background: var(--success); }
+.reading-progress-pill.is-read .rp-fill,
+.reading-progress-pill.is-read .rp-best { background: var(--success); }
 .reading-progress-pill.is-read .rp-pct { color: var(--success); }
 
 /* 「回到上次進度」提示出現時讓位，避免手機上重疊 */
@@ -2902,7 +2911,8 @@ body:has(.progress-restore-toast.show) .reading-progress-pill.show {
 }
 @media (prefers-reduced-motion: reduce) {
   .reading-progress-pill,
-  .reading-progress-pill .rp-fill { transition: none; }
+  .reading-progress-pill .rp-fill,
+  .reading-progress-pill .rp-best { transition: none; }
 }
 @media print {
   .reading-progress-pill { display: none !important; }
