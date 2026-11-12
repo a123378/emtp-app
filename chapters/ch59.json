@@ -228,9 +228,9 @@
    "type": "clinical",
    "label": "核心觀念 ‧ 臨床實務",
    "points": [
-    "考點：TRM 源自航空界的 **CRM**；直接催化事故是 **1978/12/28 聯合航空 173 號班機**（**起落架故障＋燃油耗盡**，**10 死 23 重傷**）。",
-    "考點：**NASA 於 1979 年**召開研討會，名稱由 **Cockpit** Resource Management 改為 **Crew** Resource Management。",
-    "考點：醫療版教材 **TeamSTEPPS** 由 **AHRQ（美國醫療照護研究及品質機構）**制定，全稱 **Strategies and Tools to Enhance Performance and Patient Safety**。",
+    "TRM 源自航空界的 **CRM**；直接催化事故是 **1978/12/28 聯合航空 173 號班機**（**起落架故障＋燃油耗盡**，**10 死 23 重傷**）。",
+    "**NASA 於 1979 年**召開研討會，名稱由 **Cockpit** Resource Management 改為 **Crew** Resource Management。",
+    "醫療版教材 **TeamSTEPPS** 由 **AHRQ（美國醫療照護研究及品質機構）**制定，全稱 **Strategies and Tools to Enhance Performance and Patient Safety**。",
     "臨床要訣：UA173 的教訓＝**技術好不等於團隊好**；階級文化讓副駕駛的正確訊息被忽視，正是後來**重申關切(two-challenge rule)**與**CUS** 要解決的問題。"
    ]
   },
@@ -326,9 +326,9 @@
    "type": "clinical",
    "label": "核心觀念 ‧ 臨床實務",
    "points": [
-    "考點：**認知負荷理論由 John Sweller 於 1988 年提出**，分**內在／外在／增生**三種，務必能對應定義。",
-    "考點：**輔助工具（口訣、任務卡、手寫板）產生的是「增生」認知負荷**，是**有助於降低人為錯誤**的那一種，不要誤答為有害。",
-    "考點：**壓力下的隧道視野**是典型的人為因素表現；**階級壓力屬於「組織文化」**，不是個人因素。",
+    "**認知負荷理論由 John Sweller 於 1988 年提出**，分**內在／外在／增生**三種，務必能對應定義。",
+    "**輔助工具（口訣、任務卡、手寫板）產生的是「增生」認知負荷**，是**有助於降低人為錯誤**的那一種，不要誤答為有害。",
+    "**壓力下的隧道視野**是典型的人為因素表現；**階級壓力屬於「組織文化」**，不是個人因素。",
     "臨床要訣：現場**先降外在負荷**（請家屬退開、把病人移到空間較大處、關掉不必要的警報聲），再**用口訣／任務卡降低錯誤**。"
    ]
   },
@@ -412,8 +412,8 @@
    "type": "clinical",
    "label": "核心觀念 ‧ 臨床實務",
    "points": [
-    "考點：TRM 四大模組**必背**——**領導能力(Leadership)、有效溝通(Communication)、狀況監測(Situation Monitoring)、互助合作(Mutual Support)**，本章依**TeamSTEPPS 3.0** 架構。",
-    "考點：TRM 管理的三類資源＝**人力（知識技能經驗）、物質（設備藥品）、訊息（病人資訊與現場狀況）**。",
+    "TRM 四大模組**必背**——**領導能力(Leadership)、有效溝通(Communication)、狀況監測(Situation Monitoring)、互助合作(Mutual Support)**，本章依**TeamSTEPPS 3.0** 架構。",
+    "TRM 管理的三類資源＝**人力（知識技能經驗）、物質（設備藥品）、訊息（病人資訊與現場狀況）**。",
     "臨床要訣：**TRM 不只用在現場**，設備定位、排班訓練、行政決策都算；**裝備預先定位**就是最便宜的 TRM。"
    ]
   },
@@ -676,10 +676,10 @@
    "type": "clinical",
    "label": "核心觀念 ‧ 臨床實務",
    "points": [
-    "考點：領導模組**三小工具與時機**必考——**Brief＝到現場前**、**Huddle＝急救過程中有突發狀況**、**Debrief＝任務完成後**。",
-    "考點：**SPASE ＝情人配流備**（Situation of scene／People／Assign／SOP／Equipment）；**SNAPPI ＝大狀評訂分徵**（Shout／Notify／Assess／Plan／Prioritize／Invite ideas）；**Debrief ＝ ERCP**（Experience／Reflection／Conceptualization／Plan）。",
-    "考點：**領導者三特質＝決斷力、溝通能力、靈活性**；**領導行為＝分派－監督－回饋**。",
-    "考點：領導的產生分**指定型**與**情境型**，關鍵不在頭銜而在**有沒有領導行為**。",
+    "領導模組**三小工具與時機**必考——**Brief＝到現場前**、**Huddle＝急救過程中有突發狀況**、**Debrief＝任務完成後**。",
+    "**SPASE ＝情人配流備**（Situation of scene／People／Assign／SOP／Equipment）；**SNAPPI ＝大狀評訂分徵**（Shout／Notify／Assess／Plan／Prioritize／Invite ideas）；**Debrief ＝ ERCP**（Experience／Reflection／Conceptualization／Plan）。",
+    "**領導者三特質＝決斷力、溝通能力、靈活性**；**領導行為＝分派－監督－回饋**。",
+    "領導的產生分**指定型**與**情境型**，關鍵不在頭銜而在**有沒有領導行為**。",
     "臨床要訣：**Debrief 要在返隊途中、印象深刻時做**，**對事不對人**；若檢討變成公審，反而**危害團隊**。",
     "臨床要訣：**領導者若要跳下去做技術（如插管），必須先確認有人接手領導或狀況監測**，否則全隊失去整體觀。"
    ]
@@ -971,10 +971,10 @@
    "type": "clinical",
    "label": "核心觀念 ‧ 臨床實務",
    "points": [
-    "考點：**閉圈式溝通＝Call Out → Read Back → Check Back**；對**病人／家屬**則用 **Teach Back**。",
-    "考點：**Read Back 是接收者複誦**、**Check Back 是發話者最後的確認或糾正**，兩者不可互換。",
-    "考點：**院前交班用 ISAR**（I＝建立關係／尊重邀請／表達訴求、S＝主訴與重要既往史、A＝主要發現與初步臆斷、R＝重要處置與再評結果），**由 ISBAR 調整而來**。",
-    "考點：**Teach Back 要用開放式問題，避免是／否問題**。",
+    "**閉圈式溝通＝Call Out → Read Back → Check Back**；對**病人／家屬**則用 **Teach Back**。",
+    "**Read Back 是接收者複誦**、**Check Back 是發話者最後的確認或糾正**，兩者不可互換。",
+    "**院前交班用 ISAR**（I＝建立關係／尊重邀請／表達訴求、S＝主訴與重要既往史、A＝主要發現與初步臆斷、R＝重要處置與再評結果），**由 ISBAR 調整而來**。",
+    "**Teach Back 要用開放式問題，避免是／否問題**。",
     "臨床要訣：**給藥指令一定要走完閉圈**（藥名＋劑量＋途徑三要素複誦），這是**避免給藥錯誤**最便宜的保險。",
     "臨床要訣：交班若**對方未予理會**，仍應**依病人急迫性拋出訊息、表達訴求**，不可默默離開。"
    ]
@@ -1213,10 +1213,10 @@
    "type": "clinical",
    "label": "核心觀念 ‧ 臨床實務",
    "points": [
-    "考點：**狀況監測四環節＝病人因素、團隊成員、環境因素、目標進展**（表59-5），只答「監測病人」會失分。",
-    "考點：**IMSAFE 屬於「團隊因素」**，用來評估**同仁是否準備好**——**Illness／Medication／Stress／Alcohol／Fatigue／Emotion**。",
-    "考點：**TOCC ＝旅遊、職業、接觸、群聚**，**有傳染病風險一律詢問**。",
-    "考點：**5H5T 中文版口訣＝「溫氧容酸鉀、心肺毒氣包」**；**創傷用 XABCDE**；**意識不清用 AEIOU-TIPS**。",
+    "**狀況監測四環節＝病人因素、團隊成員、環境因素、目標進展**（表59-5），只答「監測病人」會失分。",
+    "**IMSAFE 屬於「團隊因素」**，用來評估**同仁是否準備好**——**Illness／Medication／Stress／Alcohol／Fatigue／Emotion**。",
+    "**TOCC ＝旅遊、職業、接觸、群聚**，**有傳染病風險一律詢問**。",
+    "**5H5T 中文版口訣＝「溫氧容酸鉀、心肺毒氣包」**；**創傷用 XABCDE**；**意識不清用 AEIOU-TIPS**。",
     "臨床要訣：**領導者跳入個別任務前，必須確保有人維持領導或狀況監測角色**。",
     "臨床要訣：**治療無反應時先回頭質疑臆斷**（例：給氧後未改善 → 重新評估並調整策略），不要一直重複同一個無效處置。"
    ]
@@ -1390,10 +1390,10 @@
    "type": "clinical",
    "label": "核心觀念 ‧ 臨床實務",
    "points": [
-    "考點：**相助模組包含「負荷管理」與「衝突管理」**——**負荷管理著重任務分工**，**衝突管理在協調意見不一致**。",
-    "考點：**衝突管理三工具＝重申關切(two-challenge rule)、再三關切(CUS)、DESC 模組**；**CUS ＝ Concerned／Uncomfortable／Safety**；**DESC ＝ Describe／Express／Suggest／Consequences**。",
-    "考點：**心智共享(Shared Mental Model)三內涵＝任務認知、角色分工、資源分配**；達成相助的元素還包含**狀況察覺與主動呼叫**。",
-    "考點：**負荷管理兩技巧＝為病人倡議(advocacy)、主動求援與協助(task assistance)**。",
+    "**相助模組包含「負荷管理」與「衝突管理」**——**負荷管理著重任務分工**，**衝突管理在協調意見不一致**。",
+    "**衝突管理三工具＝重申關切(two-challenge rule)、再三關切(CUS)、DESC 模組**；**CUS ＝ Concerned／Uncomfortable／Safety**；**DESC ＝ Describe／Express／Suggest／Consequences**。",
+    "**心智共享(Shared Mental Model)三內涵＝任務認知、角色分工、資源分配**；達成相助的元素還包含**狀況察覺與主動呼叫**。",
+    "**負荷管理兩技巧＝為病人倡議(advocacy)、主動求援與協助(task assistance)**。",
     "臨床要訣：**組員提出疑義要婉轉，但被忽視時務必再講一次**，並**引用 SOP 與病人安全增加建議強度**——這正是 UA173 副駕駛沒做到的事。",
     "臨床要訣：**發現明顯錯誤（如呼吸 30 次／分、發紺卻只給鼻導管）應直接主動協助**，建議改用**非再呼吸型面罩(NRM)**。"
    ]

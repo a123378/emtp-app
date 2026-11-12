@@ -371,7 +371,7 @@ function renderContentBlocks(blocks, chId) {
   let curSec = null;
   blocks.forEach((block, bi) => {
     if (block.type === 'orange') {
-      if (curSec !== null && chId) html += renderSectionQuizBox(chId, curSec);
+      if (curSec !== null && chId) html += renderSectionEnd(blocks, chId, curSec);
       curSec = bi;
     }
     switch (block.type) {
@@ -406,7 +406,7 @@ function renderContentBlocks(blocks, chId) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               ${block.label || '核心觀念 ‧ 臨床實務'}
             </div>
-            <ul>${(block.points || []).map(p => `<li>${mdInline(p)}</li>`).join('')}</ul>
+            <ul>${(block.points || []).map(p => `<li>${renderClinicalPoint(p)}</li>`).join('')}</ul>
           </div>`;
         break;
       case 'text':
@@ -417,8 +417,32 @@ function renderContentBlocks(blocks, chId) {
         break;
     }
   });
-  if (curSec !== null && chId) html += renderSectionQuizBox(chId, curSec);
+  if (curSec !== null && chId) html += renderSectionEnd(blocks, chId, curSec);
   return html;
+}
+
+// ── 歷屆考點標註 ──────────────────────────────────────
+// 被歷屆題考過的觀念寫成「考點（108、113）：內容」，括號內是出現過的年度／小考。
+const EXAM_POINT_RE = /^考點（([^）]+)）：/;
+
+function examBadge(years) {
+  return `<span class="exam-badge" title="歷屆考題出現過">歷屆 ${escapeHtml(years)}</span>`;
+}
+
+function renderClinicalPoint(p) {
+  const m = EXAM_POINT_RE.exec(p);
+  return m ? examBadge(m[1]) + mdInline(p.slice(m[0].length)) : mdInline(p);
+}
+
+/** 節末：本節歷屆考點（存在 orange 區塊的 examPoints）＋本節考題 */
+function renderSectionEnd(blocks, chId, secIdx) {
+  const pts = (blocks[secIdx] && blocks[secIdx].examPoints) || [];
+  const box = pts.length ? `
+    <div class="clinical-block exam-points-block">
+      <div class="clinical-label">📌 本節歷屆考點</div>
+      <ul>${pts.map(p => `<li>${examBadge(p.years)}${mdInline(p.text)}</li>`).join('')}</ul>
+    </div>` : '';
+  return box + renderSectionQuizBox(chId, secIdx);
 }
 
 // ── 模式一：段落內嵌考題 ────────────────────────────────

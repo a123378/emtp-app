@@ -690,6 +690,23 @@ body {
 }
 .clinical-block li { margin: 4px 0; line-height: 1.6; }
 
+/* ── 歷屆考點標籤 ── */
+.exam-badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.6;
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+.exam-points-block { border-left-color: var(--orange); }
+.exam-points-block .clinical-label { color: var(--orange); }
+
 /* ── 記憶口訣 ── */
 .mnemonic-block {
   background: var(--mnemonic-bg);
