@@ -575,8 +575,8 @@ function renderSummary(cd) {
 const SUMMARY_NUMERALS = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
 
 /**
- * 重點一覽只顯示：公式（僅限 summary.showFormulas 指定的條目）、關鍵數字、比較表格、章末速記。
- * 關鍵字白話表、口訣、章末重點一覽的資料仍保留在 JSON（口訣已併入分組速記）。
+ * 重點一覽只顯示：圖解、公式（僅限 summary.showFormulas 指定的條目）、關鍵數字、比較圖表、記憶口訣。
+ * 記憶口訣來自 summary.quickReview（每組只留 title＋mnemonic）；關鍵字白話表等資料仍保留在 JSON 但不顯示。
  * @returns {{key: string, icon: string, title: string, body: string}[]}
  */
 function buildSummaryCards(cd, s) {
@@ -587,7 +587,7 @@ function buildSummaryCards(cd, s) {
   add('formulas', '🧮', '公式彙整', renderSummaryFormulas(pickShownFormulas(s)));
   add('numbers', '🔢', '關鍵數字整理', renderSummaryNumbers(s.keyNumbers));
   add('tables', '📊', '重點比較圖表', renderSummaryTables(cd, s.tables));
-  add('quick', '✅', '章末重點速記', renderSummaryQuick(s.quickReview));
+  add('quick', '💡', '記憶口訣', renderSummaryQuick(s.quickReview));
   return cards;
 }
 
@@ -691,7 +691,7 @@ function renderQuickSection(sec) {
     <div class="sum-quick-sec">
       <div class="sum-subhead">${mdInline(sec.title)}</div>
       ${sec.intro ? `<div class="sum-quick-intro">${mdInline(sec.intro)}</div>` : ''}
-      ${sec.mnemonic ? `<div class="sum-quick-mn">口訣：${mdInline(sec.mnemonic)}</div>` : ''}
+      ${sec.mnemonic ? `<div class="sum-quick-mn">${mdInline(sec.mnemonic)}</div>` : ''}
       ${renderQuickList(sec.items)}
       ${groupTable}
       ${sec.table ? renderCompTable(sec.table) : ''}
