@@ -9,6 +9,7 @@
  *   title    圖的標題（選填）
  *   note     圖下方的補充一句話（選填）
  *   summary  true 時也放進「重點一覽」的圖解速覽
+ *   summaryBrief  true 時重點一覽只畫各步驟／項目的名稱（拿掉 sub 說明與 note），流程改橫排
  *
  * 各 kind 的資料：
  *   flow     steps: [{label, sub?, via?, tone?}]，dir: "row"（預設，手機自動直排）| "col"
@@ -150,5 +151,17 @@ function diagramHtml(b) {
 function renderSummaryDiagrams(cd) {
   const shown = new Set(((cd && cd.summary && cd.summary.tables) || []).map(t => t.diagram).filter(Boolean));
   const list = ((cd && cd.content) || []).filter(x => x && x.type === 'diagram' && x.summary && !shown.has(x.id));
-  return list.map(diagramHtml).join('');
+  return list.map(b => diagramHtml(b.summaryBrief ? briefDiagram(b) : b)).join('');
+}
+
+/** 只留名稱的精簡版圖解（不修改原資料） */
+function briefDiagram(b) {
+  const strip = arr => (Array.isArray(arr) ? arr.map(({ sub, ...rest }) => rest) : arr);
+  const { note, ...rest } = b;
+  return {
+    ...rest,
+    dir: b.kind === 'flow' ? 'row' : b.dir,
+    steps: strip(b.steps),
+    items: strip(b.items),
+  };
 }

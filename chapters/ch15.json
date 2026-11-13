@@ -1420,7 +1420,8 @@
      "sub": "確認位置正確並固定、開始呼吸器輔助呼吸、持續監測",
      "tone": "green"
     }
-   ]
+   ],
+   "summaryBrief": true
   },
   {
    "type": "mnemonic",
@@ -1696,7 +1697,6 @@
   {
    "type": "diagram",
    "kind": "figure",
-   "summary": true,
    "src": "images/diagrams/ch15_cricothyroid.svg",
    "title": "環甲膜的位置與穿刺方向",
    "alt": "由上而下：舌骨、甲狀軟骨（喉結）、環甲膜、環狀軟骨、氣管；針頭以 45~60 度角朝胸骨方向向下插入環甲膜",
@@ -2250,28 +2250,8 @@
     "mnemonic": "**6-10-15-8** 像按電梯：鼻管 6、簡單／部分再吸入 10、非再吸入 15，凡德里是例外只按 8（要精準不要高濃度）"
    },
    {
-    "title": "人工呼吸、徒手開氣道與抽吸",
-    "mnemonic": "**先有氣道，才有頸椎**；抽痰＝幫病人憋氣：大人 15、小孩 5 秒，抽前吸氧 2 分鐘（經管抽 5 分鐘），中斷後再給氧 30 秒，壓力 80~120"
-   },
-   {
-    "title": "口咽與鼻咽呼吸道",
-    "mnemonic": "口咽怕**吐**（有嘔吐反射禁用）、鼻咽怕**裂**（顱底骨折禁用）"
-   },
-   {
     "title": "氣管內管插管",
     "mnemonic": "**瘦（LEAN）人靠管比 V**：Lidocaine、Epinephrine、Atropine、Naloxone＋Vasopressin；兒科「**四加三點五、二加十二、乘以三**」＝管徑歲÷4＋3.5、深度歲÷2＋12、深度＝內徑×3"
-   },
-   {
-    "title": "SGA（喉罩）與 RSI",
-    "mnemonic": "RSI 六個 P 像跳水：**備 → 深吸 → 暖身 → 放倒 → 入水 → 確認落點**；LMA 充氣量「**減一補零**」＝（號數－1）×10 毫升"
-   },
-   {
-    "title": "困難氣道評估",
-    "mnemonic": "**鬍子缺牙老胖子打呼＝BONES**（困難通氣）；插不好**送人上 HEAVEN**（困難插管）"
-   },
-   {
-    "title": "救援通氣：環甲膜、SALAD、NIPPV、HFNC",
-    "mnemonic": "環甲膜：**45~60 度朝胸骨、邊進針邊回抽、抽到氣就到位**；吸一口慢慢放：**通暢 1:4、全塞 1:8**；SALAD＝管在鏡前 → 左架上食道 → 雙管齊下；**CPAP 一個壓、BiPAP 兩個壓**"
    }
   ],
   "glossary": [
@@ -2489,27 +2469,6 @@
     "fromContent": "人工輔助呼吸"
    },
    {
-    "title": "呼吸道處置的徒手操作",
-    "fromContent": "呼吸道處置的徒手操作"
-   },
-   {
-    "title": "抽吸",
-    "fromContent": "抽吸"
-   },
-   {
-    "title": "鼻咽呼吸道",
-    "fromContent": "鼻咽呼吸道"
-   },
-   {
-    "title": "鼻咽呼吸道（續）",
-    "fromContent": "鼻咽呼吸道",
-    "nth": 1
-   },
-   {
-    "title": "口咽呼吸道",
-    "fromContent": "口咽呼吸道"
-   },
-   {
     "title": "氣管內管的尺寸",
     "fromContent": "氣管內管的尺寸"
    },
@@ -2520,11 +2479,6 @@
    {
     "title": "非侵襲性正壓呼吸器(NIPPV)",
     "diagram": "dg167"
-   },
-   {
-    "title": "高流量鼻導管(HFNC)",
-    "fromContent": "高流量鼻導管(HFNC)",
-    "nth": 1
    }
   ],
   "review": [
