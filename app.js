@@ -627,19 +627,31 @@ function renderSummaryFormulas(list) {
 
 /**
  * 表格可直接寫 headers/rows，或用 fromContent 指向重點筆記中同名標題下的表格，避免兩份資料不同步；
- * 原表已改畫成圖解時用 diagram 指向該圖的 id。
+ * 原表已改畫成圖解時用 diagram 指向該圖的 id；hideCols（欄位索引）是重點一覽裡不顯示的欄。
  */
 function renderSummaryTables(cd, list) {
   if (!list || !list.length) return '';
   return list.map(t => {
     if (t.diagram) return diagramHtml(findContentDiagram(cd, t.diagram) || {});
-    const tbl = t.fromContent ? findContentTable(cd, t.fromContent, t.nth || 0) : t;
-    if (!tbl || !tbl.rows || !tbl.rows.length) return '';
+    const src = t.fromContent ? findContentTable(cd, t.fromContent, t.nth || 0) : t;
+    if (!src || !src.rows || !src.rows.length) return '';
+    const tbl = withoutColumns(src, t.hideCols);
     return `
       <div class="sum-subhead">${mdInline(t.title || t.fromContent)}</div>
       ${renderCompTable(tbl)}
       ${t.note ? `<div class="sum-table-note">${mdInline(t.note)}</div>` : ''}`;
   }).join('');
+}
+
+/** 回傳拿掉指定欄位的新表格（不修改原表） */
+function withoutColumns(tbl, hideCols) {
+  if (!Array.isArray(hideCols) || !hideCols.length) return tbl;
+  const keep = (_, i) => !hideCols.includes(i);
+  return {
+    ...tbl,
+    headers: (tbl.headers || []).filter(keep),
+    rows: tbl.rows.map(r => r.filter(keep)),
+  };
 }
 
 function findContentDiagram(cd, id) {

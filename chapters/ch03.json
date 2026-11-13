@@ -1714,7 +1714,10 @@
    },
    {
     "title": "思考",
-    "fromContent": "思考"
+    "fromContent": "思考",
+    "hideCols": [
+     1
+    ]
    },
    {
     "title": "生理的健康：疾病自然史與三段五級預防",
