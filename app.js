@@ -292,6 +292,15 @@ async function loadChapterData(chId) {
 
   // Render summary
   els.summaryContent.innerHTML = renderSummary(cd);
+  setSummaryTabAvailable(summaryCardsOf(cd).length > 0);
+}
+
+/** 不提供重點一覽的章節隱藏「重點一覽」分頁；正停在該分頁時切回重點筆記 */
+function setSummaryTabAvailable(available) {
+  const btn = document.querySelector('.c-tab-btn[data-tab="summary"]');
+  if (btn) btn.hidden = !available;
+  const panel = document.getElementById('tab-summary');
+  if (!available && panel && !panel.classList.contains('hidden')) switchTab('notes');
 }
 
 // ── Render: Chapter Not Ready ─────────────────────────
@@ -331,13 +340,13 @@ function renderNotes(cd, chId) {
     html += renderSectionQuizBox(chId, null, '其他本章考題');
   }
 
-  // ④ 重點一覽入口
-  html += `
+  // ④ 重點一覽入口（不提供重點一覽的章節不顯示）
+  if (summaryCardsOf(cd).length) html += `
     <div class="section-label"><span class="s-num">${secNum++}</span> 重點一覽</div>
     <div class="summary-entry-card" onclick="switchTab('summary')">
       <div class="summary-entry-icon">⚡</div>
       <div class="summary-entry-text">
-        <strong>查看本章圖解、公式、關鍵數字與比較表格</strong>
+        <strong>查看本章圖解、公式、比較表格與記憶口訣</strong>
         <span>點擊快速切換至濃縮精華整理表</span>
       </div>
       <div class="summary-entry-arrow">→</div>
@@ -545,8 +554,7 @@ function renderMarkdown(text) {
 
 // ── Render: Summary ───────────────────────────────────
 function renderSummary(cd) {
-  const s = cd && cd.summary;
-  const cards = s ? buildSummaryCards(cd, s) : [];
+  const cards = summaryCardsOf(cd);
   if (!cards.length) {
     return '<p style="color:var(--text-muted);padding:20px">此章節重點一覽尚未生成。</p>';
   }
@@ -575,8 +583,18 @@ function renderSummary(cd) {
 const SUMMARY_NUMERALS = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
 
 /**
- * 重點一覽只顯示：圖解、公式（僅限 summary.showFormulas 指定的條目）、關鍵數字、比較圖表、記憶口訣。
- * 記憶口訣來自 summary.quickReview（每組只留 title＋mnemonic）；關鍵字白話表等資料仍保留在 JSON 但不顯示。
+ * 本章重點一覽的卡片；沒有 summary 或 summary.hidden 為 true 的章節回傳空陣列（不提供重點一覽）。
+ * @returns {{key: string, icon: string, title: string, body: string}[]}
+ */
+function summaryCardsOf(cd) {
+  const s = cd && cd.summary;
+  return s && !s.hidden ? buildSummaryCards(cd, s) : [];
+}
+
+/**
+ * 重點一覽只顯示：圖解、公式（僅限 summary.showFormulas 指定的條目）、比較圖表、記憶口訣。
+ * 記憶口訣來自 summary.quickReview（每組只留 title＋mnemonic）；關鍵數字（keyNumbers）、
+ * 關鍵字白話表等資料仍保留在 JSON 但不顯示。
  * @returns {{key: string, icon: string, title: string, body: string}[]}
  */
 function buildSummaryCards(cd, s) {
@@ -585,7 +603,6 @@ function buildSummaryCards(cd, s) {
 
   add('diagrams', '🖼️', '圖解速覽', renderSummaryDiagrams(cd));
   add('formulas', '🧮', '公式彙整', renderSummaryFormulas(pickShownFormulas(s)));
-  add('numbers', '🔢', '關鍵數字整理', renderSummaryNumbers(s.keyNumbers));
   add('tables', '📊', '重點比較圖表', renderSummaryTables(cd, s.tables));
   add('quick', '💡', '記憶口訣', renderSummaryQuick(s.quickReview));
   return cards;
@@ -606,24 +623,6 @@ function renderSummaryFormulas(list) {
       ${f.formula}
       ${f.note ? `<div class="formula-note">${f.note}</div>` : ''}
     </div>`).join('');
-}
-
-function renderSummaryNumbers(list) {
-  if (!list || !list.length) return '';
-  return `
-    <div class="comp-table-wrap">
-      <table class="numbers-table">
-        <thead><tr><th>項目</th><th>數值</th><th>說明／臨床連結</th></tr></thead>
-        <tbody>
-          ${list.map(n => `
-            <tr>
-              <td>${mdInline(n.label)}</td>
-              <td class="highlight-num">${mdInline(n.value)}</td>
-              <td>${mdInline(n.note || '')}</td>
-            </tr>`).join('')}
-        </tbody>
-      </table>
-    </div>`;
 }
 
 /**
