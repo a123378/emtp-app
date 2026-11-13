@@ -1423,7 +1423,6 @@
      ]
     }
    ],
-   "summary": true,
    "id": "dg132"
   },
   {
@@ -2646,25 +2645,8 @@
     "fromContent": "腦部灌流壓(Cerebral Perfusion Pressure，CPP)"
    },
    {
-    "title": "顱內壓(Intracranial Pressure，ICP)",
-    "fromContent": "顱內壓(Intracranial Pressure，ICP)"
-   },
-   {
     "title": "顱內壓(Intracranial Pressure，ICP)（續）",
     "diagram": "dg44"
-   },
-   {
-    "title": "處置原則",
-    "fromContent": "處置原則"
-   },
-   {
-    "title": "處置原則（續）",
-    "fromContent": "處置原則",
-    "nth": 1
-   },
-   {
-    "title": "腦壓升高相關處置",
-    "fromContent": "腦壓升高相關處置"
    },
    {
     "title": "頸部分區",
@@ -2677,10 +2659,6 @@
    {
     "title": "脊髓損傷特殊表現",
     "fromContent": "脊髓損傷特殊表現"
-   },
-   {
-    "title": "脊髓損傷特殊表現（續）",
-    "diagram": "dg132"
    },
    {
     "title": "加拿大頸椎守則(Canadian C-Spine Rule，CCR)",
