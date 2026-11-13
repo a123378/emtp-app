@@ -634,7 +634,6 @@
    "type": "diagram",
    "kind": "flow",
    "dir": "col",
-   "summary": true,
    "title": "SPIKES 原則：壞消息的告知",
    "steps": [
     {
@@ -1334,10 +1333,6 @@
     "mnemonic": "To cure sometimes, to relieve often, to comfort always（有時治癒，時常緩解，總是安慰）；溝通像**傳紙條**：想→編→送→收→解→回。"
    },
    {
-    "title": "醫病關係與互動模式",
-    "mnemonic": "**嬰兒—青少年—成人**：主動被動＝抱嬰兒、指導合作＝管青少年、共同參與＝大人商量；四步驟像**一頓飯**：開場 → 認知 → 同理 → 總結。"
-   },
-   {
     "title": "衝突處理：HARD",
     "mnemonic": "**杏仁核先衝出門，皮質晚 6 秒才追上**，所以數到三不夠、要**數到十**；**HARD＝這場面很硬**：發現(H) → 承認(A) → 訂規則(R) → 降溫(D)。"
    },
@@ -1555,7 +1550,50 @@
    },
    {
     "title": "SPIKES 原則——壞消息的告知",
-    "diagram": "dg61"
+    "headers": [
+     "字母",
+     "英文",
+     "中文",
+     "內容"
+    ],
+    "rows": [
+     [
+      "S",
+      "Setting up the interview",
+      "營造環境",
+      "**保護隱私**（音量放低也有效）、讓關鍵家屬參與、**坐下來**、眼神接觸或握手拍肩；預告對談時間並減少干擾"
+     ],
+     [
+      "P",
+      "Assessing the patient's Perception",
+      "評估認知",
+      "先用**開放性問題**了解病人或家屬對病情的認知與平常狀況"
+     ],
+     [
+      "I",
+      "Obtaining the patient's Invitation",
+      "邀請參與",
+      "試探對病況的了解與接受度；OHCA 時告知急救處置並觀察家屬反應"
+     ],
+     [
+      "K",
+      "Giving Knowledge and information",
+      "傳遞資訊",
+      "**先預告**壞消息；**避免專業術語**（用「心臟已經沒在跳」代替 OHCA）、避免過度直白；資訊多就分段給"
+     ],
+     [
+      "E",
+      "Addressing Emotions with empathic responses",
+      "同理回應情緒（**最具挑戰**）",
+      "觀察 → 把情緒說出來 → 確定原因 → 把情緒與原因連結陳述"
+     ],
+     [
+      "S",
+      "Strategy and Summary",
+      "策略與總結",
+      "給一個**可執行的計畫**，把對方拉回現實要面對的問題"
+     ]
+    ]
    },
    {
     "title": "ISBAR 交班（非創／內科病人）",
