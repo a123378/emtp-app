@@ -1384,7 +1384,8 @@
      "sub": "公衛護理師、關訪員或心理衛生社工"
     }
    ],
-   "id": "dg139"
+   "id": "dg139",
+   "summaryTimeline": true
   },
   {
    "type": "mnemonic",

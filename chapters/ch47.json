@@ -537,7 +537,8 @@
      "label": "重度憂鬱",
      "sub": "需求評估、**轉介醫療系統與相關資源**"
     }
-   ]
+   ],
+   "summaryTimeline": true
   },
   {
    "type": "clinical",

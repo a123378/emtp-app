@@ -271,7 +271,8 @@
      "tone": "gray"
     }
    ],
-   "id": "dg20"
+   "id": "dg20",
+   "summaryTimeline": true
   },
   {
    "type": "text",

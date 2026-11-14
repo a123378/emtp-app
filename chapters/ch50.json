@@ -852,7 +852,8 @@
      "label": "心肺衰竭甚至死亡"
     }
    ],
-   "id": "dg100"
+   "id": "dg100",
+   "summaryTimeline": true
   },
   {
    "type": "text",

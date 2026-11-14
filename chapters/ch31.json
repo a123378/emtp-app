@@ -222,7 +222,8 @@
      "label": "接觸不到 1 秒即造成表皮壞死"
     }
    ],
-   "id": "dg10"
+   "id": "dg10",
+   "summaryTimeline": true
   },
   {
    "type": "list",
@@ -1137,7 +1138,8 @@
      "tone": "green"
     }
    ],
-   "id": "dg117"
+   "id": "dg117",
+   "summaryTimeline": true
   },
   {
    "type": "list",

@@ -317,7 +317,8 @@
      "tone": "red"
     }
    ],
-   "id": "dg29"
+   "id": "dg29",
+   "summaryTimeline": true
   },
   {
    "type": "text",

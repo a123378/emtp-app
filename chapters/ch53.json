@@ -1621,7 +1621,8 @@
      "label": "直接影響神經系統",
      "sub": "死亡"
     }
-   ]
+   ],
+   "summaryTimeline": true
   },
   {
    "type": "text",

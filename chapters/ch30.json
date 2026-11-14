@@ -528,7 +528,8 @@
     }
    ],
    "summary": true,
-   "id": "dg50"
+   "id": "dg50",
+   "summaryTimeline": true
   },
   {
    "type": "mnemonic",

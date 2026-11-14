@@ -931,7 +931,8 @@
      "sub": "每 μL"
     }
    ],
-   "id": "dg66"
+   "id": "dg66",
+   "summaryTimeline": true
   },
   {
    "type": "table",

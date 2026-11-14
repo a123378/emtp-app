@@ -1209,7 +1209,8 @@
      "tone": "red"
     }
    ],
-   "id": "dg85"
+   "id": "dg85",
+   "summaryTimeline": true
   },
   {
    "type": "blue",

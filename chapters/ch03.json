@@ -518,7 +518,8 @@
      "tone": "purple"
     }
    ],
-   "id": "dg37"
+   "id": "dg37",
+   "summaryTimeline": true
   },
   {
    "type": "list",

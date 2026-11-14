@@ -10,6 +10,8 @@
  *   note     圖下方的補充一句話（選填）
  *   summary  true 時也放進「重點一覽」的圖解速覽
  *   summaryBrief  true 時重點一覽只畫各步驟／項目的名稱（拿掉 sub 說明與 note），流程改橫排
+ *   summaryTimeline  true 時 levels 在重點一覽改畫成橫向時間軸（依時間先後的分級用）
+ *   （重點一覽裡 dir: "col" 的流程一律改橫排，重點筆記維持原樣）
  *
  * 各 kind 的資料：
  *   flow     steps: [{label, sub?, via?, tone?}]，dir: "row"（預設，手機自動直排）| "col"
@@ -151,7 +153,34 @@ function diagramHtml(b) {
 function renderSummaryDiagrams(cd) {
   const shown = new Set(((cd && cd.summary && cd.summary.tables) || []).map(t => t.diagram).filter(Boolean));
   const list = ((cd && cd.content) || []).filter(x => x && x.type === 'diagram' && x.summary && !shown.has(x.id));
-  return list.map(b => diagramHtml(b.summaryBrief ? briefDiagram(b) : b)).join('');
+  return list.map(b => diagramHtml(summaryVariant(b))).join('');
+}
+
+/**
+ * 重點一覽用的版本（不修改原資料）：直排流程一律改橫排省版面；
+ * summaryBrief 只留名稱；summaryTimeline 把依時間排的 levels 畫成橫向時間軸。
+ */
+function summaryVariant(b) {
+  if (!b || !b.kind) return b || {};
+  let x = b.summaryBrief ? briefDiagram(b) : b;
+  if (x.summaryTimeline && x.kind === 'levels') x = levelsToTimeline(x);
+  if (x.kind === 'flow' && x.dir === 'col') x = { ...x, dir: 'row' };
+  return x;
+}
+
+/** levels（徽章＋名稱＋說明）→ 橫向流程：徽章當步驟名稱，名稱與說明放下方 */
+function levelsToTimeline(b) {
+  const { items, axis, scale, ...rest } = b;
+  return {
+    ...rest,
+    kind: 'flow',
+    dir: 'row',
+    steps: (items || []).map(it => ({
+      label: it.badge,
+      sub: [it.label && `**${it.label}**`, it.sub].filter(Boolean).join('：'),
+      tone: it.tone,
+    })),
+  };
 }
 
 /** 只留名稱的精簡版圖解（不修改原資料） */

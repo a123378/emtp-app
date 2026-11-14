@@ -632,7 +632,7 @@ function renderSummaryFormulas(list) {
 function renderSummaryTables(cd, list) {
   if (!list || !list.length) return '';
   return list.map(t => {
-    if (t.diagram) return diagramHtml(findContentDiagram(cd, t.diagram) || {});
+    if (t.diagram) return diagramHtml(summaryVariant(findContentDiagram(cd, t.diagram)));
     const src = t.fromContent ? findContentTable(cd, t.fromContent, t.nth || 0) : t;
     if (!src || !src.rows || !src.rows.length) return '';
     const tbl = withoutColumns(src, t.hideCols);

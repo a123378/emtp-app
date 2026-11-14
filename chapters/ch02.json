@@ -852,7 +852,8 @@
      "tone": "purple"
     }
    ],
-   "id": "dg76"
+   "id": "dg76",
+   "summaryTimeline": true
   },
   {
    "type": "table",

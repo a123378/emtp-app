@@ -1945,7 +1945,8 @@
     }
    ],
    "summary": true,
-   "id": "dg187"
+   "id": "dg187",
+   "summaryTimeline": true
   },
   {
    "type": "list",
