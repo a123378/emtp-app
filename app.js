@@ -673,10 +673,12 @@ function findContentTable(cd, heading, nth) {
 
 /**
  * 章末重點速記。舊格式是字串陣列（逐條編號）；新格式是分組陣列，每組可含
- * intro（引言）、mnemonic（口訣）、items（條列）、groups（分組表）、table（比較表）。
+ * intro（引言）、mnemonic（口訣）、items（條列）、groups（分組表）、table（比較表）、
+ * timelines（口訣下方的橫向時間軸，可有多條）。
  * @param {Array<string|{title: string, intro?: string, mnemonic?: string, items?: string[],
  *   groups?: {label: string, items: string[]}[], groupHeaders?: string[],
- *   table?: {headers: string[], rows: string[][]}}>} list
+ *   table?: {headers: string[], rows: string[][]},
+ *   timelines?: {title?: string, steps: {label: string, sub?: string}[]}[]}>} list
  */
 function renderSummaryQuick(list) {
   if (!list || !list.length) return '';
@@ -691,6 +693,16 @@ function renderQuickList(items) {
   return `<ul class="sum-quick-list">${items.map(it => `<li>${mdInline(it)}</li>`).join('')}</ul>`;
 }
 
+/** 口訣的橫向時間軸：沿用圖解的橫排流程（手機寬度不夠時會自動直排） */
+function renderQuickTimelines(timelines) {
+  if (!Array.isArray(timelines) || !timelines.length) return '';
+  const html = timelines
+    .filter(tl => tl && Array.isArray(tl.steps) && tl.steps.length)
+    .map(tl => diagramHtml({ kind: 'flow', dir: 'row', title: tl.title, steps: tl.steps.map(s => ({ ...s, tone: s.tone || 'blue' })) }))
+    .join('');
+  return html ? `<div class="sum-quick-timeline">${html}</div>` : '';
+}
+
 function renderQuickSection(sec) {
   const groupTable = sec.groups && sec.groups.length
     ? renderCompTable({
@@ -703,6 +715,7 @@ function renderQuickSection(sec) {
       <div class="sum-subhead">${mdInline(sec.title)}</div>
       ${sec.intro ? `<div class="sum-quick-intro">${mdInline(sec.intro)}</div>` : ''}
       ${sec.mnemonic ? `<div class="sum-quick-mn">${mdInline(sec.mnemonic)}</div>` : ''}
+      ${renderQuickTimelines(sec.timelines)}
       ${renderQuickList(sec.items)}
       ${groupTable}
       ${sec.table ? renderCompTable(sec.table) : ''}

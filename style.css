@@ -3023,6 +3023,7 @@ body.mode-3 #m3-side-nav { display: block; }
   margin: 4px 0 6px;
 }
 .sum-quick-list { padding-left: 20px; margin: 4px 0; line-height: 1.75; font-size: 0.9rem; }
+.summary-card .sum-quick-timeline .diagram-block { margin: 6px 0 4px; }
 .sum-quick-list li { margin-bottom: 2px; }
 .comp-table .sum-quick-list { margin: 0; padding-left: 18px; }
 .sum-quick-sec .comp-table th:first-child { min-width: 0 !important; }
