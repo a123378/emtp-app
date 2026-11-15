@@ -633,6 +633,7 @@ function renderSummaryTables(cd, list) {
   if (!list || !list.length) return '';
   return list.map(t => {
     if (t.diagram) return diagramHtml(summaryVariant(findContentDiagram(cd, t.diagram)));
+    if (t.kind) return diagramHtml(summaryVariant(t)); // 只放在重點一覽的圖（例如心電圖示意圖）
     const src = t.fromContent ? findContentTable(cd, t.fromContent, t.nth || 0) : t;
     if (!src || !src.rows || !src.rows.length) return '';
     const tbl = withoutColumns(src, t.hideCols);

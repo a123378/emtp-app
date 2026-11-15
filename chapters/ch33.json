@@ -2909,6 +2909,12 @@
     "fromContent": "波形、區間與節段"
    },
    {
+    "title": "心電圖各波與間期（示意）",
+    "kind": "figure",
+    "src": "images/diagrams/ch33_ecg_basic.svg",
+    "alt": "單一心搏放大，標出 P、QRS、T 與 PR、QRS、ST、QT"
+   },
+   {
     "title": "右心房 vs 左心房擴大",
     "diagram": "dg49"
    },
@@ -2929,6 +2935,13 @@
     "fromContent": "各種心律不整判讀準則總表（速率、規律性、P 波、PR 區間、QRS）"
    },
    {
+    "title": "常見心律波形對照（示意）",
+    "kind": "figure",
+    "src": "images/diagrams/ch33_ecg_rhythms.svg",
+    "alt": "十一種常見心律的心電圖示意",
+    "note": "黑白示意圖，依課本與 LITFL 心律判讀重點繪製，非真實病人心電圖。"
+   },
+   {
     "title": "Mobitz 第一型 vs 第二型",
     "diagram": "dg146"
    },
@@ -2937,8 +2950,20 @@
     "diagram": "dg150"
    },
    {
+    "title": "房室傳導阻斷波形（示意）",
+    "kind": "figure",
+    "src": "images/diagrams/ch33_ecg_avblock.svg",
+    "alt": "一度、二度一型、二度二型、三度房室傳導阻斷"
+   },
+   {
     "title": "RBBB vs LBBB",
     "diagram": "dg174"
+   },
+   {
+    "title": "束支傳導阻滯：V1／V6 形態（示意）",
+    "kind": "figure",
+    "src": "images/diagrams/ch33_ecg_bbb.svg",
+    "alt": "RBBB 與 LBBB 在 V1、V6 的 QRS 形態"
    },
    {
     "title": "導程—心肌區域—冠狀動脈定位總表",
@@ -2947,6 +2972,12 @@
    {
     "title": "STEMI 心電圖系列變化",
     "diagram": "dg200"
+   },
+   {
+    "title": "STEMI 演變波形（示意）",
+    "kind": "figure",
+    "src": "images/diagrams/ch33_ecg_stemi.svg",
+    "alt": "超急性 T 波、ST 上升、Q 波與 T 倒置、陳舊梗塞"
    },
    {
     "title": "梗塞位置與鏡像變化",
