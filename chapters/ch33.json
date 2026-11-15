@@ -2931,10 +2931,6 @@
     "diagram": "dg96"
    },
    {
-    "title": "各種心律不整判讀準則總表",
-    "fromContent": "各種心律不整判讀準則總表（速率、規律性、P 波、PR 區間、QRS）"
-   },
-   {
     "title": "常見心律波形對照（示意）",
     "kind": "figure",
     "src": "images/diagrams/ch33_ecg_rhythms.svg",
