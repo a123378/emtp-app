@@ -596,44 +596,81 @@
    "type": "diagram",
    "kind": "flow",
    "summary": true,
-   "title": "生存之鏈(chain of survival)的六個環節",
+   "title": "2025 生存之鏈（成人與小兒、院內與院外共用）",
    "steps": [
     {
-     "label": "啟動 EMS",
-     "sub": "activation of the emergency response system",
+     "label": "辨識與緊急啟動",
+     "sub": "recognition and activation",
      "tone": "red"
     },
     {
      "label": "高品質 CPR",
-     "sub": "high quality CPR",
+     "sub": "high-quality CPR",
      "tone": "red"
     },
     {
-     "label": "去顫電擊",
+     "label": "去顫",
      "sub": "defibrillation",
      "tone": "orange"
     },
     {
-     "label": "進階復甦術",
+     "label": "高級救命術",
      "sub": "advanced resuscitation",
      "tone": "orange"
     },
     {
-     "label": "心臟停止後照護",
+     "label": "心跳停止後照護",
      "sub": "post-cardiac arrest care",
      "tone": "blue"
     },
     {
-     "label": "復原",
-     "sub": "recovery",
+     "label": "復原與存活",
+     "sub": "recovery and survivorship",
      "tone": "green"
     }
    ],
-   "note": "資料來源：American Heart Association（圖1-7）。"
+   "note": "**2025 AHA 改版**：生存之鏈**單一化**，成人與小兒的院內(IHCA)、院外(OHCA)心跳停止都用同一條；舊版（圖1-7）第一環為「啟動 EMS」。"
+  },
+  {
+   "type": "diagram",
+   "kind": "flow",
+   "summary": true,
+   "title": "2025 新生兒生存之鏈",
+   "steps": [
+    {
+     "label": "預防",
+     "tone": "blue"
+    },
+    {
+     "label": "辨識與啟動",
+     "tone": "red"
+    },
+    {
+     "label": "初始步驟",
+     "tone": "red"
+    },
+    {
+     "label": "通氣",
+     "tone": "orange"
+    },
+    {
+     "label": "高級救命術",
+     "tone": "orange"
+    },
+    {
+     "label": "產後照護",
+     "tone": "blue"
+    },
+    {
+     "label": "復原",
+     "tone": "green"
+    }
+   ],
+   "id": "dg60nb"
   },
   {
    "type": "mnemonic",
-   "text": "生存之鏈像**一條接力的鏈子**，唸成「**啟 CPR 電、進階後復原**」：有人倒下 → **啟**動 EMS → 壓 **CPR** → **電**擊 → **進階**復甦 → **後**照護 → **復原**。",
+   "text": "生存之鏈像**一條接力的鏈子**，唸成「**啟 CPR 電、高級後復原**」：有人倒下 → 辨識與緊急**啟**動 → 壓 **CPR** → **電**擊去顫 → **高級**救命術 → 心跳停止**後**照護 → **復原**與存活。",
    "note": "原理：前面幾環負責**把心跳救回來**，後面的後照護與復原負責**保住腦與生活功能**；**鏈子任何一環斷掉，後面就接不上**。"
   },
   {
@@ -1298,7 +1335,7 @@
    },
    {
     "title": "生存之鏈",
-    "mnemonic": "**啟 CPR 電、進階後復原**——像一條接力的鏈子，前面救心跳、後面保腦，斷一環後面就接不上"
+    "mnemonic": "**啟 CPR 電、高級後復原**——像一條接力的鏈子，前面救心跳、後面保腦，斷一環後面就接不上；**2025 起成人、小兒、院內、院外共用同一條**"
    },
    {
     "title": "救護技術員訓練時數與各國制度",
