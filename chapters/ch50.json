@@ -249,7 +249,7 @@
    "text": "腸胃道除污",
    "examPoints": [
     {
-     "text": "**活性碳**可用於鴉片類、抗膽鹼藥物、茶鹼等；**氰化物、酒精、鋰鹽、金屬鹽類、甲醇、強酸強鹼不可用**；口服解毒劑NAC時**不應同時給活性碳**。",
+     "text": "**活性碳**可用於鴉片類、抗膽鹼藥物、茶鹼等；**氰化物、酒精、甲醇、鋰鹽、無機鹽類、金屬鹽類、強酸強鹼不可用**；口服解毒劑NAC時**不應同時給活性碳**。",
      "years": "110、112、113",
      "qids": [
       "112-82",
@@ -304,7 +304,7 @@
     ],
     [
      "不應該使用活性碳的狀況",
-     "● 氰化物(cyanide)<br>● 酒精中毒(ethanol intoxication)<br>● 硫酸鐵或其他金屬鹽類(ferrous sulfate or other iron salts)<br>● 鋰鹽(lithium)<br>● 無機鹽類吞服中毒(mineral acid ingestion)<br>● 甲醇(methanol)<br>● 強酸或強鹼"
+     "● 氰化物(cyanide)<br>● 酒精中毒(ethanol intoxication)<br>● 甲醇(methanol)<br>● 鋰鹽(lithium)<br>● 無機鹽類吞服中毒(mineral acid ingestion)<br>● 硫酸鐵或其他金屬鹽類(ferrous sulfate or other iron salts)<br>● 強酸或強鹼"
     ]
    ]
   },
