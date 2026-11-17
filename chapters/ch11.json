@@ -111,7 +111,7 @@
    "type": "diagram",
    "kind": "flow",
    "title": "抗休克褲(PASG)：舊觀念被新證據推翻",
-   "summary": true,
+   "summary": false,
    "steps": [
     {
      "label": "1980 年代",
