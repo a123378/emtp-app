@@ -3200,3 +3200,213 @@ body:has(.progress-restore-toast.show) .reading-progress-pill.show {
 @media print {
   .reading-progress-pill { display: none !important; }
 }
+
+/* ── 專注工作階段（番茄鐘，只在電腦版顯示） ─────────────── */
+:root {
+  --focus-accent: #2c9fdc;
+  --focus-accent-ink: #ffffff;
+  --focus-tick-dim: #d6dce5;
+  --focus-disc: #f4f7fb;
+  --focus-disc-stroke: #e6ebf2;
+  --focus-panel-bg: linear-gradient(165deg, #ffffff 0%, #f6f8fb 100%);
+  --focus-panel-shadow: 0 18px 48px rgba(15, 23, 42, 0.16), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --focus-glow: rgba(44, 159, 220, 0.28);
+}
+[data-theme="dark"] {
+  --focus-accent: #4fb3e8;
+  --focus-accent-ink: #0b2233;
+  --focus-tick-dim: #3a3f49;
+  --focus-disc: #2b2f36;
+  --focus-disc-stroke: #353a43;
+  --focus-panel-bg: linear-gradient(165deg, #2e3238 0%, #23262c 100%);
+  --focus-panel-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.35);
+  --focus-glow: rgba(79, 179, 232, 0.35);
+}
+
+#focus-btn { position: relative; }
+#focus-btn.is-running,
+#focus-btn.is-paused { color: var(--focus-accent); border-color: var(--focus-accent); }
+#focus-btn.is-paused { border-style: dashed; }
+#focus-btn.is-done { color: var(--focus-accent); border-color: var(--focus-accent); animation: focus-pulse 1.4s ease-in-out infinite; }
+.focus-badge {
+  position: absolute; right: -5px; bottom: -4px;
+  min-width: 17px; height: 15px; padding: 0 4px;
+  border-radius: 8px;
+  background: var(--focus-accent); color: var(--focus-accent-ink);
+  font-size: 0.62rem; font-weight: 800; line-height: 15px; text-align: center;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--surface);
+  pointer-events: none;
+}
+.focus-badge[hidden] { display: none; }
+#focus-btn.is-paused .focus-badge { background: var(--text-muted); color: var(--surface); }
+
+.focus-panel {
+  position: fixed;
+  top: calc(var(--header-h) + 10px);
+  right: 16px;
+  width: 256px;
+  padding: 12px 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--focus-panel-bg);
+  box-shadow: var(--focus-panel-shadow);
+  color: var(--text);
+  z-index: 500;
+  transform-origin: top right;
+  animation: focus-pop 0.18s cubic-bezier(.2, .9, .3, 1.2);
+}
+.focus-panel[hidden] { display: none; }
+
+.focus-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.focus-title { margin: 0; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.02em; }
+.focus-ghost-btn {
+  width: 30px; height: 30px; border: none; border-radius: 8px;
+  background: transparent; color: var(--text-muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.focus-ghost-btn:hover { background: var(--surface-2); color: var(--text); }
+
+.focus-dial { position: relative; width: 184px; height: 184px; margin: 0 auto; }
+.focus-ring { width: 100%; height: 100%; display: block; }
+.focus-disc { fill: var(--focus-disc); stroke: var(--focus-disc-stroke); stroke-width: 1; }
+.focus-tick {
+  stroke: var(--focus-tick-dim);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke 0.4s ease;
+}
+.focus-tick.lit { stroke: var(--focus-accent); }
+
+.focus-readout {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.focus-big { display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums; }
+.focus-num { font-size: 2.6rem; font-weight: 300; line-height: 1; color: var(--text); }
+.focus-unit { font-size: 1.1rem; font-weight: 400; color: var(--text-muted); }
+.focus-big.is-text .focus-num { font-size: 1.6rem; font-weight: 600; color: var(--focus-accent); }
+.focus-sub {
+  margin-top: 6px;
+  font-size: 0.74rem; font-weight: 600; color: var(--text-muted);
+  font-variant-numeric: tabular-nums; letter-spacing: 0.04em;
+}
+
+.focus-controls { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 10px; }
+.focus-play {
+  width: 40px; height: 40px; border-radius: 50%; border: none;
+  background: var(--focus-accent); color: var(--focus-accent-ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 4px 14px var(--focus-glow);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.focus-play:hover { filter: brightness(1.08); box-shadow: 0 6px 18px var(--focus-glow); }
+.focus-play:active { transform: scale(0.94); }
+.focus-round-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: var(--transition);
+}
+.focus-round-btn:hover:not(:disabled) { color: var(--text); border-color: var(--border-hover); }
+.focus-round-btn:disabled { opacity: 0.35; cursor: default; }
+.focus-play:focus-visible,
+.focus-round-btn:focus-visible,
+.focus-ghost-btn:focus-visible,
+.focus-preset:focus-visible { outline: 2px solid var(--focus-accent); outline-offset: 2px; }
+.focus-panel[data-status="done"] .focus-play { animation: focus-pulse 1.4s ease-in-out infinite; }
+
+.focus-menu {
+  margin-top: 12px; padding: 10px;
+  border-radius: 10px; border: 1px solid var(--border);
+  background: var(--surface);
+}
+.focus-menu[hidden] { display: none; }
+.focus-menu-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+.focus-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.focus-preset {
+  padding: 7px 0; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+  font: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+  transition: var(--transition);
+}
+.focus-preset:hover { border-color: var(--focus-accent); color: var(--focus-accent); }
+.focus-preset.active { background: var(--focus-accent); border-color: var(--focus-accent); color: var(--focus-accent-ink); }
+.focus-custom { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+.focus-custom-input {
+  width: 72px; padding: 6px 8px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+  font: inherit; font-size: 0.82rem;
+}
+.focus-custom-input:focus { outline: none; border-color: var(--focus-accent); }
+.focus-custom-unit { font-size: 0.8rem; color: var(--text-muted); }
+.focus-custom-apply {
+  margin-left: auto; padding: 6px 12px; border-radius: 8px; border: none;
+  background: var(--focus-accent); color: var(--focus-accent-ink);
+  font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+}
+.focus-custom-apply:hover { filter: brightness(1.08); }
+.focus-menu-hint { margin-top: 8px; font-size: 0.7rem; color: var(--text-muted); }
+
+
+/* 縮小後的迷你列：只剩小刻度環與剩餘時間 */
+.focus-mini { display: none; }
+.focus-panel.is-mini {
+  width: auto;
+  padding: 5px;
+  border-radius: 999px;
+  animation-duration: 0.14s;
+}
+.focus-panel.is-mini > :not(.focus-mini) { display: none; }
+.focus-panel.is-mini .focus-mini { display: flex; align-items: center; }
+.focus-mini-main {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 10px 0 0; border: none; border-radius: 999px;
+  background: transparent; color: var(--text); cursor: pointer;
+  font: inherit;
+}
+.focus-mini-ring { width: 32px; height: 32px; display: block; flex-shrink: 0; }
+.focus-mini-track { fill: none; stroke: var(--focus-tick-dim); stroke-width: 4; }
+/* 鏡像後從 12 點逆時針畫：剩餘時間的弧跟大刻度環的亮藍區一樣，結束點在 12 點 */
+.focus-mini-arc {
+  fill: none; stroke: var(--focus-accent); stroke-width: 4; stroke-linecap: round;
+  transform: scale(-1, 1) rotate(-90deg); transform-origin: 50% 50%;
+  transition: stroke-dasharray 0.3s linear;
+}
+.focus-panel[data-status="paused"] .focus-mini-arc { stroke: var(--text-muted); }
+.focus-mini-time {
+  font-size: 1rem; font-weight: 600; letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.focus-panel[data-status="paused"] .focus-mini-time { color: var(--text-muted); }
+.focus-mini-close {
+  width: 22px; height: 22px; margin-right: 3px;
+  border: none; border-radius: 50%;
+  background: transparent; color: var(--text-muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: var(--transition);
+}
+.focus-panel.is-mini:hover .focus-mini-close,
+.focus-mini-close:focus-visible { opacity: 1; }
+.focus-mini-close:hover { background: var(--surface-2); color: var(--text); }
+.focus-mini-main:focus-visible { outline: 2px solid var(--focus-accent); outline-offset: 2px; }
+
+@keyframes focus-pop {
+  from { opacity: 0; transform: scale(0.94) translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes focus-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--focus-glow); }
+  50%      { box-shadow: 0 0 0 7px transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .focus-panel, #focus-btn.is-done, .focus-panel[data-status="done"] .focus-play { animation: none; }
+  .focus-tick { transition: none; }
+}
+
+/* 手機與平板窄螢幕不顯示 */
+@media (max-width: 900px) {
+  #focus-btn, .focus-panel { display: none !important; }
+}

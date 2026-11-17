@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261115_1200">
+<link rel="stylesheet" href="style.css?v=20261117_1800">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -51,6 +51,15 @@
   </div>
 
   <div class="header-actions">
+    <button class="icon-btn" id="focus-btn" title="專注工作階段（番茄鐘）" aria-label="專注工作階段" aria-haspopup="dialog" aria-expanded="false" aria-controls="focus-panel">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="13.5" r="7.5"/>
+        <path d="M12 9.5v4l2.5 1.8"/>
+        <path d="M9.5 2.5h5"/>
+        <path d="M12 2.5V6"/>
+      </svg>
+      <span id="focus-badge" class="focus-badge" hidden></span>
+    </button>
     <button class="icon-btn" id="sync-btn" title="跨裝置同步（手機／電腦共用研讀進度）" aria-label="sync" onclick="openSyncModal()">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
@@ -380,8 +389,9 @@
 </div>
 
 <script src="diagram.js?v=20261115_1200"></script>
-<script src="app.js?v=20261117_1500"></script>
+<script src="app.js?v=20261117_1800"></script>
 <script src="sync.js?v=20261111_1750"></script>
 <script src="offline.js?v=20261105_1200"></script>
+<script src="focus-timer.js?v=20261117_1800"></script>
 </body>
 </html>
