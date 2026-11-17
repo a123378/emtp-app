@@ -1671,7 +1671,6 @@
    "cols": [
     {
      "title": "SBAR",
-     "sub": "唸成「酒吧」",
      "tone": "blue",
      "points": [
       "**S** Situation 狀況",
@@ -1682,7 +1681,6 @@
     },
     {
      "title": "MIST",
-     "sub": "唸成「霧」",
      "tone": "teal",
      "points": [
       "**M** Mechanism／Medical complaint 機轉或內科主訴",
@@ -2047,10 +2045,6 @@
   ],
   "tables": [
    {
-    "title": "初級評估",
-    "fromContent": "初級評估"
-   },
-   {
     "title": "辨認優先後送個案",
     "fromContent": "辨認優先後送個案"
    },
@@ -2069,10 +2063,6 @@
    {
     "title": "在壓力下的思考",
     "fromContent": "在壓力下的思考"
-   },
-   {
-    "title": "狀況分析：詳細 vs. 快速",
-    "fromContent": "狀況分析：詳細 vs. 快速"
    },
    {
     "title": "資料判讀：收斂式 vs. 開放式",
