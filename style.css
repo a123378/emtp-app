@@ -3406,6 +3406,37 @@ body:has(.progress-restore-toast.show) .reading-progress-pill.show {
   .focus-tick { transition: none; }
 }
 
+/* 時間到的「該休息了」視窗 */
+.focus-rest-box {
+  max-width: 360px;
+  padding: 28px 26px 22px;
+  align-items: center;
+  text-align: center;
+  background: var(--focus-panel-bg);
+  box-shadow: var(--focus-panel-shadow);
+  animation: focus-pop 0.22s cubic-bezier(.2, .9, .3, 1.2);
+}
+.focus-rest-icon {
+  width: 64px; height: 64px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--focus-disc);
+  border: 1px solid var(--focus-disc-stroke);
+  box-shadow: 0 0 0 6px var(--focus-glow);
+  font-size: 1.9rem;
+  margin-bottom: 14px;
+}
+.focus-rest-title { margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; color: var(--text); }
+.focus-rest-text { margin: 0 0 20px; font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); }
+.focus-rest-actions { display: flex; gap: 10px; width: 100%; }
+.focus-rest-actions .modal-btn { flex: 1; }
+.focus-rest-ok { background: var(--focus-accent); border-color: var(--focus-accent); color: var(--focus-accent-ink); }
+.focus-rest-ok:hover { border-color: var(--focus-accent); filter: brightness(1.08); }
+.focus-rest-actions .modal-btn:focus-visible { outline: 2px solid var(--focus-accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .focus-rest-box { animation: none; }
+}
+
 /* 手機與平板窄螢幕不顯示 */
 @media (max-width: 900px) {
   #focus-btn, .focus-panel { display: none !important; }

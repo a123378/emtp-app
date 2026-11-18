@@ -4,7 +4,7 @@
  * - 頂部列的計時按鈕開／關面板；面板收合後計時照常進行，按鈕上會顯示剩餘分鐘。
  * - 圓形刻度環：剩餘時間的刻度保持亮藍，已經過的刻度從 12 點鐘方向順時針變暗。
  * - 「⋯」選單可改時間長度（預設 15／25／45／60 分鐘或自訂）。
- * - 時間到：播放提示音、跳出系統通知（使用者有允許時），並自動打開面板。
+ * - 時間到：播放提示音、跳出系統通知（使用者有允許時），並在頁面中央彈出「該休息了」視窗。
  * - 狀態存在 localStorage，重新整理頁面後計時仍會接續。
  */
 (function () {
@@ -117,7 +117,7 @@
     setTimer({ ...timer, status: 'done', endAt: 0, remainingMs: 0 });
     playChime();
     showNotification();
-    openPanel();
+    showRestModal();
   }
 
   // 畫面每 250ms 更新；另排一個單次 timeout 在結束時間點觸發，
@@ -200,6 +200,58 @@
     } catch (err) {
       // 部分瀏覽器只允許由 service worker 發通知；失敗時仍有提示音與面板提醒
     }
+  }
+
+  // ── 休息提醒視窗 ───────────────────────────────────────
+
+  // 沿用全站 .modal-overlay 樣式；app.js 偵測到開啟中的 .modal-overlay 會暫停鍵盤快捷鍵
+  function buildRestModal() {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay focus-rest-overlay hidden';
+    overlay.innerHTML = `
+      <div class="modal-box focus-rest-box" role="alertdialog" aria-modal="true"
+           aria-labelledby="focus-rest-title" aria-describedby="focus-rest-text">
+        <div class="focus-rest-icon" aria-hidden="true">☕</div>
+        <h3 id="focus-rest-title" class="focus-rest-title">該休息了</h3>
+        <p id="focus-rest-text" class="focus-rest-text"></p>
+        <div class="focus-rest-actions">
+          <button type="button" class="modal-btn ghost" data-rest="again">再專注一輪</button>
+          <button type="button" class="modal-btn focus-rest-ok" data-rest="ok">好，去休息</button>
+        </div>
+      </div>`;
+    overlay.addEventListener('click', e => {
+      const btn = e.target.closest('[data-rest]');
+      if (btn) closeRestModal(btn.dataset.rest);
+      else if (e.target === overlay) closeRestModal('ok');
+    });
+    overlay.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      e.stopPropagation();
+      closeRestModal('ok');
+    });
+    document.body.appendChild(overlay);
+    return overlay;
+  }
+
+  function showRestModal() {
+    if (!ui.rest) return;
+    const minutes = Math.round(timer.durationMs / MS_PER_MIN);
+    ui.rest.querySelector('.focus-rest-text').textContent =
+      `已經專注 ${minutes} 分鐘了，起來動一動、喝口水，讓眼睛休息一下吧！`;
+    ui.restReturnFocus = document.activeElement;
+    ui.rest.classList.remove('hidden');
+    ui.rest.querySelector('.focus-rest-ok').focus();
+  }
+
+  // 'ok'：結束這輪、回到待命；'again'：立刻再開始一輪
+  function closeRestModal(choice) {
+    if (!ui.rest || ui.rest.classList.contains('hidden')) return;
+    ui.rest.classList.add('hidden');
+    if (choice === 'again') start();
+    else if (timer.status === 'done') reset();
+    const back = ui.restReturnFocus;
+    ui.restReturnFocus = null;
+    if (back && typeof back.focus === 'function' && document.contains(back)) back.focus();
   }
 
   // ── 畫面 ───────────────────────────────────────────────
@@ -456,6 +508,7 @@
     ui.menuBtn = q('[data-act="menu"]');
     ui.presets = Array.from(ui.panel.querySelectorAll('.focus-preset'));
     ui.customInput = q('.focus-custom-input');
+    ui.rest = buildRestModal();
 
     ui.btn.addEventListener('click', () => (view === 'full' ? collapse() : openPanel()));
     ui.panel.addEventListener('click', onPanelClick);
