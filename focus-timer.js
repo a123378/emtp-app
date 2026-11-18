@@ -6,6 +6,9 @@
  * - 「⋯」選單可改時間長度（預設 15／25／45／60 分鐘或自訂）。
  * - 時間到：播放提示音、跳出系統通知（使用者有允許時），並在頁面中央彈出「該休息了」視窗。
  * - 狀態存在 localStorage，重新整理頁面後計時仍會接續。
+ * - 依作息表自動計時（study-schedule.js）：每堂自習開始時自動開始倒數到下課並打開面板；
+ *   中途才打開網頁就從剩餘時間開始。每堂只自動開始一次，手動暫停或重設後不會再被拉起來。
+ *   「⋯」選單可關閉這個功能。
  */
 (function () {
   'use strict';
@@ -22,6 +25,12 @@
   const MINI_R = 15;
   const VIEW_KEY = 'focusTimerView';
   const STATUSES = ['idle', 'running', 'paused', 'done'];
+  const AUTO_KEY = 'focusAutoSchedule';
+  const HANDLED_KEY = 'focusScheduleSlot';
+  const SCHEDULE_CHECK_MS = 15 * 1000;
+  const MIN_AUTO_MS = MS_PER_MIN;
+  const DESKTOP_QUERY = '(min-width: 901px)';
+  const Sched = window.StudySchedule || null;
 
   const ICONS = {
     play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.6-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></svg>',
@@ -88,11 +97,13 @@
 
   // ── 操作 ───────────────────────────────────────────────
 
+  // 從「時間到」再來一輪就變成一般計時，不再屬於作息表的某一堂
   function start() {
     unlockAudio();
     askNotificationPermission();
-    const fromMs = timer.status === 'done' ? timer.durationMs : remainingMs();
-    setTimer({ ...timer, status: 'running', endAt: Date.now() + fromMs, remainingMs: fromMs });
+    const again = timer.status === 'done';
+    const fromMs = again ? timer.durationMs : remainingMs();
+    setTimer({ ...timer, slot: again ? null : timer.slot, status: 'running', endAt: Date.now() + fromMs, remainingMs: fromMs });
   }
 
   function pause() {
@@ -138,6 +149,64 @@
     if (timer.status !== 'running') return;
     if (remainingMs() <= 0) finish();
     else render();
+  }
+
+  // ── 依作息表自動計時 ───────────────────────────────────
+
+  function readStore(key) {
+    try { return localStorage.getItem(key); } catch (err) { return null; }
+  }
+
+  function writeStore(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (err) {
+      // 儲存失敗時自動計時照常運作，只是重新整理後同一堂可能再自動開始一次
+    }
+  }
+
+  function autoEnabled() { return Boolean(Sched) && readStore(AUTO_KEY) !== 'off'; }
+
+  function setAutoEnabled(on) {
+    writeStore(AUTO_KEY, on ? 'on' : 'off');
+    if (on) checkSchedule();
+  }
+
+  // 計時器只在電腦版顯示；窄螢幕不自動開始，免得在看不到的地方響鈴
+  function isDesktop() { return window.matchMedia(DESKTOP_QUERY).matches; }
+
+  function currentSlotBlock() { return Sched && timer.slot ? Sched.blockFromSlot(timer.slot) : null; }
+
+  // 每堂自習只處理一次：進入新的一堂就記下來，已經在計時（含手動計時）就不打擾
+  function checkSchedule() {
+    if (!autoEnabled() || !isDesktop()) return;
+    const now = new Date();
+    const block = Sched.blockAt(now);
+    if (block && block.type === 'study') startSlotIfNew(now, block);
+    if (view !== 'closed') renderSlot();
+  }
+
+  function startSlotIfNew(now, block) {
+    const key = Sched.slotKey(now, block);
+    if (readStore(HANDLED_KEY) === key) return;
+    writeStore(HANDLED_KEY, key);
+    const endAt = Sched.endDate(now, block).getTime();
+    const leftMs = endAt - Date.now();
+    if (isActive() || leftMs < MIN_AUTO_MS) return;
+    setTimer({ durationMs: block.dur * MS_PER_MIN, status: 'running', endAt, remainingMs: leftMs, slot: key });
+    closeRestModal('keep');
+    openPanel();
+  }
+
+  // 自動開始時沒有使用者操作，瀏覽器不讓播音效；在第一次點擊或按鍵時先解鎖
+  function unlockAudioOnFirstGesture() {
+    const unlock = () => {
+      document.removeEventListener('pointerdown', unlock, true);
+      document.removeEventListener('keydown', unlock, true);
+      unlockAudio();
+    };
+    document.addEventListener('pointerdown', unlock, true);
+    document.addEventListener('keydown', unlock, true);
   }
 
   // ── 提示音與通知 ───────────────────────────────────────
@@ -190,9 +259,8 @@
   function showNotification() {
     if (!('Notification' in window) || Notification.permission !== 'granted') return;
     try {
-      const minutes = Math.round(timer.durationMs / MS_PER_MIN);
       const note = new Notification('專注工作階段結束', {
-        body: `${minutes} 分鐘的專注時間到了，起來動一動、休息一下吧！`,
+        body: restMessage(),
         icon: 'icons/icon-192.png',
         tag: 'focus-timer'
       });
@@ -233,22 +301,27 @@
     return overlay;
   }
 
+  function restMessage() {
+    const block = currentSlotBlock();
+    if (block) return Sched.afterStudyText(block);
+    const minutes = Math.round(timer.durationMs / MS_PER_MIN);
+    return `已經專注 ${minutes} 分鐘了，起來動一動、喝口水，讓眼睛休息一下吧！`;
+  }
+
   function showRestModal() {
     if (!ui.rest) return;
-    const minutes = Math.round(timer.durationMs / MS_PER_MIN);
-    ui.rest.querySelector('.focus-rest-text').textContent =
-      `已經專注 ${minutes} 分鐘了，起來動一動、喝口水，讓眼睛休息一下吧！`;
+    ui.rest.querySelector('.focus-rest-text').textContent = restMessage();
     ui.restReturnFocus = document.activeElement;
     ui.rest.classList.remove('hidden');
     ui.rest.querySelector('.focus-rest-ok').focus();
   }
 
-  // 'ok'：結束這輪、回到待命；'again'：立刻再開始一輪
+  // 'ok'：結束這輪、回到待命；'again'：立刻再開始一輪；'keep'：只關視窗（下一堂已自動開始）
   function closeRestModal(choice) {
     if (!ui.rest || ui.rest.classList.contains('hidden')) return;
     ui.rest.classList.add('hidden');
     if (choice === 'again') start();
-    else if (timer.status === 'done') reset();
+    else if (choice === 'ok' && timer.status === 'done') reset();
     const back = ui.restReturnFocus;
     ui.restReturnFocus = null;
     if (back && typeof back.focus === 'function' && document.contains(back)) back.focus();
@@ -302,6 +375,11 @@
           <button type="submit" class="focus-custom-apply">套用</button>
         </form>
         <div class="focus-menu-hint">更改時間會重新開始計時</div>
+        ${Sched ? `
+        <label class="focus-auto" for="focus-auto-input">
+          <input type="checkbox" id="focus-auto-input" class="focus-auto-input">
+          <span>依作息表自動開始自習計時</span>
+        </label>` : ''}
       </div>`;
   }
 
@@ -317,6 +395,11 @@
         <h2 class="focus-title">專注工作階段</h2>
         <button class="focus-ghost-btn" type="button" data-act="collapse" title="縮小（只顯示剩餘時間，計時會繼續）" aria-label="縮小面板">${ICONS.collapse}</button>
       </div>
+      ${Sched ? `
+      <div class="focus-slot">
+        <span class="focus-slot-text"></span>
+        <button class="focus-slot-link" type="button" data-act="schedule">作息表</button>
+      </div>` : ''}
       <div class="focus-dial">
         <svg class="focus-ring" viewBox="0 0 220 220" aria-hidden="true">
           <circle class="focus-disc" cx="110" cy="110" r="106"/>
@@ -384,7 +467,15 @@
     const durMin = timer.durationMs / MS_PER_MIN;
     ui.presets.forEach(b => b.classList.toggle('active', Number(b.dataset.min) === durMin));
 
+    renderSlot();
     renderButton(ms);
+  }
+
+  function renderSlot() {
+    if (!ui.slotText) return;
+    ui.slotText.textContent = Sched.statusText(new Date());
+    ui.slotText.parentElement.classList.toggle('is-auto', Boolean(currentSlotBlock()) && isActive());
+    ui.autoInput.checked = autoEnabled();
   }
 
   function renderButton(ms) {
@@ -449,6 +540,7 @@
       case 'collapse': collapse(); break;
       case 'expand': openPanel(); break;
       case 'hide': setView('closed'); break;
+      case 'schedule': Sched.openModal(); break;
       case 'menu': if (ui.menu.hidden) openMenu(); else closeMenu(); break;
       default: break;
     }
@@ -508,6 +600,8 @@
     ui.menuBtn = q('[data-act="menu"]');
     ui.presets = Array.from(ui.panel.querySelectorAll('.focus-preset'));
     ui.customInput = q('.focus-custom-input');
+    ui.slotText = q('.focus-slot-text');
+    ui.autoInput = q('.focus-auto-input');
     ui.rest = buildRestModal();
 
     ui.btn.addEventListener('click', () => (view === 'full' ? collapse() : openPanel()));
@@ -522,6 +616,16 @@
     syncTicking();
     render();
     restoreView();
+    initSchedule();
+  }
+
+  function initSchedule() {
+    if (!Sched) return;
+    ui.autoInput.addEventListener('change', () => setAutoEnabled(ui.autoInput.checked));
+    unlockAudioOnFirstGesture();
+    document.addEventListener('visibilitychange', checkSchedule);
+    setInterval(checkSchedule, SCHEDULE_CHECK_MS);
+    checkSchedule();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

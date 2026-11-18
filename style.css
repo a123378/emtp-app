@@ -3350,6 +3350,29 @@ body:has(.progress-restore-toast.show) .reading-progress-pill.show {
 .focus-custom-apply:hover { filter: brightness(1.08); }
 .focus-menu-hint { margin-top: 8px; font-size: 0.7rem; color: var(--text-muted); }
 
+/* 依作息表自動計時：面板上的目前時段與選單開關 */
+.focus-slot {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin: 0 0 8px; padding: 6px 6px 6px 10px; border-radius: 8px;
+  background: var(--surface-2);
+  font-size: 0.76rem; font-weight: 600; color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.focus-slot.is-auto { color: var(--focus-accent); }
+.focus-slot-link {
+  flex-shrink: 0; padding: 2px 6px; border: none; border-radius: 6px;
+  background: transparent; color: var(--focus-accent);
+  font: inherit; font-weight: 700; cursor: pointer;
+}
+.focus-slot-link:hover { background: var(--surface); }
+.focus-slot-link:focus-visible { outline: 2px solid var(--focus-accent); outline-offset: 1px; }
+.focus-auto {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+  font-size: 0.78rem; font-weight: 600; color: var(--text); cursor: pointer;
+}
+.focus-auto-input { width: 15px; height: 15px; accent-color: var(--focus-accent); cursor: pointer; }
+
 
 /* 縮小後的迷你列：只剩小刻度環與剩餘時間 */
 .focus-mini { display: none; }
@@ -3440,4 +3463,63 @@ body:has(.progress-restore-toast.show) .reading-progress-pill.show {
 /* 手機與平板窄螢幕不顯示 */
 @media (max-width: 900px) {
   #focus-btn, .focus-panel { display: none !important; }
+}
+
+/* ── 每日作息視窗（study-schedule.js） ─────────────────── */
+:root {
+  --sched-wash: #6d4fc2;
+  --sched-wash-soft: #f0ebfb;
+  --sched-now: #d1453b;
+}
+[data-theme="dark"] {
+  --sched-wash: #b7a2f5;
+  --sched-wash-soft: #221c36;
+  --sched-now: #ff6e61;
+}
+.sched-box { max-width: 880px; }
+.sched-top {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 4px 16px; margin-bottom: 16px;
+}
+.sched-now { font-size: 1rem; font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; }
+.sched-summary { font-size: 0.82rem; color: var(--text-muted); }
+.sched-periods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.sched-period { display: grid; gap: 6px; align-content: start; }
+.sched-period-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 0 2px 6px; margin-bottom: 4px; border-bottom: 2px solid var(--text);
+}
+.sched-period-head h4 { font-size: 1.05rem; font-weight: 900; color: var(--text); }
+.sched-period-head span { font-size: 0.74rem; color: var(--text-muted); }
+
+.sched-row {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  border-radius: 9px; font-variant-numeric: tabular-nums;
+}
+.sched-row .sched-time { font-size: 0.82rem; color: var(--text); }
+.sched-row.study { padding: 8px 12px; background: var(--blue-light); }
+.sched-row.study .sched-name { color: var(--blue); font-weight: 700; }
+.sched-num { margin-left: 3px; font-size: 1.15rem; }
+.sched-row.rest { justify-content: flex-start; min-height: 22px; padding: 0 12px; font-size: 0.74rem; color: var(--text-muted); }
+.sched-row.rest .sched-time { font-size: 0.74rem; color: var(--text-muted); }
+.sched-rule { flex: 1; height: 1px; background: var(--border); }
+.sched-row.meal, .sched-row.wash { padding: 12px; }
+.sched-row.meal { background: var(--orange-light); }
+.sched-row.wash { background: var(--sched-wash-soft); }
+.sched-row.meal .sched-name,
+.sched-row.wash .sched-name { font-weight: 900; letter-spacing: 0.12em; }
+.sched-row.meal .sched-name { color: var(--orange-dark); }
+.sched-row.wash .sched-name { color: var(--sched-wash); }
+.sched-row.is-past { opacity: 0.45; }
+.sched-row.is-now { opacity: 1; outline: 2px solid var(--sched-now); outline-offset: 1px; }
+.sched-row.is-now::after {
+  content: "現在";
+  position: absolute; top: -9px; right: 10px;
+  padding: 0 7px; border-radius: 999px;
+  background: var(--sched-now); color: #fff;
+  font-size: 0.66rem; font-weight: 700; line-height: 16px;
+}
+@media (max-width: 760px) {
+  .sched-periods { grid-template-columns: 1fr; gap: 22px; }
 }
