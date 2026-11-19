@@ -95,6 +95,13 @@ window.forceAppUpdate = forceAppUpdate;
 
 // ── Init ──────────────────────────────────────────────
 async function init() {
+  // 登入牆：sync.js 確認已登入且在白名單內，才開始載入章節內容
+  if (typeof window.waitForAccess !== 'function') {
+    const gateStatus = document.getElementById('gate-status');
+    if (gateStatus) gateStatus.textContent = '登入元件載入失敗，請重新整理';
+    return;
+  }
+  await window.waitForAccess();
   if (!localStorage.getItem('red_initialized_v3')) {
     localStorage.setItem('readCh', JSON.stringify([]));
     state.readChapters.clear();

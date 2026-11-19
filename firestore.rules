@@ -1,0 +1,30 @@
+rules_version = '2';
+
+// 白名單：在 Firebase 主控台 → Firestore → allowlist 集合新增文件，
+// 文件 ID 填「小寫信箱」（例如 someone@gmail.com），欄位可以留空或隨意加備註。
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function verifiedEmail() {
+      return request.auth != null
+        && request.auth.token.email != null
+        && request.auth.token.email_verified == true;
+    }
+
+    function isAllowed() {
+      return verifiedEmail()
+        && exists(/databases/$(database)/documents/allowlist/$(request.auth.token.email.lower()));
+    }
+
+    // 每個人只能查「自己的信箱」在不在白名單；名單本身只能從主控台修改
+    match /allowlist/{email} {
+      allow get: if verifiedEmail() && request.auth.token.email.lower() == email;
+      allow list, write: if false;
+    }
+
+    // 研讀進度：本人、而且在白名單內才能讀寫
+    match /emtp/{uid} {
+      allow read, write: if isAllowed() && request.auth.uid == uid;
+    }
+  }
+}

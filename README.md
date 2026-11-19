@@ -66,25 +66,24 @@
 
 1. 到 [Firebase Console](https://console.firebase.google.com) → **建立專案**（Google Analytics 可略過）。
 2. 左側 **Firestore Database** → 建立資料庫 → 選「**正式環境模式**」→ 位置建議 `asia-east1`。
-3. 切到 **規則** 分頁，整段換成：
+3. 規則放在專案的 `firestore.rules`，用 `firebase deploy --only firestore:rules` 部署（不要在主控台手動改，下次部署會被覆蓋）。
 
-   ```
-   rules_version = '2';
-   service cloud.firestore {
-     match /databases/{database}/documents {
-       match /emtp/{uid} {
-         allow read, write: if request.auth != null && request.auth.uid == uid;
-       }
-     }
-   }
-   ```
-
-   這條規則的意思是：**只有登入者本人讀得到、寫得進自己的資料**。
+   規則的意思是：**信箱已驗證、而且在白名單裡的登入者，才讀得到、寫得進自己的資料**。
 
 4. 左側 **Authentication** → 開始使用 → 登入方式選 **電子郵件/密碼** → 啟用。
 5. **專案設定（齒輪）→ 一般 → 我的應用程式 → 網頁 `</>`** → 註冊應用程式 → 複製 `firebaseConfig` 那段。
 6. 打開網頁右上角 **☁️** → 把 `firebaseConfig` 整段貼進去 → 儲存 → **註冊**一組帳號。
 7. 手機打開同一個網址 → ☁️ → 貼同一段設定 → 用同一組帳密 **登入**。完成。
+
+### 🔒 登入牆與白名單
+
+網頁打開時會先蓋上登入畫面，**登入、信箱已驗證、而且信箱在白名單裡**才會載入內容（`sync.js` 的「登入牆」段落）。
+
+- **新增使用者**：Firebase 主控台 → Firestore Database → 集合 `allowlist` → 新增文件，**文件 ID 填小寫信箱**（例如 `someone@gmail.com`），欄位隨意（可加一個 `note` 寫是誰）。
+- **移除使用者**：刪掉那份文件。對方下次打開網頁時就會被擋下。
+- 用 Email 帳密註冊的人要先點驗證信；用 Google 登入的不用。
+- 電腦本機離線版（127.0.0.1）不擋，因為檔案本來就在那台電腦上。
+- ⚠️ 這是**前端擋**：`chapters/*.json`、圖片放在 Firebase Hosting 仍然是公開網址，GitHub repo 公開的話內容也看得到。
 
 > 想省去在每台裝置貼設定的步驟，也可以把設定直接寫進 `sync.js` 最上面的 `FIREBASE_CONFIG` 並提交。
 > Firebase 的網頁設定值本來就是公開資訊，安全性由上面的 Firestore 規則與登入帳號把關。

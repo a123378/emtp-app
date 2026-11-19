@@ -295,6 +295,8 @@
   async function init() {
     render();
     startLocalPresence();
+    // 登入牆：通過白名單檢查前不註冊 Service Worker、不下載離線包
+    if (typeof window.waitForAccess === 'function') await window.waitForAccess();
     if (!view.supported) return;
     bindEnvironmentEvents();
 

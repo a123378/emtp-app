@@ -3542,3 +3542,25 @@ body:has(.progress-restore-toast.show) .reading-progress-pill.show {
 @media (max-width: 760px) {
   .sched-periods { grid-template-columns: 1fr; gap: 22px; }
 }
+
+/* ── 登入牆（sync.js 控制；通過白名單檢查後整塊移除）────────── */
+html.gate-locked, html.gate-locked body { overflow: hidden; }
+.access-gate {
+  position: fixed; inset: 0; z-index: 2000000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; box-sizing: border-box; overflow-y: auto;
+  background:
+    radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--orange) 22%, transparent), transparent 60%),
+    var(--bg);
+}
+.gate-box {
+  width: 100%; max-width: 420px; margin: auto;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; padding: 28px 24px 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+.gate-brand { text-align: center; margin-bottom: 18px; }
+.gate-brand img { width: 64px; height: 64px; border-radius: 16px; box-shadow: 0 6px 16px rgba(232, 119, 34, 0.35); }
+.gate-brand h1 { font-size: 1.35rem; font-weight: 900; color: var(--text); margin: 12px 0 2px; }
+.gate-brand p { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+.gate-box .modal-btn:focus-visible, .gate-box input:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }

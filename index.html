@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261119_1800">
+<link rel="stylesheet" href="style.css?v=20261119_2000">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -19,6 +19,20 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 </head>
 <body>
+
+<!-- ── 登入牆：通過登入與白名單檢查前蓋住整個網頁（sync.js 控制）── -->
+<div id="access-gate" class="access-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate-box">
+    <div class="gate-brand">
+      <img src="icons/icon-192.png" alt="" width="64" height="64">
+      <h1 id="gate-title">EMT-P 重點整理</h1>
+      <p>高級救護技術員複習網站</p>
+    </div>
+    <div id="gate-status" class="sync-status busy" role="status" aria-live="polite">檢查登入狀態…</div>
+    <div id="gate-body"></div>
+  </div>
+</div>
+<script>document.documentElement.classList.add('gate-locked');</script>
 
 <!-- ── Header ── -->
 <header id="app-header">
@@ -389,9 +403,9 @@
 </div>
 
 <script src="diagram.js?v=20261115_1200"></script>
-<script src="app.js?v=20261119_1800"></script>
-<script src="sync.js?v=20261111_1750"></script>
-<script src="offline.js?v=20261105_1200"></script>
+<script src="app.js?v=20261119_2000"></script>
+<script src="sync.js?v=20261119_2000"></script>
+<script src="offline.js?v=20261119_2000"></script>
 <script src="study-schedule.js?v=20261118_1400"></script>
 <script src="focus-timer.js?v=20261118_1400"></script>
 </body>

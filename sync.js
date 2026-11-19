@@ -9,7 +9,9 @@
    1. 不改動 app.js —— 以攔截 localStorage.setItem 的方式偵測變更。
    2. 合併而非覆蓋 —— 集合類資料取聯集，並用「墓碑」記錄刪除，
       避免 A 裝置重設的進度被 B 裝置的舊資料復活。
-   3. 未設定 / 未登入 / 離線時，網頁行為與原本完全相同。
+   3. 登入牆：必須登入、信箱已驗證，而且信箱在 Firestore 的 allowlist
+      （白名單）裡，才會放行；app.js / offline.js 會等 waitForAccess()
+      完成才開始載入章節。注意這只是前端擋，靜態檔案本身仍是公開的。
    ==================================================================== */
 
 /* Firebase SDK 採動態載入：沒設定或連不上 CDN 時，
@@ -51,7 +53,12 @@ const L_PEPOCH= 'sync_prog_epoch';
 const L_READD = 'sync_readd';
 const L_LAST  = 'sync_last_at';
 
+const L_ACCESS = 'access_ok_uid';   // 最近一次通過白名單檢查的帳號（離線時沿用）
+const ALLOWLIST = 'allowlist';      // Firestore 白名單集合：文件 ID = 小寫信箱
+const GATE_BYPASS_HOSTS = ['127.0.0.1']; // 電腦本機離線版（開啟離線版.bat）：檔案本來就在本機，不擋
+
 const PUSH_DELAY = 400;
+const FB_LOAD_TIMEOUT_MS = 10000;
 
 /* ── 3. 小工具 ─────────────────────────────────────────────────────── */
 const rawGet = localStorage.getItem.bind(localStorage);
@@ -68,6 +75,145 @@ let syncReady = false;      // 首次遠端合併完成前，不把本機清空�
 let pushTimer = null;
 let unsubDoc = null;
 let lastPushedJson = '';
+
+/* ── 3b. 登入牆（白名單）────────────────────────────────────────────
+   流程：登入 → 信箱已驗證 → Firestore allowlist/{小寫信箱} 存在 → 放行。
+   通過過的帳號會記在本機，下次開啟先放行、背景再確認，離線也能用。   */
+let gateResolve = null;
+const gatePromise = new Promise(resolve => { gateResolve = resolve; });
+let accessGranted = false;
+window.waitForAccess = () => gatePromise;
+
+const gateEsc = s => String(s).replace(/[&<>"']/g,
+  c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const gateBypassed = () => GATE_BYPASS_HOSTS.includes(location.hostname);
+
+function grantAccess() {
+  if (accessGranted) return;
+  accessGranted = true;
+  document.documentElement.classList.remove('gate-locked');
+  const el = document.getElementById('access-gate');
+  if (el) el.remove();
+  gateResolve();
+}
+
+/** 在登入牆顯示內容；data-act 按鈕交給 actions 對應的函式處理 */
+function showGate(html, status, kind, actions) {
+  if (accessGranted) return null;
+  setStatus(status, kind);
+  const body = document.getElementById('gate-body');
+  if (!body) return null;
+  body.innerHTML = html;
+  Object.entries(actions || {}).forEach(([act, fn]) => {
+    const btn = body.querySelector(`[data-act="${act}"]`);
+    if (btn) btn.onclick = fn;
+  });
+  return body;
+}
+
+const gateSignOut = () => FB.signOut(fbAuth);
+
+function showGateLogin() {
+  const body = showGate('<p class="sync-note">這個網站只開放給受邀的帳號使用，請先登入。</p><div class="gate-login"></div>',
+    '尚未登入', '');
+  if (body) renderLoginForm(body.querySelector('.gate-login'), { allowReset: false });
+}
+
+function showGateDenied(u) {
+  showGate(`
+    <p class="sync-note">目前登入的帳號 <b>${gateEsc(u.email || '（沒有信箱）')}</b> 沒有使用權限。<br>
+    如果需要使用，請把這個信箱告訴網站管理員。</p>
+    <div class="sync-row"><button class="modal-btn primary" data-act="logout">改用其他帳號登入</button></div>`,
+    '沒有使用權限', 'bad', { logout: gateSignOut });
+}
+
+function showGateVerify(u) {
+  showGate(`
+    <p class="sync-note">信箱 <b>${gateEsc(u.email || '')}</b> 還沒完成驗證。<br>
+    請到信箱點開驗證信裡的連結，再回來按「我已完成驗證」。沒收到的話，先看看垃圾郵件匣，或按「重寄驗證信」。</p>
+    <div class="sync-row">
+      <button class="modal-btn primary" data-act="recheck">我已完成驗證</button>
+      <button class="modal-btn" data-act="resend">重寄驗證信</button>
+      <button class="modal-btn ghost" data-act="logout">登出</button>
+    </div>`,
+    '信箱尚未驗證', 'busy', {
+      recheck: async (e) => {
+        const btn = e && e.currentTarget;
+        if (btn) btn.disabled = true;               // 避免連點造成重複檢查
+        setStatus('重新確認中…', 'busy');
+        try {
+          await u.reload();
+          await u.getIdToken(true);   // 換新的登入憑證，Firestore 規則才看得到「已驗證」
+          await checkAccess(fbAuth.currentUser);
+        } catch (err) { setStatus('確認失敗：' + err.message, 'bad'); }
+        finally { if (btn && btn.isConnected) btn.disabled = false; }
+      },
+      resend: async () => {
+        try { await FB.sendEmailVerification(u); setStatus('已重寄驗證信', 'ok'); }
+        catch (err) {
+          setStatus(err.code === 'auth/too-many-requests' ? '寄送太頻繁，請稍後再試' : '寄送失敗：' + err.message, 'bad');
+        }
+      },
+      logout: gateSignOut
+    });
+}
+
+function showGateError(message) {
+  showGate(`
+    <p class="sync-note">${gateEsc(message)}</p>
+    <div class="sync-row"><button class="modal-btn primary" data-act="reload">重新整理</button></div>`,
+    '無法確認使用權限', 'bad', { reload: () => location.reload() });
+}
+
+function admit(u) {
+  rawSet(L_ACCESS, u.uid);
+  grantAccess();
+  startSync(u);
+}
+
+async function checkAccess(u) {
+  if (!u) return;
+  if (!u.emailVerified) { showGateVerify(u); return; }
+  const cachedOk = rawGet(L_ACCESS) === u.uid;
+  if (cachedOk) admit(u);                       // 之前通過過：先放行，背景再確認一次
+  else showGate('', '確認使用權限中…', 'busy');
+
+  let allowed;
+  try {
+    const snap = await FB.getDoc(FB.doc(fbDb, ALLOWLIST, (u.email || '').toLowerCase()));
+    allowed = snap.exists();
+  } catch (err) {
+    if (err.code !== 'permission-denied') {     // 連不上伺服器：有紀錄就照舊使用
+      if (!cachedOk) showGateError('連不上伺服器，暫時無法確認使用權限。請確認網路連線後重新整理。');
+      return;
+    }
+    allowed = false;
+  }
+  if (allowed) { if (!cachedOk) admit(u); return; }
+  localStorage.removeItem(L_ACCESS);
+  if (accessGranted) { location.reload(); return; }   // 已被移出白名單：重新整理回到登入牆
+  showGateDenied(u);
+}
+
+function onAuthChanged(u) {
+  if (gateBypassed()) { if (u) startSync(u); else stopSync(); return; }
+  if (u) { checkAccess(u); return; }
+  stopSync();
+  localStorage.removeItem(L_ACCESS);
+  if (accessGranted) location.reload();         // 登出：重新整理，把已載入的內容清掉
+  else showGateLogin();
+}
+
+/** Firebase 無法使用時：本機有通過紀錄就放行（離線使用），否則停在登入牆 */
+function gateFallback(message) {
+  if (rawGet(L_ACCESS)) grantAccess();
+  else showGateError(message);
+}
+
+function initGate() {
+  try { document.documentElement.setAttribute('data-theme', rawGet('theme') || 'light'); } catch (e) { /* 沒有就用預設 */ }
+  if (gateBypassed()) grantAccess();
+}
 
 /* ── 4. 墓碑（記錄使用者刪除了什麼）───────────────────────────────── */
 function updateTombstones(key, beforeRaw, afterRaw) {
@@ -262,6 +408,8 @@ function stopSync() {
 function setStatus(text, kind) {
   const el = document.getElementById('sync-status-line');
   if (el) { el.textContent = text; el.className = 'sync-status ' + (kind || ''); }
+  const gateEl = document.getElementById('gate-status');
+  if (gateEl) { gateEl.textContent = text; gateEl.className = 'sync-status ' + (kind || ''); }
   const dot = document.getElementById('sync-dot');
   if (dot) dot.className = 'sync-dot ' + (kind || (user ? 'ok' : ''));
 }
@@ -289,10 +437,33 @@ function renderSyncModal() {
     return;
   }
   if (!user) {
-    body.innerHTML = `
-      <p class="sync-note">在手機和電腦登入同一個帳號，研讀進度就會自動雙向同步。</p>
+    body.innerHTML = '<p class="sync-note">在手機和電腦登入同一個帳號，研讀進度就會自動雙向同步。</p><div class="sync-login"></div>';
+    renderLoginForm(body.querySelector('.sync-login'), { allowReset: true });
+    return;
+  }
+  body.innerHTML = `
+    <p class="sync-note">已登入：<b>${gateEsc(user.email || '(匿名)')}</b><br>最後同步：${lastTxt}</p>
+    <div class="sync-row">
+      <button class="modal-btn primary" id="sync-now">立即同步</button>
+      <button class="modal-btn" id="sync-logout">登出這台裝置</button>
+    </div>
+    <p class="sync-note" style="margin-top:10px">
+      已讀 ${jget(K_READ, []).length} 章
+    </p>`;
+  document.getElementById('sync-now').onclick = async () => {
+    setStatus('同步中…', 'busy');
+    try { const s = await FB.getDoc(FB.doc(fbDb, 'emtp', user.uid)); if (s.exists()) await applyRemote(s.data()); lastPushedJson = ''; await pushNow(); renderSyncModal(); }
+    catch (err) { setStatus('同步失敗：' + err.message, 'bad'); }
+  };
+  document.getElementById('sync-logout').onclick = async () => { await FB.signOut(fbAuth); };
+}
+
+/** 登入表單（登入牆與同步視窗共用）；按鈕用 data-act 綁定，避免兩處 ID 重複 */
+function renderLoginForm(container, { allowReset }) {
+  if (!container) return;
+  container.innerHTML = `
       <div class="sync-row" style="margin-bottom:12px">
-        <button class="modal-btn" id="sync-google" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:11px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;font-weight:700;font-size:0.92rem;cursor:pointer;color:var(--text)">
+        <button class="modal-btn" data-act="google" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:11px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;font-weight:700;font-size:0.92rem;cursor:pointer;color:var(--text)">
           <svg width="18" height="18" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
             <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.37 7.33 24 12 24z"/>
@@ -307,34 +478,18 @@ function renderSyncModal() {
         <span>或使用 Email 帳密</span>
         <div style="flex:1;height:1px;background:var(--border)"></div>
       </div>
-      <div class="sync-row"><input type="email" id="sync-email" placeholder="電子郵件" autocomplete="username"></div>
-      <div class="sync-row"><input type="password" id="sync-pass" placeholder="密碼（至少 6 碼）" autocomplete="current-password"></div>
+      <div class="sync-row"><input type="email" data-field="email" placeholder="電子郵件" autocomplete="username" aria-label="電子郵件"></div>
+      <div class="sync-row"><input type="password" data-field="pass" placeholder="密碼（至少 6 碼）" autocomplete="current-password" aria-label="密碼"></div>
       <div class="sync-row">
-        <button class="modal-btn primary" id="sync-login">登入</button>
-        <button class="modal-btn" id="sync-register">註冊新帳號</button>
+        <button class="modal-btn primary" data-act="login">登入</button>
+        <button class="modal-btn" data-act="register">註冊新帳號</button>
       </div>
-      <div class="sync-row"><button class="modal-btn ghost" id="sync-reset-cfg">重新設定 Firebase</button></div>`;
-    document.getElementById('sync-google').onclick = doGoogleAuth;
-    document.getElementById('sync-login').onclick = () => doAuth('login');
-    document.getElementById('sync-register').onclick = () => doAuth('register');
-    document.getElementById('sync-reset-cfg').onclick = () => { localStorage.removeItem(L_CFG); location.reload(); };
-    return;
-  }
-  body.innerHTML = `
-    <p class="sync-note">已登入：<b>${user.email || '(匿名)'}</b><br>最後同步：${lastTxt}</p>
-    <div class="sync-row">
-      <button class="modal-btn primary" id="sync-now">立即同步</button>
-      <button class="modal-btn" id="sync-logout">登出這台裝置</button>
-    </div>
-    <p class="sync-note" style="margin-top:10px">
-      已讀 ${jget(K_READ, []).length} 章
-    </p>`;
-  document.getElementById('sync-now').onclick = async () => {
-    setStatus('同步中…', 'busy');
-    try { const s = await FB.getDoc(FB.doc(fbDb, 'emtp', user.uid)); if (s.exists()) await applyRemote(s.data()); lastPushedJson = ''; await pushNow(); renderSyncModal(); }
-    catch (err) { setStatus('同步失敗：' + err.message, 'bad'); }
-  };
-  document.getElementById('sync-logout').onclick = async () => { await FB.signOut(fbAuth); };
+      ${allowReset ? '<div class="sync-row"><button class="modal-btn ghost" data-act="reset">重新設定 Firebase</button></div>' : ''}`;
+  const on = (act, fn) => { const b = container.querySelector(`[data-act="${act}"]`); if (b) b.onclick = fn; };
+  on('google', doGoogleAuth);
+  on('login', () => doAuth('login', container));
+  on('register', () => doAuth('register', container));
+  on('reset', () => { localStorage.removeItem(L_CFG); location.reload(); });
 }
 
 function saveConfig() {
@@ -371,19 +526,27 @@ async function doGoogleAuth() {
   }
 }
 
-async function doAuth(mode) {
-  const email = (document.getElementById('sync-email').value || '').trim();
-  const pass  = document.getElementById('sync-pass').value || '';
+async function doAuth(mode, container) {
+  const field = name => container.querySelector(`[data-field="${name}"]`);
+  const email = (field('email').value || '').trim();
+  const pass  = field('pass').value || '';
   if (!email || pass.length < 6) return setStatus('請輸入電子郵件與至少 6 碼密碼', 'bad');
   setStatus(mode === 'login' ? '登入中…' : '註冊中…', 'busy');
   try {
     await FB.setPersistence(fbAuth, FB.browserLocalPersistence);
-    if (mode === 'login') await FB.signInWithEmailAndPassword(fbAuth, email, pass);
-    else await FB.createUserWithEmailAndPassword(fbAuth, email, pass);
+    if (mode === 'login') {
+      await FB.signInWithEmailAndPassword(fbAuth, email, pass);
+    } else {
+      const cred = await FB.createUserWithEmailAndPassword(fbAuth, email, pass);
+      // 白名單只認已驗證的信箱，避免冒用別人的信箱註冊
+      try { await FB.sendEmailVerification(cred.user); }
+      catch (err) { setStatus('帳號已建立，但驗證信沒寄出去，請稍後按「重寄驗證信」', 'bad'); }
+    }
   } catch (err) {
     const msg = { 'auth/invalid-credential': '帳號或密碼錯誤', 'auth/email-already-in-use': '這個信箱已註冊過，請改用「登入」',
                   'auth/weak-password': '密碼太短（至少 6 碼）', 'auth/invalid-email': '信箱格式不正確',
                   'auth/operation-not-allowed': 'Firebase 尚未啟用「電子郵件/密碼」登入方式',
+                  'auth/too-many-requests': '嘗試太多次，請稍後再試',
                   'auth/network-request-failed': '網路連線失敗' }[err.code] || err.message;
     setStatus(msg, 'bad');
   }
@@ -401,24 +564,31 @@ window.closeSyncModal = function () {
 /* ── 11. 啟動 ──────────────────────────────────────────────────────── */
 async function boot() {
   const cfg = getConfig();
-  if (!cfg) { setStatus('未設定', ''); return; }
+  if (!cfg) { setStatus('未設定', ''); gateFallback('網站尚未設定登入服務，請聯絡網站管理員。'); return; }
   setStatus('連線中…', 'busy');
   try {
-    await loadFirebase();
+    // 網路很慢或連不上時 import() 可能一直等不到回應，逾時就改走離線放行
+    await Promise.race([
+      loadFirebase(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), FB_LOAD_TIMEOUT_MS))
+    ]);
   } catch (err) {
     setStatus('無法載入 Firebase（請確認網路連線）', 'bad');
+    gateFallback('需要連上網路才能登入，請確認網路連線後重新整理。');
     return;
   }
   try {
     fbApp = FB.initializeApp(cfg);
     fbAuth = FB.getAuth(fbApp);
     fbDb = FB.getFirestore(fbApp);
-    FB.onAuthStateChanged(fbAuth, u => { if (u) startSync(u); else stopSync(); });
+    FB.onAuthStateChanged(fbAuth, onAuthChanged);
   } catch (err) {
     setStatus('Firebase 初始化失敗：' + err.message, 'bad');
+    gateFallback('登入服務啟動失敗，請重新整理再試一次。');
   }
 }
 
+initGate();
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
 else boot();
 
