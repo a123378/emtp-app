@@ -1586,12 +1586,14 @@ function switchMode(mode) {
   state.currentMode = mode;
   document.body.classList.toggle('mode-1', mode === 1);
   document.body.classList.toggle('mode-3', mode === 3);
+  document.body.classList.toggle('mode-4', mode === 4);
   toggleLandscapeHeader(false);
-  [1, 3].forEach(m => {
+  [1, 3, 4].forEach(m => {
     $(`#mode${m}-btn`)?.classList.toggle('active', m === mode);
     $(`#side-mode${m}-btn`)?.classList.toggle('active', m === mode);
   });
   $('#mode3-container')?.classList.toggle('hidden', mode !== 3);
+  $('#mode4-container')?.classList.toggle('hidden', mode !== 4);
   $('#sidebar')?.classList.remove('hidden');
   if ($('#sidebar-toggle')) $('#sidebar-toggle').style.display = '';
   if (mode === 1) {
@@ -1608,7 +1610,9 @@ function switchMode(mode) {
     $('#sidebar')?.classList.add('hidden-desktop');
     $('#main-content')?.classList.add('hidden');
     closeMobileSidebar();
-    initMode3();
+    // mode 4 是介面上的「模式三：歷屆考題」（exam-mode.js）
+    if (mode === 4) window.initExamMode?.();
+    else initMode3();
   }
 }
 

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=20261119_2000">
+<link rel="stylesheet" href="exam-mode.css?v=20261119_2200">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#E87722">
 <meta name="mobile-web-app-capable" content="yes">
@@ -61,6 +62,10 @@
     <button class="mode-btn" data-mode="3" id="mode3-btn" onclick="pickMode(3)">
       <span class="mode-text-full">🎤 模式二：口試重點</span>
       <span class="mode-text-short">🎤 口試</span>
+    </button>
+    <button class="mode-btn" data-mode="4" id="mode4-btn" onclick="pickMode(4)">
+      <span class="mode-text-full">📝 模式三：歷屆考題</span>
+      <span class="mode-text-short">📝 考題</span>
     </button>
   </div>
 
@@ -118,6 +123,7 @@
     <div class="sidebar-mode-switcher">
       <button class="side-mode-btn active" id="side-mode1-btn" onclick="pickMode(1)">📋 模式一：重點筆記</button>
       <button class="side-mode-btn" id="side-mode3-btn" onclick="pickMode(3)">🎤 模式二：口試重點</button>
+      <button class="side-mode-btn" id="side-mode4-btn" onclick="pickMode(4)">📝 模式三：歷屆考題</button>
     </div>
 
     <!-- Offline Pack Banner in Drawer（由 offline.js 控制） -->
@@ -252,6 +258,9 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
   </section>
+
+  <!-- MODE 4（介面標示為模式三）：歷屆考題作答與作答檢討（exam-mode.js） -->
+  <section id="mode4-container" class="hidden"></section>
 </div><!-- /app-body -->
 
 <!-- ══════════════════════════════════════════════════════
@@ -403,7 +412,8 @@
 </div>
 
 <script src="diagram.js?v=20261115_1200"></script>
-<script src="app.js?v=20261119_2000"></script>
+<script src="app.js?v=20261119_2200"></script>
+<script src="exam-mode.js?v=20261119_2200"></script>
 <script src="sync.js?v=20261119_2000"></script>
 <script src="offline.js?v=20261119_2000"></script>
 <script src="study-schedule.js?v=20261118_1400"></script>

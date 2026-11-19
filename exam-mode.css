@@ -1,0 +1,161 @@
+/* ========================================
+   模式三：歷屆考題（exam-mode.js）
+   ======================================== */
+#mode4-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 32px 80px;
+  background: var(--bg);
+  box-sizing: border-box;
+}
+.ex-wrap { max-width: 880px; margin: 0 auto; }
+/* 模式三不需要章節列表與搜尋（手機側邊欄只留模式切換） */
+body.mode-4 #chapter-nav,
+body.mode-4 .sidebar-search { display: none; }
+.ex-head {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--bg); padding: 14px 0 10px;
+  border-bottom: 1px solid var(--border); margin-bottom: 14px;
+}
+.ex-head-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ex-title { margin: 0; font-size: 1.15rem; }
+.ex-paper {
+  font: inherit; font-size: 0.95rem; padding: 5px 8px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+}
+.ex-progress { font-size: 0.85rem; color: var(--text-muted); }
+.ex-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+.ex-tools-gap { flex: 1; }
+.ex-btn {
+  font: inherit; font-size: 0.85rem; cursor: pointer; border-radius: 8px; padding: 4px 10px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+}
+.ex-btn:hover { border-color: var(--blue); }
+.ex-btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.ex-btn.on { background: var(--blue-light); border-color: var(--blue); }
+.ex-btn.ghost { color: var(--text-muted); }
+
+.ex-summary {
+  background: var(--surface); border: 2px solid var(--blue); border-radius: 12px;
+  padding: 14px 16px; margin-bottom: 14px;
+}
+.ex-score { font-size: 1.8rem; font-weight: 800; }
+.ex-score small { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+.ex-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
+.ex-note.ok { color: var(--success); }
+.ex-missing {
+  margin-top: 10px; padding: 8px 10px; border-radius: 8px; font-size: 0.88rem;
+  background: color-mix(in srgb, var(--warning) 14%, transparent); color: var(--text);
+}
+.ex-nums { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.ex-num {
+  font: inherit; font-size: 0.82rem; cursor: pointer; border-radius: 6px; padding: 0 8px;
+  border: 1px solid var(--error); color: var(--error); background: color-mix(in srgb, var(--error) 10%, transparent);
+}
+.ex-num.blank { border-color: var(--warning); color: var(--warning); background: transparent; }
+.ex-num.flag { border-color: var(--warning); background: var(--warning); color: #fff; }
+
+.ex-q {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 16px; margin-bottom: 14px;
+}
+.ex-q.flash { outline: 3px solid var(--blue); }
+.ex-q.flagged { box-shadow: inset 0 0 0 2px var(--warning); }
+.ex-q.st-wrong { border-left: 5px solid var(--error); }
+.ex-q.st-blank { border-left: 5px solid var(--warning); }
+.ex-q.st-correct, .ex-q.st-partial, .ex-q.st-free { border-left: 5px solid var(--success); }
+.ex-q.hide { display: none; }
+.ex-q-head { display: flex; gap: 10px; align-items: flex-start; }
+.ex-stem { flex: 1; margin: 0 0 10px; white-space: pre-wrap; line-height: 1.65; }
+.ex-stem b { color: var(--blue); margin-right: 6px; }
+.ex-flag {
+  flex: none; font: inherit; font-size: 0.8rem; cursor: pointer; white-space: nowrap;
+  border: 1px solid var(--border); background: transparent; color: var(--text-muted);
+  border-radius: 999px; padding: 2px 10px;
+}
+.ex-q.flagged .ex-flag { background: var(--warning); border-color: var(--warning); color: #fff; }
+.ex-fig { display: block; max-width: 100%; height: auto; margin: 4px 0 10px; border-radius: 6px; background: #fff; }
+.ex-opts { display: grid; gap: 6px; }
+.ex-opt {
+  display: flex; gap: 10px; align-items: flex-start; text-align: left; width: 100%;
+  font: inherit; line-height: 1.55; color: var(--text); background: transparent; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
+}
+.ex-opt:not(:disabled):hover { border-color: var(--blue); }
+.ex-opt:disabled { cursor: default; }
+.ex-letter {
+  flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border);
+  display: grid; place-items: center; font-weight: 800; font-size: 0.85rem;
+}
+.ex-opt.sel { background: var(--blue-light); border-color: var(--blue); }
+.ex-opt.sel .ex-letter { background: var(--blue); border-color: var(--blue); color: #fff; }
+.ex-opt.right { background: color-mix(in srgb, var(--success) 12%, transparent); border-color: var(--success); }
+.ex-opt.right .ex-letter { background: var(--success); border-color: var(--success); color: #fff; }
+.ex-opt.accept { border: 1px dashed var(--success); }
+.ex-opt.wrong { background: color-mix(in srgb, var(--error) 10%, transparent); border-color: var(--error); }
+.ex-opt.wrong .ex-letter { background: var(--error); border-color: var(--error); color: #fff; }
+.ex-verdict { margin-top: 8px; font-size: 0.92rem; font-weight: 800; }
+.ex-verdict.correct, .ex-verdict.partial, .ex-verdict.free { color: var(--success); }
+.ex-verdict.wrong { color: var(--error); }
+.ex-verdict.blank { color: var(--warning); }
+.ex-src { margin-top: 4px; font-size: 0.82rem; color: var(--text-muted); }
+
+/* 作答檢討（逐選項詳解） */
+.ex-review { margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 10px; }
+.ex-rv-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+.ex-rv-tag { font-size: 0.8rem; font-weight: 800; border-radius: 6px; padding: 1px 8px; color: #fff; }
+.ex-rv-tag.bad { background: var(--error); }
+.ex-rv-tag.ok { background: var(--warning); }
+.ex-rv-meta { font-size: 0.82rem; color: var(--text-muted); }
+.ex-rv-missing {
+  padding: 8px 10px; border-radius: 8px; font-size: 0.86rem;
+  background: color-mix(in srgb, var(--warning) 14%, transparent);
+}
+.ex-rv-opt { border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; background: var(--surface-2); }
+.ex-rv-opt.mark-right { background: color-mix(in srgb, var(--success) 10%, var(--surface)); }
+.ex-rv-opt.mine { outline: 2px solid var(--blue); }
+.ex-rv-opt-head { display: flex; gap: 6px; align-items: baseline; font-size: 0.9rem; line-height: 1.55; }
+.ex-rv-mine {
+  flex: none; font-size: 0.72rem; font-weight: 800; color: #fff; background: var(--blue);
+  border-radius: 999px; padding: 0 8px; margin-left: auto;
+}
+.ex-rv-text { margin-top: 4px; font-size: 0.86rem; line-height: 1.65; color: var(--text); }
+.ex-rv-mark { font-weight: 800; }
+.mark-right .ex-rv-mark { color: var(--success); }
+.mark-wrong .ex-rv-mark { color: var(--error); }
+.mark-true .ex-rv-mark { color: var(--text-muted); }
+.ex-rv-think, .ex-rv-point {
+  margin-top: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.88rem; line-height: 1.65;
+}
+.ex-rv-think { background: var(--orange-light); border-left: 4px solid var(--orange); }
+.ex-rv-point { background: var(--blue-light); border-left: 4px solid var(--blue); }
+.ex-rv-think b, .ex-rv-point b { display: block; margin-bottom: 2px; }
+
+.ex-error { padding: 40px 16px; text-align: center; color: var(--error); }
+.ex-toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3000;
+  background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 10px;
+  font-size: 0.9rem; opacity: 0; transition: opacity .2s; pointer-events: none; max-width: 90vw;
+}
+.ex-toast.show { opacity: 1; }
+.ex-modal {
+  position: fixed; inset: 0; z-index: 2500; background: rgba(0, 0, 0, .45);
+  display: grid; place-items: center; padding: 16px;
+}
+.ex-modal-box {
+  width: min(520px, 100%); background: var(--surface); color: var(--text);
+  border-radius: 12px; padding: 18px; box-shadow: var(--shadow);
+}
+.ex-modal-box h3 { margin: 0 0 6px; }
+.ex-import-text {
+  width: 100%; min-height: 140px; margin-top: 10px; font: inherit; font-size: 0.82rem;
+  border: 1px solid var(--border); border-radius: 8px; padding: 8px;
+  background: var(--bg); color: var(--text); box-sizing: border-box;
+}
+.ex-modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
+@media (max-width: 900px) {
+  #mode4-container { padding: 0 12px 80px; }
+  .ex-title { font-size: 1rem; }
+  .ex-q { padding: 12px; }
+}
