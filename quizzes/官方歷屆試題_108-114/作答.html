@@ -63,6 +63,16 @@ main { max-width: 860px; margin: 0 auto; padding: 16px; }
 .q.st-wrong { border-left: 5px solid var(--bad); }
 .q.st-blank { border-left: 5px solid var(--warn); }
 .q.st-correct, .q.st-partial, .q.st-free { border-left: 5px solid var(--ok); }
+.q-head { display: flex; gap: 10px; align-items: flex-start; }
+.q-head .stem { flex: 1; }
+.flag-btn {
+  flex: none; font-size: 14px; border: 1px solid var(--line); background: transparent;
+  color: var(--muted); border-radius: 999px; padding: 2px 10px; white-space: nowrap;
+}
+.flag-btn:hover { border-color: var(--warn); }
+.q.flagged .flag-btn { background: var(--warn); border-color: var(--warn); color: #fff; }
+.q.flagged { box-shadow: inset 0 0 0 2px var(--warn); }
+.summary .wrong-list button.flag { border-color: var(--warn); color: #fff; background: var(--warn); }
 .stem { margin: 0 0 10px; white-space: pre-wrap; }
 .stem b { color: var(--accent); margin-right: 6px; }
 .q img { display: block; max-width: 100%; height: auto; margin: 6px 0 10px; border-radius: 6px; background: #fff; }
@@ -140,6 +150,7 @@ let store = {
   year: loaded.year || null,
   answers: loaded.answers && typeof loaded.answers === "object" ? loaded.answers : {},
   submitted: loaded.submitted && typeof loaded.submitted === "object" ? loaded.submitted : {},
+  flags: loaded.flags && typeof loaded.flags === "object" ? loaded.flags : {},
 };
 function saveStore() {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); }
@@ -152,6 +163,8 @@ let onlyWrong = false;
 
 function yearAnswers(y) { return store.answers[y] || {}; }
 function isSubmitted(y) { return Boolean(store.submitted[y]); }
+function yearFlags(y) { return store.flags[y] || {}; }
+function flaggedNos(y) { return DATA[y].filter(q => yearFlags(y)[q.no]).map(q => q.no); }
 
 // ---------- grading ----------
 // raw answer formats: "C", "C(A)", "C(A、B、D)", "ABCD", "B(送分)"
@@ -248,7 +261,7 @@ function renderYears() {
 function renderTools() {
   const tools = isSubmitted(year)
     ? [
-        el("button", { textContent: onlyWrong ? "顯示全部" : "只看錯題", className: onlyWrong ? "on" : "", onclick: toggleWrong }),
+        el("button", { textContent: onlyWrong ? "顯示全部" : "只看錯題與疑慮", className: onlyWrong ? "on" : "", onclick: toggleWrong }),
         el("button", { textContent: "重新作答", onclick: resetYear }),
         el("button", { textContent: "複製結果", className: "primary", onclick: copyResult }),
       ]
@@ -287,6 +300,13 @@ function renderSummary() {
   } else {
     card.append(el("div", { className: "note", textContent: "全對，太強了！" }));
   }
+  const flags = flaggedNos(year);
+  if (flags.length) {
+    card.append(el("div", { className: "note", textContent: `有疑慮 ${flags.length} 題：` }));
+    const list = el("div", { className: "wrong-list" });
+    flags.forEach(no => list.append(el("button", { textContent: no, className: "flag", onclick: () => jumpTo(no) })));
+    card.append(list);
+  }
   box.replaceChildren(card);
 }
 
@@ -295,7 +315,10 @@ function questionCard(q) {
   const chosen = yearAnswers(year)[q.no];
   const result = submitted ? grade(q, chosen) : null;
   const card = el("section", { className: "q", id: "q" + q.no });
-  card.append(el("p", { className: "stem" }, el("b", { textContent: q.no + "." }), q.stem));
+  if (yearFlags(year)[q.no]) card.classList.add("flagged");
+  card.append(el("div", { className: "q-head" },
+    el("p", { className: "stem" }, el("b", { textContent: q.no + "." }), q.stem),
+    el("button", { className: "flag-btn", textContent: "🤔 有疑慮", title: "標記這題觀念不清楚，需要詳解", onclick: () => toggleFlag(q.no) })));
   q.figures.forEach(f => card.append(el("img", { src: "images/" + f, alt: `${year}年第${q.no}題附圖`, loading: "lazy" })));
   const opts = el("div", { className: "opts" });
   q.options.forEach((o, i) => {
@@ -319,7 +342,7 @@ function questionCard(q) {
   if (result) {
     card.classList.add("st-" + result.status);
     card.append(el("div", { className: "verdict " + result.status, textContent: verdictText(result.status, result.key, chosen) }));
-    if (onlyWrong && !["wrong", "blank"].includes(result.status)) card.classList.add("hide");
+    if (onlyWrong && !needsReview(q.no, result.status)) card.classList.add("hide");
   }
   return card;
 }
@@ -331,6 +354,19 @@ function renderList() {
 function renderAll() { renderYears(); renderTools(); renderProgress(); renderSummary(); renderList(); }
 
 // ---------- actions ----------
+function needsReview(no, status) {
+  return status === "wrong" || status === "blank" || Boolean(yearFlags(year)[no]);
+}
+
+function toggleFlag(no) {
+  const updated = { ...yearFlags(year) };
+  if (updated[no]) delete updated[no]; else updated[no] = true;
+  store = { ...store, flags: { ...store.flags, [year]: updated } };
+  saveStore();
+  document.getElementById("q" + no).classList.toggle("flagged", Boolean(updated[no]));
+  if (isSubmitted(year)) renderSummary();
+}
+
 function choose(no, letter) {
   if (isSubmitted(year)) return;
   const updated = { ...yearAnswers(year) };
@@ -366,14 +402,16 @@ function submitYear() {
 }
 
 function resetYear() {
-  const has = Object.keys(yearAnswers(year)).length || isSubmitted(year);
+  const has = Object.keys(yearAnswers(year)).length || isSubmitted(year) || flaggedNos(year).length;
   if (!has) { showToast("這個年度沒有作答紀錄"); return; }
-  if (!window.confirm(`確定清除 ${year} 年的作答與批改結果，重新作答？清除後無法復原。`)) return;
+  if (!window.confirm(`確定清除 ${year} 年的作答、疑慮標記與批改結果，重新作答？清除後無法復原。`)) return;
   const answers = { ...store.answers };
   const submitted = { ...store.submitted };
+  const flags = { ...store.flags };
   delete answers[year];
   delete submitted[year];
-  store = { ...store, answers, submitted };
+  delete flags[year];
+  store = { ...store, answers, submitted, flags };
   onlyWrong = false;
   saveStore();
   renderAll();
@@ -395,6 +433,13 @@ function resultText() {
     `錯題：${r.wrong.length ? r.wrong.join("、") : "無"}`,
   ];
   if (r.blank.length) lines.push(`未作答：${r.blank.join("、")}`);
+  const flags = flaggedNos(year);
+  if (flags.length) {
+    const okFlags = flags.filter(no => !r.wrong.includes(no) && !r.blank.includes(no));
+    lines.push(`有疑慮：${flags.join("、")}` + (okFlags.length ? `（其中 ${okFlags.join("、")} 答對）` : ""));
+  }
+  const review = [...new Set([...r.wrong, ...flags])].sort((a, b) => a - b);
+  lines.push(`需要詳解：${review.length ? review.join("、") : "無"}`);
   return lines.join("\n");
 }
 
