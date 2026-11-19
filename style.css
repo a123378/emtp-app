@@ -2199,6 +2199,25 @@ body {
 }
 .sr-bar b { color: var(--orange); }
 .sr-hint { display: block; font-weight: 500; font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+/* 章節列：先只看章節，點開才看命中段落 */
+.sr-groups { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); overflow: hidden; }
+.sr-group + .sr-group { border-top: 1px solid var(--border); }
+.sr-group-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; cursor: pointer; list-style: none;
+  transition: background var(--transition);
+}
+.sr-group-head::-webkit-details-marker { display: none; }
+.sr-group-head::before {
+  content: "▸"; color: var(--text-muted); font-size: 0.8rem;
+  transition: transform var(--transition);
+}
+.sr-group[open] > .sr-group-head::before { transform: rotate(90deg); }
+.sr-group-head:hover, .sr-group[open] > .sr-group-head { background: var(--surface-2); }
+.sr-group-head:focus-visible { outline: 2px solid var(--orange); outline-offset: -2px; }
+.sr-group-title { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+.sr-group-count { margin-left: auto; font-size: 0.78rem; font-weight: 700; color: var(--orange); white-space: nowrap; }
+.sr-group-body { padding: 10px 14px 4px 34px; }
 .sr-item {
   border: 1px solid var(--border); border-radius: 10px;
   padding: 11px 14px; margin-bottom: 9px; background: var(--surface);

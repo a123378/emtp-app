@@ -850,50 +850,76 @@ async function runFullTextSearch(q) {
   }
   if (state.searchQuery !== q) return;
 
-  const hits = [];
-  for (let i = 0; i < idx.blocks.length; i++) {
-    const b = idx.blocks[i];
-    const pos = b[2].toLowerCase().indexOf(q);
-    if (pos < 0) continue;
-    const sec = idx.secs[b[0]];
-    const inTitle = sec && sec[2] && sec[2].toLowerCase().includes(q);
-    hits.push({ sr: b[0], bi: b[1], txt: b[2], pos, score: (inTitle ? 1000 : 0) + Math.max(0, 300 - pos) });
-    if (hits.length >= 600) break;
-  }
-  hits.sort((a, b) => b.score - a.score);
-  renderSearchResults(idx, hits, q);
+  renderSearchResults(groupHitsByChapter(idx, findSearchHits(idx, q)), q);
 }
 
-function renderSearchResults(idx, hits, q) {
-  els.searchCount.textContent = hits.length ? `內文命中 ${hits.length} 處` : '內文找不到';
-  if (!hits.length) {
+/** 找出所有命中的區塊；不在任何大標底下的區塊無法跳轉，略過 */
+function findSearchHits(idx, q) {
+  const hits = [];
+  for (const b of idx.blocks) {
+    const pos = b[2].toLowerCase().indexOf(q);
+    const sec = idx.secs[b[0]];
+    if (pos >= 0 && sec) hits.push({ sec, bi: b[1], txt: b[2], pos });
+  }
+  return hits;
+}
+
+/**
+ * 依章節編號分組（索引裡的章節本來就是 CH01→CH60 的順序），組內照課文順序。
+ * @returns {{ch: string[], hits: object[]}[]}
+ */
+function groupHitsByChapter(idx, hits) {
+  const byCh = new Map();
+  hits.forEach(h => {
+    const chI = h.sec[0];
+    byCh.set(chI, [...(byCh.get(chI) || []), h]);
+  });
+  return [...byCh.keys()]
+    .sort((a, b) => a - b)
+    .map(chI => ({ ch: idx.chs[chI], hits: byCh.get(chI).slice().sort((a, b) => a.bi - b.bi) }));
+}
+
+function searchSnippet(h, q) {
+  const st = Math.max(0, h.pos - 34);
+  const en = Math.min(h.txt.length, h.pos + q.length + 70);
+  return (st > 0 ? '…' : '') + escapeHtml(h.txt.slice(st, h.pos))
+    + '<mark>' + escapeHtml(h.txt.substr(h.pos, q.length)) + '</mark>'
+    + escapeHtml(h.txt.slice(h.pos + q.length, en)) + (en < h.txt.length ? '…' : '');
+}
+
+function renderSearchHit(chId, h, q) {
+  const [, secIdx, secTitle, page, pdfp] = h.sec;
+  return `
+    <div class="sr-item" onclick="openSearchHit('${chId}', ${secIdx})">
+      <div class="sr-head">
+        <span class="sr-sec">${escapeHtml(secTitle || '')}</span>
+        ${page ? `<span class="sr-page">📖 教科書 p.${page}<span class="sr-pdfp"> ‧ PDF 第 ${pdfp} 頁</span></span>` : ''}
+      </div>
+      <div class="sr-snip">${searchSnippet(h, q)}</div>
+    </div>`;
+}
+
+/** 先只列出有命中的章節（章名＋處數），點開章節才看各段內容 */
+function renderSearchResults(groups, q) {
+  const total = groups.reduce((sum, g) => sum + g.hits.length, 0);
+  els.searchCount.textContent = total ? `內文命中 ${total} 處` : '內文找不到';
+  if (!total) {
     els.searchView.innerHTML = `<div class="sr-empty">「${escapeHtml(q)}」在 60 章內文中沒有找到。<br>試試更短的關鍵字，或改用中文專有名詞。</div>`;
     return;
   }
-  const items = hits.slice(0, 60).map(h => {
-    const sec = idx.secs[h.sr];
-    const ch = sec ? idx.chs[sec[0]] : null;
-    const st = Math.max(0, h.pos - 34);
-    const en = Math.min(h.txt.length, h.pos + q.length + 70);
-    const snip = (st > 0 ? '…' : '') + escapeHtml(h.txt.slice(st, h.pos))
-      + '<mark>' + escapeHtml(h.txt.substr(h.pos, q.length)) + '</mark>'
-      + escapeHtml(h.txt.slice(h.pos + q.length, en)) + (en < h.txt.length ? '…' : '');
-    const page = sec && sec[3] ? sec[3] : 0;
-    const pdfp = sec && sec[4] ? sec[4] : 0;
-    return `
-      <div class="sr-item" onclick="openSearchHit('${ch ? ch[0] : ''}', ${sec ? sec[1] : -1})">
-        <div class="sr-head">
-          <span class="sr-ch">${escapeHtml(ch ? ch[1] : '')}</span>
-          <span class="sr-sec">${escapeHtml(sec ? sec[2] : '')}</span>
-          ${page ? `<span class="sr-page">📖 教科書 p.${page}<span class="sr-pdfp"> ‧ PDF 第 ${pdfp} 頁</span></span>` : ''}
-        </div>
-        <div class="sr-snip">${snip}</div>
-      </div>`;
-  }).join('');
+  const chapters = groups.map(({ ch, hits }) => `
+    <details class="sr-group">
+      <summary class="sr-group-head">
+        <span class="sr-ch">${escapeHtml(ch[1])}</span>
+        <span class="sr-group-title">${escapeHtml(ch[2])}</span>
+        <span class="sr-group-count">${hits.length} 處</span>
+      </summary>
+      <div class="sr-group-body">${hits.map(h => renderSearchHit(ch[0], h, q)).join('')}</div>
+    </details>`).join('');
   els.searchView.innerHTML = `
-    <div class="sr-bar">🔍 「${escapeHtml(q)}」在重點整理內文中找到 <b>${hits.length}</b> 處${hits.length > 60 ? '（顯示前 60 筆）' : ''}
-      <span class="sr-hint">點一下可跳到該段落 ‧ 📖 頁碼對應大白第三版</span></div>
-    ${items}`;
+    <div class="sr-bar">🔍 「${escapeHtml(q)}」出現在 <b>${groups.length}</b> 章，共 <b>${total}</b> 處
+      <span class="sr-hint">點章節展開命中的段落，再點段落可跳過去 ‧ 📖 頁碼對應大白第三版</span></div>
+    <div class="sr-groups">${chapters}</div>`;
 }
 
 async function openSearchHit(chId, secIdx) {
