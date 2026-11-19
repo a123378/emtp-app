@@ -118,7 +118,7 @@
 
   function jumpTo(no) {
     let card = document.getElementById('ex-q' + no);
-    if (card && card.classList.contains('hide')) { onlyReview = false; renderAll(); card = document.getElementById('ex-q' + no); }
+    if (!card) { onlyReview = false; renderAll(); card = document.getElementById('ex-q' + no); }
     const sc = container();
     const head = sc && sc.querySelector('.ex-head');
     if (!card || !sc) return;
@@ -154,7 +154,7 @@
   function renderTools() {
     const btn = (text, onclick, cls) => el('button', { className: 'ex-btn' + (cls ? ' ' + cls : ''), textContent: text, onclick });
     const main = isSubmitted(paper)
-      ? [btn(onlyReview ? '顯示全部' : '只看錯題與疑慮', toggleOnlyReview, onlyReview ? 'on' : ''),
+      ? [btn(onlyReview ? '顯示全部題目' : '作答檢討', toggleOnlyReview, onlyReview ? 'on' : ''),
          btn('重新作答', resetPaper), btn('複製結果', copyResult, 'primary')]
       : [btn('跳到未作答', jumpBlank), btn('清除作答', resetPaper), btn('交卷批改', submitPaper, 'primary')];
     document.getElementById('ex-tools').replaceChildren(...main,
@@ -262,13 +262,32 @@
       const show = needsReview(q.no, result.status);
       if (show) card.append(reviewBlock(q, result, chosen));
       else if (q.point) card.append(el('div', { className: 'ex-src', textContent: '考點：' + q.point }));
-      if (onlyReview && !show) card.classList.add('hide');
     }
     return card;
   }
 
+  // 作答檢討：一、錯題（答錯與未作答，含有疑慮但答錯）優先；二、有疑慮但答對
+  function reviewSections() {
+    const ans = answersOf(paper);
+    const flags = flagsOf(paper);
+    const graded = (questions[paper] || []).map(q => ({ q, status: grade(q, ans[q.no]).status }));
+    const wrong = graded.filter(g => g.status === 'wrong' || g.status === 'blank').map(g => g.q);
+    const doubt = graded.filter(g => g.status !== 'wrong' && g.status !== 'blank' && flags[g.q.no]).map(g => g.q);
+    const section = (title, desc, qs) => [
+      el('h3', { className: 'ex-sec' }, title, el('small', { textContent: `　${qs.length} 題` })),
+      el('p', { className: 'ex-sec-desc', textContent: qs.length ? desc : '沒有題目。' }),
+      ...qs.map(questionCard),
+    ];
+    return [
+      ...section('一、錯題', '答錯與未作答的題目（有疑慮但答錯的也在這裡），請優先看。', wrong),
+      ...section('二、有疑慮', '標了有疑慮但答對的題目，確認觀念是不是真的清楚。', doubt),
+    ];
+  }
+
   function renderList() {
-    document.getElementById('ex-list').replaceChildren(...(questions[paper] || []).map(questionCard));
+    const list = document.getElementById('ex-list');
+    if (onlyReview && isSubmitted(paper)) list.replaceChildren(...reviewSections());
+    else list.replaceChildren(...(questions[paper] || []).map(questionCard));
   }
 
   function renderAll() { renderPaperSelect(); renderTools(); renderProgress(); renderSummary(); renderList(); }
@@ -276,7 +295,7 @@
   // ---------- actions ----------
   function selectPaper(id) {
     paper = id;
-    onlyReview = false;
+    onlyReview = isSubmitted(id);
     store = { ...store, paper: id };
     saveStore();
     renderAll();
@@ -298,7 +317,8 @@
     if (updated[no]) delete updated[no]; else updated[no] = true;
     store = { ...store, flags: { ...store.flags, [paper]: updated } };
     saveStore();
-    if (isSubmitted(paper)) { renderSummary(); document.getElementById('ex-q' + no).replaceWith(questionCard(questions[paper].find(q => q.no === no))); }
+    if (isSubmitted(paper) && onlyReview) { renderSummary(); renderList(); }
+    else if (isSubmitted(paper)) { renderSummary(); document.getElementById('ex-q' + no).replaceWith(questionCard(questions[paper].find(q => q.no === no))); }
     else document.getElementById('ex-q' + no).classList.toggle('flagged', Boolean(updated[no]));
   }
 
@@ -318,6 +338,7 @@
     const msg = blank.length ? `還有 ${blank.length} 題未作答，確定要交卷嗎？交卷後就不能再改答案。` : '確定要交卷嗎？交卷後就不能再改答案。';
     if (!window.confirm(msg)) return;
     store = { ...store, submitted: { ...store.submitted, [paper]: true } };
+    onlyReview = true;
     saveStore();
     renderAll();
     container().scrollTo(0, 0);
@@ -356,8 +377,13 @@
       const ok = flags.filter(no => !r.wrong.includes(no) && !r.blank.includes(no));
       lines.push(`有疑慮：${flags.join('、')}` + (ok.length ? `（其中 ${ok.join('、')} 答對）` : ''));
     }
-    lines.push(`需要詳解：${review.length ? review.join('、') : '無'}`);
-    lines.push(`尚無詳解：${missing.length ? missing.join('、') : '無'}`);
+    const wrongAll = [...r.wrong, ...r.blank].sort((a, b) => a - b);
+    const doubtOnly = flags.filter(no => !wrongAll.includes(no));
+    lines.push(`錯題詳解：${wrongAll.length ? wrongAll.join('、') : '無'}`);
+    lines.push(`疑慮詳解：${doubtOnly.length ? doubtOnly.join('、') : '無'}`);
+    const missWrong = missing.filter(no => wrongAll.includes(no));
+    const missDoubt = missing.filter(no => !wrongAll.includes(no));
+    lines.push(`尚無詳解：${missing.length ? `錯題 ${missWrong.join('、') || '無'}；疑慮 ${missDoubt.join('、') || '無'}` : '無'}`);
     return lines.join('\n');
   }
 
@@ -446,6 +472,7 @@
       loadPromise = loadData().then(() => {
         const ids = papers.map(p => p.id);
         paper = ids.includes(store.paper) ? store.paper : (ids.includes('114') ? '114' : ids[0]);
+        onlyReview = isSubmitted(paper);
         renderShell();
         renderAll();
       }).catch(err => {
