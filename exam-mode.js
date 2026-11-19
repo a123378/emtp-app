@@ -24,7 +24,7 @@
   function normalizeStore(raw) {
     const s = raw && typeof raw === 'object' ? raw : {};
     const obj = v => (v && typeof v === 'object' ? v : {});
-    return { paper: s.paper || s.year || null, answers: obj(s.answers), submitted: obj(s.submitted), flags: obj(s.flags) };
+    return { paper: s.paper || s.year || null, answers: obj(s.answers), submitted: obj(s.submitted), flags: obj(s.flags), updated: obj(s.updated) };
   }
 
   function loadStore() {
@@ -38,6 +38,64 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); }
     catch (e) { toast('瀏覽器無法儲存，關掉頁面後作答會消失'); }
   }
+
+  // ---------- cloud sync（sync.js 提供 window.examCloud；登入後才有）----------
+  const CLOUD_DELAY = 1500;
+  let cloudTimer = null;
+
+  // 記錄這份試卷剛被修改，雲端合併時以較新的一方為準
+  function touch(ids) {
+    const now = Date.now();
+    const updated = { ...store.updated };
+    ids.forEach(id => { updated[id] = now; });
+    store = { ...store, updated };
+  }
+
+  function scheduleCloudSave() {
+    clearTimeout(cloudTimer);
+    cloudTimer = setTimeout(() => {
+      const cloud = window.examCloud;
+      if (!cloud || !cloud.ready()) return;
+      const { answers, submitted, flags, updated } = store;
+      cloud.save({ answers, submitted, flags, updated }).catch(() => toast('雲端同步失敗，作答已存在這台裝置'));
+    }, CLOUD_DELAY);
+  }
+
+  function commit(ids) {
+    touch(ids);
+    saveStore();
+    scheduleCloudSave();
+  }
+
+  // 合併雲端資料：每份試卷取修改時間較新的一方；本機較新或雲端沒有的，就上傳
+  function applyRemote(remote) {
+    const r = normalizeStore(remote || {});
+    const ids = new Set([...Object.keys(store.answers), ...Object.keys(store.submitted), ...Object.keys(store.flags),
+      ...Object.keys(r.answers), ...Object.keys(r.submitted), ...Object.keys(r.flags)]);
+    const next = { answers: { ...store.answers }, submitted: { ...store.submitted }, flags: { ...store.flags }, updated: { ...store.updated } };
+    let changedLocal = false;
+    let needUpload = false;
+    ids.forEach(id => {
+      const lt = store.updated[id] || 0;
+      const rt = r.updated[id] || 0;
+      const remoteHas = id in r.answers || id in r.submitted || id in r.flags;
+      if (rt > lt) {
+        ['answers', 'submitted', 'flags'].forEach(f => { if (r[f][id]) next[f][id] = r[f][id]; else delete next[f][id]; });
+        next.updated[id] = rt;
+        changedLocal = true;
+      } else if (lt > rt || !remoteHas) {
+        needUpload = true;
+      }
+    });
+    if (changedLocal) {
+      store = { ...store, ...next };
+      saveStore();
+      if (paper && document.getElementById('ex-list')) renderAll();
+    }
+    if (needUpload) scheduleCloudSave();
+  }
+
+  window.examMode = { applyRemote };
 
   const answersOf = id => store.answers[id] || {};
   const flagsOf = id => store.flags[id] || {};
@@ -226,6 +284,7 @@
           mine ? el('span', { className: 'ex-rv-mine', textContent: '你的答案' }) : null),
         el('div', { className: 'ex-rv-text' }, el('span', { className: 'ex-rv-mark', textContent: `${o.mark} ${MARK_LABEL[o.mark] || ''}` }), ' ', o.text)));
     });
+    if (rv.note) box.append(el('div', { className: 'ex-rv-note' }, el('b', { textContent: '⚠ 版本差異' }), rv.note));
     if (rv.think) box.append(el('div', { className: 'ex-rv-think' }, el('b', { textContent: '這題怎麼想' }), rv.think));
     if (rv.point) box.append(el('div', { className: 'ex-rv-point' }, el('b', { textContent: '考點' }), rv.point));
     return box;
@@ -307,7 +366,7 @@
     const updated = { ...answersOf(paper) };
     if (updated[no] === letter) delete updated[no]; else updated[no] = letter;
     store = { ...store, answers: { ...store.answers, [paper]: updated } };
-    saveStore();
+    commit([paper]);
     document.querySelectorAll(`#ex-q${no} .ex-opt`).forEach(b => b.classList.toggle('sel', b.dataset.letter === updated[no]));
     renderProgress();
   }
@@ -316,7 +375,7 @@
     const updated = { ...flagsOf(paper) };
     if (updated[no]) delete updated[no]; else updated[no] = true;
     store = { ...store, flags: { ...store.flags, [paper]: updated } };
-    saveStore();
+    commit([paper]);
     if (isSubmitted(paper) && onlyReview) { renderSummary(); renderList(); }
     else if (isSubmitted(paper)) { renderSummary(); document.getElementById('ex-q' + no).replaceWith(questionCard(questions[paper].find(q => q.no === no))); }
     else document.getElementById('ex-q' + no).classList.toggle('flagged', Boolean(updated[no]));
@@ -339,7 +398,7 @@
     if (!window.confirm(msg)) return;
     store = { ...store, submitted: { ...store.submitted, [paper]: true } };
     onlyReview = true;
-    saveStore();
+    commit([paper]);
     renderAll();
     container().scrollTo(0, 0);
   }
@@ -350,7 +409,7 @@
     const drop = obj => { const copy = { ...obj }; delete copy[paper]; return copy; };
     store = { ...store, answers: drop(store.answers), submitted: drop(store.submitted), flags: drop(store.flags) };
     onlyReview = false;
-    saveStore();
+    commit([paper]);
     renderAll();
     container().scrollTo(0, 0);
   }
@@ -430,7 +489,7 @@
       return next;
     };
     store = { ...store, answers: pick('answers'), submitted: pick('submitted'), flags: pick('flags') };
-    saveStore();
+    commit(targets);
     renderAll();
     toast(`已匯入 ${targets.length} 份試卷：${targets.map(labelOf).join('、')}`);
     return true;
@@ -455,7 +514,8 @@
   // ---------- init ----------
   async function loadData() {
     const url = p => (typeof dataUrl === 'function' ? dataUrl(p) : p);
-    const [pRes, rRes] = await Promise.all([fetch(url('chapters/exam_papers.json')), fetch(url('chapters/exam_reviews.json'))]);
+    // 詳解會陸續補寫：不帶版號，Service Worker 會先抓網路（離線才用快取），重新整理就看得到新詳解
+    const [pRes, rRes] = await Promise.all([fetch(url('chapters/exam_papers.json')), fetch('chapters/exam_reviews.json')]);
     if (!pRes.ok) throw new Error('試卷資料載入失敗（' + pRes.status + '）');
     const data = await pRes.json();
     papers = data.papers;

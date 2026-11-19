@@ -332,6 +332,8 @@ async function pushNow() {
 /* ── 8. 套用遠端資料 ───────────────────────────────────────────────── */
 async function applyRemote(remote) {
   if (!remote) return;
+  // 模式三（歷屆考題）的作答紀錄交給 exam-mode.js 合併；雲端還沒有也要通知，讓本機紀錄上傳
+  try { window.examMode && window.examMode.applyRemote(remote.exam || null); } catch (e) {}
   const s = app();
 
   const readd     = jget(L_READD, []);
@@ -551,6 +553,18 @@ async function doAuth(mode, container) {
     setStatus(msg, 'bad');
   }
 }
+
+/* ── 模式三（歷屆考題）作答紀錄：存在同一份文件的 exam 欄位 ────────────
+   交卷後上傳，讓這台電腦的排程任務偵測新交卷、自動補寫詳解；也順便跨裝置同步。
+   mergeFields 只整欄覆寫 exam，不動研讀進度等其他欄位。                     */
+window.examCloud = {
+  ready: () => Boolean(user && fbDb && FB),
+  async save(exam) {
+    if (!user || !fbDb || !FB) return false;
+    await FB.setDoc(FB.doc(fbDb, 'emtp', user.uid), { exam }, { mergeFields: ['exam'] });
+    return true;
+  }
+};
 
 window.openSyncModal = function () {
   const m = document.getElementById('sync-modal');
