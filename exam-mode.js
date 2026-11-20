@@ -3,7 +3,7 @@
    --------------------------------------------------------------------
    點選作答 → 交卷批改 → 錯題與有疑慮題顯示逐選項詳解（作答檢討）。
    資料：chapters/exam_papers.json（試卷）、chapters/exam_reviews.json（詳解）
-   進度：localStorage「emtpExamV1」，格式與 quizzes/作答.html 相同，可互相匯入。
+   進度：localStorage「emtpExamV1」，登入後同步到 Firestore emtp/{uid}.exam；也可用「匯出／匯入進度」在裝置間搬移。
    ==================================================================== */
 (function () {
   const STORE_KEY = 'emtpExamV1';
@@ -502,7 +502,7 @@
     overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
     overlay.append(el('div', { className: 'ex-modal-box' },
       el('h3', { textContent: '匯入進度' }),
-      el('p', { className: 'ex-note', textContent: '在作答頁（作答.html）或另一台裝置按「匯出進度」，再把複製的文字貼到下面。' }),
+      el('p', { className: 'ex-note', textContent: '在另一台裝置按「匯出進度」，再把複製的文字貼到下面。' }),
       ta,
       el('div', { className: 'ex-modal-actions' },
         el('button', { className: 'ex-btn', textContent: '取消', onclick: close }),
