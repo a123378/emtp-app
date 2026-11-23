@@ -255,39 +255,11 @@
         : (review.length ? el('div', { className: 'ex-note ok', textContent: '錯題與有疑慮題都已有逐選項詳解。' }) : null)));
   }
 
-  function reviewTag(status, flagged) {
-    if (status === 'blank') return flagged ? '有疑慮・未作答' : '未作答';
-    if (status === 'wrong') return flagged ? '有疑慮・答錯' : '答錯';
-    return '有疑慮・答對';
-  }
-
-  function reviewBlock(q, result, chosen) {
-    const flagged = Boolean(flagsOf(paper)[q.no]);
-    const rv = reviewOf(q.no);
-    const meta = [`答案 ${result.key.main.join('、')}`, chosen ? `你選 ${chosen}` : '未作答'];
-    if (rv && rv.kind) meta.push(rv.kind);
-    const box = el('div', { className: 'ex-review' },
-      el('div', { className: 'ex-rv-head' },
-        el('span', { className: 'ex-rv-tag ' + (result.status === 'wrong' || result.status === 'blank' ? 'bad' : 'ok'), textContent: reviewTag(result.status, flagged) }),
-        el('span', { className: 'ex-rv-meta', textContent: meta.join('｜') })));
-    if (!rv) {
-      box.append(el('div', { className: 'ex-rv-missing', textContent: '這題還沒有逐選項詳解。按「複製結果」貼給 Claude，寫好後會出現在這裡。' }));
-      return box;
-    }
-    rv.opts.forEach((o, i) => {
-      const letter = LETTERS[i];
-      const mine = chosen === letter;
-      box.append(el('div', { className: `ex-rv-opt mark-${o.mark === '✔' ? 'right' : o.mark === '✘' ? 'wrong' : 'true'}${mine ? ' mine' : ''}` },
-        el('div', { className: 'ex-rv-opt-head' },
-          el('b', { textContent: `(${letter})` }),
-          el('span', { textContent: (q.options[i] || '').replace(/^[(（][A-E][)）]\s*/, '') || '（見上圖）' }),
-          mine ? el('span', { className: 'ex-rv-mine', textContent: '你的答案' }) : null),
-        el('div', { className: 'ex-rv-text' }, el('span', { className: 'ex-rv-mark', textContent: `${o.mark} ${MARK_LABEL[o.mark] || ''}` }), ' ', o.text)));
-    });
-    if (rv.note) box.append(el('div', { className: 'ex-rv-note' }, el('b', { textContent: '⚠ 版本差異' }), rv.note));
-    if (rv.think) box.append(el('div', { className: 'ex-rv-think' }, el('b', { textContent: '這題怎麼想' }), rv.think));
-    if (rv.point) box.append(el('div', { className: 'ex-rv-point' }, el('b', { textContent: '考點' }), rv.point));
-    return box;
+  // 逐選項詳解直接接在各選項下方：只留題目、選項與各選項說明
+  function optionExplain(o) {
+    const kind = o.mark === '✔' ? 'right' : o.mark === '✘' ? 'wrong' : 'true';
+    return el('div', { className: 'ex-opt-exp mark-' + kind },
+      el('span', { className: 'ex-rv-mark', textContent: `${o.mark} ${MARK_LABEL[o.mark] || ''}` }), ' ', o.text);
   }
 
   function questionCard(q) {
@@ -300,6 +272,8 @@
         el('p', { className: 'ex-stem' }, el('b', { textContent: q.no + '.' }), q.stem),
         el('button', { className: 'ex-flag', textContent: '🤔 有疑慮', title: '標記觀念不清楚，需要詳解', onclick: () => toggleFlag(q.no) })),
       q.figures.map(f => el('img', { className: 'ex-fig', src: f, alt: `${labelOf(paper)}第${q.no}題附圖`, loading: 'lazy' })));
+    const show = result ? needsReview(q.no, result.status) : false;
+    const rv = show ? reviewOf(q.no) : null;
     const opts = el('div', { className: 'ex-opts' });
     q.options.forEach((o, i) => {
       const letter = LETTERS[i];
@@ -312,15 +286,17 @@
       opts.append(el('button', { className: cls.join(' '), disabled: submitted, dataset: { letter }, onclick: () => choose(q.no, letter) },
         el('span', { className: 'ex-letter', textContent: letter }),
         el('span', { textContent: o.replace(/^[(（][A-E][)）]\s*/, '') || '（見上圖）' })));
+      const exp = rv && rv.opts[i];
+      if (exp) opts.append(optionExplain(exp));
     });
     card.append(opts);
     if (result) {
       card.classList.add('st-' + result.status);
       card.append(el('div', { className: 'ex-verdict ' + result.status, textContent: verdictText(result.status, result.key, chosen) }));
       if (q.source) card.append(el('div', { className: 'ex-src', textContent: '出處：' + q.source }));
-      const show = needsReview(q.no, result.status);
-      if (show) card.append(reviewBlock(q, result, chosen));
-      else if (q.point) card.append(el('div', { className: 'ex-src', textContent: '考點：' + q.point }));
+      if (rv && rv.note) card.append(el('div', { className: 'ex-rv-note' }, el('b', { textContent: '⚠ 版本差異' }), rv.note));
+      if (show && !rv) card.append(el('div', { className: 'ex-rv-missing', textContent: '這題還沒有逐選項詳解。按「複製結果」貼給 Claude，寫好後會出現在這裡。' }));
+      if (!show && q.point) card.append(el('div', { className: 'ex-src', textContent: '考點：' + q.point }));
     }
     return card;
   }
