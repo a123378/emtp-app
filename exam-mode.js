@@ -295,6 +295,7 @@
       card.append(el('div', { className: 'ex-verdict ' + result.status, textContent: verdictText(result.status, result.key, chosen) }));
       if (q.source) card.append(el('div', { className: 'ex-src', textContent: '出處：' + q.source }));
       if (rv && rv.note) card.append(el('div', { className: 'ex-rv-note' }, el('b', { textContent: '⚠ 版本差異' }), rv.note));
+      if (rv && rv.think) card.append(el('div', { className: 'ex-rv-think' }, el('b', { textContent: '這題怎麼想' }), rv.think));
       if (show && !rv) card.append(el('div', { className: 'ex-rv-missing', textContent: '這題還沒有逐選項詳解。按「複製結果」貼給 Claude，寫好後會出現在這裡。' }));
       if (!show && q.point) card.append(el('div', { className: 'ex-src', textContent: '考點：' + q.point }));
     }

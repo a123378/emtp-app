@@ -129,6 +129,11 @@ body.mode-4 .sidebar-search { display: none; }
   background: color-mix(in srgb, var(--warning) 14%, transparent); border-left: 4px solid var(--warning);
 }
 .ex-rv-note b { display: block; margin-bottom: 2px; }
+.ex-rv-think {
+  margin-top: 8px; padding: 8px 10px; border-radius: 8px; font-size: 0.88rem; line-height: 1.65;
+  background: var(--orange-light); border-left: 4px solid var(--orange);
+}
+.ex-rv-think b { display: block; margin-bottom: 2px; }
 
 .ex-error { padding: 40px 16px; text-align: center; color: var(--error); }
 .ex-toast {
