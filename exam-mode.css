@@ -94,6 +94,24 @@ body.mode-4 .sidebar-search { display: none; }
 .ex-opt.accept { border: 1px dashed var(--success); }
 .ex-opt.wrong { background: color-mix(in srgb, var(--error) 10%, transparent); border-color: var(--error); }
 .ex-opt.wrong .ex-letter { background: var(--error); border-color: var(--error); color: #fff; }
+/* 劃掉選項（刪去法）：選項右邊的 ✕，劃掉後加刪除線、變淡 */
+.ex-opt-row { display: flex; gap: 6px; align-items: stretch; }
+.ex-opt-row .ex-opt { flex: 1; min-width: 0; }
+.ex-strike {
+  flex: none; width: 34px; font: inherit; font-size: 0.9rem; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 8px; background: transparent; color: var(--text-muted);
+}
+.ex-strike:hover { border-color: var(--error); color: var(--error); }
+.ex-strike.on { border-style: dashed; color: var(--blue); }
+.ex-strike.on:hover { border-color: var(--blue); }
+.ex-opt.struck { opacity: 0.5; }
+.ex-opt.struck .ex-opt-text { text-decoration: line-through; text-decoration-thickness: 2px; }
+.ex-opt.struck.right, .ex-opt.struck.accept { opacity: 1; }
+.ex-struck-right {
+  flex: none; margin-left: auto; align-self: center; white-space: nowrap;
+  font-size: 0.78rem; font-weight: 800; color: #fff; background: var(--error);
+  border-radius: 999px; padding: 1px 8px;
+}
 .ex-verdict { margin-top: 8px; font-size: 0.92rem; font-weight: 800; }
 .ex-verdict.correct, .ex-verdict.partial, .ex-verdict.free { color: var(--success); }
 .ex-verdict.wrong { color: var(--error); }

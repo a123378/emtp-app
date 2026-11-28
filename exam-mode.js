@@ -19,12 +19,15 @@
   let onlyReview = false;
 
   // ---------- storage ----------
-  function emptyStore() { return { paper: null, answers: {}, submitted: {}, flags: {} }; }
+  // struck：作答時劃掉（刪去）的選項，{ 試卷: { 題號: ['A', 'C'] } }
+  const FIELDS = ['answers', 'submitted', 'flags', 'struck'];
+
+  function emptyStore() { return { paper: null, answers: {}, submitted: {}, flags: {}, struck: {} }; }
 
   function normalizeStore(raw) {
     const s = raw && typeof raw === 'object' ? raw : {};
     const obj = v => (v && typeof v === 'object' ? v : {});
-    return { paper: s.paper || s.year || null, answers: obj(s.answers), submitted: obj(s.submitted), flags: obj(s.flags), updated: obj(s.updated) };
+    return { paper: s.paper || s.year || null, answers: obj(s.answers), submitted: obj(s.submitted), flags: obj(s.flags), struck: obj(s.struck), updated: obj(s.updated) };
   }
 
   function loadStore() {
@@ -56,8 +59,8 @@
     cloudTimer = setTimeout(() => {
       const cloud = window.examCloud;
       if (!cloud || !cloud.ready()) return;
-      const { answers, submitted, flags, updated } = store;
-      cloud.save({ answers, submitted, flags, updated }).catch(() => toast('雲端同步失敗，作答已存在這台裝置'));
+      const { answers, submitted, flags, struck, updated } = store;
+      cloud.save({ answers, submitted, flags, struck, updated }).catch(() => toast('雲端同步失敗，作答已存在這台裝置'));
     }, CLOUD_DELAY);
   }
 
@@ -70,17 +73,16 @@
   // 合併雲端資料：每份試卷取修改時間較新的一方；本機較新或雲端沒有的，就上傳
   function applyRemote(remote) {
     const r = normalizeStore(remote || {});
-    const ids = new Set([...Object.keys(store.answers), ...Object.keys(store.submitted), ...Object.keys(store.flags),
-      ...Object.keys(r.answers), ...Object.keys(r.submitted), ...Object.keys(r.flags)]);
-    const next = { answers: { ...store.answers }, submitted: { ...store.submitted }, flags: { ...store.flags }, updated: { ...store.updated } };
+    const ids = new Set(FIELDS.flatMap(f => [...Object.keys(store[f]), ...Object.keys(r[f])]));
+    const next = { answers: { ...store.answers }, submitted: { ...store.submitted }, flags: { ...store.flags }, struck: { ...store.struck }, updated: { ...store.updated } };
     let changedLocal = false;
     let needUpload = false;
     ids.forEach(id => {
       const lt = store.updated[id] || 0;
       const rt = r.updated[id] || 0;
-      const remoteHas = id in r.answers || id in r.submitted || id in r.flags;
+      const remoteHas = FIELDS.some(f => id in r[f]);
       if (rt > lt) {
-        ['answers', 'submitted', 'flags'].forEach(f => { if (r[f][id]) next[f][id] = r[f][id]; else delete next[f][id]; });
+        FIELDS.forEach(f => { if (r[f][id]) next[f][id] = r[f][id]; else delete next[f][id]; });
         next.updated[id] = rt;
         changedLocal = true;
       } else if (lt > rt || !remoteHas) {
@@ -99,6 +101,8 @@
 
   const answersOf = id => store.answers[id] || {};
   const flagsOf = id => store.flags[id] || {};
+  const struckOf = id => store.struck[id] || {};
+  const struckNos = id => (questions[id] || []).filter(q => (struckOf(id)[q.no] || []).length).map(q => q.no);
   const isSubmitted = id => Boolean(store.submitted[id]);
   const labelOf = id => (papers.find(p => p.id === id) || {}).label || id;
   const flaggedNos = id => (questions[id] || []).filter(q => flagsOf(id)[q.no]).map(q => q.no);
@@ -274,18 +278,30 @@
       q.figures.map(f => el('img', { className: 'ex-fig', src: f, alt: `${labelOf(paper)}第${q.no}題附圖`, loading: 'lazy' })));
     const show = result ? needsReview(q.no, result.status) : false;
     const rv = show ? reviewOf(q.no) : null;
+    const struck = struckOf(paper)[q.no] || [];
     const opts = el('div', { className: 'ex-opts' });
     q.options.forEach((o, i) => {
       const letter = LETTERS[i];
+      const isStruck = struck.includes(letter);
       const cls = ['ex-opt'];
       if (result) {
         if (result.key.main.includes(letter)) cls.push('right');
         else if (result.key.accepted.includes(letter)) cls.push('accept');
         if (chosen === letter) cls.push(result.status === 'wrong' ? 'wrong' : 'sel');
       } else if (chosen === letter) cls.push('sel');
-      opts.append(el('button', { className: cls.join(' '), disabled: submitted, dataset: { letter }, onclick: () => choose(q.no, letter) },
-        el('span', { className: 'ex-letter', textContent: letter }),
-        el('span', { textContent: o.replace(/^[(（][A-E][)）]\s*/, '') || '（見上圖）' })));
+      if (isStruck) cls.push('struck');
+      const struckRight = isStruck && result && result.key.accepted.includes(letter);
+      opts.append(el('div', { className: 'ex-opt-row' },
+        el('button', { className: cls.join(' '), disabled: submitted, dataset: { letter }, onclick: () => choose(q.no, letter) },
+          el('span', { className: 'ex-letter', textContent: letter }),
+          el('span', { className: 'ex-opt-text', textContent: o.replace(/^[(（][A-E][)）]\s*/, '') || '（見上圖）' }),
+          struckRight ? el('span', { className: 'ex-struck-right', textContent: '⚠ 你劃掉了正解' }) : null),
+        submitted ? null : el('button', {
+          className: 'ex-strike' + (isStruck ? ' on' : ''), textContent: isStruck ? '↺' : '✕',
+          title: isStruck ? '恢復這個選項' : '劃掉這個選項（刪去法）',
+          ariaLabel: (isStruck ? '恢復選項 ' : '劃掉選項 ') + letter,
+          onclick: () => toggleStrike(q.no, letter),
+        })));
       const exp = rv && rv.opts[i];
       if (exp) opts.append(optionExplain(exp));
     });
@@ -343,9 +359,44 @@
     const updated = { ...answersOf(paper) };
     if (updated[no] === letter) delete updated[no]; else updated[no] = letter;
     store = { ...store, answers: { ...store.answers, [paper]: updated } };
+    // 選了劃掉的選項，就把它的刪除線拿掉
+    const wasStruck = (struckOf(paper)[no] || []).includes(letter) && updated[no] === letter;
+    if (wasStruck) store = { ...store, struck: withStruck(no, (struckOf(paper)[no] || []).filter(l => l !== letter)) };
     commit([paper]);
-    document.querySelectorAll(`#ex-q${no} .ex-opt`).forEach(b => b.classList.toggle('sel', b.dataset.letter === updated[no]));
+    if (wasStruck) rerenderCard(no);
+    else document.querySelectorAll(`#ex-q${no} .ex-opt`).forEach(b => b.classList.toggle('sel', b.dataset.letter === updated[no]));
     renderProgress();
+  }
+
+  // 回傳換掉某題劃掉清單後的 struck（清單為空就刪掉這題）
+  function withStruck(no, letters) {
+    const forPaper = { ...struckOf(paper) };
+    if (letters.length) forPaper[no] = letters; else delete forPaper[no];
+    const next = { ...store.struck };
+    if (Object.keys(forPaper).length) next[paper] = forPaper; else delete next[paper];
+    return next;
+  }
+
+  function rerenderCard(no) {
+    const card = document.getElementById('ex-q' + no);
+    const q = (questions[paper] || []).find(x => x.no === no);
+    if (card && q) card.replaceWith(questionCard(q));
+  }
+
+  function toggleStrike(no, letter) {
+    if (isSubmitted(paper)) return;
+    const cur = struckOf(paper)[no] || [];
+    const letters = cur.includes(letter) ? cur.filter(l => l !== letter) : [...cur, letter].sort();
+    store = { ...store, struck: withStruck(no, letters) };
+    // 劃掉目前選的答案，就取消這題的作答
+    if (letters.includes(letter) && answersOf(paper)[no] === letter) {
+      const ans = { ...answersOf(paper) };
+      delete ans[no];
+      store = { ...store, answers: { ...store.answers, [paper]: ans } };
+      renderProgress();
+    }
+    commit([paper]);
+    rerenderCard(no);
   }
 
   function toggleFlag(no) {
@@ -381,10 +432,10 @@
   }
 
   function resetPaper() {
-    if (!Object.keys(answersOf(paper)).length && !isSubmitted(paper) && !flaggedNos(paper).length) { toast('這份試卷沒有作答紀錄'); return; }
-    if (!window.confirm(`確定清除「${labelOf(paper)}」的作答、疑慮標記與批改結果，重新作答？清除後無法復原。`)) return;
+    if (!Object.keys(answersOf(paper)).length && !isSubmitted(paper) && !flaggedNos(paper).length && !struckNos(paper).length) { toast('這份試卷沒有作答紀錄'); return; }
+    if (!window.confirm(`確定清除「${labelOf(paper)}」的作答、劃掉的選項、疑慮標記與批改結果，重新作答？清除後無法復原。`)) return;
     const drop = obj => { const copy = { ...obj }; delete copy[paper]; return copy; };
-    store = { ...store, answers: drop(store.answers), submitted: drop(store.submitted), flags: drop(store.flags) };
+    store = { ...store, answers: drop(store.answers), submitted: drop(store.submitted), flags: drop(store.flags), struck: drop(store.struck) };
     onlyReview = false;
     commit([paper]);
     renderAll();
@@ -415,6 +466,12 @@
     }
     const wrongAll = [...r.wrong, ...r.blank].sort((a, b) => a - b);
     const doubtOnly = flags.filter(no => !wrongAll.includes(no));
+    const struck = struckOf(paper);
+    const struckReview = review.filter(no => (struck[no] || []).length);
+    if (struckReview.length) lines.push('刪去：' + struckReview.map(no => `${no}（${struck[no].join('、')}）`).join('、'));
+    const keyOf = no => parseKey((questions[paper].find(q => q.no === no) || {}).answer);
+    const struckRight = struckReview.filter(no => struck[no].some(l => keyOf(no).accepted.includes(l)));
+    if (struckRight.length) lines.push(`劃掉了正解：${struckRight.join('、')}`);
     lines.push(`錯題詳解：${wrongAll.length ? wrongAll.join('、') : '無'}`);
     lines.push(`疑慮詳解：${doubtOnly.length ? doubtOnly.join('、') : '無'}`);
     const missWrong = missing.filter(no => wrongAll.includes(no));
@@ -443,7 +500,7 @@
 
   // ---------- import / export ----------
   async function exportProgress() {
-    const text = JSON.stringify({ type: EXPORT_TYPE, v: 1, answers: store.answers, submitted: store.submitted, flags: store.flags });
+    const text = JSON.stringify({ type: EXPORT_TYPE, v: 1, answers: store.answers, submitted: store.submitted, flags: store.flags, struck: store.struck });
     if (await copyText(text)) toast('已複製進度，可貼到另一台裝置的「匯入進度」');
     else window.prompt('自動複製失敗，請手動複製下面的文字：', text);
   }
@@ -452,9 +509,9 @@
     let data;
     try { data = normalizeStore(JSON.parse(text.trim())); } catch (e) { toast('格式不對，請貼上「匯出進度」複製的整段文字'); return false; }
     const known = new Set(papers.map(p => p.id));
-    const ids = [...new Set([...Object.keys(data.answers), ...Object.keys(data.submitted), ...Object.keys(data.flags)])].filter(id => known.has(id));
+    const ids = [...new Set(FIELDS.flatMap(f => Object.keys(data[f])))].filter(id => known.has(id));
     if (!ids.length) { toast('沒有可以匯入的試卷紀錄'); return false; }
-    const hasLocal = id => Object.keys(answersOf(id)).length || isSubmitted(id) || flaggedNos(id).length;
+    const hasLocal = id => Object.keys(answersOf(id)).length || isSubmitted(id) || flaggedNos(id).length || struckNos(id).length;
     const conflicts = ids.filter(hasLocal);
     const overwrite = conflicts.length
       ? window.confirm(`以下試卷在模式三已有紀錄：${conflicts.map(labelOf).join('、')}。\n按「確定」用匯入的紀錄覆蓋，按「取消」保留模式三原本的紀錄。`)
@@ -465,7 +522,7 @@
       targets.forEach(id => { if (data[field][id]) next[id] = data[field][id]; else delete next[id]; });
       return next;
     };
-    store = { ...store, answers: pick('answers'), submitted: pick('submitted'), flags: pick('flags') };
+    store = { ...store, answers: pick('answers'), submitted: pick('submitted'), flags: pick('flags'), struck: pick('struck') };
     commit(targets);
     renderAll();
     toast(`已匯入 ${targets.length} 份試卷：${targets.map(labelOf).join('、')}`);
